@@ -21,7 +21,8 @@
         </activity>
         <activity
             android:name="android.my.annin.londontubeschedule.ui.StationListActivity"
-            android:parentActivityName="android.my.annin.londontubeschedule.ui.MainActivity">
+            android:parentActivityName="android.my.annin.londontubeschedule.ui.MainActivity"
+            android:launchMode="singleTop" >
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value="android.my.annin.londontubeschedule.ui.MainActivity" />
