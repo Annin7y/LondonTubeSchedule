@@ -19,6 +19,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="android.my.annin.londontubeschedule.ui.StationListActivity"
+            android:parentActivityName="android.my.annin.londontubeschedule.ui.MainActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="android.my.annin.londontubeschedule.ui.MainActivity" />
+    </activity>
+        <activity
+            android:name="android.my.annin.londontubeschedule.ui.StationScheduleActivity"
+            android:parentActivityName="android.my.annin.londontubeschedule.ui.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="android.my.annin.londontubeschedule.ui.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

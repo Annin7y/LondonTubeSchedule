@@ -1,4 +1,5 @@
 package android.my.annin.londontubeschedule.asynctask;
 
-public class TubeLineListTask {
+public interface TubeLineAsyncTaskInterface
+{
 }
