@@ -33,7 +33,7 @@ public class NetworkUtils
     public NetworkUtils()
     {
     }
-    public static URL buildUrl()
+    public static URL buildTubeUrl()
     {
         URL urlTubeList = null;
         try
