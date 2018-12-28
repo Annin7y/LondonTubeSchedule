@@ -33,34 +33,68 @@ public class NetworkUtils
     public NetworkUtils()
     {
     }
-    public static URL buildTubeUrl()
+    public static URL buildLineUrl()
     {
-        URL urlTubeList = null;
+        URL urlLineList = null;
         try
         {
-            Uri tubeListQueryUri = Uri.parse(BASE_URL_LINES_LIST).buildUpon()
+            Uri lineListQueryUri = Uri.parse(BASE_URL_LINES_LIST).buildUpon()
                     .build();
-            urlTubeList = new URL(tubeListQueryUri.toString());
+            urlLineList = new URL(lineListQueryUri.toString());
         }
         catch (MalformedURLException e)
         {
             e.printStackTrace();
         }
-        Log.v(TAG, "Built URI " + urlTubeList);
-        return urlTubeList;
+        Log.v(TAG, "Built URI " + urlLineList);
+        return urlLineList;
     }
 
+    public static URL buildStationsUrl()
+    {
+        URL urlStationsList = null;
+        try
+        {
+            Uri stationsListQueryUri = Uri.parse(BASE_URL_STATIONS_LIST).buildUpon()
+                    .build();
+            urlStationsList = new URL(stationsListQueryUri.toString());
+        }
+        catch (MalformedURLException e)
+        {
+            e.printStackTrace();
+        }
+        Log.v(TAG, "Built URI " + urlStationsList);
+        return urlStationsList;
+    }
+
+    public static URL buildScheduleUrl()
+    {
+        URL urlSchedule = null;
+        try
+        {
+            Uri scheduleQueryUri = Uri.parse(BASE_URL_SCHEDULE).buildUpon()
+                    .build();
+            urlSchedule = new URL(scheduleQueryUri.toString());
+        }
+        catch (MalformedURLException e)
+        {
+            e.printStackTrace();
+        }
+        Log.v(TAG, "Built URI " + urlSchedule);
+        return urlSchedule;
+    }
+    
     /**
      * Make an HTTP request to the given URL and return a String as the response.
      */
-    public static String makeHttpTubeRequest(URL url) throws IOException
+    public static String makeHttpLineRequest(URL url) throws IOException
     {
-        String jsonResponse = "";
+        String jsonLineResponse = "";
         Log.i("URL: ", url.toString());
         // If the URL is null, then return early.
         if (url == null)
         {
-            return jsonResponse;
+            return jsonLineResponse;
         }
 
         HttpURLConnection urlConnection = null;
@@ -78,7 +112,7 @@ public class NetworkUtils
             if (urlConnection.getResponseCode() == 200)
             {
                 inputStream = urlConnection.getInputStream();
-                jsonResponse = readFromStream(inputStream);
+                jsonLineResponse = readFromStream(inputStream);
             }
             else
             {
@@ -87,7 +121,7 @@ public class NetworkUtils
         }
         catch (IOException e)
         {
-            Log.e(LOG_TAG, "Problem retrieving tube list JSON results.", e);
+            Log.e(LOG_TAG, "Problem retrieving line list JSON results.", e);
         }
         finally
         {
@@ -103,7 +137,63 @@ public class NetworkUtils
                 inputStream.close();
             }
         }
-        return jsonResponse;
+        return jsonLineResponse;
+    }
+
+    /**
+     * Make an HTTP request to the given URL and return a String as the response.
+     */
+    public static String makeHttpStationRequest(URL url) throws IOException
+    {
+        String jsonStationResponse = "";
+        Log.i("URL: ", url.toString());
+        // If the URL is null, then return early.
+        if (url == null)
+        {
+            return jsonStationResponse;
+        }
+
+        HttpURLConnection urlConnection = null;
+        InputStream inputStream = null;
+        try
+        {
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setReadTimeout(10000 /* milliseconds */);
+            urlConnection.setConnectTimeout(15000 /* milliseconds */);
+            urlConnection.setRequestMethod("GET");
+            urlConnection.connect();
+
+            // If the request was successful (response code 200),
+            // then read the input stream and parse the response.
+            if (urlConnection.getResponseCode() == 200)
+            {
+                inputStream = urlConnection.getInputStream();
+                jsonStationResponse = readFromStream(inputStream);
+            }
+            else
+            {
+                Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
+            }
+        }
+        catch (IOException e)
+        {
+            Log.e(LOG_TAG, "Problem retrieving station list JSON results.", e);
+        }
+        finally
+        {
+            if (urlConnection != null)
+            {
+                urlConnection.disconnect();
+            }
+            if (inputStream != null)
+            {
+                // Closing the input stream could throw an IOException, which is why
+                // the makeHttpRequest(URL url) method signature specifies than an IOException
+                // could be thrown.
+                inputStream.close();
+            }
+        }
+        return jsonStationResponse;
     }
 
     /**
