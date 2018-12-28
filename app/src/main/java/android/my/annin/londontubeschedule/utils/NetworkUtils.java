@@ -28,7 +28,7 @@ public class NetworkUtils
 
     private static final String BASE_URL_STATIONS_LIST = "https://api.tfl.gov.uk/Line/victoria/Route/Sequence/inbound?serviceTypes=Regular&excludeCrowding=false";
 
-    private static final String BASE_URL_SCHEDULE = "https://api.tfl.gov.uk/swagger/ui/index.html?url=/swagger/docs/v1#!/Lines/Line_Arrivals";
+    private static final String BASE_URL_SCHEDULE = "https://api.tfl.gov.uk/Line/victoria/Arrivals/940GZZLUGPK";
 
     public NetworkUtils()
     {
@@ -83,7 +83,7 @@ public class NetworkUtils
         Log.v(TAG, "Built URI " + urlSchedule);
         return urlSchedule;
     }
-    
+
     /**
      * Make an HTTP request to the given URL and return a String as the response.
      */
