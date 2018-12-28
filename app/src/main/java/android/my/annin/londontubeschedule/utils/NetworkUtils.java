@@ -24,9 +24,9 @@ public class NetworkUtils
     private static final String API_KEY = "api_key";
     private static final String APP_ID = "ap_id";
 
-    private static final String BASE_URL_LINES_LIST = "https://api.tfl.gov.uk/swagger/ui/index.html?url=/swagger/docs/v1#!/Lines/Line_GetByMode";
+    private static final String BASE_URL_LINES_LIST = "https://api.tfl.gov.uk/Line/Mode/tube%2Cdlr";
 
-    private static final String BASE_URL_STATIONS_LIST = "https://api.tfl.gov.uk/swagger/ui/index.html?url=/swagger/docs/v1#!/Lines/Line_RouteSequence";
+    private static final String BASE_URL_STATIONS_LIST = "https://api.tfl.gov.uk/Line/victoria/Route/Sequence/inbound?serviceTypes=Regular&excludeCrowding=false";
 
     private static final String BASE_URL_SCHEDULE = "https://api.tfl.gov.uk/swagger/ui/index.html?url=/swagger/docs/v1#!/Lines/Line_Arrivals";
 
@@ -53,7 +53,7 @@ public class NetworkUtils
     /**
      * Make an HTTP request to the given URL and return a String as the response.
      */
-    public static String makeHttpRequest(URL url) throws IOException
+    public static String makeHttpTubeRequest(URL url) throws IOException
     {
         String jsonResponse = "";
         Log.i("URL: ", url.toString());
