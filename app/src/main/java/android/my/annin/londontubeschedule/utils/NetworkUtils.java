@@ -197,6 +197,66 @@ public class NetworkUtils
     }
 
     /**
+     * Make an HTTP request to the given URL and return a String as the response.
+     */
+    public static String makeHttpLineRequest(URL url) throws IOException
+    {
+        String jsonLineResponse = "";
+        Log.i("URL: ", url.toString());
+        // If the URL is null, then return early.
+        if (url == null)
+        {
+            return jsonLineResponse;
+        }
+
+        HttpURLConnection urlConnection = null;
+        InputStream inputStream = null;
+        try
+        {
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setReadTimeout(10000 /* milliseconds */);
+            urlConnection.setConnectTimeout(15000 /* milliseconds */);
+            urlConnection.setRequestMethod("GET");
+            urlConnection.connect();
+
+            // If the request was successful (response code 200),
+            // then read the input stream and parse the response.
+            if (urlConnection.getResponseCode() == 200)
+            {
+                inputStream = urlConnection.getInputStream();
+                jsonLineResponse = readFromStream(inputStream);
+            }
+            else
+            {
+                Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
+            }
+        }
+        catch (IOException e)
+        {
+            Log.e(LOG_TAG, "Problem retrieving line list JSON results.", e);
+        }
+        finally
+        {
+            if (urlConnection != null)
+            {
+                urlConnection.disconnect();
+            }
+            if (inputStream != null)
+            {
+                // Closing the input stream could throw an IOException, which is why
+                // the makeHttpRequest(URL url) method signature specifies than an IOException
+                // could be thrown.
+                inputStream.close();
+            }
+        }
+        return jsonLineResponse;
+    }
+
+
+
+
+
+    /**
      * Convert the {@link InputStream} into a String which contains the
      * whole JSON response from the server.
      */
