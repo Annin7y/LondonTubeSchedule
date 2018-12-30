@@ -199,14 +199,14 @@ public class NetworkUtils
     /**
      * Make an HTTP request to the given URL and return a String as the response.
      */
-    public static String makeHttpLineRequest(URL url) throws IOException
+    public static String makeHttpScheduleRequest(URL url) throws IOException
     {
-        String jsonLineResponse = "";
+        String jsonScheduleResponse = "";
         Log.i("URL: ", url.toString());
         // If the URL is null, then return early.
         if (url == null)
         {
-            return jsonLineResponse;
+            return jsonScheduleResponse;
         }
 
         HttpURLConnection urlConnection = null;
@@ -224,7 +224,7 @@ public class NetworkUtils
             if (urlConnection.getResponseCode() == 200)
             {
                 inputStream = urlConnection.getInputStream();
-                jsonLineResponse = readFromStream(inputStream);
+                jsonScheduleResponse = readFromStream(inputStream);
             }
             else
             {
@@ -233,7 +233,7 @@ public class NetworkUtils
         }
         catch (IOException e)
         {
-            Log.e(LOG_TAG, "Problem retrieving line list JSON results.", e);
+            Log.e(LOG_TAG, "Problem retrieving schedule JSON results.", e);
         }
         finally
         {
@@ -249,12 +249,8 @@ public class NetworkUtils
                 inputStream.close();
             }
         }
-        return jsonLineResponse;
+        return jsonScheduleResponse;
     }
-
-
-
-
 
     /**
      * Convert the {@link InputStream} into a String which contains the
