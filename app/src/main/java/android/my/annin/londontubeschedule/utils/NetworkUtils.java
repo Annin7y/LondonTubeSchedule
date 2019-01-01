@@ -35,6 +35,7 @@ public class NetworkUtils
     }
     public static URL buildLineUrl()
     {
+        //1.https://api.tfl.gov.uk/Line/Mode/tube%2Cdlr/Route?serviceTypes=Regular&app_key=7deda6y&app_id=854g4r
         URL urlLineList = null;
         try
         {
