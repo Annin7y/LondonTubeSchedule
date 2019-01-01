@@ -42,7 +42,7 @@ public class NetworkUtils
         {
             Uri lineListQueryUri = Uri.parse(BASE_URL_LINES_LIST).buildUpon()
                     .appendQueryParameter(API_KEY, BuildConfig.UNIFIED_LONDON_TRANSPORT_API_KEY)
-                    .appendQueryParameter(API_KEY, BuildConfig.UNIFIED_LONDON_TRANSPORT_APP_ID)
+                    .appendQueryParameter(APP_ID, BuildConfig.UNIFIED_LONDON_TRANSPORT_APP_ID)
 
                     .build();
             urlLineList = new URL(lineListQueryUri.toString());
