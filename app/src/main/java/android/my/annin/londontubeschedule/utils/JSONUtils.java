@@ -1,5 +1,9 @@
 package android.my.annin.londontubeschedule.utils;
 
+import android.text.TextUtils;
+
+import java.util.ArrayList;
+
 public class JSONUtils
 {
     /**
@@ -11,6 +15,12 @@ public class JSONUtils
     {
     }
 
-
+//    public static ArrayList<Lines> extractFeatureFromJson(String linesJSON)
+//    {
+//        // If the JSON string is empty or null, then return early.
+//        if (TextUtils.isEmpty(linesJSON))
+//        {
+//            return null;
+//        }
 
 }
