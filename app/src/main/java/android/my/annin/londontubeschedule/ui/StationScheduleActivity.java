@@ -25,7 +25,4 @@ public class StationScheduleActivity extends AppCompatActivity
 //        shareIntent.putExtra(Intent.EXTRA_TEXT, BASE_STATION_URL_SHARE  + stationKey);
 //        return shareIntent;
 //    }
-
-
-
 }

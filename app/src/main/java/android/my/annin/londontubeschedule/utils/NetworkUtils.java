@@ -1,5 +1,6 @@
 package android.my.annin.londontubeschedule.utils;
 
+import android.my.annin.londontubeschedule.BuildConfig;
 import android.net.Uri;
 import android.util.Log;
 
@@ -40,6 +41,9 @@ public class NetworkUtils
         try
         {
             Uri lineListQueryUri = Uri.parse(BASE_URL_LINES_LIST).buildUpon()
+                    .appendQueryParameter(API_KEY, BuildConfig.UNIFIED_LONDON_TRANSPORT_API_KEY)
+                    .appendQueryParameter(API_KEY, BuildConfig.UNIFIED_LONDON_TRANSPORT_APP_ID)
+
                     .build();
             urlLineList = new URL(lineListQueryUri.toString());
         }
