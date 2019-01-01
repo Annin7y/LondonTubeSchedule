@@ -53,6 +53,7 @@ public class NetworkUtils
 
     public static URL buildStationsUrl()
     {
+        //https://api.tfl.gov.uk/Line/victoria/Route/Sequence/inbound?serviceTypes=Regular&excludeCrowding=false&app_id=58p&app_key=9glkug765j
         URL urlStationsList = null;
         try
         {
