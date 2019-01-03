@@ -36,14 +36,12 @@ public class NetworkUtils
     }
     public static URL buildLineUrl()
     {
-        //1.https://api.tfl.gov.uk/Line/Mode/tube%2Cdlr/Route?serviceTypes=Regular&app_key=7deda6y&app_id=854g4r
         URL urlLineList = null;
         try
         {
             Uri lineListQueryUri = Uri.parse(BASE_URL_LINES_LIST).buildUpon()
                     .appendQueryParameter(API_KEY, BuildConfig.UNIFIED_LONDON_TRANSPORT_API_KEY)
                     .appendQueryParameter(APP_ID, BuildConfig.UNIFIED_LONDON_TRANSPORT_APP_ID)
-
                     .build();
             urlLineList = new URL(lineListQueryUri.toString());
         }

@@ -10,8 +10,6 @@ import butterknife.ButterKnife;
 
 public class StationListActivity extends AppCompatActivity
 {
-    @BindView(R.id.tube_list_instructions)
-    TextView stationListInstructions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -19,7 +17,6 @@ public class StationListActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_station_list);
 
-        // Bind the views
-        ButterKnife.bind(this);
+
     }
 }
