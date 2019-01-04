@@ -43,7 +43,6 @@ public class JSONUtils
                 id = jsonObject.optString(KEY_LINE_ID);
             }
 
-
             String name = "";
             if (jsonObject.has("name"))
             {
