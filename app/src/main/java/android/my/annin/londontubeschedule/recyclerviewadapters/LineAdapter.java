@@ -18,39 +18,31 @@ public class LineAdapter extends RecyclerView.Adapter<LineAdapter.LineAdapterVie
 {
     private static final String TAG = LineAdapter.class.getSimpleName();
 
-    private ArrayList<Lines> lineList = new ArrayList<Lines>();
+    private ArrayList<Lines> linesList = new ArrayList<Lines>();
     private Context context;
 
     /**
      * Creates a Line Adapter.
      */
-    public LineAdapter(ArrayList<Lines> lineList, Context context)
+    public LineAdapter(ArrayList<Lines> linesList, Context context)
     {
-        this.lineList= lineList;
+        this.linesList = linesList;
         this.context = context;
     }
 
     /**
-     * Cache of the children views for an ingredients list item.
+     * Cache of the children views for a line list item.
      */
-    public class IngredientsAdapterViewHolder extends RecyclerView.ViewHolder
+    public class LineAdapterViewHolder extends RecyclerView.ViewHolder
     {
-        @BindView(R.id.ingredient_quantity)
+        @BindView(R.id.line_name)
         public TextView lineName;
 
-        @BindView(R.id.ingredient_measure)
-        public TextView ingredientMeasure;
-
-        @BindView(R.id.ingredient_name)
-        public TextView ingredientName;
-
-        public IngredientsAdapterViewHolder(View view)
-        {
+        public LineAdapterViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
-
-
+    }
 
     @Override
     public LineAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType)
@@ -63,33 +55,28 @@ public class LineAdapter extends RecyclerView.Adapter<LineAdapter.LineAdapterVie
         return new LineAdapterViewHolder(view);
     }
 
-
-
     /**
      * Cache of the children views for a line list item.
      */
-    public class LineAdapterViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public void onBindViewHolder(LineAdapterViewHolder holder, int position)
+    {
+        //Binding data
+        final Lines lineView = linesList.get(position);
 
-        @Override
-        public void onBindViewHolder(LineAdapterViewHolder holder, int position)
-        {
-            //Binding data
-            final Lines lineView = lineList.get(position);
+        holder.lineName.setText(lineView.getLineName());
+    }
 
-            holder.lineName.setText(lineView.getLineName());
+    @Override
+    public int getItemCount()
+    {
+        return linesList.size();
+    }
 
-        }
-
-        @Override
-        public int getItemCount()
-        {
-            return ingredientsList.size();
-        }
-
-        public void setIngredientsList(ArrayList<Ingredients> mIngredientsList)
-        {
-            this.ingredientsList.addAll(mIngredientsList);
-            notifyDataSetChanged();
-        }
+    public void setLinesList(ArrayList<Lines> mLinesList)
+    {
+        this.linesList.addAll(mLinesList);
+        notifyDataSetChanged();
     }
 }
+
