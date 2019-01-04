@@ -2,4 +2,6 @@
     <string name="app_name">LondonTubeSchedule</string>
     <string name="tube_list_instructions">Click on a line to view a list of stations</string>
     <string name="station_list_instructions">Click on a station to view train schedules</string>
+    <string name="line_name">Bakerloo</string>
+    <string name="station_name">Canary Wharf</string>
 </resources>
