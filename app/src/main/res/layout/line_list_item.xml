@@ -10,10 +10,10 @@
     <TextView
         android:id="@+id/line_name"
         style="@style/LineStationListStyle"
-        android:layout_marginLeft="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginRight="35dp"
-        android:layout_marginEnd="35dp"
+        android:layout_marginLeft="@dimen/line_station_margin_start"
+        android:layout_marginStart="@dimen/line_station_margin_start"
+        android:layout_marginRight="@dimen/line_station_margin_end"
+        android:layout_marginEnd="@dimen/line_station_margin_end"
         android:padding="2dp"
         tools:text="@string/line_name" />
 
