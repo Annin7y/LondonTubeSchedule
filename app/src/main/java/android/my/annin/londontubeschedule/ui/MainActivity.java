@@ -1,6 +1,7 @@
 package android.my.annin.londontubeschedule.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.my.annin.londontubeschedule.R;
 import android.my.annin.londontubeschedule.asynctask.TubeLineAsyncTask;
 import android.my.annin.londontubeschedule.asynctask.TubeLineAsyncTaskInterface;
@@ -9,10 +10,12 @@ import android.my.annin.londontubeschedule.recyclerviewadapters.LinesAdapter;
 import android.my.annin.londontubeschedule.utils.NetworkUtils;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
@@ -31,7 +34,10 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
     private ArrayList<Lines> linesArrayList = new ArrayList<>();
     private Context context;
     private static final String KEY_LINES_LIST = "lines_list";
+    CoordinatorLayout mCoordinatorLayout;
 
+    @BindView(R.id.pb_loading_indicator)
+    ProgressBar mLoadingIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -69,9 +75,8 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
             linesArrayList = savedInstanceState.getParcelableArrayList(KEY_LINES_LIST);
             linesAdapter.setLinesList(linesArrayList);
         }
-
-
     }
+
     public class MyClickListener implements View.OnClickListener
     {
         @Override
@@ -83,6 +88,31 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         }
     }
 
+    @Override
+    public void returnLineData(ArrayList<Lines> simpleJsonLineData)
+    {
+        mLoadingIndicator.setVisibility(View.INVISIBLE);
+        if (null != simpleJsonLineData)
+        {
+            recipesAdapter = new RecipesAdapter(this, simpleJsonRecipeData, MainActivity.this);
+            recipesArrayList = simpleJsonRecipeData;
+            mRecipeRecyclerView.setAdapter(recipesAdapter);
+            linesAdapter.setRecipesList(recipesArrayList);
+        }
+        else
+        {
+            showErrorMessage();
+        }
+    }
+
+    @Override
+    public void onClick(Lines lines)
+    {
+        Intent intent = new Intent(MainActivity.this, StationListActivity.class);
+        intent.putExtra("Lines", lines);
+        startActivity(intent);
+    }
+
     //Display if there is no internet connection
     public void showErrorMessage()
     {
@@ -90,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
                 .make(mCoordinatorLayout, "Please check your internet connection", Snackbar.LENGTH_INDEFINITE)
                 .setAction("Retry", new MyClickListener())
                 .show();
-        mRecyclerView.setVisibility(View.INVISIBLE);
+        mLineRecyclerView.setVisibility(View.INVISIBLE);
         mLoadingIndicator.setVisibility(View.VISIBLE);
     }
 

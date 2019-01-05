@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public interface TubeLineAsyncTaskInterface
 {
-    void returnData( ArrayList<Lines> simpleJsonLineData);
+    void returnLineData( ArrayList<Lines> simpleJsonLineData);
 }
 
 
