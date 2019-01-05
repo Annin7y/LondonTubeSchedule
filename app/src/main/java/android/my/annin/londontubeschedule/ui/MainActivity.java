@@ -10,6 +10,7 @@ import android.my.annin.londontubeschedule.recyclerviewadapters.LinesAdapter;
 import android.my.annin.londontubeschedule.utils.NetworkUtils;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -46,8 +47,10 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         setContentView(R.layout.activity_main);
 
         context = getApplicationContext();
+
         // Bind the views
         ButterKnife.bind(this);
+        mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
 
         linesAdapter = new LinesAdapter(this, linesArrayList, context);
         mLineRecyclerView.setAdapter(linesAdapter);
@@ -94,10 +97,10 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         mLoadingIndicator.setVisibility(View.INVISIBLE);
         if (null != simpleJsonLineData)
         {
-            recipesAdapter = new RecipesAdapter(this, simpleJsonRecipeData, MainActivity.this);
-            recipesArrayList = simpleJsonRecipeData;
-            mRecipeRecyclerView.setAdapter(recipesAdapter);
-            linesAdapter.setRecipesList(recipesArrayList);
+            linesAdapter = new LinesAdapter(this, simpleJsonLineData, MainActivity.this);
+            linesArrayList = simpleJsonLineData;
+            mLineRecyclerView.setAdapter(linesAdapter);
+            linesAdapter.setLinesList(linesArrayList);
         }
         else
         {

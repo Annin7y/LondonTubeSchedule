@@ -2,4 +2,21 @@
 <resources>
     <dimen name="line_station_margin_start">15dp</dimen>
     <dimen name="line_station_margin_end">35dp</dimen>
+
+    <!-- Progress bar width and height specifications in activity_main -->
+    <dimen name="progress_bar">42dp</dimen>
+
+    <!-- Progress bar marginStart & marginEnd in activity_main -->
+    <dimen name="progress_bar_start">260dp</dimen>
+    <dimen name="progress_bar_end">260dp</dimen>
+
+    <!-- Progress bar marginLeft & marginRight in activity_main -->
+    <dimen name="progress_bar_left">260dp</dimen>
+    <dimen name="progress_bar_right">260dp</dimen>
+
+    <!-- Progress bar marginTop in activity_main -->
+    <dimen name="progress_bar_top">295dp</dimen>
+
+
+
 </resources>
