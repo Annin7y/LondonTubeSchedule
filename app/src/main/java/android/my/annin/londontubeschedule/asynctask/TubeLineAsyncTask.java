@@ -6,8 +6,9 @@ import android.my.annin.londontubeschedule.utils.NetworkUtils;
 import android.os.AsyncTask;
 
 import java.net.URL;
+import java.util.ArrayList;
 
-public class TubeLineAsyncTask extends AsyncTask<URL, Void, Lines>
+public class TubeLineAsyncTask extends AsyncTask<URL, Void, ArrayList<Lines>>
 {
     private static final String TAG = TubeLineAsyncTask.class.getSimpleName();
 
@@ -25,7 +26,7 @@ public class TubeLineAsyncTask extends AsyncTask<URL, Void, Lines>
     }
 
     @Override
-    protected Lines doInBackground(URL... params)
+    protected ArrayList<Lines> doInBackground(URL... params)
     {
         URL lineRequestUrl = NetworkUtils.buildLineUrl();
 
@@ -43,7 +44,7 @@ public class TubeLineAsyncTask extends AsyncTask<URL, Void, Lines>
         }
     }
     @Override
-    protected void onPostExecute(Lines mLineList)
+    protected void onPostExecute(ArrayList<Lines> mLineList)
     {
         super.onPostExecute(mLineList);
          /*the if method is commented out because the error message will be displayed if there is no internet connection
