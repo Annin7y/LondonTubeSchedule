@@ -7,9 +7,15 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import capstone.my.annin.londontubeschedule.model.Lines;
 
 public class StationListActivity extends AppCompatActivity
 {
+    //Tag for the log messages
+    private static final String TAG = StationListActivity.class.getSimpleName();
+
+    Lines lines;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

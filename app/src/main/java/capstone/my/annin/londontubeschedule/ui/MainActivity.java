@@ -15,6 +15,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -58,8 +59,7 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         linesAdapter = new LinesAdapter(this, linesArrayList, context);
         mLineRecyclerView.setAdapter(linesAdapter);
 
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(context, calculateNoOfColumns(context));
-        mLineRecyclerView.setLayoutManager(mLayoutManager);
+        mLineRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         /*
          *  Starting the asyncTask so that lines load upon launching the app.
@@ -85,16 +85,6 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
             linesAdapter.setLinesList(linesArrayList);
         }
     }
-
-    public static int calculateNoOfColumns(Context context)
-    {
-        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
-        float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
-        int scalingFactor = 180;
-        int noOfColumns = (int) (dpWidth / scalingFactor);
-        return noOfColumns;
-    }
-
 
     public class MyClickListener implements View.OnClickListener
     {
