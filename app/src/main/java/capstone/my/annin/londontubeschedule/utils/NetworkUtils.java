@@ -27,7 +27,7 @@ public class NetworkUtils
     private static final String APP_KEY = "app_key";
     private static final String APP_ID = "app_id";
 
-    private static final String BASE_URL_LINES_LIST = "https://api.tfl.gov.uk/Line/Mode/tube%2Cdlr";
+    private static final String BASE_URL_LINES_LIST = "https://api.tfl.gov.uk/Line/Mode/tube";
 
     private static final String BASE_URL_STATIONS_LIST = "https://api.tfl.gov.uk/Line/victoria/Route/Sequence/inbound?serviceTypes=Regular&excludeCrowding=false";
 
