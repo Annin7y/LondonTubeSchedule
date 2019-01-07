@@ -1,6 +1,8 @@
 package capstone.my.annin.londontubeschedule.ui;
 
 import capstone.my.annin.londontubeschedule.R;
+
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
@@ -15,14 +17,14 @@ public class StationListActivity extends AppCompatActivity
     private static final String TAG = StationListActivity.class.getSimpleName();
 
     Lines lines;
-
-
+    public String lineId;
+    private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_station_list);
-
+        context = getApplicationContext();
 
     }
 }

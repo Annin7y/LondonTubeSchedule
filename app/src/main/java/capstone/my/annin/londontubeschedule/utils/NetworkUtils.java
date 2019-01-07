@@ -29,7 +29,7 @@ public class NetworkUtils
 
     private static final String BASE_URL_LINES_LIST = "https://api.tfl.gov.uk/Line/Mode/tube";
 
-    private static final String BASE_URL_STATIONS_LIST = "https://api.tfl.gov.uk/Line/victoria/Route/Sequence/inbound?serviceTypes=Regular&excludeCrowding=false";
+    private static final String BASE_URL_STATIONS_LIST = "https://api.tfl.gov.uk/Line/";
 
     private static final String BASE_URL_SCHEDULE = "https://api.tfl.gov.uk/Line/victoria/Arrivals/940GZZLUGPK";
 
@@ -56,13 +56,14 @@ public class NetworkUtils
         return urlLineList;
     }
 
-    public static URL buildStationsUrl()
+    public static URL buildStationsUrl(String lineId)
     {
         //https://api.tfl.gov.uk/Line/victoria/Route/Sequence/inbound?serviceTypes=Regular&excludeCrowding=false&app_id=58p&app_key=9glkug765j
         URL urlStationsList = null;
         try
         {
             Uri stationsListQueryUri = Uri.parse(BASE_URL_STATIONS_LIST).buildUpon()
+                    .appendPath(lineId)
                     .build();
             urlStationsList = new URL(stationsListQueryUri.toString());
         }
