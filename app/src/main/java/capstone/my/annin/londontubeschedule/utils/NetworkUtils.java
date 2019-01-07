@@ -52,7 +52,7 @@ public class NetworkUtils
         {
             e.printStackTrace();
         }
-        Log.v(TAG, "Built URI " + urlLineList);
+        Log.v(TAG, "Built URIline " + urlLineList);
         return urlLineList;
     }
 
@@ -64,6 +64,13 @@ public class NetworkUtils
         {
             Uri stationsListQueryUri = Uri.parse(BASE_URL_STATIONS_LIST).buildUpon()
                     .appendPath(lineId)
+                    .appendPath("Route")
+                    .appendPath("Sequence")
+                    .appendPath("inbound")
+                    .appendQueryParameter("serviceTypes", "Regular")
+                    .appendQueryParameter("excludeCrowding", "false")
+                    .appendQueryParameter(APP_ID, BuildConfig.UNIFIED_LONDON_TRANSPORT_APP_ID)
+                    .appendQueryParameter(APP_KEY, BuildConfig.UNIFIED_LONDON_TRANSPORT_APP_KEY)
                     .build();
             urlStationsList = new URL(stationsListQueryUri.toString());
         }
@@ -71,7 +78,7 @@ public class NetworkUtils
         {
             e.printStackTrace();
         }
-        Log.v(TAG, "Built URI " + urlStationsList);
+        Log.v(TAG, "Built URIStation " + urlStationsList);
         return urlStationsList;
     }
 
@@ -88,7 +95,7 @@ public class NetworkUtils
         {
             e.printStackTrace();
         }
-        Log.v(TAG, "Built URI " + urlSchedule);
+        Log.v(TAG, "Built URISchedule " + urlSchedule);
         return urlSchedule;
     }
 

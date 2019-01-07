@@ -2,22 +2,14 @@ package capstone.my.annin.londontubeschedule.ui;
 
 import android.content.Context;
 import android.content.Intent;
-import capstone.my.annin.londontubeschedule.R;
-import capstone.my.annin.londontubeschedule.asynctask.TubeLineAsyncTask;
-import capstone.my.annin.londontubeschedule.asynctask.TubeLineAsyncTaskInterface;
-import capstone.my.annin.londontubeschedule.model.Lines;
-import capstone.my.annin.londontubeschedule.recyclerviewadapters.LinesAdapter;
-import capstone.my.annin.londontubeschedule.utils.NetworkUtils;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -25,7 +17,12 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import capstone.my.annin.londontubeschedule.R;
+import capstone.my.annin.londontubeschedule.asynctask.TubeLineAsyncTask;
+import capstone.my.annin.londontubeschedule.asynctask.TubeLineAsyncTaskInterface;
+import capstone.my.annin.londontubeschedule.model.Lines;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.LinesAdapter;
+import capstone.my.annin.londontubeschedule.utils.NetworkUtils;
 
 public class MainActivity extends AppCompatActivity implements LinesAdapter.LinesAdapterOnClickHandler, TubeLineAsyncTaskInterface
 {
@@ -119,6 +116,8 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
     {
         Intent intent = new Intent(MainActivity.this, StationListActivity.class);
         intent.putExtra("Lines", lines);
+        //the animation transition explode code is based on the third answer in the following stackoverflow post:
+        //https://stackoverflow.com/questions/24517620/activityoptions-makescenetransitionanimation-doesnt-seem-to-exist
         startActivity(intent);
     }
 

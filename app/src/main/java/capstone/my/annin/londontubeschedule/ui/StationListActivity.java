@@ -26,5 +26,11 @@ public class StationListActivity extends AppCompatActivity
         setContentView(R.layout.activity_station_list);
         context = getApplicationContext();
 
+
+        if (getIntent() != null && getIntent().getExtras() != null)
+        {
+            lines = getIntent().getExtras().getParcelable("Lines");
+            lineId = lines.getLineId();
+
     }
-}
+}}

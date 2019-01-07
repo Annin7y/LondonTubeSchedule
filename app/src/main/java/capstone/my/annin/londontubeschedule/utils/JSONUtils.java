@@ -18,6 +18,8 @@ public class JSONUtils {
 
     private static final String KEY_LINE_ID = "id";
     private static final String KEY_LINE_NAME = "name";
+    private static final String KEY_STATION_ID = "id";
+    private static final String KEY_STATION_NAME = "name";
 
     public JSONUtils() {
     }
