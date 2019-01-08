@@ -103,8 +103,8 @@ public class LinesAdapter extends RecyclerView.Adapter<LinesAdapter.LinesAdapter
 
     public void setLinesList(ArrayList<Lines> mLinesList)
     {
-        this.linesList.addAll(mLinesList);
-        notifyDataSetChanged();
+       this.linesList = mLinesList;
+       notifyDataSetChanged();
     }
 }
 
