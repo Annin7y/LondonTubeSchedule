@@ -35,7 +35,7 @@ public class TubeLineAsyncTask extends AsyncTask<URL, Void, ArrayList<Lines>>
             String jsonLineResponse = NetworkUtils
                     .makeHttpLineRequest(lineRequestUrl);
 
-            return JSONUtils.extractFeatureFromJson(jsonLineResponse);
+            return JSONUtils.extractFeatureFromLineJson(jsonLineResponse);
         }
         catch (Exception e)
         {

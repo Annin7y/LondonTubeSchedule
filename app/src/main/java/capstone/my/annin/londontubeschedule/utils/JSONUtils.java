@@ -1,6 +1,8 @@
 package capstone.my.annin.londontubeschedule.utils;
 
 import capstone.my.annin.londontubeschedule.model.Lines;
+import capstone.my.annin.londontubeschedule.model.Stations;
+
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -24,7 +26,7 @@ public class JSONUtils {
     public JSONUtils() {
     }
 
-    public static ArrayList<Lines> extractFeatureFromJson(String lineJSON) {
+    public static ArrayList<Lines> extractFeatureFromLineJson(String lineJSON) {
         // If the JSON string is empty or null, then return early.
         if (TextUtils.isEmpty(lineJSON)) {
             return null;
@@ -63,6 +65,19 @@ public class JSONUtils {
         }
         // Return the list of lines
         return lines;
+    }
+
+    public static ArrayList<Stations> extractFeatureFromStationJson(String stationJSON) {
+        // If the JSON string is empty or null, then return early.
+        if (TextUtils.isEmpty(stationJSON)) {
+            return null;
+        }
+        ArrayList<Stations> stations = new ArrayList<>();
+
+
+        // Return the list of stations
+        return stations;
+
     }
 }
 
