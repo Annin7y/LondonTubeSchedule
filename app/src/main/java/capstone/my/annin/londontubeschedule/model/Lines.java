@@ -8,12 +8,12 @@ import java.util.ArrayList;
 public class Lines implements Parcelable
 {
     /**
-     * Lines id
+     * Line id
      */
     private String lineId;
 
     /**
-     * Lines name
+     * Line name
      */
     private String lineName;
 
@@ -38,7 +38,7 @@ public class Lines implements Parcelable
         return lineId;
     }
 
-    public void setName(String lineName)
+    public void setLineName(String lineName)
     {
         this.lineName = lineName;
     }
