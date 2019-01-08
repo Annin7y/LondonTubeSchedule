@@ -54,9 +54,7 @@ public class JSONUtils {
                 Lines line = new Lines(id, name);
                 lines.add(line);
             }
-        }
-        catch (JSONException e)
-        {
+        } catch (JSONException e) {
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
             // with the message from the exception.
@@ -73,9 +71,44 @@ public class JSONUtils {
             return null;
         }
         ArrayList<Stations> stations = new ArrayList<>();
+        try {
+            // Create a JSONObject from the JSON response string
+            JSONObject baseJsonResponse = new JSONObject(stationJSON);
+            JSONArray stopPointSequenceArrayList = baseJsonResponse.getJSONArray("stopPointSequences");
+            if (stopPointSequenceArrayList != null) {
+                for (int i = 0; i < stopPointSequenceArrayList.length(); i++) {
+                    JSONObject elem = stopPointSequenceArrayList.getJSONObject(i);
+                    if (elem != null) {
+                        JSONArray stopPointArrayList = elem.getJSONArray("stopPoint");
+                        if (stopPointArrayList != null) {
+                            for (int j = 0; j < stopPointArrayList.length(); j++) ;
+                            JSONObject innerElem = stopPointArrayList.getJSONObject(i);
+                            if (innerElem != null) {
+                                String idStation = "";
+                                if (innerElem.has("id")) {
+                                    idStation = innerElem.optString(KEY_STATION_ID);
+                                }
+                                String nameStation = "";
+                                if (innerElem.has("name")) {
+                                    nameStation = innerElem.optString(KEY_STATION_NAME);
+                                }
+                                stopPointSequenceArrayList.add(stopPointArrayList);
+                            }
+                        }
+                    }
+                }
+            }
+            Stations station = new Stations(idStation, nameStation);
+            stations.add(station);
 
+        } catch (JSONException e) {
+            // If an error is thrown when executing any of the above statements in the "try" block,
+            // catch the exception here, so the app doesn't crash. Print a log message
+            // with the message from the exception.
+            Log.e("QueryUtils", "Problem parsing stations JSON results", e);
 
-        // Return the list of stations
+        }
+          // Return the list of stations
         return stations;
 
     }
