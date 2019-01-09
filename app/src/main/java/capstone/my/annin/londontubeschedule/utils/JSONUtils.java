@@ -81,7 +81,7 @@ public class JSONUtils
         {
             return null;
         }
-        ArrayList<Stations> stations = new ArrayList<>();
+       ArrayList<Stations> stations = new ArrayList<>();
 
         try
         {

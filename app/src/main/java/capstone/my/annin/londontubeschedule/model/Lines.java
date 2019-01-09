@@ -20,7 +20,6 @@ public class Lines implements Parcelable
     /**
      * List of lines
      */
-   // private ArrayList<Lines> listLines;
 
     public Lines(String lineId, String lineName)
     {

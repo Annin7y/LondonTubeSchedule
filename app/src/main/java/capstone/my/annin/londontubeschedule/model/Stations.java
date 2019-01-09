@@ -15,6 +15,12 @@ public class Stations implements Parcelable
      */
     private String stationName;
 
+    public Stations(String stationId, String stationName)
+    {
+        this.stationId = stationId;
+        this.stationName = stationName;
+    }
+
     public void setStationId(String stationId)
     {
         this.stationId = stationId;
@@ -34,6 +40,7 @@ public class Stations implements Parcelable
     {
         return stationName;
     }
+
     protected Stations(Parcel in)
     {
         stationId = in.readString();
