@@ -7,5 +7,4 @@ import capstone.my.annin.londontubeschedule.model.Stations;
 public interface TubeStationAsyncTaskInterface
 {
     void returnStationData( ArrayList<Stations> simpleJsonStationData);
-
 }

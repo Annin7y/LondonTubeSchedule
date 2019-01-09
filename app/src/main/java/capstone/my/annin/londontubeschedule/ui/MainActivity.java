@@ -56,7 +56,10 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         linesAdapter = new LinesAdapter(this, linesArrayList, context);
         mLineRecyclerView.setAdapter(linesAdapter);
 
-        mLineRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        RecyclerView.LayoutManager mLineLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        mLineRecyclerView.setLayoutManager(mLineLayoutManager);
+
+       // mLineRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         /*
          *  Starting the asyncTask so that lines load upon launching the app.
@@ -65,8 +68,8 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         {
             if (isNetworkStatusAvailable(this))
             {
-                TubeLineAsyncTask myTask = new TubeLineAsyncTask(this);
-                myTask.execute(NetworkUtils.buildLineUrl());
+                TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(this);
+                myLineTask.execute(NetworkUtils.buildLineUrl());
             }
             else
             {
@@ -89,8 +92,8 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         public void onClick(View v)
         {
             // Run the AsyncTask in response to the click
-            TubeLineAsyncTask myTask = new TubeLineAsyncTask(MainActivity.this);
-            myTask.execute();
+            TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(MainActivity.this);
+            myLineTask.execute();
         }
     }
 
@@ -116,8 +119,6 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
     {
         Intent intent = new Intent(MainActivity.this, StationListActivity.class);
         intent.putExtra("Lines", lines);
-        //the animation transition explode code is based on the third answer in the following stackoverflow post:
-        //https://stackoverflow.com/questions/24517620/activityoptions-makescenetransitionanimation-doesnt-seem-to-exist
         startActivity(intent);
     }
 
