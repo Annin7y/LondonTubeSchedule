@@ -38,10 +38,12 @@ public class TubeStationAsyncTask extends AsyncTask<String, Void, ArrayList<Stat
 
         try {
             String jsonStationResponse = NetworkUtils
-                    .makeHttpLineRequest(stationRequestUrl);
+                    .makeHttpStationRequest(stationRequestUrl);
 
             return JSONUtils.extractFeatureFromStationJson(jsonStationResponse);
-        } catch (Exception e) {
+
+        } catch (Exception e)
+        {
             e.printStackTrace();
             return null;
         }
@@ -50,7 +52,7 @@ public class TubeStationAsyncTask extends AsyncTask<String, Void, ArrayList<Stat
     @Override
     protected void onPostExecute(ArrayList<Stations> mStationList) {
         super.onPostExecute(mStationList);
- /*the if method is commented out because the error message will be displayed if there is no internet connection
+        /*the if method is commented out because the error message will be displayed if there is no internet connection
         the if statement is included in the returnData method in the Main Activity
         */
         //   if (mStationList != null) {}
