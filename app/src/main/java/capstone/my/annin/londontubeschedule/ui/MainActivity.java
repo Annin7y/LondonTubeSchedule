@@ -13,6 +13,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -31,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
 
     @BindView(R.id.recyclerview_main)
     RecyclerView mLineRecyclerView;
-
     private LinesAdapter linesAdapter;
     private ArrayList<Lines> linesArrayList = new ArrayList<>();
     private Context context;
@@ -40,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
 
     @BindView(R.id.pb_loading_indicator)
     ProgressBar mLoadingIndicator;
+
+    private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -51,6 +56,12 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
 
         // Bind the views
         ButterKnife.bind(this);
+
+        MobileAds.initialize(this, "ca-app-pub-9580291377897056~9472538876");
+        AdRequest request = new AdRequest.Builder().build();
+        adView = (AdView)findViewById(R.id.adView);
+        adView.loadAd(request);
+
         mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
 
         linesAdapter = new LinesAdapter(this, linesArrayList, context);
