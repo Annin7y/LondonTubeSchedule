@@ -88,38 +88,33 @@ public class JSONUtils
             // Create a JSONObject from the JSON response string
             JSONObject baseJsonResponse = new JSONObject(stationJSON);
             JSONArray stopPointSequenceArrayList = baseJsonResponse.getJSONArray("stopPointSequences");
-            if (stopPointSequenceArrayList != null)
-            {
+            if (stopPointSequenceArrayList != null) {
                 for (int i = 0; i < stopPointSequenceArrayList.length(); i++)
                 {
                     JSONObject elem = stopPointSequenceArrayList.getJSONObject(i);
-                    if (elem != null)
-                    {
+                    if (elem != null) {
                         JSONArray stopPointArrayList = elem.getJSONArray("stopPoint");
-                        if (stopPointArrayList != null)
-                        {
-                            for (int j = 0; j < stopPointArrayList.length(); j++) ;
-                            JSONObject innerElem = stopPointArrayList.getJSONObject(i);
-                            if (innerElem != null)
+                        if (stopPointArrayList != null) {
+                            for (int j = 0; j < stopPointArrayList.length(); j++)
                             {
-                                String idStation = "";
-                               if (innerElem.has("id"))
-                               {
-                                    idStation = innerElem.optString(KEY_STATION_ID);
+                                JSONObject innerElem = stopPointArrayList.getJSONObject(j);
+                                if (innerElem != null) {
+                                    String idStation = "";
+                                    if (innerElem.has("id")) {
+                                        idStation = innerElem.optString(KEY_STATION_ID);
+                                    }
+                                    String nameStation = "";
+                                    if (innerElem.has("name")) {
+                                        nameStation = innerElem.optString(KEY_STATION_NAME);
+                                    }
+                                    Stations station = new Stations(idStation, nameStation);
+                                    stations.add(station);
                                 }
-                                String nameStation = "";
-                                if (innerElem.has("name"))
-                                {
-                                    nameStation = innerElem.optString(KEY_STATION_NAME);
-                                }
-                                Stations station = new Stations(idStation, nameStation);
-                                stations.add(station);
                             }
                         }
                     }
                 }
             }
-
         } catch (JSONException e)
         {
             // If an error is thrown when executing any of the above statements in the "try" block,
