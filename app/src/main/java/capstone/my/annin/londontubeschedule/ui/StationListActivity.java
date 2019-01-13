@@ -2,14 +2,18 @@ package capstone.my.annin.londontubeschedule.ui;
 
 import capstone.my.annin.londontubeschedule.R;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -17,6 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import capstone.my.annin.londontubeschedule.asynctask.TubeStationAsyncTask;
 import capstone.my.annin.londontubeschedule.asynctask.TubeStationAsyncTaskInterface;
+import capstone.my.annin.londontubeschedule.data.TubeLineContract;
 import capstone.my.annin.londontubeschedule.model.Lines;
 import capstone.my.annin.londontubeschedule.model.Stations;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.StationsAdapter;
@@ -39,6 +44,16 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
     private TextView lineNameStation;
     private String lineNameToString;
 
+    @BindView(R.id.favorites_button)
+    Button favoritesButton;
+
+    /**
+     * Identifier for the favorites data loader
+     */
+    private static final int FAVORITES_LOADER = 0;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +70,27 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
         mStationRecyclerView.setLayoutManager(mStationLayoutManager);
 
         lineNameStation = (TextView) findViewById(R.id.line_name_station);
+
+        //add to favorites
+        favoritesButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                ContentValues values = new ContentValues();
+                values.put(TubeLineContract.TubeLineEntry.COLUMN_LINES_ID, lines.getLineId());
+                values.put(TubeLineContract.TubeLineEntry.COLUMN_LINES_NAME, lines.getLineName());
+                Uri uri = getContentResolver().insert(TubeLineContract.TubeLineEntry.CONTENT_URI, values);
+
+                if (uri != null)
+                {
+                    Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(StationListActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
+                    favoritesButton.setVisibility(View.GONE);
+                }
+            }
+
+        });
 
         /*
          *  Starting the asyncTask so that stations load when the activity opens.
