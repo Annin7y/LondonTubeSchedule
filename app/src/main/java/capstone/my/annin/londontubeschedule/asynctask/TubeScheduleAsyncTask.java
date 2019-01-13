@@ -32,7 +32,7 @@ public class TubeScheduleAsyncTask extends AsyncTask<String, Void, ArrayList<Sch
             return null;
         }
         String lineId = params[0];
-        String stationId = params[0];
+        String stationId = params[1];
 
         URL scheduleRequestUrl = NetworkUtils.buildScheduleUrl(lineId, stationId);
 
