@@ -7,7 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,6 +54,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         @BindView(R.id.schedule_arrival)
         public TextView expectedArrival;
 
+
         public ScheduleAdapterViewHolder(View view)
         {
             super(view);
@@ -83,6 +87,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         holder.currentLocation.setText(stationView.getCurrentLocation());
         holder.directionTowards.setText(stationView.getDirectionTowards());
         holder.expectedArrival.setText(stationView.getExpectedArrival());
+
     }
 
     @Override

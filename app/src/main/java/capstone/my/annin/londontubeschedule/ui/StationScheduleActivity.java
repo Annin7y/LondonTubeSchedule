@@ -83,7 +83,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
         if (null != simpleJsonScheduleData) {
             scheduleAdapter = new ScheduleAdapter(simpleJsonScheduleData, StationScheduleActivity.this);
             scheduleArrayList = simpleJsonScheduleData;
-            mScheduleRecyclerView.setAdapter(scheduleAdapter);
+        //    mScheduleRecyclerView.setAdapter(scheduleAdapter);
             scheduleAdapter.setScheduleList(scheduleArrayList);
         }
     }
