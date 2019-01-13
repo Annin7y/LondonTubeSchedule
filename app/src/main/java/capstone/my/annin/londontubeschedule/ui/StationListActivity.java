@@ -53,14 +53,20 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
         /*
          *  Starting the asyncTask so that stations load when the activity opens.
          */
-        if (savedInstanceState == null) {
-            if (getIntent() != null && getIntent().getExtras() != null) {
+
+            if (getIntent() != null && getIntent().getExtras() != null)
+            {
+                if (savedInstanceState == null)
+                {
                 lines = getIntent().getExtras().getParcelable("Lines");
                 lineId = lines.getLineId();
 
                 TubeStationAsyncTask myStationTask = new TubeStationAsyncTask(this);
                 myStationTask.execute(lineId);
-            } else {
+
+
+            } else
+                {
                 stationsArrayList = savedInstanceState.getParcelableArrayList(KEY_STATIONS_LIST);
                 stationsAdapter.setStationsList(stationsArrayList);
             }
