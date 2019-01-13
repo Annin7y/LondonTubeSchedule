@@ -21,7 +21,8 @@ import capstone.my.annin.londontubeschedule.model.Lines;
 import capstone.my.annin.londontubeschedule.model.Stations;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.StationsAdapter;
 
-public class StationListActivity extends AppCompatActivity implements StationsAdapter.StationsAdapterOnClickHandler, TubeStationAsyncTaskInterface {
+public class StationListActivity extends AppCompatActivity implements StationsAdapter.StationsAdapterOnClickHandler, TubeStationAsyncTaskInterface
+{
     //Tag for the log messages
     private static final String TAG = StationListActivity.class.getSimpleName();
 
@@ -31,9 +32,12 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
     private StationsAdapter stationsAdapter;
     private ArrayList<Stations> stationsArrayList = new ArrayList<>();
     private static final String KEY_STATIONS_LIST = "stations_list";
+    private static final String KEY_LINE_NAME = "line_name";
     Lines lines;
     public String lineId;
     private Context context;
+    private TextView lineNameStation;
+    private String lineNameToString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,8 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
         RecyclerView.LayoutManager mStationLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mStationRecyclerView.setLayoutManager(mStationLayoutManager);
 
+        lineNameStation = (TextView) findViewById(R.id.line_name_station);
+
         /*
          *  Starting the asyncTask so that stations load when the activity opens.
          */
@@ -64,13 +70,14 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
                 TubeStationAsyncTask myStationTask = new TubeStationAsyncTask(this);
                 myStationTask.execute(lineId);
 
+                lineNameStation.setText(lines.getLineName());
 
             } else
                 {
                 stationsArrayList = savedInstanceState.getParcelableArrayList(KEY_STATIONS_LIST);
                 stationsAdapter.setStationsList(stationsArrayList);
-            }
 
+            }
         }
     }
 
@@ -88,7 +95,7 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
     public void onClick(Stations stations) {
         Intent intent = new Intent(StationListActivity.this, StationScheduleActivity.class);
         intent.putExtra("Stations", stations);
-
+        intent.putExtra("Lines", lines);
         startActivity(intent);
     }
 

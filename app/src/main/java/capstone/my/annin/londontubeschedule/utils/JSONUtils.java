@@ -1,6 +1,7 @@
 package capstone.my.annin.londontubeschedule.utils;
 
 import capstone.my.annin.londontubeschedule.model.Lines;
+import capstone.my.annin.londontubeschedule.model.Schedule;
 import capstone.my.annin.londontubeschedule.model.Stations;
 
 import android.text.TextUtils;
@@ -23,6 +24,12 @@ public class JSONUtils
     private static final String KEY_LINE_NAME = "name";
     private static final String KEY_STATION_ID = "id";
     private static final String KEY_STATION_NAME = "name";
+    private static final String KEY_STATION_NAPTAN_ID = "naptanId";
+    private static final String KEY_STATION_SCHEDULE_NAME = "stationName";
+    private static final String KEY_DESTINATION_NAME = "destinationName";
+    private static final String KEY_CURRENT_LOCATION = "currentLocation";
+    private static final String KEY_DIRECTION_TOWARDS = "towards";
+    private static final String KEY_EXPECTED_ARRIVAL = "expectedArrival";
 
     public JSONUtils()
     {
@@ -42,10 +49,10 @@ public class JSONUtils
             // Create a JSONObject from the JSON response string
             JSONArray lineArray = new JSONArray(lineJSON);
 
-            // For each line in the recipeArray, create an {@link Recipes} object
+            // For each line in the recipeArray, create an {@link Lines} object
             for (int i = 0; i < lineArray.length(); i++)
             {
-                // Get a single recipe description at position i within the list of recipes
+                // Get a single line description at position i within the list of lines
                 JSONObject currentLine = lineArray.getJSONObject(i);
 
                 String id = "";
@@ -88,6 +95,8 @@ public class JSONUtils
             // Create a JSONObject from the JSON response string
             JSONObject baseJsonResponse = new JSONObject(stationJSON);
             JSONArray stopPointSequenceArrayList = baseJsonResponse.getJSONArray("stopPointSequences");
+            //Parsing structure below based on the accepted answer in this stackoverflow thread:
+            //https://stackoverflow.com/questions/17673057/how-to-parse-this-nested-json-array-in-android
             if (stopPointSequenceArrayList != null) {
                 for (int i = 0; i < stopPointSequenceArrayList.length(); i++)
                 {
@@ -126,5 +135,78 @@ public class JSONUtils
         return stations;
 
     }
-}
 
+    public static ArrayList<Schedule> extractFeatureFromScheduleJson(String scheduleJSON)
+    {
+        // If the JSON string is empty or null, then return early.
+        if (TextUtils.isEmpty(scheduleJSON))
+        {
+            return null;
+        }
+
+        ArrayList<Schedule> schedules = new ArrayList<>();
+
+        try
+        {
+            // Create a JSONObject from the JSON response string
+            JSONArray scheduleArray = new JSONArray(scheduleJSON);
+
+            // For each schedule item in the scheduleArray, create an {@link Schedule} object
+            for (int i = 0; i < scheduleArray.length(); i++)
+            {
+                // Get a single schedule description at position i within the schedule list
+                JSONObject currentSchedule = scheduleArray.getJSONObject(i);
+
+                //Extract values for the following keys
+                String naptanIdStation = "";
+                if (currentSchedule.has("naptanId"))
+                {
+                    naptanIdStation = currentSchedule.optString(KEY_STATION_NAPTAN_ID);
+                }
+
+                String scheduleNameStation = "";
+                if (currentSchedule.has("stationName"))
+                {
+                    scheduleNameStation = currentSchedule.optString(KEY_STATION_SCHEDULE_NAME);
+                }
+
+                String nameDestination  = "";
+                if (currentSchedule.has("destinationName"))
+                {
+                    nameDestination = currentSchedule.optString(KEY_DESTINATION_NAME);
+                }
+
+                String locationCurrent = "";
+                if (currentSchedule.has("currentLocation"))
+                {
+                    locationCurrent = currentSchedule.optString(KEY_CURRENT_LOCATION);
+                }
+
+                String towardsDirection  = "";
+                if (currentSchedule.has("towards"))
+                {
+                    towardsDirection = currentSchedule.optString(KEY_DIRECTION_TOWARDS);
+                }
+
+                String arrivalExpected = "";
+                if (currentSchedule.has("expectedArrival"))
+                {
+                    arrivalExpected = currentSchedule.optString(KEY_EXPECTED_ARRIVAL);
+                }
+
+                Schedule schedule = new Schedule(naptanIdStation,scheduleNameStation, nameDestination, locationCurrent, towardsDirection, arrivalExpected);
+                schedules.add(schedule);
+            }
+        }
+        catch(JSONException e)
+        {
+            // If an error is thrown when executing any of the above statements in the "try" block,
+            // catch the exception here, so the app doesn't crash. Print a log message
+            // with the message from the exception.
+            Log.e("QueryUtils", "Problem parsing schedule JSON results", e);
+        }
+
+        //Return the schedule list
+        return schedules;
+}
+}

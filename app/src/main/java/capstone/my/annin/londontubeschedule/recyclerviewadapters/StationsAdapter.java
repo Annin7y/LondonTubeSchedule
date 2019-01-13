@@ -16,7 +16,7 @@ import capstone.my.annin.londontubeschedule.model.Stations;
 
 public class StationsAdapter extends RecyclerView.Adapter<StationsAdapter.StationsAdapterViewHolder>
 {
-    private static final String TAG = LinesAdapter.class.getSimpleName();
+    private static final String TAG = StationsAdapter.class.getSimpleName();
 
     private ArrayList<Stations> stationsList = new ArrayList<Stations>();
     private Context context;

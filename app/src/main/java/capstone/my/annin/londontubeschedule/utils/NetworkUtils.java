@@ -81,12 +81,17 @@ public class NetworkUtils
         return urlStationsList;
     }
 
-    public static URL buildScheduleUrl()
+    public static URL buildScheduleUrl(String lineId, String stationId)
     {
         URL urlSchedule = null;
         try
         {
             Uri scheduleQueryUri = Uri.parse(BASE_URL_SCHEDULE).buildUpon()
+                    .appendPath(lineId)
+                    .appendPath("Arrivals")
+                    .appendPath(stationId)
+                    .appendQueryParameter(APP_KEY, BuildConfig.UNIFIED_LONDON_TRANSPORT_APP_KEY)
+                    .appendQueryParameter(APP_ID, BuildConfig.UNIFIED_LONDON_TRANSPORT_APP_ID)
                     .build();
             urlSchedule = new URL(scheduleQueryUri.toString());
         }

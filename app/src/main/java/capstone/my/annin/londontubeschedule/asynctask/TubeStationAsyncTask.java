@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import java.net.URL;
 import java.util.ArrayList;
 
-import capstone.my.annin.londontubeschedule.model.Lines;
 import capstone.my.annin.londontubeschedule.model.Stations;
 import capstone.my.annin.londontubeschedule.utils.JSONUtils;
 import capstone.my.annin.londontubeschedule.utils.NetworkUtils;
@@ -52,7 +51,7 @@ public class TubeStationAsyncTask extends AsyncTask<String, Void, ArrayList<Stat
     @Override
     protected void onPostExecute(ArrayList<Stations> mStationList) {
         super.onPostExecute(mStationList);
-        /*the if method is commented out because the error message will be displayed if there is no internet connection
+        /*the if method is commented out because the error message will be displayed in the Main Activity if there is no internet connection
         the if statement is included in the returnData method in the Main Activity
         */
         //   if (mStationList != null) {}
