@@ -15,7 +15,8 @@
         android:layout_marginRight="@dimen/line_station_margin_end"
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:padding="2dp"
-        tools:text="@string/station_name" />
+        tools:text="@string/station_name"
+        />
 
     <TextView
         android:id="@+id/schedule_destination_name"

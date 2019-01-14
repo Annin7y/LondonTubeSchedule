@@ -66,7 +66,7 @@ public class NetworkUtils
                     .appendPath("Route")
                     .appendPath("Sequence")
                     .appendPath("inbound")
-                    .appendQueryParameter("serviceTypes", "Regular")
+                    .appendQueryParameter("serviceTypes", "Regular,Night")
                     .appendQueryParameter("excludeCrowding", "false")
                     .appendQueryParameter(APP_ID, BuildConfig.UNIFIED_LONDON_TRANSPORT_APP_ID)
                     .appendQueryParameter(APP_KEY, BuildConfig.UNIFIED_LONDON_TRANSPORT_APP_KEY)

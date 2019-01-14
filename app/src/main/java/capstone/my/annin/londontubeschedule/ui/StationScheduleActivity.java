@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -83,8 +84,12 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
         if (null != simpleJsonScheduleData) {
             scheduleAdapter = new ScheduleAdapter(simpleJsonScheduleData, StationScheduleActivity.this);
             scheduleArrayList = simpleJsonScheduleData;
-        //    mScheduleRecyclerView.setAdapter(scheduleAdapter);
+            mScheduleRecyclerView.setAdapter(scheduleAdapter);
             scheduleAdapter.setScheduleList(scheduleArrayList);
+        }
+       else
+        {
+            Toast.makeText(StationScheduleActivity.this, "Data currently unavailable", Toast.LENGTH_SHORT).show();
         }
     }
 

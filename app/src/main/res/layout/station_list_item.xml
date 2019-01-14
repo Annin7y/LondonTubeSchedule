@@ -14,7 +14,7 @@
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginRight="@dimen/line_station_margin_end"
         android:layout_marginEnd="@dimen/line_station_margin_end"
-        android:padding="2dp"
+        android:padding="8dp"
         tools:text="@string/station_name" />
 
 </LinearLayout>
