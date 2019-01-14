@@ -60,9 +60,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
             // Determine the values of the wanted data
             int lineIdIndex = cursor.getColumnIndexOrThrow(TubeLineContract.TubeLineEntry.COLUMN_LINES_ID);
 
-
             final int id = cursor.getInt(lineIdIndex);
-
 
             holder.itemView.setTag(id);
 

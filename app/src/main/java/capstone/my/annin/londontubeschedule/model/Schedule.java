@@ -105,6 +105,7 @@ public class Schedule implements Parcelable
     {
         return expectedArrival;
     }
+
     protected Schedule(Parcel in)
     {
         stationNaptanId = in.readString();

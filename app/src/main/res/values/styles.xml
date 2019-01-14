@@ -24,6 +24,7 @@
         <item name="android:textSize">15sp</item>
     </style>
 
-
+    <!-- Widget text size -->
+    <dimen name="widget_text_size">20sp</dimen>
 
 </resources>

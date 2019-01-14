@@ -12,6 +12,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.content.CursorLoader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -141,11 +142,12 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
                         .show();
             }
         } else {
-            getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
-            mLineRecyclerView.setAdapter(favoritesAdapter);
+
             linesArrayList = savedInstanceState.getParcelableArrayList(KEY_LINES_LIST);
             linesAdapter.setLinesList(linesArrayList);
         }
+//                getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
+//        mLineRecyclerView.setAdapter(favoritesAdapter);
     }
 
     public class MyClickListener implements View.OnClickListener {
@@ -314,8 +316,7 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
                 myLineTask.execute();
                 return true;
 
-
-            default:
+                default:
                 return super.onOptionsItemSelected(item);
     }}
 

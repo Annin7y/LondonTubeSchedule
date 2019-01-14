@@ -13,11 +13,20 @@ import capstone.my.annin.londontubeschedule.model.Schedule;
 import capstone.my.annin.londontubeschedule.model.Stations;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.ScheduleAdapter;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.ShareActionProvider;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -36,6 +45,10 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     Lines lines;
     public String lineId;
     private Context context;
+    private ShareActionProvider mShareActionProvider;
+    Schedule stationArrival;
+    private String stationShareStationName;
+    private String stationShareArrivalTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -81,27 +94,61 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     @Override
     public void returnScheduleData(ArrayList<Schedule> simpleJsonScheduleData)
     {
-        if (null != simpleJsonScheduleData) {
+        if (simpleJsonScheduleData.size() > 0) {
             scheduleAdapter = new ScheduleAdapter(simpleJsonScheduleData, StationScheduleActivity.this);
             scheduleArrayList = simpleJsonScheduleData;
             mScheduleRecyclerView.setAdapter(scheduleAdapter);
             scheduleAdapter.setScheduleList(scheduleArrayList);
+            stationArrival = scheduleArrayList.get(0);
+            stationShareStationName = stationArrival.getStationScheduleName();
+            stationShareArrivalTime = stationArrival.getExpectedArrival();
+
+            //Store Ingredients in SharedPreferences
+            SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
+
+            Gson gson = new Gson();
+            String json = gson.toJson(scheduleArrayList);
+            prefsEditor.putString("ScheduleList_Widget", json);
+            prefsEditor.apply();
+
         }
        else
         {
             Toast.makeText(StationScheduleActivity.this, "Data currently unavailable", Toast.LENGTH_SHORT).show();
         }
+        if (mShareActionProvider != null)
+        {
+            mShareActionProvider.setShareIntent(createShareIntent());
+        }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        /* Use AppCompatActivity's method getMenuInflater to get a handle on the menu inflater */
+        MenuInflater inflater = getMenuInflater();
+        /* Use the inflater's inflate method to inflate our menu layout to this menu */
+        inflater.inflate(R.menu.schedule, menu);
+        /* Return true so that the menu is displayed in the Toolbar */
+        MenuItem shareItem = menu.findItem(R.id.menu_item_share);
 
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
 
-//    public Intent createShareIntent()
-//    {
-//        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-//        shareIntent.setType("text/plain");
-//        shareIntent.putExtra(Intent.EXTRA_TEXT, BASE_STATION_URL_SHARE  + stationKey);
-//        return shareIntent;
-//    }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public Intent createShareIntent()
+    {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        Bundle extras = new Bundle();
+        extras.putString(Intent.EXTRA_TEXT, stationShareArrivalTime);
+        extras.putString(Intent.EXTRA_TEXT, stationShareStationName);
+        shareIntent.putExtras(extras);
+
+        return shareIntent;
+    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

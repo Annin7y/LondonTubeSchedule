@@ -7,4 +7,6 @@
     <string name="favorites_added">Line added to favorites</string>
     <string name="most_frequented_lines">Most Frequented Lines</string>
     <string name="line_list_menu">Line List</string>
+    <string name="action_share">Send arrival time</string>
+    <string name="empty_view">Empty view</string>
 </resources>
