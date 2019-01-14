@@ -5,4 +5,6 @@
     <string name="line_name">Bakerloo</string>
     <string name="station_name">Canary Wharf</string>
     <string name="favorites_added">Line added to favorites</string>
+    <string name="most_frequented_lines">Most Frequented Lines</string>
+    <string name="line_list_menu">Line List</string>
 </resources>

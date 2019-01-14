@@ -2,9 +2,13 @@ package capstone.my.annin.londontubeschedule.ui;
 
 import capstone.my.annin.londontubeschedule.R;
 
+import android.app.LoaderManager;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.Loader;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -26,7 +30,8 @@ import capstone.my.annin.londontubeschedule.model.Lines;
 import capstone.my.annin.londontubeschedule.model.Stations;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.StationsAdapter;
 
-public class StationListActivity extends AppCompatActivity implements StationsAdapter.StationsAdapterOnClickHandler, TubeStationAsyncTaskInterface
+public class StationListActivity extends AppCompatActivity implements StationsAdapter.StationsAdapterOnClickHandler, TubeStationAsyncTaskInterface,
+        LoaderManager.LoaderCallbacks<Cursor>
 {
     //Tag for the log messages
     private static final String TAG = StationListActivity.class.getSimpleName();
@@ -115,6 +120,9 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
 
             }
         }
+        // Kick off the loader
+        getLoaderManager().initLoader(FAVORITES_LOADER, null, this);
+
     }
 
     @Override
@@ -133,6 +141,40 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
         intent.putExtra("Stations", stations);
         intent.putExtra("Lines", lines);
         startActivity(intent);
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int loaderId, Bundle bundle)
+    {
+        String[] projection = {TubeLineContract.TubeLineEntry._ID, TubeLineContract.TubeLineEntry.COLUMN_LINES_ID,};
+        String[] selectionArgs = new String[]{lineId};
+
+        switch (loaderId)
+        {
+            case FAVORITES_LOADER:
+                return new CursorLoader(this,   // Parent activity context
+                        TubeLineContract.TubeLineEntry.CONTENT_URI,   // Provider content URI to query
+                        projection,             // Columns to include in the resulting Cursor
+                        TubeLineContract.TubeLineEntry.COLUMN_LINES_ID + "=?",
+                        selectionArgs,
+                        null);                  // Default sort order
+
+            default:
+                throw new RuntimeException("Loader Not Implemented: " + loaderId);
+        }
+    }
+
+    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor)
+    {
+        if ((cursor != null) && (cursor.getCount() > 0))
+        {
+            //"Add to Favorites" button is disabled in the StationList Activity when the user clicks on a line stored in Favorites
+            favoritesButton.setEnabled(false);
+        }
+    }
+
+    public void onLoaderReset(Loader<Cursor> cursorLoader)
+    {
     }
 
     @Override

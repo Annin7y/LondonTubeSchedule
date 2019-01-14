@@ -7,6 +7,12 @@
         <item
             android:id="@+id/most_frequented_favorites"
             android:orderInCategory="1"
-            android:title="Most Frequented"
+            android:title="@string/most_frequented_lines"
             app:showAsAction="never" />
+        <item
+            android:id="@+id/line_list"
+            android:orderInCategory="1"
+            android:title="@string/line_list_menu"
+            app:showAsAction="never" />
+
 </menu>
