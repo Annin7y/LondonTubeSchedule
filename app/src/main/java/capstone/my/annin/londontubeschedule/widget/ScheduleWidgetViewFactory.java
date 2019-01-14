@@ -59,6 +59,7 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
         RemoteViews itemView = new RemoteViews(mContext.getPackageName(), R.layout.schedule_list_item);
 
         itemView.setTextViewText(R.id.schedule_station_name, schedule.getStationScheduleName());
+        itemView.setTextViewText(R.id.schedule_arrival, schedule.getExpectedArrival());
 
         Intent intent = new Intent();
         intent.putExtra(ScheduleWidgetProvider.EXTRA_ITEM, schedule);

@@ -135,7 +135,9 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
             {
                 TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(this);
                 myLineTask.execute(NetworkUtils.buildLineUrl());
-            } else {
+
+            } else
+                {
                 Snackbar
                         .make(mCoordinatorLayout, "Please check your internet connection", Snackbar.LENGTH_INDEFINITE)
                         .setAction("Retry", new MyClickListener())
@@ -146,10 +148,10 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
             linesArrayList = savedInstanceState.getParcelableArrayList(KEY_LINES_LIST);
             linesAdapter.setLinesList(linesArrayList);
         }
-//                getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
-//        mLineRecyclerView.setAdapter(favoritesAdapter);
-    }
+        getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
+        favoritesAdapter = new FavoritesAdapter(this, MainActivity.this);
 
+    }
     public class MyClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {

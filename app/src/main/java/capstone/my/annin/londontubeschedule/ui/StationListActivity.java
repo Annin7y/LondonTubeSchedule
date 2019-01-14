@@ -60,7 +60,8 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_station_list);
         context = getApplicationContext();
