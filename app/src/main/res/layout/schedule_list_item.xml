@@ -26,7 +26,8 @@
         android:layout_marginRight="@dimen/line_station_margin_end"
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:padding="2dp"
-        tools:text="Brixton Underground Station" />
+        tools:text="Brixton Underground Station"
+      />
 
     <TextView
         android:id="@+id/schedule_current_location"
