@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
 
                 // TODO (2) Delete a single row of data using a ContentResolver
                 int rowsDeleted = getContentResolver().delete(uri, null, null);
-                Log.v("CatalogActivity", rowsDeleted + " rows deleted from the movie database");
+                Log.v("CatalogActivity", rowsDeleted + " rows deleted from the line database");
                 // TODO (3) Restart the loader to re-query for all tasks after a deletion
                 getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
             }

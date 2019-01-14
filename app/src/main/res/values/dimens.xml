@@ -17,6 +17,7 @@
     <!-- Progress bar marginTop in activity_main -->
     <dimen name="progress_bar_top">295dp</dimen>
 
-
+    <!-- Widget text size -->
+    <dimen name="widget_text_size">20sp</dimen>
 
 </resources>

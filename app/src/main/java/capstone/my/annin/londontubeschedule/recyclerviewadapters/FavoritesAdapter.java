@@ -59,10 +59,14 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
 
             // Determine the values of the wanted data
             int lineIdIndex = cursor.getColumnIndexOrThrow(TubeLineContract.TubeLineEntry.COLUMN_LINES_ID);
+            int lineNameColumnIndex = cursor.getColumnIndexOrThrow(TubeLineContract.TubeLineEntry.COLUMN_LINES_NAME);
+
+            String stationName = cursor.getString(lineNameColumnIndex);
 
             final int id = cursor.getInt(lineIdIndex);
 
             holder.itemView.setTag(id);
+            holder.lineName.setText(stationName);
 
         }
 
@@ -101,7 +105,9 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         {
             if (null == cursor)
                 return 0;
+
             return cursor.getCount();
+
         }
     }
 
