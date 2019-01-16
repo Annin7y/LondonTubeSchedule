@@ -1,7 +1,7 @@
 package capstone.my.annin.londontubeschedule.utils;
 
-
 import android.net.Uri;
+
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -12,6 +12,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+
 
 import capstone.my.annin.londontubeschedule.BuildConfig;
 

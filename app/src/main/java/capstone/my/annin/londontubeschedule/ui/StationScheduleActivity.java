@@ -144,7 +144,8 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
 
     public Intent createShareIntent()
     {
-        String data =stationShareStationName + "\n" + stationShareArrivalTime;
+        String shareTitle = "Next train at ";
+        String data = shareTitle + "\n" + stationShareStationName + "\n" + stationShareArrivalTime;
 
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");

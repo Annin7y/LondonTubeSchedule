@@ -114,6 +114,7 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
                 myStationTask.execute(lineId);
 
                 lineNameStation.setText(lines.getLineName());
+                lineNameToString = lineNameStation.getText().toString();
 
             } else
                 {
