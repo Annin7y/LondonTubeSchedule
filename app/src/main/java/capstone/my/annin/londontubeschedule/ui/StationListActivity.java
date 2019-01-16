@@ -114,12 +114,13 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
                 myStationTask.execute(lineId);
 
                 lineNameStation.setText(lines.getLineName());
-                lineNameToString = lineNameStation.getText().toString();
+
 
             } else
                 {
                 stationsArrayList = savedInstanceState.getParcelableArrayList(KEY_STATIONS_LIST);
                 stationsAdapter.setStationsList(stationsArrayList);
+                lineNameToString = lineNameStation.getText().toString();
                 lineNameToString = savedInstanceState.getString(KEY_LINE_NAME);
 
             }

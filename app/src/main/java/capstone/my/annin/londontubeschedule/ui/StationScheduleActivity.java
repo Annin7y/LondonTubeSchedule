@@ -109,7 +109,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
             stationShareStationName = stationArrival.getStationScheduleName();
             stationShareArrivalTime = stationArrival.getExpectedArrival();
 
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
             Date date = null;
 
             try
@@ -121,7 +121,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
             {
                 e.printStackTrace();
             }
-            SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy");
+            SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
             String finalDate = newDateFormat.format(date);
 
             stationShareArrivalTime = finalDate;
