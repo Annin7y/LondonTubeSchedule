@@ -76,6 +76,7 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
         mStationRecyclerView.setLayoutManager(mStationLayoutManager);
 
         lineNameStation = (TextView) findViewById(R.id.line_name_station);
+        lineNameToString = lineNameStation.getText().toString();
 
         //add to favorites
         favoritesButton.setOnClickListener(new View.OnClickListener()
@@ -181,6 +182,7 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putParcelableArrayList(KEY_STATIONS_LIST, stationsArrayList);
+        outState.putString(KEY_LINE_NAME, lineNameToString);
         super.onSaveInstanceState(outState);
     }
 }
