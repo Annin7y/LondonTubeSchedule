@@ -335,6 +335,15 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
     }}
 
     @Override
+    public void onResume()
+    {
+        super.onResume();
+        TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(MainActivity.this);
+         myLineTask.execute();
+
+    }
+
+    @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putParcelableArrayList(KEY_LINES_LIST, linesArrayList);
         super.onSaveInstanceState(outState);
