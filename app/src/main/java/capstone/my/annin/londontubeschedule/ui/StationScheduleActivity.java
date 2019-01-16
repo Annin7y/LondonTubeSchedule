@@ -74,7 +74,6 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
         /*
          *  Starting the asyncTask so that schedule loads when the activity opens.
          */
-
         if (getIntent() != null && getIntent().getExtras() != null)
         {
             if (savedInstanceState == null)
@@ -88,13 +87,13 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
                 TubeScheduleAsyncTask myScheduleTask = new TubeScheduleAsyncTask(this);
                 myScheduleTask.execute(lineId,stationId);
             }
-            else {
+            else
+                {
                 scheduleArrayList = savedInstanceState.getParcelableArrayList(KEY_SCHEDULE_LIST);
                 scheduleAdapter.setScheduleList(scheduleArrayList);
             }
             }
     }
-
 
     @Override
     public void returnScheduleData(ArrayList<Schedule> simpleJsonScheduleData)
@@ -135,7 +134,6 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
             String json = gson.toJson(scheduleArrayList);
             prefsEditor.putString("ScheduleList_Widget", json);
             prefsEditor.apply();
-
         }
        else
         {
@@ -174,7 +172,8 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(Bundle outState)
+    {
         outState.putParcelableArrayList(KEY_SCHEDULE_LIST, scheduleArrayList);
         super.onSaveInstanceState(outState);
     }}
