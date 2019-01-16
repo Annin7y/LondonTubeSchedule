@@ -107,7 +107,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
             stationShareStationName = stationArrival.getStationScheduleName();
             stationShareArrivalTime = stationArrival.getExpectedArrival();
 
-            //Store Ingredients in SharedPreferences
+            //Store Schedule Info in SharedPreferences
             SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
 
