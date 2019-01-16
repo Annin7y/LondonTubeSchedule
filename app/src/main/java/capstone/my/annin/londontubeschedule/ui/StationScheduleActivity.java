@@ -99,9 +99,15 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
             scheduleArrayList = simpleJsonScheduleData;
             mScheduleRecyclerView.setAdapter(scheduleAdapter);
             scheduleAdapter.setScheduleList(scheduleArrayList);
+
             stationArrival = scheduleArrayList.get(0);
+
+
             stationShareStationName = stationArrival.getStationScheduleName();
             stationShareArrivalTime = stationArrival.getExpectedArrival();
+
+            ArrayList <String> imageUris = new ArrayList<String>();
+
 
             //Store Ingredients in SharedPreferences
             SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());

@@ -27,6 +27,7 @@ import android.widget.ProgressBar;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
 
@@ -65,6 +66,9 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
     private FavoritesAdapter favoritesAdapter;
     private static final int FAVORITES_LOADER_ID = 0;
     private int mPosition = RecyclerView.NO_POSITION;
+    private FirebaseAnalytics mFirebaseAnalytics;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +85,8 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         adView = (AdView) findViewById(R.id.adView);
         adView.loadAd(request);
 
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
         mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
 
         favoritesAdapter = new FavoritesAdapter(this, context);
@@ -90,10 +96,16 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         RecyclerView.LayoutManager mLineLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mLineRecyclerView.setLayoutManager(mLineLayoutManager);
 
+//        Bundle bundle = new Bundle();
+//        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, line
+//        bundle
+//
 
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT| ItemTouchHelper.RIGHT)
+        {
             @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target)
+            {
                 return false;
             }
 

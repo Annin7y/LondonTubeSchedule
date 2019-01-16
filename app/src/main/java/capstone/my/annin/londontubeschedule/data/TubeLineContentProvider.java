@@ -21,7 +21,7 @@ public class TubeLineContentProvider extends ContentProvider
     public static final int LINES = 100;
 
     /**
-     * URI matcher code for the content URI for one line in the movie table
+     * URI matcher code for the content URI for one line in the lines table
      */
     public static final int LINE_WITH_ID = 101;
 
@@ -171,7 +171,6 @@ public class TubeLineContentProvider extends ContentProvider
     @Override
     public int delete(@NonNull Uri uri, String selection, String[] selectionArgs)
     {
-
         // Get access to the database and write URI matching code to recognize a single item
         final SQLiteDatabase db = mTubeLineDbHelper.getWritableDatabase();
 
@@ -186,7 +185,7 @@ public class TubeLineContentProvider extends ContentProvider
         {
             // Handle the single item case, recognized by the ID included in the URI path
             case LINE_WITH_ID:
-                // Get the movie ID from the URI path
+                // Get the line ID from the URI path
                 String id = uri.getPathSegments().get(1);
                 // Use selections/selectionArgs to filter for this ID
                 rowsDeleted = db.delete(TubeLineContract.TubeLineEntry.TABLE_NAME, "id=?", new String[]{id});
@@ -220,5 +219,4 @@ public class TubeLineContentProvider extends ContentProvider
                 throw new UnsupportedOperationException("Not yet implemented");
         }
     }
-
 }

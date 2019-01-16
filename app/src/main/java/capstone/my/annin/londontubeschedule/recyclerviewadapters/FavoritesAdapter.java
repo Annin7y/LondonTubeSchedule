@@ -61,12 +61,12 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
             int lineIdIndex = cursor.getColumnIndexOrThrow(TubeLineContract.TubeLineEntry.COLUMN_LINES_ID);
             int lineNameColumnIndex = cursor.getColumnIndexOrThrow(TubeLineContract.TubeLineEntry.COLUMN_LINES_NAME);
 
-            String stationName = cursor.getString(lineNameColumnIndex);
-
             final int id = cursor.getInt(lineIdIndex);
+            String stationName = cursor.getString(lineNameColumnIndex);
 
             holder.itemView.setTag(id);
             holder.lineName.setText(stationName);
+            Log.e(TAG, "Failed to load line text.");
 
         }
 
