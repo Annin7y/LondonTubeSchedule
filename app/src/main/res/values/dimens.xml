@@ -17,7 +17,15 @@
     <!-- Progress bar marginTop in activity_main -->
     <dimen name="progress_bar_top">295dp</dimen>
 
+    <dimen name="station_dup_instructions_start">20dp</dimen>
+    <dimen name="station_dup_instructions_top">20dp</dimen>
+    <dimen name="station_dup_instructions_end">30dp</dimen>
+
+
     <!-- Widget text size -->
     <dimen name="widget_text_size">20sp</dimen>
+
+
+
 
 </resources>

@@ -28,6 +28,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class StationScheduleActivity extends AppCompatActivity implements TubeScheduleAsyncTaskInterface {
@@ -102,12 +104,8 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
 
             stationArrival = scheduleArrayList.get(0);
 
-
             stationShareStationName = stationArrival.getStationScheduleName();
             stationShareArrivalTime = stationArrival.getExpectedArrival();
-
-            ArrayList <String> imageUris = new ArrayList<String>();
-
 
             //Store Ingredients in SharedPreferences
             SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -148,11 +146,8 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
-        Bundle extras = new Bundle();
-        extras.putString(Intent.EXTRA_TEXT, stationShareArrivalTime);
-        extras.putString(Intent.EXTRA_TEXT, stationShareStationName);
-        shareIntent.putExtras(extras);
-
+        shareIntent.putExtra(Intent.EXTRA_TEXT,stationShareStationName);
+        shareIntent.putExtra(Intent.EXTRA_TEXT,stationShareArrivalTime);
         return shareIntent;
     }
 
