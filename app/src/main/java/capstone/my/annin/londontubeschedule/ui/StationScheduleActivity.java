@@ -30,7 +30,10 @@ import com.google.gson.Gson;
 
 import org.w3c.dom.Text;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class StationScheduleActivity extends AppCompatActivity implements TubeScheduleAsyncTaskInterface {
 
@@ -106,6 +109,23 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
 
             stationShareStationName = stationArrival.getStationScheduleName();
             stationShareArrivalTime = stationArrival.getExpectedArrival();
+
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = null;
+
+            try
+            {
+                date = simpleDateFormat.parse(stationArrival.getExpectedArrival());
+                date.toString();
+            }
+            catch (ParseException e)
+            {
+                e.printStackTrace();
+            }
+            SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy");
+            String finalDate = newDateFormat.format(date);
+
+            stationShareArrivalTime = finalDate;
 
             //Store Schedule Info in SharedPreferences
             SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());

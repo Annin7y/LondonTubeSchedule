@@ -88,6 +88,22 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         holder.directionTowards.setText(stationView.getDirectionTowards());
         holder.expectedArrival.setText(stationView.getExpectedArrival());
 
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+
+        try
+        {
+            date = simpleDateFormat.parse(stationView.getExpectedArrival());
+            date.toString();
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+        SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy");
+        String finalDate = newDateFormat.format(date);
+
+        holder.expectedArrival.setText(finalDate);
     }
 
     @Override
