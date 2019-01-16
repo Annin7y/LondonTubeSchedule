@@ -46,8 +46,11 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
     Lines lines;
     public String lineId;
     private Context context;
-    private TextView lineNameStation;
-    private String lineNameToString;
+
+    @BindView(R.id.line_name_station)
+    TextView lineNameStation;
+
+  //  private String lineNameToString;
 
     @BindView(R.id.favorites_button)
     Button favoritesButton;
@@ -56,7 +59,6 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
      * Identifier for the favorites data loader
      */
     private static final int FAVORITES_LOADER = 0;
-
 
 
     @Override
@@ -75,8 +77,6 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
         RecyclerView.LayoutManager mStationLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mStationRecyclerView.setLayoutManager(mStationLayoutManager);
 
-        lineNameStation = (TextView) findViewById(R.id.line_name_station);
-        lineNameToString = lineNameStation.getText().toString();
 
         //add to favorites
         favoritesButton.setOnClickListener(new View.OnClickListener()
@@ -114,7 +114,7 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
                 myStationTask.execute(lineId);
 
                 lineNameStation.setText(lines.getLineName());
-                lineNameToString = lineNameStation.getText().toString();
+             //   String lineNameToString = lineNameStation.getText().toString();
 
             } else
                 {
@@ -183,7 +183,7 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putParcelableArrayList(KEY_STATIONS_LIST, stationsArrayList);
-        outState.putString(KEY_LINE_NAME, lineNameToString);
+        outState.putString(KEY_LINE_NAME, lineNameStation.getText().toString());
         super.onSaveInstanceState(outState);
     }
 }
