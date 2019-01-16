@@ -50,7 +50,7 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
     @BindView(R.id.line_name_station)
     TextView lineNameStation;
 
-  //  private String lineNameToString;
+    String lineNameToString;
 
     @BindView(R.id.favorites_button)
     Button favoritesButton;
@@ -114,12 +114,13 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
                 myStationTask.execute(lineId);
 
                 lineNameStation.setText(lines.getLineName());
-             //   String lineNameToString = lineNameStation.getText().toString();
+                lineNameToString = lineNameStation.getText().toString();
 
             } else
                 {
                 stationsArrayList = savedInstanceState.getParcelableArrayList(KEY_STATIONS_LIST);
                 stationsAdapter.setStationsList(stationsArrayList);
+                lineNameToString = savedInstanceState.getString(KEY_LINE_NAME);
 
             }
         }
@@ -183,7 +184,7 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putParcelableArrayList(KEY_STATIONS_LIST, stationsArrayList);
-        outState.putString(KEY_LINE_NAME, lineNameStation.getText().toString());
+        outState.putString(KEY_LINE_NAME, lineNameToString);
         super.onSaveInstanceState(outState);
     }
 }
