@@ -55,6 +55,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     Schedule stationArrival;
     private String stationShareStationName;
     private String stationShareArrivalTime;
+    private String noData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,19 +75,22 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
         /*
          *  Starting the asyncTask so that schedule loads when the activity opens.
          */
-        if (getIntent() != null && getIntent().getExtras() != null) {
-            if (savedInstanceState == null) {
-
+        if (getIntent() != null && getIntent().getExtras() != null)
+        {
+            if (savedInstanceState == null)
+            {
                 lines = getIntent().getExtras().getParcelable("Lines");
                 stations = getIntent().getExtras().getParcelable("Stations");
 
                 lineId = lines.getLineId();
                 Log.i("lineId: ", lines.getLineId());
+
                 stationId = stations.getStationId();
                 Log.i("stationId: ", stations.getStationId());
 
                 TubeScheduleAsyncTask myScheduleTask = new TubeScheduleAsyncTask(this);
                 myScheduleTask.execute(lineId, stationId);
+
             } else {
                 scheduleArrayList = savedInstanceState.getParcelableArrayList(KEY_SCHEDULE_LIST);
                 scheduleAdapter.setScheduleList(scheduleArrayList);
@@ -97,33 +101,32 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     @Override
     public void returnScheduleData(ArrayList<Schedule> simpleJsonScheduleData)
     {
-        if (simpleJsonScheduleData.size() == 0) {
             scheduleAdapter = new ScheduleAdapter(simpleJsonScheduleData, StationScheduleActivity.this);
             scheduleArrayList = simpleJsonScheduleData;
             mScheduleRecyclerView.setAdapter(scheduleAdapter);
             scheduleAdapter.setScheduleList(scheduleArrayList);
 
-            stationArrival = scheduleArrayList.get(0);
+//            stationArrival = scheduleArrayList.get(0);
+//
+//            stationShareStationName = stationArrival.getStationScheduleName();
+//            stationShareArrivalTime = stationArrival.getExpectedArrival();
 
-            stationShareStationName = stationArrival.getStationScheduleName();
-            stationShareArrivalTime = stationArrival.getExpectedArrival();
-
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-            Date date = null;
-
-            try
-            {
-                date = simpleDateFormat.parse(stationArrival.getExpectedArrival());
-                date.toString();
-            }
-            catch (ParseException e)
-            {
-                e.printStackTrace();
-            }
-            SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
-            String finalDate = newDateFormat.format(date);
-
-            stationShareArrivalTime = finalDate;
+//            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+//            Date date = null;
+//
+//            try
+//            {
+//                date = simpleDateFormat.parse(stationArrival.getExpectedArrival());
+//                date.toString();
+//            }
+//            catch (ParseException e)
+//            {
+//                e.printStackTrace();
+//            }
+//            SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
+//            String finalDate = newDateFormat.format(date);
+//
+//            stationShareArrivalTime = finalDate;
 
             //Store Schedule Info in SharedPreferences
             SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -133,15 +136,15 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
             String json = gson.toJson(scheduleArrayList);
             prefsEditor.putString("ScheduleList_Widget", json);
             prefsEditor.apply();
-        }
-       else
+
+        if (simpleJsonScheduleData.size() == 0)
         {
             Toast.makeText(StationScheduleActivity.this, "Data currently unavailable", Toast.LENGTH_SHORT).show();
         }
-        if (mShareActionProvider != null)
-        {
-            mShareActionProvider.setShareIntent(createShareIntent());
-        }
+//        if (mShareActionProvider != null)
+//        {
+//            mShareActionProvider.setShareIntent(createShareIntent());
+//        }
     }
 
     @Override
