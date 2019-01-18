@@ -74,31 +74,33 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
         /*
          *  Starting the asyncTask so that schedule loads when the activity opens.
          */
-        if (getIntent() != null && getIntent().getExtras() != null)
+            if (getIntent() != null && getIntent().getExtras() != null)
         {
             if (savedInstanceState == null)
             {
-                stations = getIntent().getExtras().getParcelable("Stations");
-                stationId = stations.getStationId();
+            stations = getIntent().getParcelableExtra ("Stations");
 
-                lines = getIntent().getExtras().getParcelable("Lines");
+            lines = getIntent().getParcelableExtra("Lines");
+
                 lineId = lines.getLineId();
+                stationId = stations.getStationId();
 
                 TubeScheduleAsyncTask myScheduleTask = new TubeScheduleAsyncTask(this);
                 myScheduleTask.execute(lineId,stationId);
-            }
+
+            }}
             else
                 {
                 scheduleArrayList = savedInstanceState.getParcelableArrayList(KEY_SCHEDULE_LIST);
                 scheduleAdapter.setScheduleList(scheduleArrayList);
             }
             }
-    }
+
 
     @Override
     public void returnScheduleData(ArrayList<Schedule> simpleJsonScheduleData)
     {
-        if (simpleJsonScheduleData.size() > 0) {
+        if (simpleJsonScheduleData.size() == 0) {
             scheduleAdapter = new ScheduleAdapter(simpleJsonScheduleData, StationScheduleActivity.this);
             scheduleArrayList = simpleJsonScheduleData;
             mScheduleRecyclerView.setAdapter(scheduleAdapter);

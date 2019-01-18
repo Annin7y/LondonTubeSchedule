@@ -38,10 +38,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="capstone.my.annin.londontubeschedule.ui.MainActivity" />
         </activity>
-        <provider
-            android:name="capstone.my.annin.londontubeschedule.data.TubeLineContentProvider"
-            android:authorities="capstone.my.annin.londontubeschedule"
-            android:exported="false" />
 
     <receiver android:name=".widget.ScheduleWidgetProvider">
         <intent-filter>
