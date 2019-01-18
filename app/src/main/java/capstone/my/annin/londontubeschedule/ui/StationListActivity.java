@@ -31,7 +31,7 @@ import capstone.my.annin.londontubeschedule.model.Lines;
 import capstone.my.annin.londontubeschedule.model.Stations;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.StationsAdapter;
 
-public class StationListActivity extends AppCompatActivity implements StationsAdapter.StationsAdapterOnClickHandler, TubeStationAsyncTaskInterface,
+public class StationListActivity extends AppCompatActivity implements StationsAdapter.StationsAdapterOnClickHandler, TubeStationAsyncTaskInterface ,
      LoaderManager.LoaderCallbacks<Cursor>
 {
 
@@ -121,7 +121,7 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
             }}
     // Kick off the loader
 
-        getLoaderManager().initLoader(FAVORITES_LOADER, null, this);
+       getLoaderManager().initLoader(FAVORITES_LOADER, null, this);
         }
 
 

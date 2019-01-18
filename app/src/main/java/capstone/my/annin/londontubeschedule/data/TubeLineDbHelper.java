@@ -14,7 +14,7 @@ public class TubeLineDbHelper extends SQLiteOpenHelper
 
    /**
      * Constructs a new instance of {@link TubeLineDbHelper}.
-    *
+     *
      * @param context of the app
     */
     TubeLineDbHelper(Context context)

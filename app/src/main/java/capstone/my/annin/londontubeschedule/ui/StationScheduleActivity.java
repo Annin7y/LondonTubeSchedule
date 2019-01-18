@@ -106,27 +106,27 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
             mScheduleRecyclerView.setAdapter(scheduleAdapter);
             scheduleAdapter.setScheduleList(scheduleArrayList);
 
-//            stationArrival = scheduleArrayList.get(0);
-//
-//            stationShareStationName = stationArrival.getStationScheduleName();
-//            stationShareArrivalTime = stationArrival.getExpectedArrival();
+            stationArrival = scheduleArrayList.get(0);
 
-//            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-//            Date date = null;
-//
-//            try
-//            {
-//                date = simpleDateFormat.parse(stationArrival.getExpectedArrival());
-//                date.toString();
-//            }
-//            catch (ParseException e)
-//            {
-//                e.printStackTrace();
-//            }
-//            SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
-//            String finalDate = newDateFormat.format(date);
-//
-//            stationShareArrivalTime = finalDate;
+            stationShareStationName = stationArrival.getStationScheduleName();
+            stationShareArrivalTime = stationArrival.getExpectedArrival();
+
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+            Date date = null;
+
+            try
+            {
+                date = simpleDateFormat.parse(stationArrival.getExpectedArrival());
+                date.toString();
+            }
+            catch (ParseException e)
+            {
+                e.printStackTrace();
+            }
+            SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
+            String finalDate = newDateFormat.format(date);
+
+            stationShareArrivalTime = finalDate;
 
             //Store Schedule Info in SharedPreferences
             SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -141,10 +141,10 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
         {
             Toast.makeText(StationScheduleActivity.this, "Data currently unavailable", Toast.LENGTH_SHORT).show();
         }
-//        if (mShareActionProvider != null)
-//        {
-//            mShareActionProvider.setShareIntent(createShareIntent());
-//        }
+        if (mShareActionProvider != null)
+        {
+            mShareActionProvider.setShareIntent(createShareIntent());
+        }
     }
 
     @Override

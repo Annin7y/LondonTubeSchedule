@@ -44,8 +44,8 @@ import capstone.my.annin.londontubeschedule.utils.NetworkUtils;
 import static capstone.my.annin.londontubeschedule.data.TubeLineContentProvider.LOG_TAG;
 
 
-public class MainActivity extends AppCompatActivity implements LinesAdapter.LinesAdapterOnClickHandler, TubeLineAsyncTaskInterface,
-  LoaderManager.LoaderCallbacks<Cursor>
+public class MainActivity extends AppCompatActivity implements LinesAdapter.LinesAdapterOnClickHandler, TubeLineAsyncTaskInterface ,
+ LoaderManager.LoaderCallbacks<Cursor>
         {
 
     // Tag for logging
@@ -160,8 +160,8 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         }
       getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
         favoritesAdapter = new FavoritesAdapter(this, MainActivity.this);
-
-    }
+//
+  }
     public class MyClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
@@ -315,10 +315,10 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         {
             case R.id.most_frequented_favorites:
 
-                getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
-                favoritesAdapter = new FavoritesAdapter(this, MainActivity.this);
-                mLineRecyclerView.setAdapter(favoritesAdapter);
-                return true;
+//                getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
+//                favoritesAdapter = new FavoritesAdapter(this, MainActivity.this);
+//                mLineRecyclerView.setAdapter(favoritesAdapter);
+//                return true;
 
             case R.id.line_list:
                 myLineTask.execute();
