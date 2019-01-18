@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -98,26 +99,25 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
          *  Starting the asyncTask so that stations load when the activity opens.
          */
 
-
-          if (getIntent() != null && getIntent().getExtras() != null) {
-         if (savedInstanceState == null) {
-             Lines lines = getIntent().getParcelableExtra("Lines");
-        lineNameStation.setText(lines.getLineName());
-        lineId = lines.getLineId();
+        if (getIntent() != null && getIntent().getExtras() != null)
+        {
+            if (savedInstanceState == null)
+            {
+             lines = getIntent().getExtras().getParcelable("Lines");
+             lineId = lines.getLineId();
+             Log.i("lineId: ", lines.getLineId());
+             lineNameStation.setText(lines.getLineName());
+             Log.i("lineName: ", lines.getLineName());
 
              TubeStationAsyncTask myStationTask = new TubeStationAsyncTask(this);
              myStationTask.execute(lineId);
     }
-
-            } else {
+         else {
                 stationsArrayList = savedInstanceState.getParcelableArrayList(KEY_STATIONS_LIST);
                 stationsAdapter.setStationsList(stationsArrayList);
-                lineNameToString = lineNameStation.getText().toString();
                 lineNameToString = savedInstanceState.getString(KEY_LINE_NAME);
-                lineNameStation.setText(lineNameToString);
-
-
-            }
+                lineNameToString = lineNameStation.getText().toString();
+            }}
     // Kick off the loader
 
        //     getLoaderManager().initLoader(FAVORITES_LOADER, null, this);

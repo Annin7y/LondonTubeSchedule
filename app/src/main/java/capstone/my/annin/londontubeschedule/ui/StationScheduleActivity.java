@@ -21,6 +21,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.ShareActionProvider;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -56,8 +57,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     private String stationShareArrivalTime;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_station_schedule);
         context = getApplicationContext();
@@ -74,28 +74,25 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
         /*
          *  Starting the asyncTask so that schedule loads when the activity opens.
          */
-            if (getIntent() != null && getIntent().getExtras() != null)
-        {
-            if (savedInstanceState == null)
-            {
-            stations = getIntent().getParcelableExtra ("Stations");
+        if (getIntent() != null && getIntent().getExtras() != null) {
+            if (savedInstanceState == null) {
 
-            lines = getIntent().getParcelableExtra("Lines");
+                lines = getIntent().getExtras().getParcelable("Lines");
+                stations = getIntent().getExtras().getParcelable("Stations");
 
                 lineId = lines.getLineId();
+                Log.i("lineId: ", lines.getLineId());
                 stationId = stations.getStationId();
+                Log.i("stationId: ", stations.getStationId());
 
                 TubeScheduleAsyncTask myScheduleTask = new TubeScheduleAsyncTask(this);
-                myScheduleTask.execute(lineId,stationId);
-
-            }}
-            else
-                {
+                myScheduleTask.execute(lineId, stationId);
+            } else {
                 scheduleArrayList = savedInstanceState.getParcelableArrayList(KEY_SCHEDULE_LIST);
                 scheduleAdapter.setScheduleList(scheduleArrayList);
             }
-            }
-
+        }
+    }
 
     @Override
     public void returnScheduleData(ArrayList<Schedule> simpleJsonScheduleData)
