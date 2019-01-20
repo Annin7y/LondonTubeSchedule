@@ -11,8 +11,13 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import capstone.my.annin.londontubeschedule.R;
 import capstone.my.annin.londontubeschedule.model.Schedule;
@@ -21,6 +26,7 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
 {
     private ArrayList<Schedule> mScheduleList;
     private Context mContext;
+    private String stationWidgetArrivalTime;
 
     public ScheduleWidgetViewFactory(Context context)
     {
@@ -56,14 +62,29 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
     {
         Schedule schedule = mScheduleList.get(position);
 
-        RemoteViews itemView = new RemoteViews(mContext.getPackageName(), R.layout.schedule_list_item);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        Date date = null;
 
-        itemView.setTextViewText(R.id.schedule_station_name, schedule.getStationScheduleName());
-        itemView.setTextViewText(R.id.schedule_arrival, schedule.getExpectedArrival());
+        try {
+            date = simpleDateFormat.parse(schedule.getExpectedArrival());
+            date.toString();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
+        String finalDate = newDateFormat.format(date);
 
+        stationWidgetArrivalTime = finalDate;
+
+        RemoteViews itemView = new RemoteViews(mContext.getPackageName(), R.layout.schedule_widget_list_item);
+
+        itemView.setTextViewText(R.id.schedule_widget_station_name, schedule.getStationScheduleName());
+        itemView.setTextViewText(R.id.schedule_widget_arrival, stationWidgetArrivalTime);
+        itemView.setTextViewText(R.id.schedule_widget_towards, schedule.getDirectionTowards());
+        
         Intent intent = new Intent();
         intent.putExtra(ScheduleWidgetProvider.EXTRA_ITEM, schedule);
-        itemView.setOnClickFillInIntent(R.id.schedule_list, intent);
+        itemView.setOnClickFillInIntent(R.id.schedule_widget_list, intent);
 
         return itemView;
     }

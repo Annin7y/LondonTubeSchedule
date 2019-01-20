@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/schedule_widget_list">
+
+    <TextView
+        android:id="@+id/schedule_widget_name_label"
+        style="@style/ScheduleWidgetLabelStyle"
+        android:layout_marginStart="@dimen/line_station_margin_start"
+        android:layout_marginEnd="@dimen/line_station_margin_end"
+        android:text="Station Name: "
+        />
+
+    <TextView
+        android:id="@+id/schedule_widget_station_name"
+        style="@style/ScheduleWidgetNameStyle"
+        android:layout_marginStart="@dimen/line_station_margin_start"
+        android:layout_marginEnd="@dimen/line_station_margin_end"
+        android:padding="2dp"
+        tools:text="@string/station_name"
+        />
+
+    <TextView
+        android:id="@+id/schedule_widget_arrival_label"
+        style="@style/ScheduleWidgetLabelStyle"
+        android:layout_marginStart="@dimen/line_station_margin_start"
+        android:layout_marginEnd="@dimen/line_station_margin_end"
+        android:layout_marginTop="3dp"
+        android:text="Next train: "/>
+
+    <TextView
+        android:id="@+id/schedule_widget_arrival"
+        style="@style/ScheduleWidgetNameStyle"
+        android:layout_marginStart="@dimen/line_station_margin_start"
+        android:layout_marginEnd="@dimen/line_station_margin_end"
+        android:padding="2dp"
+        tools:text="5:45 p.m. Jan 2, 2018" />
+
+    <TextView
+        android:id="@+id/schedule_widget_towards_label"
+        style="@style/ScheduleLabelStyle"
+        android:layout_marginStart="@dimen/line_station_margin_start"
+        android:layout_marginEnd="@dimen/line_station_margin_end"
+        android:text="Towards: "/>
+
+    <TextView
+        android:id="@+id/schedule_widget_towards"
+        style="@style/ScheduleNameStyle"
+        android:layout_marginStart="@dimen/line_station_margin_start"
+        android:layout_marginEnd="@dimen/line_station_margin_end"
+        android:padding="2dp"
+        tools:text="High Barnet via CX" />
+
+</LinearLayout>

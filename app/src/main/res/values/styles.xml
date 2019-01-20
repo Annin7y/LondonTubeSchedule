@@ -16,8 +16,8 @@
     <item name="android:textSize">25sp</item>
     </style>
 
-    <!-- Schedule List Theme -->
-    <style name="ScheduleListStyle">
+    <!-- Schedule Label Theme -->
+    <style name="ScheduleLabelStyle">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:fontFamily">serif</item>
@@ -32,5 +32,24 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <!-- Schedule Widget Label Theme -->
+    <style name="ScheduleWidgetLabelStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <!-- Schedule Widget Name Theme -->
+    <style name="ScheduleWidgetNameStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
 
 </resources>

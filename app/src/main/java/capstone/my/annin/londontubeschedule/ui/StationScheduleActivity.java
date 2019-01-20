@@ -25,6 +25,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -55,7 +57,9 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     Schedule stationArrival;
     private String stationShareStationName;
     private String stationShareArrivalTime;
-    private String noData;
+    private String stationShareDirection;
+    @BindView(R.id.empty_view_schedule)
+    TextView emptySchedule;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +105,8 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     @Override
     public void returnScheduleData(ArrayList<Schedule> simpleJsonScheduleData)
     {
+        if (simpleJsonScheduleData.size() > 0)
+        {
             scheduleAdapter = new ScheduleAdapter(simpleJsonScheduleData, StationScheduleActivity.this);
             scheduleArrayList = simpleJsonScheduleData;
             mScheduleRecyclerView.setAdapter(scheduleAdapter);
@@ -110,17 +116,15 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
 
             stationShareStationName = stationArrival.getStationScheduleName();
             stationShareArrivalTime = stationArrival.getExpectedArrival();
+            stationShareDirection = stationArrival.getDirectionTowards();
 
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
             Date date = null;
 
-            try
-            {
+            try {
                 date = simpleDateFormat.parse(stationArrival.getExpectedArrival());
                 date.toString();
-            }
-            catch (ParseException e)
-            {
+            } catch (ParseException e) {
                 e.printStackTrace();
             }
             SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
@@ -137,9 +141,14 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
             prefsEditor.putString("ScheduleList_Widget", json);
             prefsEditor.apply();
 
-        if (simpleJsonScheduleData.size() == 0)
+        }
+        else
         {
-            Toast.makeText(StationScheduleActivity.this, "Data currently unavailable", Toast.LENGTH_SHORT).show();
+            //Toast message commented out; replaced with the text message below
+            // Toast.makeText(StationScheduleActivity.this, getString(R.string.empty_view_toast), Toast.LENGTH_SHORT).show();
+            //Code below(and the trailer code) based on the highest rated answer in this stackoverflow post:
+            //https://stackoverflow.com/questions/28217436/how-to-show-an-empty-view-with-a-recyclerview
+            emptySchedule.setVisibility(View.VISIBLE);
         }
         if (mShareActionProvider != null)
         {
@@ -165,7 +174,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     public Intent createShareIntent()
     {
         String shareTitle = "Next train at ";
-        String data = shareTitle + "\n" + stationShareStationName + "\n" + stationShareArrivalTime;
+        String data = shareTitle + "\n" + stationShareStationName + "\n" + stationShareArrivalTime + "\n" + stationShareDirection;
 
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");

@@ -9,4 +9,12 @@
     <string name="line_list_menu">Line List</string>
     <string name="action_share">Send arrival time</string>
     <string name="empty_view">Empty view</string>
+    <string name="empty_view_toast">Data currently unavailable</string>
+    <string name="empty_view_text">Data currently unavailable</string>
+    <string name="name_label">Station Name:</string>
+    <string name="arrival_label">Next train:</string>
+    <string name="destination_label">Terminal Station:</string>
+    <string name="location_label">Current Location:</string>
+    <string name="towards_label">Towards:</string>
+
 </resources>

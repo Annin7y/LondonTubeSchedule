@@ -8,12 +8,11 @@
     android:id="@+id/schedule_list">
 
     <TextView
-        android:id="@+id/schedule__name_label"
-        style="@style/ScheduleListStyle"
+        android:id="@+id/schedule_name_label"
+        style="@style/ScheduleLabelStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
-        android:padding="2dp"
-        android:text="Station Name: "
+        android:text="@string/name_label"
         />
 
     <TextView
@@ -21,60 +20,75 @@
         style="@style/ScheduleNameStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
-        android:padding="2dp"
+        android:padding="3dp"
         tools:text="@string/station_name"
         />
 
     <TextView
-        android:id="@+id/schedule_destination_label"
-        style="@style/ScheduleListStyle"
+        android:id="@+id/schedule_arrival_label"
+        style="@style/ScheduleLabelStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
-        android:padding="2dp"
-        android:text="Terminal Station: "
+        android:layout_marginTop="5dp"
+        android:text="@string/arrival_label"/>
+
+    <TextView
+        android:id="@+id/schedule_arrival"
+        style="@style/ScheduleNameStyle"
+        android:layout_marginStart="@dimen/line_station_margin_start"
+        android:layout_marginEnd="@dimen/line_station_margin_end"
+        android:padding="3dp"
+        tools:text="5:45 p.m. Jan 2, 2018" />
+
+    <TextView
+        android:id="@+id/schedule_destination_label"
+        style="@style/ScheduleLabelStyle"
+        android:layout_marginStart="@dimen/line_station_margin_start"
+        android:layout_marginEnd="@dimen/line_station_margin_end"
+        android:layout_marginTop="5dp"
+        android:text="@string/destination_label"
         />
 
     <TextView
         android:id="@+id/schedule_destination_name"
-        style="@style/ScheduleListStyle"
+        style="@style/ScheduleNameStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
-        android:padding="2dp"
+        android:padding="3dp"
         tools:text="Brixton Underground Station"
       />
 
     <TextView
-        android:id="@+id/schedule_destination_label"
-        style="@style/ScheduleListStyle"
+        android:id="@+id/schedule_location_label"
+        style="@style/ScheduleLabelStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
-        android:padding="2dp"
-        android:text="Terminal Station: "
+        android:layout_marginTop="5dp"
+        android:text="@string/location_label"
         />
-
 
     <TextView
         android:id="@+id/schedule_current_location"
-        style="@style/ScheduleListStyle"
+        style="@style/ScheduleNameStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
-        android:padding="2dp"
+        android:padding="3dp"
         tools:text="Between Highbury and Islington and Kings Cross St. P" />
 
     <TextView
-        android:id="@+id/schedule_towards"
-        style="@style/ScheduleListStyle"
+        android:id="@+id/schedule_towards_label"
+        style="@style/ScheduleLabelStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
-        android:padding="2dp"
-        tools:text="Brixton" />
+        android:layout_marginTop="5dp"
+        android:text="@string/towards_label"/>
 
     <TextView
-        android:id="@+id/schedule_arrival"
-        style="@style/ScheduleListStyle"
+        android:id="@+id/schedule_towards"
+        style="@style/ScheduleNameStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
-        android:padding="2dp"
-        tools:text="5:45 p.m. Jan 2, 2018" />
+        android:padding="3dp"
+        tools:text="High Barnet via CX" />
 
 </LinearLayout>

@@ -17,6 +17,7 @@ public class ScheduleWidgetProvider extends AppWidgetProvider {
     //The following code is based on the code in these links:
     //https://joshuadonlan.gitbooks.io/onramp-android/content/widgets/collection_widgets.html
     //http://www.vogella.com/tutorials/AndroidWidgets/article.html
+    //https://medium.com/android-bits/android-widgets-ad3d166458d3
 
     public static final String ACTION_VIEW_DETAILS =
             "annin.my.android.ScheduleWidgetProvider.ACTION_VIEW_DETAILS";
@@ -61,7 +62,8 @@ public class ScheduleWidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        //   http://android-er.blogspot.com/2010/10/update-widget-in-onreceive-method.html
+        //Code structure based on the code in this blog:
+        //http://android-er.blogspot.com/2010/10/update-widget-in-onreceive-method.html
         super.onReceive(context, intent);
 
         if (ACTION_VIEW_DETAILS.equals(intent.getAction())) {
