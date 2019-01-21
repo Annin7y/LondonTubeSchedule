@@ -9,6 +9,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
+
+import static capstone.my.annin.londontubeschedule.data.TubeLineContract.TubeLineEntry._ID;
 
 public class TubeLineContentProvider extends ContentProvider
 {
@@ -185,10 +188,12 @@ public class TubeLineContentProvider extends ContentProvider
             // Handle the single item case, recognized by the ID included in the URI path
             case LINE_WITH_ID:
                 // Get the line ID from the URI path
-                String id = uri.getPathSegments().get(1);
+               String id = uri.getPathSegments().get(1);
                 // Use selections/selectionArgs to filter for this ID
-                rowsDeleted = db.delete(TubeLineContract.TubeLineEntry.TABLE_NAME, "id=?", new String[]{id});
 
+               // rowsDeleted = db.delete(TubeLineContract.TubeLineEntry.TABLE_NAME, "id=?", new String[]{id});
+                rowsDeleted = db.delete(TubeLineContract.TubeLineEntry.TABLE_NAME, _ID +  " = " + id +
+                                (!TextUtils.isEmpty(selection) ? " AND (" + selection + ')' : ""), selectionArgs);
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);

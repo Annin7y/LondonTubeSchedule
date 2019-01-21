@@ -6,6 +6,8 @@ import capstone.my.annin.londontubeschedule.model.Stations;
 
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -138,6 +140,7 @@ public class JSONUtils
 
     public static ArrayList<Schedule> extractFeatureFromScheduleJson(String scheduleJSON)
     {
+
         // If the JSON string is empty or null, then return early.
         if (TextUtils.isEmpty(scheduleJSON))
         {

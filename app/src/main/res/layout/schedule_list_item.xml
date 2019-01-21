@@ -91,4 +91,14 @@
         android:padding="3dp"
         tools:text="High Barnet via CX" />
 
+    <TextView
+        android:id="@+id/empty_towards"
+        style="@style/ScheduleNameStyle"
+        android:layout_marginStart="@dimen/line_station_margin_start"
+        android:layout_marginEnd="@dimen/line_station_margin_end"
+        android:padding="3dp"
+        android:visibility="gone"
+        android:text = "@string/empty_view_text" />
+
+
 </LinearLayout>

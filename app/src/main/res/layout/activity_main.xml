@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginStart="428dp"
+                android:layout_marginStart="200dp"
                 android:layout_marginTop="60dp"
                 ads:adSize="BANNER"
                 ads:adUnitId="ca-app-pub-9580291377897056/7393170448"
