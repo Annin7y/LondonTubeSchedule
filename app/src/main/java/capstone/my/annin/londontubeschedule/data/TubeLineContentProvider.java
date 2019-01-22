@@ -43,7 +43,7 @@ public class TubeLineContentProvider extends ContentProvider
         // when a match is found.
         UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         uriMatcher.addURI(TubeLineContract.CONTENT_AUTHORITY, TubeLineContract.PATH_LINES, LINES);
-        uriMatcher.addURI(TubeLineContract.CONTENT_AUTHORITY, TubeLineContract.PATH_LINES + "/#", LINE_WITH_ID);
+        uriMatcher.addURI(TubeLineContract.CONTENT_AUTHORITY, TubeLineContract.PATH_LINES + "/*", LINE_WITH_ID);
 
         return uriMatcher;
     }
@@ -80,10 +80,10 @@ public class TubeLineContentProvider extends ContentProvider
                 // Insert new values into the database
                 // Inserting values into lines table
                 long id = db.insert(TubeLineContract.TubeLineEntry.TABLE_NAME, null, values);
-                if (id > 0)
-                {
+                if (id == 0)
+               {
                     returnUri = ContentUris.withAppendedId(TubeLineContract.TubeLineEntry.CONTENT_URI, id);
-                }
+              }
                 else
                 {
                     throw new android.database.SQLException("Failed to insert row into " + uri);
@@ -192,7 +192,7 @@ public class TubeLineContentProvider extends ContentProvider
                 // Use selections/selectionArgs to filter for this ID
 
                 rowsDeleted = db.delete(TubeLineContract.TubeLineEntry.TABLE_NAME, "id=?",
-                        new String[]{String.valueOf(id)});
+                        new String[]{id});
 
                 break;
             default:

@@ -59,7 +59,7 @@ public class TubeLineContract
         public static final String TABLE_NAME = "lines";
 
         /**
-         * Unique ID number for the lines table(only for use in the database table). Type: INTEGER
+         * Unique ID number for the lines table(only for use in the database table). Type: TEXT
          */
        public final static String COLUMN_LINES_ID = "id";
 

@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
     private static final String KEY_SORT_ORDER = "sort_order";
     private String selectedSortOrder = "line_list";
     private static final String SORT_BY_FAVORITES = "line_favorites";
+    private static final String SORT_BY_LINES = "line_sort";
     CoordinatorLayout mCoordinatorLayout;
 
     @BindView(R.id.pb_loading_indicator)
@@ -72,7 +73,8 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
     private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -122,10 +124,10 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
                 //Construct the URI for the item to delete
                 //[Hint] Use getTag (from the adapter code) to get the id of the swiped item
                 // Retrieve the id of the task to delete
-                int id = (int) viewHolder.itemView.getTag();
+                String id = (String) viewHolder.itemView.getTag();
 
                 // Build appropriate uri with String row id appended
-                String stringId = Integer.toString(id);
+                String stringId = id;
                 Uri uri = TubeLineContract.TubeLineEntry.CONTENT_URI;
                 uri = uri.buildUpon().appendPath(stringId).build();
 
@@ -140,7 +142,8 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         /*
          *  Starting the asyncTask so that lines load upon launching the app.
          */
-        if (savedInstanceState == null) {
+        if (savedInstanceState == null)
+        {
             if (isNetworkStatusAvailable(this))
             {
                 TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(this);
@@ -152,23 +155,23 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
                         .setAction("Retry", new MyClickListener())
                         .show();
             }
-        } else {
+        } else
+        {
             selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "line_list");
             if (selectedSortOrder == SORT_BY_FAVORITES)
             {
-
                 getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
                 mLineRecyclerView.setAdapter(favoritesAdapter);
             } else {
                 linesArrayList = savedInstanceState.getParcelableArrayList(KEY_LINES_LIST);
                 linesAdapter.setLinesList(linesArrayList);
             }
-            mLoadingIndicator.setVisibility(View.INVISIBLE);
-            Log.v(LOG_TAG, "SORT ORDER= ." + selectedSortOrder);
-            Log.i("list", linesArrayList.size() + "");
+        mLoadingIndicator.setVisibility(View.INVISIBLE);
+        Log.v(LOG_TAG, "SORT ORDER= ." + selectedSortOrder);
+        Log.i("list", linesArrayList.size() + "");
+    }}
 
-        }
-  }
+
     public class MyClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
@@ -330,6 +333,7 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
 
             case R.id.line_list:
                 myLineTask.execute();
+                selectedSortOrder = SORT_BY_LINES;
                 return true;
 
                 default:
