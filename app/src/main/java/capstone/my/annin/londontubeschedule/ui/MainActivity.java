@@ -57,6 +57,9 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
     private ArrayList<Lines> linesArrayList = new ArrayList<>();
     private Context context;
     private static final String KEY_LINES_LIST = "lines_list";
+    private static final String KEY_SORT_ORDER = "sort_order";
+    private String selectedSortOrder = "line_list";
+    private static final String SORT_BY_FAVORITES = "line_favorites";
     CoordinatorLayout mCoordinatorLayout;
 
     @BindView(R.id.pb_loading_indicator)
@@ -87,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
 
         mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
 
-      favoritesAdapter = new FavoritesAdapter(this, context);
+        favoritesAdapter = new FavoritesAdapter(this, context);
         linesAdapter = new LinesAdapter(this, linesArrayList, context);
         mLineRecyclerView.setAdapter(linesAdapter);
 
@@ -99,11 +102,9 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
 //        bundle
 //
 
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT| ItemTouchHelper.RIGHT)
-        {
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target)
-            {
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                 return false;
             }
 
@@ -129,38 +130,44 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
                 uri = uri.buildUpon().appendPath(stringId).build();
 
 
-               int rowsDeleted = getContentResolver().delete(uri,null, null);
+                int rowsDeleted = getContentResolver().delete(uri, null, null);
                 Log.v("CatalogActivity", rowsDeleted + " rows deleted from the line database");
 
                 getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
-           }
-       }).attachToRecyclerView(mLineRecyclerView);
+            }
+        }).attachToRecyclerView(mLineRecyclerView);
 
         /*
          *  Starting the asyncTask so that lines load upon launching the app.
          */
-        if (savedInstanceState == null)
-        {
+        if (savedInstanceState == null) {
             if (isNetworkStatusAvailable(this))
             {
                 TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(this);
                 myLineTask.execute(NetworkUtils.buildLineUrl());
 
-            } else
-                {
+            } else {
                 Snackbar
                         .make(mCoordinatorLayout, "Please check your internet connection", Snackbar.LENGTH_INDEFINITE)
                         .setAction("Retry", new MyClickListener())
                         .show();
             }
         } else {
+            selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "line_list");
+            if (selectedSortOrder == SORT_BY_FAVORITES)
+            {
 
-            linesArrayList = savedInstanceState.getParcelableArrayList(KEY_LINES_LIST);
-            linesAdapter.setLinesList(linesArrayList);
+                getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
+                mLineRecyclerView.setAdapter(favoritesAdapter);
+            } else {
+                linesArrayList = savedInstanceState.getParcelableArrayList(KEY_LINES_LIST);
+                linesAdapter.setLinesList(linesArrayList);
+            }
+            mLoadingIndicator.setVisibility(View.INVISIBLE);
+            Log.v(LOG_TAG, "SORT ORDER= ." + selectedSortOrder);
+            Log.i("list", linesArrayList.size() + "");
+
         }
-     getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
-        favoritesAdapter = new FavoritesAdapter(this, MainActivity.this);
-//
   }
     public class MyClickListener implements View.OnClickListener {
         @Override
@@ -318,6 +325,7 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
                 getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
                 favoritesAdapter = new FavoritesAdapter(this, MainActivity.this);
                 mLineRecyclerView.setAdapter(favoritesAdapter);
+                selectedSortOrder = SORT_BY_FAVORITES;
                 return true;
 
             case R.id.line_list:
@@ -339,6 +347,7 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        outState.putString(KEY_SORT_ORDER, selectedSortOrder);
         outState.putParcelableArrayList(KEY_LINES_LIST, linesArrayList);
         super.onSaveInstanceState(outState);
     }

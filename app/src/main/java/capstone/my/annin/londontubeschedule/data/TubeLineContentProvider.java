@@ -191,9 +191,9 @@ public class TubeLineContentProvider extends ContentProvider
                String id = uri.getPathSegments().get(1);
                 // Use selections/selectionArgs to filter for this ID
 
-               // rowsDeleted = db.delete(TubeLineContract.TubeLineEntry.TABLE_NAME, "id=?", new String[]{id});
-                rowsDeleted = db.delete(TubeLineContract.TubeLineEntry.TABLE_NAME, _ID +  " = " + id +
-                                (!TextUtils.isEmpty(selection) ? " AND (" + selection + ')' : ""), selectionArgs);
+                rowsDeleted = db.delete(TubeLineContract.TubeLineEntry.TABLE_NAME, "id=?",
+                        new String[]{String.valueOf(id)});
+
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
