@@ -1,4 +1,4 @@
-package capstone.my.annin.londontubeschedule.model;
+package capstone.my.annin.londontubeschedule.pojo;
 
 import android.os.Parcel;
 import android.os.Parcelable;

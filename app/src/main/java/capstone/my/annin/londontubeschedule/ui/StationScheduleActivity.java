@@ -8,9 +8,9 @@ import butterknife.ButterKnife;
 import capstone.my.annin.londontubeschedule.R;
 import capstone.my.annin.londontubeschedule.asynctask.TubeScheduleAsyncTask;
 import capstone.my.annin.londontubeschedule.asynctask.TubeScheduleAsyncTaskInterface;
-import capstone.my.annin.londontubeschedule.model.Lines;
-import capstone.my.annin.londontubeschedule.model.Schedule;
-import capstone.my.annin.londontubeschedule.model.Stations;
+import capstone.my.annin.londontubeschedule.pojo.Lines;
+import capstone.my.annin.londontubeschedule.pojo.Schedule;
+import capstone.my.annin.londontubeschedule.pojo.Stations;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.ScheduleAdapter;
 
 import android.content.SharedPreferences;
@@ -27,11 +27,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
-
-import org.w3c.dom.Text;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

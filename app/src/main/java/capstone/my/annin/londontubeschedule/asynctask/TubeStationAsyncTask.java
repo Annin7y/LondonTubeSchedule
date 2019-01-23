@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 import java.net.URL;
 import java.util.ArrayList;
 
-import capstone.my.annin.londontubeschedule.model.Stations;
+import capstone.my.annin.londontubeschedule.pojo.Stations;
 import capstone.my.annin.londontubeschedule.utils.JSONUtils;
 import capstone.my.annin.londontubeschedule.utils.NetworkUtils;
 

@@ -1,13 +1,11 @@
 package capstone.my.annin.londontubeschedule.utils;
 
-import capstone.my.annin.londontubeschedule.model.Lines;
-import capstone.my.annin.londontubeschedule.model.Schedule;
-import capstone.my.annin.londontubeschedule.model.Stations;
+import capstone.my.annin.londontubeschedule.pojo.Lines;
+import capstone.my.annin.londontubeschedule.pojo.Schedule;
+import capstone.my.annin.londontubeschedule.pojo.Stations;
 
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;

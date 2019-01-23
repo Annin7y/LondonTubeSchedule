@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import capstone.my.annin.londontubeschedule.R;
-import capstone.my.annin.londontubeschedule.model.Stations;
+import capstone.my.annin.londontubeschedule.pojo.Stations;
 
 public class StationsAdapter extends RecyclerView.Adapter<StationsAdapter.StationsAdapterViewHolder>
 {

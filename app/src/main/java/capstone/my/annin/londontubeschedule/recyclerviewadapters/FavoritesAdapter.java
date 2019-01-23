@@ -13,7 +13,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import capstone.my.annin.londontubeschedule.R;
 import capstone.my.annin.londontubeschedule.data.TubeLineContract;
-import capstone.my.annin.londontubeschedule.model.Lines;
+import capstone.my.annin.londontubeschedule.pojo.Lines;
 
 public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.FavoritesAdapterViewHolder>
 {

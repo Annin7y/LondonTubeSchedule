@@ -1,6 +1,6 @@
 package capstone.my.annin.londontubeschedule.asynctask;
 
-import capstone.my.annin.londontubeschedule.model.Lines;
+import capstone.my.annin.londontubeschedule.pojo.Lines;
 
 import java.util.ArrayList;
 

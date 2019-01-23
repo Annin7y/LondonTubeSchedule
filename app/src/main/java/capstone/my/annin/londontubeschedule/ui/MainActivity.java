@@ -36,7 +36,7 @@ import capstone.my.annin.londontubeschedule.R;
 import capstone.my.annin.londontubeschedule.asynctask.TubeLineAsyncTask;
 import capstone.my.annin.londontubeschedule.asynctask.TubeLineAsyncTaskInterface;
 import capstone.my.annin.londontubeschedule.data.TubeLineContract;
-import capstone.my.annin.londontubeschedule.model.Lines;
+import capstone.my.annin.londontubeschedule.pojo.Lines;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.FavoritesAdapter;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.LinesAdapter;
 import capstone.my.annin.londontubeschedule.utils.NetworkUtils;
@@ -89,6 +89,11 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         adView.loadAd(request);
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+//
+//        Bundle params = new Bundle();
+//        params.putBundle("line_select", lines);
+//        mFirebaseAnalytics.logEvent("ActivityStartEvent", bundle);
+//
 
         mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
 
@@ -99,10 +104,9 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         RecyclerView.LayoutManager mLineLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mLineRecyclerView.setLayoutManager(mLineLayoutManager);
 
-//        Bundle bundle = new Bundle();
-//        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, line
-//        bundle
-//
+
+
+
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -199,6 +203,7 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         Intent intent = new Intent(MainActivity.this, StationListActivity.class);
         intent.putExtra("Lines", lines);
         startActivity(intent);
+
     }
 
     //Display if there is no internet connection

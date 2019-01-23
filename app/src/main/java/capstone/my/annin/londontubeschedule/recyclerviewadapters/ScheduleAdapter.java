@@ -15,7 +15,7 @@ import java.util.Date;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import capstone.my.annin.londontubeschedule.R;
-import capstone.my.annin.londontubeschedule.model.Schedule;
+import capstone.my.annin.londontubeschedule.pojo.Schedule;
 
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ScheduleAdapterViewHolder>
 {

@@ -2,7 +2,7 @@ package capstone.my.annin.londontubeschedule.recyclerviewadapters;
 
 import android.content.Context;
 import capstone.my.annin.londontubeschedule.R;
-import capstone.my.annin.londontubeschedule.model.Lines;
+import capstone.my.annin.londontubeschedule.pojo.Lines;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;

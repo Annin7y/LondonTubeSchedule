@@ -27,8 +27,8 @@ import butterknife.ButterKnife;
 import capstone.my.annin.londontubeschedule.asynctask.TubeStationAsyncTask;
 import capstone.my.annin.londontubeschedule.asynctask.TubeStationAsyncTaskInterface;
 import capstone.my.annin.londontubeschedule.data.TubeLineContract;
-import capstone.my.annin.londontubeschedule.model.Lines;
-import capstone.my.annin.londontubeschedule.model.Stations;
+import capstone.my.annin.londontubeschedule.pojo.Lines;
+import capstone.my.annin.londontubeschedule.pojo.Stations;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.StationsAdapter;
 
 public class StationListActivity extends AppCompatActivity implements StationsAdapter.StationsAdapterOnClickHandler, TubeStationAsyncTaskInterface,
