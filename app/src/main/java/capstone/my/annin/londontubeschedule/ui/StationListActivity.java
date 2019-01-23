@@ -111,7 +111,7 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
              lineId = lines.getLineId();
              Log.i("lineId: ", lines.getLineId());
              lineNameStation.setText(lines.getLineName());
-             lineNameStation.setText(lineNameToString);
+             lineNameToString = lineNameStation.getText().toString();
              Log.i("lineName: ", lines.getLineName());
 
              TubeStationAsyncTask myStationTask = new TubeStationAsyncTask(this);
@@ -122,7 +122,7 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
                 stationsArrayList = savedInstanceState.getParcelableArrayList(KEY_STATIONS_LIST);
                 stationsAdapter.setStationsList(stationsArrayList);
                 lineNameToString = savedInstanceState.getString(KEY_LINE_NAME);
-                lineNameToString = lineNameStation.getText().toString();
+                lineNameStation.setText(lineNameToString);
             }}
     // Kick off the loader
        getLoaderManager().initLoader(FAVORITES_LOADER, null, this);

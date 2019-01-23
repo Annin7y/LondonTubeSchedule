@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
             }
         } else
         {
-            selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "line_list");
+       //     selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "line_list");
             if (selectedSortOrder == SORT_BY_FAVORITES)
             {
                 getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
