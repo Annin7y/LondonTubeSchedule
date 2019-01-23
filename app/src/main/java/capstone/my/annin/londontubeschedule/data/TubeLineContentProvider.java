@@ -80,7 +80,7 @@ public class TubeLineContentProvider extends ContentProvider
                 // Insert new values into the database
                 // Inserting values into lines table
                 long id = db.insert(TubeLineContract.TubeLineEntry.TABLE_NAME, null, values);
-                if (id == 0)
+                if (id > 0)
                {
                     returnUri = ContentUris.withAppendedId(TubeLineContract.TubeLineEntry.CONTENT_URI, id);
               }
