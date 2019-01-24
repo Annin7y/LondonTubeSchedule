@@ -44,6 +44,7 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
     private StationsAdapter stationsAdapter;
     private ArrayList<Stations> stationsArrayList = new ArrayList<>();
     private static final String KEY_STATIONS_LIST = "stations_list";
+    private static final String KEY_LINES_LIST = "lines_list";
     private static final String KEY_LINE_NAME = "line_name";
     Lines lines;
     public String lineId;
@@ -121,6 +122,7 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
              {
                 stationsArrayList = savedInstanceState.getParcelableArrayList(KEY_STATIONS_LIST);
                 stationsAdapter.setStationsList(stationsArrayList);
+                lines = savedInstanceState.getParcelable(KEY_LINES_LIST);
                 lineNameToString = savedInstanceState.getString(KEY_LINE_NAME);
                 lineNameStation.setText(lineNameToString);
             }}
@@ -188,6 +190,7 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
     {
         outState.putParcelableArrayList(KEY_STATIONS_LIST, stationsArrayList);
         outState.putString(KEY_LINE_NAME, lineNameToString);
+        outState.putParcelable(KEY_LINES_LIST, lines);
         super.onSaveInstanceState(outState);
     }
 }

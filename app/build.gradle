@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'com.google.gms.google-services'
 android {
     signingConfigs {
         config {
             keyAlias 'Android'
             keyPassword ANDROID_KEY_PASSWORD
-            storeFile file('C:/LondonTubeSchedule/keystore.jks')
+            storeFile file('LondonTubeSchedule/keystore.jks')
             storePassword ANDROID_KEYSTORE_PASSWORD
         }
     }
@@ -53,5 +53,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     apply plugin: 'com.google.gms.google-services'
-
 }
+
+
+
