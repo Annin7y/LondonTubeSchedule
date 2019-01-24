@@ -24,11 +24,10 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
     private ArrayList<Schedule> scheduleList = new ArrayList<Schedule>();
     private Context context;
 
-
     /**
      * Creates a Schedule Adapter.
      */
-    public ScheduleAdapter(ArrayList<Schedule> scheduleList,Context context)
+    public ScheduleAdapter(ArrayList<Schedule> scheduleList, Context context)
     {
         this.scheduleList = scheduleList;
         this.context = context;
@@ -53,7 +52,6 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
 
         @BindView(R.id.schedule_arrival)
         public TextView expectedArrival;
-
 
         public ScheduleAdapterViewHolder(View view)
         {

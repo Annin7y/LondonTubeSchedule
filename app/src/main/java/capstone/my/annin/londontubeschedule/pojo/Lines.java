@@ -18,7 +18,6 @@ public class Lines implements Parcelable
     /**
      * List of lines
      */
-
     public Lines(String lineId, String lineName)
     {
         this.lineId = lineId;
@@ -50,6 +49,7 @@ public class Lines implements Parcelable
         lineId = in.readString();
         lineName = in.readString();
     }
+
     @Override
     public int describeContents()
     {
@@ -67,12 +67,14 @@ public class Lines implements Parcelable
     public static final Parcelable.Creator<Lines> CREATOR = new Parcelable.Creator<Lines>()
     {
         @Override
-        public Lines createFromParcel(Parcel in) {
+        public Lines createFromParcel(Parcel in)
+        {
             return new Lines(in);
         }
 
         @Override
-        public Lines[] newArray(int size) {
+        public Lines[] newArray(int size)
+        {
             return new Lines[size];
         }
     };

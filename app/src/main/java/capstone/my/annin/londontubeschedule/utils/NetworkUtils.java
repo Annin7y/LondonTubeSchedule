@@ -1,7 +1,6 @@
 package capstone.my.annin.londontubeschedule.utils;
 
 import android.net.Uri;
-
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -12,7 +11,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
-
 
 import capstone.my.annin.londontubeschedule.BuildConfig;
 
@@ -33,11 +31,12 @@ public class NetworkUtils
     private static final String BASE_URL_STATIONS_LIST = "https://api.tfl.gov.uk/Line/";
 
     private static final String BASE_URL_SCHEDULE = "https://api.tfl.gov.uk/Line/";
-   // https://api.tfl.gov.uk/Line/victoria/Arrivals/940GZZLUGPK"
+    // https://api.tfl.gov.uk/Line/victoria/Arrivals/940GZZLUGPK"
 
     public NetworkUtils()
     {
     }
+
     public static URL buildLineUrl()
     {
         URL urlLineList = null;
@@ -133,9 +132,8 @@ public class NetworkUtils
             {
                 inputStream = urlConnection.getInputStream();
                 jsonLineResponse = readFromStream(inputStream);
-            }
-            else
-            {
+            } else
+                {
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
         }
@@ -189,9 +187,8 @@ public class NetworkUtils
             {
                 inputStream = urlConnection.getInputStream();
                 jsonStationResponse = readFromStream(inputStream);
-            }
-            else
-            {
+            } else
+                {
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
         }
@@ -245,9 +242,8 @@ public class NetworkUtils
             {
                 inputStream = urlConnection.getInputStream();
                 jsonScheduleResponse = readFromStream(inputStream);
-            }
-            else
-            {
+            } else
+                {
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
         }

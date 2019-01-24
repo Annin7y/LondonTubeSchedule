@@ -5,14 +5,14 @@ android {
         config {
             keyAlias 'Android'
             keyPassword ANDROID_KEY_PASSWORD
-            storeFile file('LondonTubeSchedule/keystore.jks')
+            storeFile file('../keystore.jks')
             storePassword ANDROID_KEYSTORE_PASSWORD
         }
     }
     compileSdkVersion 28
     defaultConfig {
         applicationId "capstone.my.annin.londontubeschedule"
-        minSdkVersion 17
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"

@@ -20,7 +20,7 @@
         style="@style/ScheduleWidgetNameStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
-        android:padding="2dp"
+        android:padding="@dimen/widget_list_pad"
         tools:text="@string/station_name"
         />
 
@@ -37,7 +37,7 @@
         style="@style/ScheduleWidgetNameStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
-        android:padding="2dp"
+        android:padding="@dimen/widget_list_pad"
         tools:text="5:45 p.m. Jan 2, 2018" />
 
     <TextView
@@ -52,7 +52,7 @@
         style="@style/ScheduleNameStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
-        android:padding="2dp"
+        android:padding="@dimen/widget_list_pad"
         tools:text="High Barnet via CX" />
 
 </LinearLayout>

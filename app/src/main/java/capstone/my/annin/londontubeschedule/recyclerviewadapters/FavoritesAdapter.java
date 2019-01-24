@@ -28,18 +28,22 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         mClickHandler = clickHandler;
         this.context = context;
     }
-    public class FavoritesAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+    public class FavoritesAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+    {
         @BindView(R.id.line_name)
         TextView lineName;
 
-        public FavoritesAdapterViewHolder(View view) {
+        public FavoritesAdapterViewHolder(View view)
+        {
             super(view);
             ButterKnife.bind(this, view);
             view.setOnClickListener(this);
         }
 
         @Override
-        public void onClick(View v) {
+        public void onClick(View v)
+        {
             cursor.moveToPosition(getAdapterPosition());
 
             String lineName = cursor.getString(cursor.getColumnIndexOrThrow(TubeLineContract.TubeLineEntry.COLUMN_LINES_NAME));
@@ -52,64 +56,62 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
     }
 
     @Override
-        public void onBindViewHolder(FavoritesAdapter.FavoritesAdapterViewHolder holder, int position)
-        {
-            // get to the right location in the cursor
-            cursor.moveToPosition(position);
+    public void onBindViewHolder(FavoritesAdapter.FavoritesAdapterViewHolder holder, int position)
+    {
+        // get to the right location in the cursor
+        cursor.moveToPosition(position);
 
-            // Determine the values of the wanted data
-            int lineIdIndex = cursor.getColumnIndexOrThrow(TubeLineContract.TubeLineEntry.COLUMN_LINES_ID);
-            int lineNameColumnIndex = cursor.getColumnIndexOrThrow(TubeLineContract.TubeLineEntry.COLUMN_LINES_NAME);
+        // Determine the values of the wanted data
+        int lineIdIndex = cursor.getColumnIndexOrThrow(TubeLineContract.TubeLineEntry.COLUMN_LINES_ID);
+        int lineNameColumnIndex = cursor.getColumnIndexOrThrow(TubeLineContract.TubeLineEntry.COLUMN_LINES_NAME);
 
-            final String id = cursor.getString(lineIdIndex);
-            String stationName = cursor.getString(lineNameColumnIndex);
+        final String id = cursor.getString(lineIdIndex);
+        String stationName = cursor.getString(lineNameColumnIndex);
 
-            holder.itemView.setTag(id);
-            holder.lineName.setText(stationName);
-            Log.e(TAG, "Failed to load line text.");
-
-        }
-
-        @Override
-        public FavoritesAdapter.FavoritesAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType)
-        {
-            Context context = viewGroup.getContext();
-            int layoutIdForListItem = R.layout.line_list_item;
-            LayoutInflater inflater = LayoutInflater.from(context);
-            boolean shouldAttachToParentImmediately = false;
-            View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
-            return new FavoritesAdapter.FavoritesAdapterViewHolder(view);
-        }
-
-        public Cursor swapCursor(Cursor c)
-        {
-            // check if this cursor is the same as the previous cursor (mCursor)
-            if (cursor == c)
-            {
-                return null; // bc nothing has changed
-            }
-
-            Cursor temp = cursor;
-            this.cursor = c; // new cursor value assigned
-
-            //check if this is a valid cursor, then update the cursor
-            if (c != null)
-            {
-                this.notifyDataSetChanged();
-            }
-            return temp;
-        }
-
-        @Override
-        public int getItemCount()
-        {
-            if (null == cursor)
-                return 0;
-
-            return cursor.getCount();
-
-        }
+        holder.itemView.setTag(id);
+        holder.lineName.setText(stationName);
+        Log.e(TAG, "Failed to load line text.");
     }
+
+    @Override
+    public FavoritesAdapter.FavoritesAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType)
+    {
+        Context context = viewGroup.getContext();
+        int layoutIdForListItem = R.layout.line_list_item;
+        LayoutInflater inflater = LayoutInflater.from(context);
+        boolean shouldAttachToParentImmediately = false;
+        View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
+        return new FavoritesAdapter.FavoritesAdapterViewHolder(view);
+    }
+
+    public Cursor swapCursor(Cursor c)
+    {
+        // check if this cursor is the same as the previous cursor (mCursor)
+        if (cursor == c)
+        {
+            return null; // bc nothing has changed
+        }
+
+        Cursor temp = cursor;
+        this.cursor = c; // new cursor value assigned
+
+        //check if this is a valid cursor, then update the cursor
+        if (c != null)
+        {
+            this.notifyDataSetChanged();
+        }
+        return temp;
+    }
+
+    @Override
+    public int getItemCount()
+    {
+        if (null == cursor)
+            return 0;
+
+        return cursor.getCount();
+    }
+}
 
 
 

@@ -1,9 +1,5 @@
 package capstone.my.annin.londontubeschedule.utils;
 
-import capstone.my.annin.londontubeschedule.pojo.Lines;
-import capstone.my.annin.londontubeschedule.pojo.Schedule;
-import capstone.my.annin.londontubeschedule.pojo.Stations;
-
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -12,6 +8,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import capstone.my.annin.londontubeschedule.pojo.Lines;
+import capstone.my.annin.londontubeschedule.pojo.Schedule;
+import capstone.my.annin.londontubeschedule.pojo.Stations;
 
 public class JSONUtils
 {
@@ -88,7 +88,7 @@ public class JSONUtils
         {
             return null;
         }
-       ArrayList<Stations> stations = new ArrayList<>();
+        ArrayList<Stations> stations = new ArrayList<>();
 
         try
         {
@@ -97,23 +97,29 @@ public class JSONUtils
             JSONArray stopPointSequenceArrayList = baseJsonResponse.getJSONArray("stopPointSequences");
             //Parsing structure below based on the accepted answer in this stackoverflow thread:
             //https://stackoverflow.com/questions/17673057/how-to-parse-this-nested-json-array-in-android
-            if (stopPointSequenceArrayList != null) {
+            if (stopPointSequenceArrayList != null)
+            {
                 for (int i = 0; i < stopPointSequenceArrayList.length(); i++)
                 {
                     JSONObject elem = stopPointSequenceArrayList.getJSONObject(i);
-                    if (elem != null) {
+                    if (elem != null)
+                    {
                         JSONArray stopPointArrayList = elem.getJSONArray("stopPoint");
-                        if (stopPointArrayList != null) {
+                        if (stopPointArrayList != null)
+                        {
                             for (int j = 0; j < stopPointArrayList.length(); j++)
                             {
                                 JSONObject innerElem = stopPointArrayList.getJSONObject(j);
-                                if (innerElem != null) {
+                                if (innerElem != null)
+                                {
                                     String idStation = "";
-                                    if (innerElem.has("id")) {
+                                    if (innerElem.has("id"))
+                                    {
                                         idStation = innerElem.optString(KEY_STATION_ID);
                                     }
                                     String nameStation = "";
-                                    if (innerElem.has("name")) {
+                                    if (innerElem.has("name"))
+                                    {
                                         nameStation = innerElem.optString(KEY_STATION_NAME);
                                     }
                                     Stations station = new Stations(idStation, nameStation);
@@ -124,7 +130,8 @@ public class JSONUtils
                     }
                 }
             }
-        } catch (JSONException e)
+        }
+        catch (JSONException e)
         {
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
@@ -133,12 +140,10 @@ public class JSONUtils
         }
         // Return the list of stations
         return stations;
-
     }
 
     public static ArrayList<Schedule> extractFeatureFromScheduleJson(String scheduleJSON)
     {
-
         // If the JSON string is empty or null, then return early.
         if (TextUtils.isEmpty(scheduleJSON))
         {
@@ -171,7 +176,7 @@ public class JSONUtils
                     scheduleNameStation = currentSchedule.optString(KEY_STATION_SCHEDULE_NAME);
                 }
 
-                String nameDestination  = "";
+                String nameDestination = "";
                 if (currentSchedule.has("destinationName"))
                 {
                     nameDestination = currentSchedule.optString(KEY_DESTINATION_NAME);
@@ -183,7 +188,7 @@ public class JSONUtils
                     locationCurrent = currentSchedule.optString(KEY_CURRENT_LOCATION);
                 }
 
-                String towardsDirection  = "";
+                String towardsDirection = "";
                 if (currentSchedule.has("towards"))
                 {
                     towardsDirection = currentSchedule.optString(KEY_DIRECTION_TOWARDS);
@@ -195,11 +200,11 @@ public class JSONUtils
                     arrivalExpected = currentSchedule.optString(KEY_EXPECTED_ARRIVAL);
                 }
 
-                Schedule schedule = new Schedule(naptanIdStation,scheduleNameStation, nameDestination, locationCurrent, towardsDirection, arrivalExpected);
+                Schedule schedule = new Schedule(naptanIdStation, scheduleNameStation, nameDestination, locationCurrent, towardsDirection, arrivalExpected);
                 schedules.add(schedule);
             }
         }
-        catch(JSONException e)
+        catch (JSONException e)
         {
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
@@ -209,5 +214,5 @@ public class JSONUtils
 
         //Return the schedule list
         return schedules;
-}
+    }
 }

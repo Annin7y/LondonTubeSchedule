@@ -46,6 +46,7 @@ public class Stations implements Parcelable
         stationId = in.readString();
         stationName = in.readString();
     }
+
     @Override
     public int describeContents()
     {
@@ -58,16 +59,19 @@ public class Stations implements Parcelable
         dest.writeString(stationId);
         dest.writeString(stationName);
     }
+
     @SuppressWarnings("unused")
     public static final Parcelable.Creator<Stations> CREATOR = new Parcelable.Creator<Stations>()
     {
         @Override
-        public Stations createFromParcel(Parcel in) {
+        public Stations createFromParcel(Parcel in)
+        {
             return new Stations(in);
         }
 
         @Override
-        public Stations[] newArray(int size) {
+        public Stations[] newArray(int size)
+        {
             return new Stations[size];
         }
     };

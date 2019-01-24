@@ -1,8 +1,6 @@
 package capstone.my.annin.londontubeschedule.recyclerviewadapters;
 
 import android.content.Context;
-import capstone.my.annin.londontubeschedule.R;
-import capstone.my.annin.londontubeschedule.pojo.Lines;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +11,8 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import capstone.my.annin.londontubeschedule.R;
+import capstone.my.annin.londontubeschedule.pojo.Lines;
 
 public class LinesAdapter extends RecyclerView.Adapter<LinesAdapter.LinesAdapterViewHolder>
 {
@@ -33,8 +33,8 @@ public class LinesAdapter extends RecyclerView.Adapter<LinesAdapter.LinesAdapter
     /**
      * Creates a Lines Adapter.
      *
-     *  @param lineClickHandler The on-click handler for this adapter. This single handler is called
-     *      *                     when an item is clicked.
+     * @param lineClickHandler The on-click handler for this adapter. This single handler is called
+     *                         *                     when an item is clicked.
      */
     public LinesAdapter(LinesAdapterOnClickHandler lineClickHandler, ArrayList<Lines> linesList, Context context)
     {
@@ -103,8 +103,8 @@ public class LinesAdapter extends RecyclerView.Adapter<LinesAdapter.LinesAdapter
 
     public void setLinesList(ArrayList<Lines> mLinesList)
     {
-       this.linesList = mLinesList;
-       notifyDataSetChanged();
+        this.linesList = mLinesList;
+        notifyDataSetChanged();
     }
 }
 

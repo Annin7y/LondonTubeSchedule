@@ -9,9 +9,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.text.TextUtils;
-
-import static capstone.my.annin.londontubeschedule.data.TubeLineContract.TubeLineEntry._ID;
 
 public class TubeLineContentProvider extends ContentProvider
 {
@@ -81,11 +78,10 @@ public class TubeLineContentProvider extends ContentProvider
                 // Inserting values into lines table
                 long id = db.insert(TubeLineContract.TubeLineEntry.TABLE_NAME, null, values);
                 if (id > 0)
-               {
-                    returnUri = ContentUris.withAppendedId(TubeLineContract.TubeLineEntry.CONTENT_URI, id);
-              }
-                else
                 {
+                    returnUri = ContentUris.withAppendedId(TubeLineContract.TubeLineEntry.CONTENT_URI, id);
+                } else
+                    {
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 }
                 break;
@@ -188,7 +184,7 @@ public class TubeLineContentProvider extends ContentProvider
             // Handle the single item case, recognized by the ID included in the URI path
             case LINE_WITH_ID:
                 // Get the line ID from the URI path
-               String id = uri.getPathSegments().get(1);
+                String id = uri.getPathSegments().get(1);
                 // Use selections/selectionArgs to filter for this ID
 
                 rowsDeleted = db.delete(TubeLineContract.TubeLineEntry.TABLE_NAME, "id=?",
@@ -214,7 +210,8 @@ public class TubeLineContentProvider extends ContentProvider
     public String getType(@NonNull Uri uri)
     {
         final int match = sUriMatcher.match(uri);
-        switch (match) {
+        switch (match)
+        {
             case LINES:
                 return TubeLineContract.TubeLineEntry.CONTENT_LIST_TYPE;
             case LINE_WITH_ID:

@@ -27,8 +27,10 @@ public class TubeScheduleAsyncTask extends AsyncTask<String, Void, ArrayList<Sch
     }
 
     @Override
-    protected ArrayList<Schedule> doInBackground(String... params) {
-        if (params.length == 0) {
+    protected ArrayList<Schedule> doInBackground(String... params)
+    {
+        if (params.length == 0)
+        {
             return null;
         }
         String lineId = params[0];
@@ -36,26 +38,29 @@ public class TubeScheduleAsyncTask extends AsyncTask<String, Void, ArrayList<Sch
 
         URL scheduleRequestUrl = NetworkUtils.buildScheduleUrl(lineId, stationId);
 
-        try {
+        try
+        {
             String jsonScheduleResponse = NetworkUtils
                     .makeHttpScheduleRequest(scheduleRequestUrl);
 
             return JSONUtils.extractFeatureFromScheduleJson(jsonScheduleResponse);
 
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             e.printStackTrace();
             return null;
         }
     }
+
     @Override
-    protected void onPostExecute(ArrayList<Schedule> mScheduleList) {
+    protected void onPostExecute(ArrayList<Schedule> mScheduleList)
+    {
         super.onPostExecute(mScheduleList);
         /*the if method is commented out because the error message will be displayed in the Main Activity if there is no internet connection
         the if statement is included in the returnData method in the Main Activity
         */
         //   if (mScheduleList != null) {}
         listener.returnScheduleData(mScheduleList);
-
     }
 }

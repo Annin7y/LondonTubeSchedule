@@ -14,14 +14,14 @@ public class TubeLineDbHelper extends SQLiteOpenHelper
     // If you change the database schema, you must increment the database version
     private static final int VERSION = 3;
 
-   /**
+    /**
      * Constructs a new instance of {@link TubeLineDbHelper}.
      *
      * @param context of the app
-    */
+     */
     TubeLineDbHelper(Context context)
     {
-       super(context, DATABASE_NAME, null, VERSION);
+        super(context, DATABASE_NAME, null, VERSION);
     }
 
     /**
@@ -48,8 +48,8 @@ public class TubeLineDbHelper extends SQLiteOpenHelper
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
-    //   db.execSQL("ALTER TABLE  " + TubeLineContract.TubeLineEntry.TABLE_NAME);
-//        onCreate(db);
+        //   db.execSQL("ALTER TABLE  " + TubeLineContract.TubeLineEntry.TABLE_NAME);
+        //  onCreate(db);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }

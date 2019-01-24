@@ -8,6 +8,9 @@ public class TubeLineContract
 {
     // To prevent someone from accidentally instantiating the contract class,
     // give it an empty constructor.
+    private TubeLineContract()
+    {
+    }
 
     /**
      * The "Content authority" is a name for the entire content provider, similar to the
@@ -32,18 +35,19 @@ public class TubeLineContract
      * Inner class that defines constant values for the lines database table.
      * Each entry in the table represents one line.
      */
-    public static final class TubeLineEntry implements BaseColumns {
+    public static final class TubeLineEntry implements BaseColumns
+    {
         /**
          * To make this a usable URI, we use the parse method which takes in a URI string and returns a Uri.
          */
         public static final Uri CONTENT_URI =
-               BASE_CONTENT_URI.buildUpon().appendPath(PATH_LINES).build();
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_LINES).build();
 
         /**
          * The MIME type of the {@link #CONTENT_URI} for a list of lines.
          */
         public static final String CONTENT_LIST_TYPE =
-               ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_LINES;
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_LINES;
 
         /**
          * The MIME type of the {@link #CONTENT_URI} for one line.
@@ -51,7 +55,7 @@ public class TubeLineContract
         public static final String CONTENT_ITEM_TYPE =
                 ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_LINES;
 
-       public final static String _ID = BaseColumns._ID;
+        public final static String _ID = BaseColumns._ID;
 
         /**
          * Name of database table for lines
@@ -61,11 +65,11 @@ public class TubeLineContract
         /**
          * Unique ID number for the lines table(only for use in the database table). Type: TEXT
          */
-       public final static String COLUMN_LINES_ID = "id";
+        public final static String COLUMN_LINES_ID = "id";
 
         /**
          * LINE name. Type: TEXT
          */
-       public final static String COLUMN_LINES_NAME = "line_name";
-   }
+        public final static String COLUMN_LINES_NAME = "line_name";
+    }
 }

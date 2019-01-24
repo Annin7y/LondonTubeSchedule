@@ -22,6 +22,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.support.v7.widget.Toolbar;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -46,7 +47,7 @@ import static capstone.my.annin.londontubeschedule.data.TubeLineContentProvider.
 
 public class MainActivity extends AppCompatActivity implements LinesAdapter.LinesAdapterOnClickHandler, TubeLineAsyncTaskInterface,
  LoaderManager.LoaderCallbacks<Cursor>
-        {
+{
 
     // Tag for logging
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -94,7 +95,6 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
 //        params.putBundle("line_select", lines);
 //        mFirebaseAnalytics.logEvent("ActivityStartEvent", bundle);
 //
-
         mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
 
         favoritesAdapter = new FavoritesAdapter(this, context);
@@ -104,25 +104,25 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         RecyclerView.LayoutManager mLineLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mLineRecyclerView.setLayoutManager(mLineLayoutManager);
 
-
-
-
-
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT)
+        {
             @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target)
+            {
                 return false;
             }
 
             @Override
-            public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+            public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder)
+            {
                 if (viewHolder instanceof LinesAdapter.LinesAdapterViewHolder) return 0;
                 return super.getSwipeDirs(recyclerView, viewHolder);
             }
 
             // Called when a user swipes left or right on a ViewHolder
             @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir)
+            {
                 // Here is where you'll implement swipe to delete
 
                 //Construct the URI for the item to delete
@@ -134,7 +134,6 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
                 String stringId = id;
                 Uri uri = TubeLineContract.TubeLineEntry.CONTENT_URI;
                 uri = uri.buildUpon().appendPath(stringId).build();
-
 
                 int rowsDeleted = getContentResolver().delete(uri, null, null);
                 Log.v("CatalogActivity", rowsDeleted + " rows deleted from the line database");
@@ -152,33 +151,38 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
             {
                 TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(this);
                 myLineTask.execute(NetworkUtils.buildLineUrl());
-
-            } else {
+            }
+            else
+                {
                 Snackbar
                         .make(mCoordinatorLayout, "Please check your internet connection", Snackbar.LENGTH_INDEFINITE)
                         .setAction("Retry", new MyClickListener())
                         .show();
             }
-        } else
+        }
+        else
         {
-       //     selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "line_list");
+          selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "line_list");
             if (selectedSortOrder == SORT_BY_FAVORITES)
             {
                 getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
                 mLineRecyclerView.setAdapter(favoritesAdapter);
-            } else {
+            } else
+                {
                 linesArrayList = savedInstanceState.getParcelableArrayList(KEY_LINES_LIST);
                 linesAdapter.setLinesList(linesArrayList);
             }
         mLoadingIndicator.setVisibility(View.INVISIBLE);
-        Log.v(LOG_TAG, "SORT ORDER= ." + selectedSortOrder);
+        Log.v(LOG_TAG, "SORTORDER= " + selectedSortOrder);
         Log.i("list", linesArrayList.size() + "");
-    }}
+    }
+    }
 
-
-    public class MyClickListener implements View.OnClickListener {
+    public class MyClickListener implements View.OnClickListener
+    {
         @Override
-        public void onClick(View v) {
+        public void onClick(View v)
+        {
             // Run the AsyncTask in response to the click
             TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(MainActivity.this);
             myLineTask.execute();
@@ -186,28 +190,32 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
     }
 
     @Override
-    public void returnLineData(ArrayList<Lines> simpleJsonLineData) {
+    public void returnLineData(ArrayList<Lines> simpleJsonLineData)
+    {
         mLoadingIndicator.setVisibility(View.INVISIBLE);
-        if (null != simpleJsonLineData) {
+        if (null != simpleJsonLineData)
+        {
             linesAdapter = new LinesAdapter(this, simpleJsonLineData, MainActivity.this);
             linesArrayList = simpleJsonLineData;
             mLineRecyclerView.setAdapter(linesAdapter);
             linesAdapter.setLinesList(linesArrayList);
-        } else {
+        } else
+            {
             showErrorMessage();
         }
     }
 
     @Override
-    public void onClick(Lines lines) {
+    public void onClick(Lines lines)
+    {
         Intent intent = new Intent(MainActivity.this, StationListActivity.class);
         intent.putExtra("Lines", lines);
         startActivity(intent);
-
     }
 
     //Display if there is no internet connection
-    public void showErrorMessage() {
+    public void showErrorMessage()
+    {
         Snackbar
                 .make(mCoordinatorLayout, "Please check your internet connection", Snackbar.LENGTH_INDEFINITE)
                 .setAction("Retry", new MyClickListener())
@@ -216,7 +224,8 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         mLoadingIndicator.setVisibility(View.VISIBLE);
     }
 
-    public static boolean isNetworkStatusAvailable(Context context) {
+    public static boolean isNetworkStatusAvailable(Context context)
+    {
         ConnectivityManager cm =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -310,9 +319,9 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         favoritesAdapter.swapCursor(null);
     }
 
-
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         /* Use AppCompatActivity's method getMenuInflater to get a handle on the menu inflater */
         MenuInflater inflater = getMenuInflater();
         /* Use the inflater's inflate method to inflate our menu layout to this menu */
@@ -351,11 +360,11 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         super.onResume();
         TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(MainActivity.this);
         myLineTask.execute();
-
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(Bundle outState)
+    {
         outState.putString(KEY_SORT_ORDER, selectedSortOrder);
         outState.putParcelableArrayList(KEY_LINES_LIST, linesArrayList);
         super.onSaveInstanceState(outState);

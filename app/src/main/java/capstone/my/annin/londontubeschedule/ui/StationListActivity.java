@@ -32,9 +32,8 @@ import capstone.my.annin.londontubeschedule.pojo.Stations;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.StationsAdapter;
 
 public class StationListActivity extends AppCompatActivity implements StationsAdapter.StationsAdapterOnClickHandler, TubeStationAsyncTaskInterface,
-   LoaderManager.LoaderCallbacks<Cursor>
+        LoaderManager.LoaderCallbacks<Cursor>
 {
-
     //Tag for the log messages
     private static final String TAG = StationListActivity.class.getSimpleName();
 
@@ -63,7 +62,6 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
      */
     private static final int FAVORITES_LOADER = 0;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -80,7 +78,7 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
         RecyclerView.LayoutManager mStationLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mStationRecyclerView.setLayoutManager(mStationLayoutManager);
 
-//        //add to favorites
+        //add to favorites
         favoritesButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -100,35 +98,34 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
             }
         });
 
-        /*
-         *  Starting the asyncTask so that stations load when the activity opens.
-         */
-
         if (getIntent() != null && getIntent().getExtras() != null)
         {
             if (savedInstanceState == null)
             {
-             lines = getIntent().getExtras().getParcelable("Lines");
-             lineId = lines.getLineId();
-             Log.i("lineId: ", lines.getLineId());
-             lineNameStation.setText(lines.getLineName());
-             lineNameToString = lineNameStation.getText().toString();
-             Log.i("lineName: ", lines.getLineName());
+                lines = getIntent().getExtras().getParcelable("Lines");
+                lineId = lines.getLineId();
+                Log.i("lineId: ", lines.getLineId());
+                lineNameStation.setText(lines.getLineName());
+                lineNameToString = lineNameStation.getText().toString();
+                Log.i("lineName: ", lines.getLineName());
 
-             TubeStationAsyncTask myStationTask = new TubeStationAsyncTask(this);
-             myStationTask.execute(lineId);
-    }
-    else
-             {
+                /*
+                 *  Starting the asyncTask so that stations load when the activity opens.
+                 */
+                TubeStationAsyncTask myStationTask = new TubeStationAsyncTask(this);
+                myStationTask.execute(lineId);
+            } else
+                {
                 stationsArrayList = savedInstanceState.getParcelableArrayList(KEY_STATIONS_LIST);
                 stationsAdapter.setStationsList(stationsArrayList);
                 lines = savedInstanceState.getParcelable(KEY_LINES_LIST);
                 lineNameToString = savedInstanceState.getString(KEY_LINE_NAME);
                 lineNameStation.setText(lineNameToString);
-            }}
-    // Kick off the loader
-       getLoaderManager().initLoader(FAVORITES_LOADER, null, this);
+            }
         }
+        // Kick off the loader
+        getLoaderManager().initLoader(FAVORITES_LOADER, null, this);
+    }
 
     @Override
     public void returnStationData(ArrayList<Stations> simpleJsonStationData)

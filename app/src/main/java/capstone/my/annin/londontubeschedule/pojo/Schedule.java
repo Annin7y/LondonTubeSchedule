@@ -36,7 +36,7 @@ public class Schedule implements Parcelable
     private String expectedArrival;
 
 
-    public Schedule(String stationNaptanId, String stationScheduleName, String destinationName,String currentLocation, String directionTowards, String expectedArrival)
+    public Schedule(String stationNaptanId, String stationScheduleName, String destinationName, String currentLocation, String directionTowards, String expectedArrival)
     {
         this.stationNaptanId = stationNaptanId;
         this.stationScheduleName = stationScheduleName;
@@ -76,8 +76,7 @@ public class Schedule implements Parcelable
         return destinationName;
     }
 
-    public void setCurrentLocation(String currentLocation)
-    {
+    public void setCurrentLocation(String currentLocation) {
         this.currentLocation = currentLocation;
     }
 
@@ -137,12 +136,14 @@ public class Schedule implements Parcelable
     public static final Parcelable.Creator<Schedule> CREATOR = new Parcelable.Creator<Schedule>()
     {
         @Override
-        public Schedule createFromParcel(Parcel in) {
+        public Schedule createFromParcel(Parcel in)
+        {
             return new Schedule(in);
         }
 
         @Override
-        public Schedule[] newArray(int size) {
+        public Schedule[] newArray(int size)
+        {
             return new Schedule[size];
         }
     };

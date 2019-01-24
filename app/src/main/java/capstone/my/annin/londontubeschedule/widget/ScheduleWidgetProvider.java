@@ -11,9 +11,9 @@ import android.widget.RemoteViews;
 
 import capstone.my.annin.londontubeschedule.R;
 import capstone.my.annin.londontubeschedule.ui.StationListActivity;
-import capstone.my.annin.londontubeschedule.ui.StationScheduleActivity;
 
-public class ScheduleWidgetProvider extends AppWidgetProvider {
+public class ScheduleWidgetProvider extends AppWidgetProvider
+{
     //The following code is based on the code in these links:
     //https://joshuadonlan.gitbooks.io/onramp-android/content/widgets/collection_widgets.html
     //http://www.vogella.com/tutorials/AndroidWidgets/article.html
@@ -25,9 +25,8 @@ public class ScheduleWidgetProvider extends AppWidgetProvider {
     public static final String EXTRA_ITEM =
             "annin.my.android.ScheduleWidgetProvider.EXTRA_ITEM";
 
-    public void setPendingIntentTemplate (int viewId, PendingIntent pendingIntentTemplate)
+    public void setPendingIntentTemplate(int viewId, PendingIntent pendingIntentTemplate)
     {
-
     }
 
     /*
@@ -35,25 +34,26 @@ public class ScheduleWidgetProvider extends AppWidgetProvider {
      */
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager,
-                         int[] appWidgetIds) {
-        for (int i = 0; i < appWidgetIds.length; i++) {
-
+                         int[] appWidgetIds)
+    {
+        for (int i = 0; i < appWidgetIds.length; i++)
+        {
             int widgetId = appWidgetIds[i];
 
             //    Build the intent to call the service
             Intent intent = new Intent(context.getApplicationContext(),
                     ScheduleWidgetService.class);
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
-            Log.d("onUpdate","method working");
+            Log.d("onUpdate", "method working");
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.schedule_widget_provider);
             views.setRemoteAdapter(R.id.appwidget_list, intent);
             views.setEmptyView(R.id.appwidget_list, R.id.empty);
 
-            Intent detailIntent = new Intent(context,StationListActivity.class);
+            Intent detailIntent = new Intent(context, StationListActivity.class);
             PendingIntent pIntent = PendingIntent.getBroadcast(context, 0, detailIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             views.setPendingIntentTemplate(R.id.appwidget_list, pIntent);
 
-            appWidgetManager.updateAppWidget(widgetId,views);
+            appWidgetManager.updateAppWidget(widgetId, views);
         }
 
         super.onUpdate(context, appWidgetManager, appWidgetIds);
@@ -61,13 +61,14 @@ public class ScheduleWidgetProvider extends AppWidgetProvider {
     }
 
     @Override
-    public void onReceive(Context context, Intent intent) {
+    public void onReceive(Context context, Intent intent)
+    {
         //Code structure based on the code in this blog:
         //http://android-er.blogspot.com/2010/10/update-widget-in-onreceive-method.html
         super.onReceive(context, intent);
 
-        if (ACTION_VIEW_DETAILS.equals(intent.getAction())) {
-
+        if (ACTION_VIEW_DETAILS.equals(intent.getAction()))
+        {
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
             ComponentName thisAppWidget = new ComponentName(context.getPackageName(), ScheduleWidgetProvider.class.getName());
             int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidget);
@@ -78,13 +79,13 @@ public class ScheduleWidgetProvider extends AppWidgetProvider {
     }
 
     @Override
-    public void onEnabled (Context context)
+    public void onEnabled(Context context)
     {
         // Enter relevant functionality for when the first widget is created
     }
 
     @Override
-    public void onDisabled (Context context)
+    public void onDisabled(Context context)
     {
         // Enter relevant functionality for when the last widget is disabled
     }

@@ -33,8 +33,8 @@ public class StationsAdapter extends RecyclerView.Adapter<StationsAdapter.Statio
     /**
      * Creates a Stations Adapter.
      *
-     *  @param stationClickHandler The on-click handler for this adapter. This single handler is called
-     *      *                     when an item is clicked.
+     * @param stationClickHandler The on-click handler for this adapter. This single handler is called
+     *                            *                     when an item is clicked.
      */
     public StationsAdapter(StationsAdapterOnClickHandler stationClickHandler, ArrayList<Stations> stationsList, Context context)
     {
@@ -94,6 +94,7 @@ public class StationsAdapter extends RecyclerView.Adapter<StationsAdapter.Statio
 
         holder.stationName.setText(stationView.getStationName());
     }
+
     @Override
     public int getItemCount()
     {

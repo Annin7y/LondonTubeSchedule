@@ -63,12 +63,16 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         Date date = null;
 
-        try {
+        try
+        {
             date = simpleDateFormat.parse(schedule.getExpectedArrival());
             date.toString();
-        } catch (ParseException e) {
+        }
+        catch (ParseException e)
+        {
             e.printStackTrace();
         }
+
         SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
         String finalDate = newDateFormat.format(date);
 
@@ -112,7 +116,8 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
     }
 
     @Override
-    public void onDestroy() {
+    public void onDestroy()
+    {
     }
 }
 

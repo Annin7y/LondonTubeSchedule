@@ -12,7 +12,7 @@
         style="@style/LineStationListStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
-        android:padding="5dp"
+        android:padding="@dimen/line_list_padding"
         tools:text="@string/line_name" />
 
 </LinearLayout>

@@ -20,7 +20,7 @@
         style="@style/ScheduleNameStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
-        android:padding="3dp"
+        android:padding="@dimen/sch_text_padding"
         tools:text="@string/station_name"
         />
 
@@ -29,7 +29,7 @@
         style="@style/ScheduleLabelStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="@dimen/sch_label_top_padding"
         android:text="@string/arrival_label"/>
 
     <TextView
@@ -37,7 +37,7 @@
         style="@style/ScheduleNameStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
-        android:padding="3dp"
+        android:padding="@dimen/sch_text_padding"
         tools:text="5:45 p.m. Jan 2, 2018" />
 
     <TextView
@@ -45,7 +45,7 @@
         style="@style/ScheduleLabelStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="@dimen/sch_label_top_padding"
         android:text="@string/destination_label"
         />
 
@@ -54,7 +54,7 @@
         style="@style/ScheduleNameStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
-        android:padding="3dp"
+        android:padding="@dimen/sch_text_padding"
         tools:text="Brixton Underground Station"
       />
 
@@ -63,7 +63,7 @@
         style="@style/ScheduleLabelStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="@dimen/sch_label_top_padding"
         android:text="@string/location_label"
         />
 
@@ -72,7 +72,7 @@
         style="@style/ScheduleNameStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
-        android:padding="3dp"
+        android:padding="@dimen/sch_text_padding"
         tools:text="Between Highbury and Islington and Kings Cross St. P" />
 
     <TextView
@@ -80,7 +80,7 @@
         style="@style/ScheduleLabelStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="@dimen/sch_label_top_padding"
         android:text="@string/towards_label"/>
 
     <TextView
@@ -88,7 +88,7 @@
         style="@style/ScheduleNameStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
-        android:padding="3dp"
+        android:padding="@dimen/sch_text_padding"
         tools:text="High Barnet via CX" />
 
     <TextView
@@ -96,7 +96,7 @@
         style="@style/ScheduleNameStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
-        android:padding="3dp"
+        android:padding="@dimen/sch_text_padding"
         android:visibility="gone"
         android:text = "@string/empty_view_text" />
 

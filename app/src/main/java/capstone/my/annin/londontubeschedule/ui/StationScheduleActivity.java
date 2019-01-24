@@ -35,8 +35,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class StationScheduleActivity extends AppCompatActivity implements TubeScheduleAsyncTaskInterface {
-
+public class StationScheduleActivity extends AppCompatActivity implements TubeScheduleAsyncTaskInterface
+{
     private static final String TAG = StationScheduleActivity.class.getSimpleName();
 
     @BindView(R.id.recyclerview_schedule)
@@ -59,7 +59,8 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     TextView emptySchedule;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_station_schedule);
         context = getApplicationContext();
@@ -73,9 +74,6 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
         RecyclerView.LayoutManager mScheduleLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mScheduleRecyclerView.setLayoutManager(mScheduleLayoutManager);
 
-        /*
-         *  Starting the asyncTask so that schedule loads when the activity opens.
-         */
         if (getIntent() != null && getIntent().getExtras() != null)
         {
             if (savedInstanceState == null)
@@ -89,10 +87,15 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
                 stationId = stations.getStationId();
                 Log.i("stationId: ", stations.getStationId());
 
+                /*
+                 *  Starting the asyncTask so that schedule loads when the activity opens.
+                 */
                 TubeScheduleAsyncTask myScheduleTask = new TubeScheduleAsyncTask(this);
                 myScheduleTask.execute(lineId, stationId);
 
-            } else {
+            }
+            else
+                {
                 scheduleArrayList = savedInstanceState.getParcelableArrayList(KEY_SCHEDULE_LIST);
                 scheduleAdapter.setScheduleList(scheduleArrayList);
             }
@@ -118,10 +121,13 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
             Date date = null;
 
-            try {
+            try
+            {
                 date = simpleDateFormat.parse(stationArrival.getExpectedArrival());
                 date.toString();
-            } catch (ParseException e) {
+            }
+            catch (ParseException e)
+            {
                 e.printStackTrace();
             }
             SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
@@ -137,7 +143,6 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
             String json = gson.toJson(scheduleArrayList);
             prefsEditor.putString("ScheduleList_Widget", json);
             prefsEditor.apply();
-
         }
         else
         {
