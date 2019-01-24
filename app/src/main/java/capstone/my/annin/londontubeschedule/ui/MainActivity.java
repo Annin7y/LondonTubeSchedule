@@ -22,7 +22,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.support.v7.widget.Toolbar;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -74,8 +73,7 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
     private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -104,25 +102,21 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         RecyclerView.LayoutManager mLineLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mLineRecyclerView.setLayoutManager(mLineLayoutManager);
 
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT)
-        {
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target)
-            {
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                 return false;
             }
 
             @Override
-            public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder)
-            {
+            public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
                 if (viewHolder instanceof LinesAdapter.LinesAdapterViewHolder) return 0;
                 return super.getSwipeDirs(recyclerView, viewHolder);
             }
 
             // Called when a user swipes left or right on a ViewHolder
             @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir)
-            {
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
                 // Here is where you'll implement swipe to delete
 
                 //Construct the URI for the item to delete
@@ -147,35 +141,34 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
          */
         if (savedInstanceState == null)
         {
-            if (isNetworkStatusAvailable(this))
-            {
-                TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(this);
-                myLineTask.execute(NetworkUtils.buildLineUrl());
-            }
-            else
+                if (isNetworkStatusAvailable(this))
                 {
-                Snackbar
-                        .make(mCoordinatorLayout, "Please check your internet connection", Snackbar.LENGTH_INDEFINITE)
-                        .setAction("Retry", new MyClickListener())
-                        .show();
-            }
-        }
-        else
-        {
-          selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "line_list");
-            if (selectedSortOrder == SORT_BY_FAVORITES)
-            {
-                getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
-                mLineRecyclerView.setAdapter(favoritesAdapter);
-            } else
+                    if (selectedSortOrder == SORT_BY_LINES)
+                    {
+                    TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(this);
+                    myLineTask.execute(NetworkUtils.buildLineUrl());
+                }} else
+                    {
+                    Snackbar
+                            .make(mCoordinatorLayout, "Please check your internet connection", Snackbar.LENGTH_INDEFINITE)
+                            .setAction("Retry", new MyClickListener())
+                            .show();
+                }
+            } else {
+                selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "line_list");
+                if (selectedSortOrder == SORT_BY_FAVORITES)
                 {
-                linesArrayList = savedInstanceState.getParcelableArrayList(KEY_LINES_LIST);
-                linesAdapter.setLinesList(linesArrayList);
+                    getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
+                    mLineRecyclerView.setAdapter(favoritesAdapter);
+                } else
+                    {
+                    linesArrayList = savedInstanceState.getParcelableArrayList(KEY_LINES_LIST);
+                    linesAdapter.setLinesList(linesArrayList);
+                }
+                mLoadingIndicator.setVisibility(View.INVISIBLE);
+                Log.v(LOG_TAG, "SORTORDER= " + selectedSortOrder);
+                Log.i("list", linesArrayList.size() + "");
             }
-        mLoadingIndicator.setVisibility(View.INVISIBLE);
-        Log.v(LOG_TAG, "SORTORDER= " + selectedSortOrder);
-        Log.i("list", linesArrayList.size() + "");
-    }
     }
 
     public class MyClickListener implements View.OnClickListener
@@ -337,7 +330,7 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
 
         switch (item.getItemId())
         {
-            case R.id.most_frequented_favorites:
+            case R.id.most_frequented_lines:
 
                 getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
                 favoritesAdapter = new FavoritesAdapter(this, MainActivity.this);

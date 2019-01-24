@@ -57,6 +57,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     private String stationShareDirection;
     @BindView(R.id.empty_view_schedule)
     TextView emptySchedule;
+    private static final String KEY_EMPTY_VALUE = "empty_value";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -151,6 +152,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
             //Code below(and the trailer code) based on the highest rated answer in this stackoverflow post:
             //https://stackoverflow.com/questions/28217436/how-to-show-an-empty-view-with-a-recyclerview
             emptySchedule.setVisibility(View.VISIBLE);
+
         }
         if (mShareActionProvider != null)
         {

@@ -5,7 +5,7 @@
         tools:context="capstone.my.annin.londontubeschedule.ui.MainActivity">
 
         <item
-            android:id="@+id/most_frequented_favorites"
+            android:id="@+id/most_frequented_lines"
             android:orderInCategory="1"
             android:title="@string/most_frequented_lines"
             app:showAsAction="never" />
