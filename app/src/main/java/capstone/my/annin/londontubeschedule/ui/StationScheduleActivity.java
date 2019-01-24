@@ -95,13 +95,16 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
                 myScheduleTask.execute(lineId, stationId);
 
             }
-            else
+            else {
+                if(savedInstanceState.getBoolean("visible"))
+                { emptySchedule.setVisibility(View.VISIBLE);
+            }
                 {
                 scheduleArrayList = savedInstanceState.getParcelableArrayList(KEY_SCHEDULE_LIST);
                 scheduleAdapter.setScheduleList(scheduleArrayList);
             }
         }
-    }
+    }}
 
     @Override
     public void returnScheduleData(ArrayList<Schedule> simpleJsonScheduleData)
@@ -189,6 +192,11 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     @Override
     protected void onSaveInstanceState(Bundle outState)
     {
+        if(emptySchedule.getVisibility()==View.VISIBLE)
+        { outState.putBoolean("visible",true); }
+        else
+            { outState.putBoolean("visible",false); }
+
         outState.putParcelableArrayList(KEY_SCHEDULE_LIST, scheduleArrayList);
         super.onSaveInstanceState(outState);
     }}

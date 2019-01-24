@@ -89,9 +89,9 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 //
-//        Bundle params = new Bundle();
-//        params.putBundle("line_select", lines);
-//        mFirebaseAnalytics.logEvent("ActivityStartEvent", bundle);
+        Bundle params = new Bundle();
+ //      params.putBundle("line_select", lines);
+//        mFirebaseAnalytics.logEvent("line_select", bundle);
 //
         mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
 
@@ -177,10 +177,17 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         public void onClick(View v)
         {
             // Run the AsyncTask in response to the click
+            if (selectedSortOrder == SORT_BY_FAVORITES)
+            {
+              getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
+               mLineRecyclerView.setAdapter(favoritesAdapter);
+        }
+        else {
+
             TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(MainActivity.this);
             myLineTask.execute();
         }
-    }
+    }}
 
     @Override
     public void returnLineData(ArrayList<Lines> simpleJsonLineData)
