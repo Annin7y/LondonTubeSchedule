@@ -16,5 +16,14 @@
     <string name="destination_label">Terminal Station:</string>
     <string name="location_label">Current Location:</string>
     <string name="towards_label">Towards:</string>
+    <string name="snackbar_internet">Please check your internet connection</string>
+    <string name="snackbar_retry">Retry</string>
+    <string name="arrival_text">5:45 p.m. Jan 2, 2018</string>
+    <string name="destination_text">Brixton Underground Station</string>
+    <string name="location_text">Between Highbury and Islington and Kings Cross St. P</string>
+    <string name="towards_text">High Barnet via CX</string>
+    <string name="station_dup_instructions">Duplicate station names indicate different line branches.</string>
+    <string name="station_dup_instructions_two">Terminus station displayed on the next page.</string>
+    <string name="add_to_favourites">Add to Favourites</string>
 
 </resources>

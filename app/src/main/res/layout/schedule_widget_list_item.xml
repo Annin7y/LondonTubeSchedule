@@ -12,7 +12,7 @@
         style="@style/ScheduleWidgetLabelStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
-        android:text="Station Name: "
+        android:text="@string/name_label"
         />
 
     <TextView
@@ -30,7 +30,7 @@
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:layout_marginTop="3dp"
-        android:text="Next train: "/>
+        android:text="@string/arrival_label"/>
 
     <TextView
         android:id="@+id/schedule_widget_arrival"
@@ -38,14 +38,14 @@
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:padding="@dimen/widget_list_pad"
-        tools:text="5:45 p.m. Jan 2, 2018" />
+        tools:text="@string/arrival_text" />
 
     <TextView
         android:id="@+id/schedule_widget_towards_label"
         style="@style/ScheduleLabelStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
-        android:text="Towards: "/>
+        android:text="@string/towards_label"/>
 
     <TextView
         android:id="@+id/schedule_widget_towards"
@@ -53,6 +53,6 @@
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:padding="@dimen/widget_list_pad"
-        tools:text="High Barnet via CX" />
+        tools:text="@string/towards_text" />
 
 </LinearLayout>

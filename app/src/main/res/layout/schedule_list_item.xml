@@ -38,7 +38,7 @@
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:padding="@dimen/sch_text_padding"
-        tools:text="5:45 p.m. Jan 2, 2018" />
+        tools:text="@string/arrival_text" />
 
     <TextView
         android:id="@+id/schedule_destination_label"
@@ -55,7 +55,7 @@
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:padding="@dimen/sch_text_padding"
-        tools:text="Brixton Underground Station"
+        tools:text="@string/destination_text"
       />
 
     <TextView
@@ -73,7 +73,7 @@
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:padding="@dimen/sch_text_padding"
-        tools:text="Between Highbury and Islington and Kings Cross St. P" />
+        tools:text="@string/location_text" />
 
     <TextView
         android:id="@+id/schedule_towards_label"
@@ -89,7 +89,7 @@
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:padding="@dimen/sch_text_padding"
-        tools:text="High Barnet via CX" />
+        tools:text="@string/towards_text" />
 
     <TextView
         android:id="@+id/empty_towards"

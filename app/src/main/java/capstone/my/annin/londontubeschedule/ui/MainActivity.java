@@ -148,8 +148,8 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
                 } else
                     {
                     Snackbar
-                            .make(mCoordinatorLayout, "Please check your internet connection", Snackbar.LENGTH_INDEFINITE)
-                            .setAction("Retry", new MyClickListener())
+                            .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.snackbar_retry, new MyClickListener())
                             .show();
                 }
             } else {
@@ -215,8 +215,8 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
     public void showErrorMessage()
     {
         Snackbar
-                .make(mCoordinatorLayout, "Please check your internet connection", Snackbar.LENGTH_INDEFINITE)
-                .setAction("Retry", new MyClickListener())
+                .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+                .setAction(R.string.snackbar_retry, new MyClickListener())
                 .show();
         mLineRecyclerView.setVisibility(View.INVISIBLE);
         mLoadingIndicator.setVisibility(View.VISIBLE);
@@ -355,9 +355,10 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
 //    @Override
 //    public void onResume()
 //    {
-//        super.onResume();
-//        TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(MainActivity.this);
-//        myLineTask.execute();
+//            super.onResume();
+//            TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(MainActivity.this);
+//            myLineTask.execute();
+//
 //    }
 
     @Override
