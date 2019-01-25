@@ -143,11 +143,9 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         {
                 if (isNetworkStatusAvailable(this))
                 {
-                    if (selectedSortOrder == SORT_BY_LINES)
-                    {
                     TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(this);
                     myLineTask.execute(NetworkUtils.buildLineUrl());
-                }} else
+                } else
                     {
                     Snackbar
                             .make(mCoordinatorLayout, "Please check your internet connection", Snackbar.LENGTH_INDEFINITE)
@@ -155,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
                             .show();
                 }
             } else {
-                selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "line_list");
+             selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "line_list");
                 if (selectedSortOrder == SORT_BY_FAVORITES)
                 {
                     getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
@@ -354,13 +352,13 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
                 return super.onOptionsItemSelected(item);
     }}
 
-    @Override
-    public void onResume()
-    {
-        super.onResume();
-        TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(MainActivity.this);
-        myLineTask.execute();
-    }
+//    @Override
+//    public void onResume()
+//    {
+//        super.onResume();
+//        TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(MainActivity.this);
+//        myLineTask.execute();
+//    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState)
