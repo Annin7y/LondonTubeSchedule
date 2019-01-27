@@ -20,8 +20,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintTop_toBottomOf="@id/station_list_instructions"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="@dimen/station_name_start"
+        android:layout_marginTop="@dimen/station_name_top"
         tools:text="@string/station_name"
         />
 
@@ -32,8 +32,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/line_name_station"
         app:layout_constraintBottom_toTopOf="@id/station_duplicate_instructions"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="@dimen/station_dup_instructions_start"
+        android:layout_marginTop="@dimen/station_name_top"
         android:text="@string/station_list_instructions" />
 
     <TextView
@@ -51,7 +51,7 @@
     <TextView
         android:id="@+id/station_duplicate_instructions_two"
         style="@style/StationInstructionStyle"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="@dimen/station_dup_instructions_start"
         android:layout_marginEnd="@dimen/station_dup_instructions_end"
         app:layout_constraintBottom_toTopOf="@id/recyclerview_station"
         app:layout_constraintHorizontal_bias="0.0"
@@ -68,10 +68,10 @@
         android:scrollbars="vertical"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="@dimen/station_recycler_start"
         app:layout_constraintTop_toBottomOf="@id/station_duplicate_instructions"
         app:layout_constraintBottom_toTopOf="@id/favorites_button"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/station_recycler_top"
         android:descendantFocusability="afterDescendants"
         />
 
@@ -81,8 +81,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="@dimen/fav_button_margin_start"
+        android:layout_marginTop="@dimen/fav_button_margin_top"
         app:layout_constraintTop_toBottomOf="@id/recyclerview_station"
         app:layout_constraintBottom_toBottomOf="parent"
         android:focusable="false"

@@ -88,11 +88,7 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         adView.loadAd(request);
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-//
-        Bundle params = new Bundle();
- //      params.putBundle("line_select", lines);
-//        mFirebaseAnalytics.logEvent("line_select", bundle);
-//
+
         mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
 
         favoritesAdapter = new FavoritesAdapter(this, context);
@@ -209,6 +205,11 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         Intent intent = new Intent(MainActivity.this, StationListActivity.class);
         intent.putExtra("Lines", lines);
         startActivity(intent);
+
+        Bundle params = new Bundle();
+        params.putParcelable("line_select", lines);
+        mFirebaseAnalytics.logEvent("line_select",params);
+
     }
 
     //Display if there is no internet connection

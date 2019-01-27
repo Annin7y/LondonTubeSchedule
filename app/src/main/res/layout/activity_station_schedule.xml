@@ -19,16 +19,13 @@
 
     <TextView
         android:id="@+id/empty_view_schedule"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/ScheduleNameStyle"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="@dimen/schedule_empty_start"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="@dimen/empty_schedule_top"
         android:visibility="gone"
-        android:textSize ="20sp"
-        android:textStyle ="bold"
         android:text = "@string/empty_view_text"/>
 
 </android.support.constraint.ConstraintLayout>

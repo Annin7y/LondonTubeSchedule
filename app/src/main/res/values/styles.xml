@@ -16,6 +16,15 @@
         <item name="android:textSize">25sp</item>
     </style>
 
+    <!-- Main Activity Instructions Theme -->
+    <style name="MainInstructionStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
     <!-- Station Activity Instructions Theme -->
     <style name="StationInstructionStyle">
         <item name="android:layout_height">wrap_content</item>

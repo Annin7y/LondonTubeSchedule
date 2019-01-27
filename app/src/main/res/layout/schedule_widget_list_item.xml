@@ -29,7 +29,7 @@
         style="@style/ScheduleWidgetLabelStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="@dimen/sch_widget_top_padding"
         android:text="@string/arrival_label"/>
 
     <TextView
