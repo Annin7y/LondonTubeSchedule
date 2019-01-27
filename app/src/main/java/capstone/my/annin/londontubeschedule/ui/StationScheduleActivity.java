@@ -35,7 +35,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class StationScheduleActivity extends AppCompatActivity implements TubeScheduleAsyncTaskInterface {
+public class StationScheduleActivity extends AppCompatActivity implements TubeScheduleAsyncTaskInterface
+{
     private static final String TAG = StationScheduleActivity.class.getSimpleName();
 
     @BindView(R.id.recyclerview_schedule)
@@ -59,7 +60,8 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     private static final String KEY_EMPTY_VALUE = "empty_value";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_station_schedule);
         context = getApplicationContext();
@@ -73,8 +75,10 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
         RecyclerView.LayoutManager mScheduleLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mScheduleRecyclerView.setLayoutManager(mScheduleLayoutManager);
 
-        if (getIntent() != null && getIntent().getExtras() != null) {
-            if (savedInstanceState == null) {
+        if (getIntent() != null && getIntent().getExtras() != null)
+        {
+            if (savedInstanceState == null)
+            {
                 lines = getIntent().getExtras().getParcelable("Lines");
                 stations = getIntent().getExtras().getParcelable("Stations");
 
@@ -90,10 +94,12 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
                 TubeScheduleAsyncTask myScheduleTask = new TubeScheduleAsyncTask(this);
                 myScheduleTask.execute(lineId, stationId);
 
-            } else {
+            } else
+                {
                 //emptySchedule visibility code based on the answer in this stackoverflow thread:
                 //https://stackoverflow.com/questions/51903851/keeping-textview-visibility-view-invisible-and-button-state-setenabledfalse
-                if (savedInstanceState.getBoolean("visible")) {
+                if (savedInstanceState.getBoolean("visible"))
+                {
                     emptySchedule.setVisibility(View.VISIBLE);
                 }
                 {
@@ -105,8 +111,10 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     }
 
     @Override
-    public void returnScheduleData(ArrayList<Schedule> simpleJsonScheduleData) {
-        if (simpleJsonScheduleData.size() > 0) {
+    public void returnScheduleData(ArrayList<Schedule> simpleJsonScheduleData)
+    {
+        if (simpleJsonScheduleData.size() > 0)
+        {
             scheduleAdapter = new ScheduleAdapter(simpleJsonScheduleData, StationScheduleActivity.this);
             scheduleArrayList = simpleJsonScheduleData;
             mScheduleRecyclerView.setAdapter(scheduleAdapter);
@@ -121,7 +129,8 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
             Date date = null;
 
-            try {
+            try
+            {
                 date = simpleDateFormat.parse(stationArrival.getExpectedArrival());
                 date.toString();
             } catch (ParseException e) {
@@ -140,7 +149,9 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
             String json = gson.toJson(scheduleArrayList);
             prefsEditor.putString("ScheduleList_Widget", json);
             prefsEditor.apply();
-        } else {
+        } else
+            {
+
             //Toast message commented out; replaced with the text message below
             // Toast.makeText(StationScheduleActivity.this, getString(R.string.empty_view_toast), Toast.LENGTH_SHORT).show();
             //Code below(and the trailer code) based on the highest rated answer in this stackoverflow post:
@@ -148,13 +159,15 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
             emptySchedule.setVisibility(View.VISIBLE);
 
         }
-        if (mShareActionProvider != null) {
+        if (mShareActionProvider != null)
+        {
             mShareActionProvider.setShareIntent(createShareIntent());
         }
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         /* Use AppCompatActivity's method getMenuInflater to get a handle on the menu inflater */
         MenuInflater inflater = getMenuInflater();
         /* Use the inflater's inflate method to inflate our menu layout to this menu */
@@ -167,7 +180,8 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
         return super.onCreateOptionsMenu(menu);
     }
 
-    public Intent createShareIntent() {
+    public Intent createShareIntent()
+    {
         String shareTitle = "Next train at ";
         String data = shareTitle + "\n" + stationShareStationName + "\n" + stationShareArrivalTime + "\n" + stationShareDirection;
 
@@ -178,8 +192,10 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        if (emptySchedule.getVisibility() == View.VISIBLE) {
+    protected void onSaveInstanceState(Bundle outState)
+    {
+        if (emptySchedule.getVisibility() == View.VISIBLE)
+        {
             outState.putBoolean("visible", true);
         } else {
             outState.putBoolean("visible", false);

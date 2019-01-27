@@ -39,7 +39,7 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
     @Override
     public void onDataSetChanged()
     {
-        //code structure based on this link:
+        //code structure based on the code in this link:
         //https://stackoverflow.com/questions/37927113/how-to-store-and-retrieve-an-object-from-gson-in-android
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
 

@@ -29,6 +29,7 @@ android {
     buildTypes.each {
         it.buildConfigField 'String', 'UNIFIED_LONDON_TRANSPORT_APP_KEY', MyUnifiedLondonTransportAppKey
         it.buildConfigField 'String', 'UNIFIED_LONDON_TRANSPORT_APP_ID', MyUnifiedLondonTransportAppId
+
     }
     configurations.all {
         resolutionStrategy.force "com.android.support:support-v7:28.0.0"

@@ -47,7 +47,6 @@ import static capstone.my.annin.londontubeschedule.data.TubeLineContentProvider.
 public class MainActivity extends AppCompatActivity implements LinesAdapter.LinesAdapterOnClickHandler, TubeLineAsyncTaskInterface,
  LoaderManager.LoaderCallbacks<Cursor>
 {
-
     // Tag for logging
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -73,7 +72,8 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
     private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -98,21 +98,25 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         RecyclerView.LayoutManager mLineLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mLineRecyclerView.setLayoutManager(mLineLayoutManager);
 
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT)
+        {
             @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target)
+            {
                 return false;
             }
 
             @Override
-            public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+            public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder)
+            {
                 if (viewHolder instanceof LinesAdapter.LinesAdapterViewHolder) return 0;
                 return super.getSwipeDirs(recyclerView, viewHolder);
             }
 
             // Called when a user swipes left or right on a ViewHolder
             @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir)
+            {
                 // Here is where you'll implement swipe to delete
 
                 //Construct the URI for the item to delete
@@ -148,7 +152,8 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
                             .setAction(R.string.snackbar_retry, new MyClickListener())
                             .show();
                 }
-            } else {
+            } else
+                {
              selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "line_list");
                 if (selectedSortOrder == SORT_BY_FAVORITES)
                 {
@@ -175,8 +180,8 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
             {
               getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
                mLineRecyclerView.setAdapter(favoritesAdapter);
-        }
-        else {
+        } else
+            {
 
             TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(MainActivity.this);
             myLineTask.execute();
@@ -206,6 +211,7 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         intent.putExtra("Lines", lines);
         startActivity(intent);
 
+        //log event when the user selects a line
         Bundle params = new Bundle();
         params.putParcelable("line_select", lines);
         mFirebaseAnalytics.logEvent("line_select",params);
@@ -353,14 +359,6 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
                 return super.onOptionsItemSelected(item);
     }}
 
-//    @Override
-//    public void onResume()
-//    {
-//            super.onResume();
-//            TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(MainActivity.this);
-//            myLineTask.execute();
-//
-//    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState)

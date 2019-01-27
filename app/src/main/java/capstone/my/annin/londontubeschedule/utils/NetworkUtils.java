@@ -31,7 +31,6 @@ public class NetworkUtils
     private static final String BASE_URL_STATIONS_LIST = "https://api.tfl.gov.uk/Line/";
 
     private static final String BASE_URL_SCHEDULE = "https://api.tfl.gov.uk/Line/";
-    // https://api.tfl.gov.uk/Line/victoria/Arrivals/940GZZLUGPK"
 
     public NetworkUtils()
     {

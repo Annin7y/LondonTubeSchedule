@@ -20,6 +20,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -48,6 +50,7 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
     Lines lines;
     public String lineId;
     private Context context;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @BindView(R.id.line_name_station)
     TextView lineNameStation;
@@ -77,6 +80,8 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
 
         RecyclerView.LayoutManager mStationLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mStationRecyclerView.setLayoutManager(mStationLayoutManager);
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         //add to favorites
         favoritesButton.setOnClickListener(new View.OnClickListener()
@@ -146,6 +151,12 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
         intent.putExtra("Lines", lines);
         intent.putExtra("Stations", stations);
         startActivity(intent);
+
+        //log event when the user selects a station
+        Bundle params = new Bundle();
+        params.putParcelable("station_select", stations);
+        mFirebaseAnalytics.logEvent("station_select",params);
+
     }
 
     @Override
