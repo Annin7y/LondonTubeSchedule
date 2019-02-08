@@ -98,6 +98,7 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
                 {
                     Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
                     Toast.makeText(StationListActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
+
                     favoritesButton.setVisibility(View.GONE);
                 }
             }

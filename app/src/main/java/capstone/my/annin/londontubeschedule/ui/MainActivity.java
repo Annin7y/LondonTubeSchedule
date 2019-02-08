@@ -40,6 +40,7 @@ import capstone.my.annin.londontubeschedule.pojo.Lines;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.FavoritesAdapter;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.LinesAdapter;
 import capstone.my.annin.londontubeschedule.utils.NetworkUtils;
+import timber.log.Timber;
 
 import static capstone.my.annin.londontubeschedule.data.TubeLineContentProvider.LOG_TAG;
 
@@ -130,7 +131,8 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
                 uri = uri.buildUpon().appendPath(stringId).build();
 
                 int rowsDeleted = getContentResolver().delete(uri, null, null);
-                Log.v("CatalogActivity", rowsDeleted + " rows deleted from the line database");
+              //  Log.v("CatalogActivity", rowsDeleted + " rows deleted from the line database");
+                Timber.v( "%s rows deleted from the line database", rowsDeleted);
 
                 getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
             }
