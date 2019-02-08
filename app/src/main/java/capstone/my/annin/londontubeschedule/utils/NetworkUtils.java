@@ -13,6 +13,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 
 import capstone.my.annin.londontubeschedule.BuildConfig;
+import timber.log.Timber;
 
 import static android.content.ContentValues.TAG;
 
@@ -51,7 +52,8 @@ public class NetworkUtils
         {
             e.printStackTrace();
         }
-        Log.v(TAG, "Built URIline " + urlLineList);
+      //  Log.v(TAG, "Built URIline " + urlLineList);
+          Timber.v( "Built URIline " + urlLineList);
         return urlLineList;
     }
 
