@@ -12,6 +12,7 @@ import capstone.my.annin.londontubeschedule.pojo.Lines;
 import capstone.my.annin.londontubeschedule.pojo.Schedule;
 import capstone.my.annin.londontubeschedule.pojo.Stations;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.ScheduleAdapter;
+import timber.log.Timber;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -86,7 +87,8 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
                 Log.i("lineId: ", lines.getLineId());
 
                 stationId = stations.getStationId();
-                Log.i("stationId: ", stations.getStationId());
+               // Log.i("stationId: ", stations.getStationId());
+                Timber.i(stationId);
 
                 /*
                  *  Starting the asyncTask so that schedule loads when the activity opens.

@@ -32,6 +32,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import capstone.my.annin.londontubeschedule.BuildConfig;
 import capstone.my.annin.londontubeschedule.R;
 import capstone.my.annin.londontubeschedule.asynctask.TubeLineAsyncTask;
 import capstone.my.annin.londontubeschedule.asynctask.TubeLineAsyncTaskInterface;
@@ -39,6 +40,7 @@ import capstone.my.annin.londontubeschedule.data.TubeLineContract;
 import capstone.my.annin.londontubeschedule.pojo.Lines;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.FavoritesAdapter;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.LinesAdapter;
+import capstone.my.annin.londontubeschedule.timberlog.ReleaseTree;
 import capstone.my.annin.londontubeschedule.utils.NetworkUtils;
 import timber.log.Timber;
 
@@ -82,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
 
         // Bind the views
         ButterKnife.bind(this);
+
 
         MobileAds.initialize(this, "ca-app-pub-9580291377897056~9472538876");
         AdRequest request = new AdRequest.Builder().build();
