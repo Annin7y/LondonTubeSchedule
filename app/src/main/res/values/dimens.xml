@@ -15,7 +15,7 @@
     <!-- Progress bar marginTop in activity_main -->
     <dimen name="progress_bar_top">295dp</dimen>
 
-    <dimen name="station_dup_instructions_start">20dp</dimen>
+    <dimen name="station_dup_instructions_start">15dp</dimen>
     <dimen name="station_dup_instructions_top">20dp</dimen>
     <dimen name="station_dup_instructions_end">30dp</dimen>
 
@@ -28,8 +28,8 @@
     <dimen name="station_list_padding">8dp</dimen>
     <dimen name="line_list_padding">5dp</dimen>
     <dimen name="sch_label_top_padding">5dp</dimen>
-    <dimen name="line_station_margin_end">35dp</dimen>
-    <dimen name="line_station_margin_start">15dp</dimen>
+    <dimen name="line_station_margin_end">40dp</dimen>
+    <dimen name="line_station_margin_start">10dp</dimen>
     <dimen name="sch_text_padding">1dp</dimen>
     <dimen name="recycler_schedule_start">16dp</dimen>
     <dimen name="recycler_schedule_top">20dp</dimen>
@@ -38,7 +38,7 @@
     <dimen name="fav_button_margin_top">20dp</dimen>
     <dimen name="station_name_start">8dp</dimen>
     <dimen name="station_name_top">16dp</dimen>
-    <dimen name="station_recycler_start">8dp</dimen>
+    <dimen name="station_recycler_start">5dp</dimen>
     <dimen name="station_recycler_top">20dp</dimen>
     <dimen name="empty_schedule_top">50dp</dimen>
     <dimen name="main_instr_start">10dp</dimen>

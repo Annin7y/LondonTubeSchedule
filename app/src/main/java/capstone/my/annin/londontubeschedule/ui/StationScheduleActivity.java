@@ -84,10 +84,11 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
                 stations = getIntent().getExtras().getParcelable("Stations");
 
                 lineId = lines.getLineId();
-                Log.i("lineId: ", lines.getLineId());
+               // Log.i("lineId: ", lines.getLineId());
+                Timber.i(stationId);
 
                 stationId = stations.getStationId();
-               // Log.i("stationId: ", stations.getStationId());
+              // Log.i("stationId: ", stations.getStationId());
                 Timber.i(stationId);
 
                 /*
