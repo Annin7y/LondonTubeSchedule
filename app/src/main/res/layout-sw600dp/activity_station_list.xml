@@ -1,6 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true" >
+
+        <TextView
+            android:id="@+id/line_name_station"
+            style="@style/LineStationListStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/station_list_instructions"
+            android:layout_marginStart="@dimen/station_name_start"
+            android:layout_marginTop="@dimen/station_name_top"
+            tools:text="@string/station_name"
+            />
+
+        <TextView
+            android:id="@+id/station_list_instructions"
+            style="@style/StationInstructionTabletStyle"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line_name_station"
+            app:layout_constraintBottom_toTopOf="@id/station_duplicate_instructions"
+            android:layout_marginStart="@dimen/station_dup_instructions_start"
+            android:layout_marginTop="@dimen/station_name_top"
+            android:text="@string/station_list_instructions" />
+
+        <TextView
+            android:id="@+id/station_duplicate_instructions"
+            style="@style/StationInstructionTabletStyle"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="@dimen/station_dup_instructions_top"
+            app:layout_constraintBottom_toTopOf="@id/station_duplicate_instructions_two"
+            app:layout_constraintHorizontal_bias="0.366"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/station_list_instructions"
+            android:text="@string/station_dup_instructions" />
+
+        <TextView
+            android:id="@+id/station_duplicate_instructions_two"
+            style="@style/StationInstructionTabletStyle"
+            android:layout_marginStart="@dimen/station_dup_instr_start_tablet"
+            android:layout_marginEnd="@dimen/station_dup_instructions_end"
+            app:layout_constraintBottom_toTopOf="@id/recyclerview_station"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/station_duplicate_instructions"
+            android:text="@string/station_dup_instructions_two"
+            />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview_station"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="@dimen/station_recycler_start"
+            app:layout_constraintTop_toBottomOf="@id/station_duplicate_instructions"
+            app:layout_constraintBottom_toTopOf="@id/favorites_button"
+            android:layout_marginTop="@dimen/station_recycler_top"
+            android:descendantFocusability="afterDescendants"
+            />
+
+        <Button
+            android:id="@+id/favorites_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/fav_button_margin_start"
+            android:layout_marginTop="@dimen/fav_button_margin_top"
+            android:focusable="false"
+            android:text="@string/add_to_favourites"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recyclerview_station" />
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

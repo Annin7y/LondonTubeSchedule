@@ -50,7 +50,7 @@
     <dimen name="loading_width">0dp</dimen>
     <dimen name="loading_height">45dp</dimen>
     <dimen name="loading_bottom">40dp</dimen>
-
+    <dimen name="station_dup_instr_start_tablet">15dp</dimen>
 
 
 </resources>
