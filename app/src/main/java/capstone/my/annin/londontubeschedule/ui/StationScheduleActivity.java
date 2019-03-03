@@ -1,5 +1,7 @@
 package capstone.my.annin.londontubeschedule.ui;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 
@@ -12,6 +14,7 @@ import capstone.my.annin.londontubeschedule.pojo.Lines;
 import capstone.my.annin.londontubeschedule.pojo.Schedule;
 import capstone.my.annin.londontubeschedule.pojo.Stations;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.ScheduleAdapter;
+import capstone.my.annin.londontubeschedule.widget.ScheduleWidgetProvider;
 import timber.log.Timber;
 
 import android.content.SharedPreferences;
@@ -152,6 +155,16 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
             String json = gson.toJson(scheduleArrayList);
             prefsEditor.putString("ScheduleList_Widget", json);
             prefsEditor.apply();
+
+            //Send to Widget Provider code based on the answer with 9 upvotes in this post:
+            //https://stackoverflow.com/questions/3455123/programmatically-update-widget-from-activity-service-receiver
+            Context context = getApplicationContext();
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+            ComponentName thisWidget = new ComponentName(context, ScheduleWidgetProvider.class);
+            int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.appwidget_list);
+
+
         } else
             {
 
