@@ -168,11 +168,13 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
                     {
                     linesArrayList = savedInstanceState.getParcelableArrayList(KEY_LINES_LIST);
                     linesAdapter.setLinesList(linesArrayList);
+                        Timber.i("list: " + linesArrayList.size());
                 }
                 mLoadingIndicator.setVisibility(View.INVISIBLE);
               //  Log.v(LOG_TAG, "SORTORDER= " + selectedSortOrder);
                 Timber.v(selectedSortOrder, "SORTORDER= ");
-                Log.i("list", linesArrayList.size() + "");
+               // Log.i("list", linesArrayList.size() + "");
+               // Timber.i("list: " + linesArrayList.size());
             }
     }
 
