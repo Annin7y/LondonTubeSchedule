@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
                 uri = uri.buildUpon().appendPath(stringId).build();
 
                 int rowsDeleted = getContentResolver().delete(uri, null, null);
-              //  Log.v("CatalogActivity", rowsDeleted + " rows deleted from the line database");
+               // Log.v("CatalogActivity", rowsDeleted + " rows deleted from the line database");
                 Timber.v( "%s rows deleted from the line database", rowsDeleted);
 
                 getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
@@ -170,7 +170,8 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
                     linesAdapter.setLinesList(linesArrayList);
                 }
                 mLoadingIndicator.setVisibility(View.INVISIBLE);
-                Log.v(LOG_TAG, "SORTORDER= " + selectedSortOrder);
+              //  Log.v(LOG_TAG, "SORTORDER= " + selectedSortOrder);
+                Timber.v(selectedSortOrder, "SORTORDER= ");
                 Log.i("list", linesArrayList.size() + "");
             }
     }

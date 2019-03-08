@@ -210,6 +210,7 @@ public class JSONUtils
             // catch the exception here, so the app doesn't crash. Print a log message
             // with the message from the exception.
             Log.e("QueryUtils", "Problem parsing schedule JSON results", e);
+
         }
 
         //Return the schedule list
