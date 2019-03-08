@@ -112,11 +112,13 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
                 lines = getIntent().getExtras().getParcelable("Lines");
                 lineId = lines.getLineId();
                // Log.i("lineId: ", lines.getLineId());
-                Timber.i(lines.getLineId(), "lineId: "  );
+                Timber.i(lines.getLineId(), "lineId: ");
 
                 lineNameStation.setText(lines.getLineName());
                 lineNameToString = lineNameStation.getText().toString();
-                Log.i("lineName: ", lines.getLineName());
+               // Log.i("lineName: ", lines.getLineName());
+                Timber.i(lines.getLineName(),"lineName: ");
+
 
                 /*
                  *  Starting the asyncTask so that stations load when the activity opens.

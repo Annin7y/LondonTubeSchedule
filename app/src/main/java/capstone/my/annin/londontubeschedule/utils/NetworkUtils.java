@@ -110,7 +110,9 @@ public class NetworkUtils
     public static String makeHttpLineRequest(URL url) throws IOException
     {
         String jsonLineResponse = "";
-        Log.i("URL: ", url.toString());
+       // Log.i("URL: ", url.toString());
+        Timber.i(url.toString(),"URL: " );
+
         // If the URL is null, then return early.
         if (url == null)
         {
@@ -140,7 +142,8 @@ public class NetworkUtils
         }
         catch (IOException e)
         {
-            Log.e(LOG_TAG, "Problem retrieving line list JSON results.", e);
+           //Log.e(LOG_TAG, "Problem retrieving line list JSON results.", e);
+            Timber.e(e,"Problem retrieving schedule JSON results." );
         }
         finally
         {
@@ -165,7 +168,8 @@ public class NetworkUtils
     public static String makeHttpStationRequest(URL url) throws IOException
     {
         String jsonStationResponse = "";
-        Log.i("URL: ", url.toString());
+       // Log.i("URL: ", url.toString());
+        Timber.i(url.toString(),"URL: " );
         // If the URL is null, then return early.
         if (url == null)
         {
@@ -195,7 +199,8 @@ public class NetworkUtils
         }
         catch (IOException e)
         {
-            Log.e(LOG_TAG, "Problem retrieving station list JSON results.", e);
+           // Log.e(LOG_TAG, "Problem retrieving station list JSON results.", e);
+            Timber.e(e,"Problem retrieving schedule JSON results." );
         }
         finally
         {
@@ -220,7 +225,8 @@ public class NetworkUtils
     public static String makeHttpScheduleRequest(URL url) throws IOException
     {
         String jsonScheduleResponse = "";
-        Log.i("URL: ", url.toString());
+       // Log.i("URL: ", url.toString());
+        Timber.i(url.toString(),"URL: " );
         // If the URL is null, then return early.
         if (url == null)
         {
@@ -246,11 +252,13 @@ public class NetworkUtils
             } else
                 {
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
+
             }
         }
         catch (IOException e)
         {
-            Log.e(LOG_TAG, "Problem retrieving schedule JSON results.", e);
+           // Log.e(LOG_TAG, "Problem retrieving schedule JSON results.", e);
+            Timber.e(e,"Problem retrieving schedule JSON results." );
         }
         finally
         {

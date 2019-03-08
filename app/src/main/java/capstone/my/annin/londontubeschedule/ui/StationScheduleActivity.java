@@ -88,11 +88,11 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
 
                 lineId = lines.getLineId();
                // Log.i("lineId: ", lines.getLineId());
-                Timber.i(stationId);
+                Timber.i(lines.getLineId(), "lineId: ");
 
                 stationId = stations.getStationId();
               // Log.i("stationId: ", stations.getStationId());
-                Timber.i(stationId);
+                Timber.i(stationId, "stationId: ");
 
                 /*
                  *  Starting the asyncTask so that schedule loads when the activity opens.

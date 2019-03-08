@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import capstone.my.annin.londontubeschedule.pojo.Lines;
 import capstone.my.annin.londontubeschedule.pojo.Schedule;
 import capstone.my.annin.londontubeschedule.pojo.Stations;
+import timber.log.Timber;
 
 public class JSONUtils
 {
@@ -75,7 +76,8 @@ public class JSONUtils
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
             // with the message from the exception.
-            Log.e("QueryUtils", "Problem parsing lines JSON results", e);
+            //Log.e("QueryUtils", "Problem parsing lines JSON results", e);
+
         }
         // Return the list of lines
         return lines;
@@ -136,7 +138,8 @@ public class JSONUtils
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
             // with the message from the exception.
-            Log.e("QueryUtils", "Problem parsing stations JSON results", e);
+           // Log.e("QueryUtils", "Problem parsing stations JSON results", e);
+            Timber.e(e,"Problem parsing stations JSON results" );
         }
         // Return the list of stations
         return stations;
@@ -209,7 +212,8 @@ public class JSONUtils
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
             // with the message from the exception.
-            Log.e("QueryUtils", "Problem parsing schedule JSON results", e);
+            //Log.e("QueryUtils", "Problem parsing schedule JSON results", e);
+            Timber.e(e,"Problem parsing schedule JSON results" );
 
         }
 
