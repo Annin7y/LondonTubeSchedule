@@ -11,6 +11,8 @@ import android.widget.RemoteViews;
 
 import capstone.my.annin.londontubeschedule.R;
 import capstone.my.annin.londontubeschedule.ui.StationListActivity;
+import capstone.my.annin.londontubeschedule.ui.StationScheduleActivity;
+import timber.log.Timber;
 
 public class ScheduleWidgetProvider extends AppWidgetProvider
 {
@@ -44,12 +46,13 @@ public class ScheduleWidgetProvider extends AppWidgetProvider
             Intent intent = new Intent(context.getApplicationContext(),
                     ScheduleWidgetService.class);
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
-            Log.d("onUpdate", "method working");
+            //Log.d("onUpdate", "method working");
+            Timber.d("method working");
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.schedule_widget_provider);
             views.setRemoteAdapter(R.id.appwidget_list, intent);
             views.setEmptyView(R.id.appwidget_list, R.id.empty);
 
-            Intent detailIntent = new Intent(context, StationListActivity.class);
+            Intent detailIntent = new Intent(context, StationScheduleActivity.class);
             PendingIntent pIntent = PendingIntent.getBroadcast(context, 0, detailIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             views.setPendingIntentTemplate(R.id.appwidget_list, pIntent);
 

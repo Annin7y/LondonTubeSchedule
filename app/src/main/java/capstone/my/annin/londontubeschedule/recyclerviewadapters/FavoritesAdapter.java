@@ -70,7 +70,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
 
         holder.itemView.setTag(id);
         holder.lineName.setText(stationName);
-        Log.e(TAG, "Line text loaded.");
+        Log.v(TAG, "Line text loaded.");
     }
 
     @Override
