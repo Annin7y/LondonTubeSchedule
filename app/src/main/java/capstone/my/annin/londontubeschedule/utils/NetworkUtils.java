@@ -169,7 +169,7 @@ public class NetworkUtils
     {
         String jsonStationResponse = "";
        // Log.i("URL: ", url.toString());
-        Timber.i(url.toString(),"URL: " );
+        Timber.i("URL: " + url.toString());
         // If the URL is null, then return early.
         if (url == null)
         {
