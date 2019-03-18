@@ -210,6 +210,7 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         } else
             {
             showErrorMessage();
+            Timber.e("Problem parsing lines JSON results" );
         }
     }
 

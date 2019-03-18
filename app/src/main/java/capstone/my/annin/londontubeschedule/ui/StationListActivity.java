@@ -148,6 +148,10 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
             mStationRecyclerView.setAdapter(stationsAdapter);
             stationsAdapter.setStationsList(stationsArrayList);
         }
+        else{
+            Timber.e("Problem parsing stations JSON results" );
+        }
+
     }
 
     @Override

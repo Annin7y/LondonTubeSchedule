@@ -77,6 +77,7 @@ public class JSONUtils
             // catch the exception here, so the app doesn't crash. Print a log message
             // with the message from the exception.
             //Log.e("QueryUtils", "Problem parsing lines JSON results", e);
+            Timber.e("Problem parsing lines JSON results" );
 
         }
         // Return the list of lines
@@ -138,8 +139,8 @@ public class JSONUtils
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
             // with the message from the exception.
-           // Log.e("QueryUtils", "Problem parsing stations JSON results", e);
-            Timber.e(e,"Problem parsing stations JSON results" );
+       //Log.e("QueryUtils", "Problem parsing stations JSON results", e);
+           Timber.e(e,"Problem parsing stations JSON results" );
         }
         // Return the list of stations
         return stations;
