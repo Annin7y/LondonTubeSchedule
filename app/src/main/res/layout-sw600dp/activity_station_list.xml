@@ -13,7 +13,7 @@
 
         <TextView
             android:id="@+id/line_name_station"
-            style="@style/LineStationListStyle"
+            style="@style/LineNameStationListStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -38,8 +38,7 @@
 
         <TextView
             android:id="@+id/station_duplicate_instructions"
-            style="@style/StationInstructionTabletStyle"
-            android:layout_marginStart="20dp"
+            style="@style/StationInstructionDuplicateTabletStyle"
             android:layout_marginTop="@dimen/station_dup_instructions_top"
             app:layout_constraintBottom_toTopOf="@id/station_duplicate_instructions_two"
             app:layout_constraintHorizontal_bias="0.366"
@@ -52,7 +51,7 @@
 
         <TextView
             android:id="@+id/station_duplicate_instructions_two"
-            style="@style/StationInstructionTabletStyle"
+            style="@style/StationInstructionDuplicateTabletStyle"
             android:layout_marginStart="@dimen/station_dup_instr_start_tablet"
             android:layout_marginEnd="@dimen/station_dup_instructions_end"
             app:layout_constraintBottom_toTopOf="@id/recyclerview_station"
@@ -71,7 +70,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="@dimen/station_recycler_start"
-            app:layout_constraintTop_toBottomOf="@id/station_duplicate_instructions"
+            app:layout_constraintTop_toBottomOf="@id/station_duplicate_instructions_two"
             app:layout_constraintBottom_toTopOf="@id/favorites_button"
             android:layout_marginTop="@dimen/station_recycler_top"
             android:descendantFocusability="afterDescendants"

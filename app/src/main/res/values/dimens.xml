@@ -23,7 +23,7 @@
     <!--  Lists & Activities padding & margins -->
     <dimen name="station_list_padding">8dp</dimen>
     <dimen name="station_dup_instructions_start_one">35dp</dimen>
-    <dimen name="station_dup_instructions_start">15dp</dimen>
+    <dimen name="station_dup_instructions_start">12dp</dimen>
     <dimen name="station_dup_instructions_top">20dp</dimen>
     <dimen name="station_dup_instructions_end">30dp</dimen>
     <dimen name="line_list_padding">5dp</dimen>
@@ -36,10 +36,10 @@
     <dimen name="schedule_empty_start">16dp</dimen>
     <dimen name="fav_button_margin_start">124dp</dimen>
     <dimen name="fav_button_margin_top">20dp</dimen>
-    <dimen name="station_name_start">8dp</dimen>
+    <dimen name="station_name_start">9dp</dimen>
     <dimen name="station_name_top">16dp</dimen>
     <dimen name="station_recycler_start">5dp</dimen>
-    <dimen name="station_recycler_top">20dp</dimen>
+    <dimen name="station_recycler_top">35dp</dimen>
     <dimen name="empty_schedule_top">50dp</dimen>
     <dimen name="main_instr_start">10dp</dimen>
     <dimen name="main_instr_top">16dp</dimen>
@@ -50,7 +50,7 @@
     <dimen name="loading_width">0dp</dimen>
     <dimen name="loading_height">45dp</dimen>
     <dimen name="loading_bottom">40dp</dimen>
-    <dimen name="station_dup_instr_start_tablet">15dp</dimen>
+    <dimen name="station_dup_instr_start_tablet">14dp</dimen>
 
 
 </resources>
