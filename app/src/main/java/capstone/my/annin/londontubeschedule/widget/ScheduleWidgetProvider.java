@@ -63,23 +63,23 @@ public class ScheduleWidgetProvider extends AppWidgetProvider
 
     }
 
-    @Override
-    public void onReceive(Context context, Intent intent)
-    {
-        //Code structure based on the code in this blog:
-        //http://android-er.blogspot.com/2010/10/update-widget-in-onreceive-method.html
-        super.onReceive(context, intent);
-
-        if (ACTION_VIEW_DETAILS.equals(intent.getAction()))
-        {
-            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-            ComponentName thisAppWidget = new ComponentName(context.getPackageName(), ScheduleWidgetProvider.class.getName());
-            int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidget);
-
-            onUpdate(context, appWidgetManager, appWidgetIds);
-            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.appwidget_list);
-        }
-    }
+//    @Override
+//    public void onReceive(Context context, Intent intent)
+//    {
+//        //Code structure based on the code in this blog:
+//        //http://android-er.blogspot.com/2010/10/update-widget-in-onreceive-method.html
+//        super.onReceive(context, intent);
+//
+//        if (ACTION_VIEW_DETAILS.equals(intent.getAction()))
+//        {
+//            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+//            ComponentName thisAppWidget = new ComponentName(context.getPackageName(), ScheduleWidgetProvider.class.getName());
+//            int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidget);
+//
+//            onUpdate(context, appWidgetManager, appWidgetIds);
+//            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.appwidget_list);
+//        }
+//    }
 
     @Override
     public void onEnabled(Context context)
