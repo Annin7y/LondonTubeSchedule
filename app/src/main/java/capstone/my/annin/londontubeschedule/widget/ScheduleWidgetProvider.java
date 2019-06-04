@@ -53,7 +53,7 @@ public class ScheduleWidgetProvider extends AppWidgetProvider
             views.setEmptyView(R.id.appwidget_list, R.id.empty);
 
             Intent detailIntent = new Intent(context, StationScheduleActivity.class);
-            PendingIntent pIntent = PendingIntent.getBroadcast(context, 0, detailIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent pIntent = PendingIntent.getActivity(context, 0, detailIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             views.setPendingIntentTemplate(R.id.appwidget_list, pIntent);
 
             appWidgetManager.updateAppWidget(widgetId, views);
