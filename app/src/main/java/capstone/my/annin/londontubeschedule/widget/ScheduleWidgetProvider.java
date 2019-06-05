@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.RemoteViews;
 
 import capstone.my.annin.londontubeschedule.R;
+import capstone.my.annin.londontubeschedule.ui.MainActivity;
 import capstone.my.annin.londontubeschedule.ui.StationListActivity;
 import capstone.my.annin.londontubeschedule.ui.StationScheduleActivity;
 import timber.log.Timber;
@@ -52,7 +53,7 @@ public class ScheduleWidgetProvider extends AppWidgetProvider
             views.setRemoteAdapter(R.id.appwidget_list, intent);
             views.setEmptyView(R.id.appwidget_list, R.id.empty);
 
-            Intent detailIntent = new Intent(context, StationScheduleActivity.class);
+            Intent detailIntent = new Intent(context, MainActivity.class);
             PendingIntent pIntent = PendingIntent.getActivity(context, 0, detailIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             views.setPendingIntentTemplate(R.id.appwidget_list, pIntent);
 
