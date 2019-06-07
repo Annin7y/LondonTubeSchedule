@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 import capstone.my.annin.londontubeschedule.R;
+import capstone.my.annin.londontubeschedule.pojo.Lines;
 import capstone.my.annin.londontubeschedule.pojo.Schedule;
 
 public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViewsFactory
@@ -25,6 +26,7 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
     private ArrayList<Schedule> mScheduleList;
     private Context mContext;
     private String stationWidgetArrivalTime;
+    private Lines lines;
 
     public ScheduleWidgetViewFactory(Context context)
     {
@@ -34,6 +36,7 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
     @Override
     public void onCreate()
     {
+
     }
 
     @Override
@@ -86,6 +89,7 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
 
         Intent intent = new Intent();
         intent.putExtra(ScheduleWidgetProvider.EXTRA_ITEM, schedule);
+        intent.putExtra(ScheduleWidgetProvider.EXTRA_ITEM, lines);
         itemView.setOnClickFillInIntent(R.id.schedule_widget_list, intent);
 
         return itemView;
