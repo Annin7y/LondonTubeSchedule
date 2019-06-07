@@ -1,6 +1,7 @@
 package capstone.my.annin.londontubeschedule.widget;
 
 import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
@@ -54,7 +55,12 @@ public class ScheduleWidgetProvider extends AppWidgetProvider
             views.setEmptyView(R.id.appwidget_list, R.id.empty);
 
             Intent detailIntent = new Intent(context,StationScheduleActivity.class);
-            PendingIntent pIntent = PendingIntent.getActivity(context, 0, detailIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            TaskStackBuilder stackBuilder = TaskStackBuilder.create(context) ;
+            stackBuilder.addNextIntent(new Intent(context, MainActivity.class));
+            stackBuilder.addNextIntent(detailIntent);
+
+            PendingIntent pIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+            //PendingIntent pIntent = PendingIntent.getActivity(context, 0, detailIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             views.setPendingIntentTemplate(R.id.appwidget_list, pIntent);
 
             appWidgetManager.updateAppWidget(widgetId, views);
