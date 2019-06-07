@@ -154,7 +154,15 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
             Gson gson = new Gson();
             String json = gson.toJson(scheduleArrayList);
             prefsEditor.putString("ScheduleList_Widget", json);
-            prefsEditor.putString("Lines", lineId);
+
+            //Save the Lines as a JSON string using Preferences.
+           String jsonLines = gson.toJson(lines);
+           prefsEditor.putString("Lines", jsonLines);
+
+            //Save the Stations as a JSON string using Preferences.
+            String jsonStations = gson.toJson(stations);
+            prefsEditor.putString("Stations", jsonStations);
+
             prefsEditor.apply();
 
             //Send to Widget Provider code based on the answer with 9 upvotes in this post:

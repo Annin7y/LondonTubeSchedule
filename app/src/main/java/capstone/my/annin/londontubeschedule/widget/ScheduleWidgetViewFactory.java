@@ -20,6 +20,7 @@ import java.util.List;
 import capstone.my.annin.londontubeschedule.R;
 import capstone.my.annin.londontubeschedule.pojo.Lines;
 import capstone.my.annin.londontubeschedule.pojo.Schedule;
+import capstone.my.annin.londontubeschedule.pojo.Stations;
 
 public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViewsFactory
 {
@@ -27,6 +28,7 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
     private Context mContext;
     private String stationWidgetArrivalTime;
     private Lines lines;
+    private Stations stations;
 
     public ScheduleWidgetViewFactory(Context context)
     {
@@ -40,8 +42,7 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
     }
 
     @Override
-    public void onDataSetChanged()
-    {
+    public void onDataSetChanged() {
         //code structure based on the code in this link:
         //https://stackoverflow.com/questions/37927113/how-to-store-and-retrieve-an-object-from-gson-in-android
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
@@ -50,6 +51,15 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
         Type type = new TypeToken<List<Schedule>>() {}.getType();
         String gsonString = sharedPreferences.getString("ScheduleList_Widget", "");
         mScheduleList = gson.fromJson(gsonString, type);
+
+        //Extract the JSON lines from preferences and assign it to a Lines object.
+        String jsonLines = sharedPreferences.getString("Lines", "");
+        lines = gson.fromJson(jsonLines, Lines.class);
+
+        //Extract the JSON stations from preferences and assign it to a Stations object.
+       String jsonStations = sharedPreferences.getString("Stations", "");
+       stations = gson.fromJson(jsonStations, Stations.class);
+
     }
 
     @Override
@@ -89,7 +99,8 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
 
         Intent intent = new Intent();
         intent.putExtra(ScheduleWidgetProvider.EXTRA_ITEM, schedule);
-        intent.putExtra(ScheduleWidgetProvider.EXTRA_ITEM, lines);
+        intent.putExtra("Lines", lines);
+        intent.putExtra("Stations", stations);
         itemView.setOnClickFillInIntent(R.id.schedule_widget_list, intent);
 
         return itemView;
