@@ -5,6 +5,7 @@
     android:id="@+id/widgetLinearLayout"
     android:padding="@dimen/widget_prov_pad"
     android:orientation="vertical"
+    android:descendantFocusability="blocksDescendants"
     android:background="@android:color/background_light" >
 
     <ListView
