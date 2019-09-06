@@ -16,6 +16,22 @@
         <item name="android:textSize">22sp</item>
     </style>
 
+    <!-- Line Station Theme -->
+    <style name="LineStationStatusStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <!-- Line List Theme -->
+    <style name="LineStationStatusReasonStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
     <!-- Line Name Station List Theme -->
     <style name="LineNameStationListStyle">
         <item name="android:layout_height">wrap_content</item>

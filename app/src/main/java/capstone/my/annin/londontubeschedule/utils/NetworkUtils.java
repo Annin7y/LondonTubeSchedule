@@ -29,6 +29,8 @@ public class NetworkUtils
 
     private static final String BASE_URL_LINES_LIST = "https://api.tfl.gov.uk/Line/Mode/tube";
 
+    private static final String BASE_URL_LINES_STATUS_LIST = "https://api.tfl.gov.uk/line/mode/tube/status";
+
     private static final String BASE_URL_STATIONS_LIST = "https://api.tfl.gov.uk/Line/";
 
     private static final String BASE_URL_SCHEDULE = "https://api.tfl.gov.uk/Line/";
@@ -37,24 +39,42 @@ public class NetworkUtils
     {
     }
 
-    public static URL buildLineUrl()
+//    public static URL buildLineUrl()
+//    {
+//        URL urlLineList = null;
+//        try
+//        {
+//            Uri lineListQueryUri = Uri.parse(BASE_URL_LINES_LIST).buildUpon()
+//                    .appendQueryParameter(APP_ID, BuildConfig.UNIFIED_LONDON_TRANSPORT_APP_ID)
+//                    .appendQueryParameter(APP_KEY, BuildConfig.UNIFIED_LONDON_TRANSPORT_APP_KEY)
+//                    .build();
+//            urlLineList = new URL(lineListQueryUri.toString());
+//        }
+//        catch (MalformedURLException e)
+//        {
+//            e.printStackTrace();
+//        }
+//      //  Log.v(TAG, "Built URIline " + urlLineList);
+//          Timber.v( "Built URIline " + urlLineList);
+//        return urlLineList;
+//    }
+
+    public static URL buildLineStatusUrl()
     {
-        URL urlLineList = null;
+        URL urlLineStatusList = null;
         try
         {
-            Uri lineListQueryUri = Uri.parse(BASE_URL_LINES_LIST).buildUpon()
-                    .appendQueryParameter(APP_ID, BuildConfig.UNIFIED_LONDON_TRANSPORT_APP_ID)
-                    .appendQueryParameter(APP_KEY, BuildConfig.UNIFIED_LONDON_TRANSPORT_APP_KEY)
+            Uri lineStatusListQueryUri = Uri.parse(BASE_URL_LINES_STATUS_LIST).buildUpon()
                     .build();
-            urlLineList = new URL(lineListQueryUri.toString());
+            urlLineStatusList = new URL(lineStatusListQueryUri.toString());
         }
         catch (MalformedURLException e)
         {
             e.printStackTrace();
         }
-      //  Log.v(TAG, "Built URIline " + urlLineList);
-          Timber.v( "Built URIline " + urlLineList);
-        return urlLineList;
+        //  Log.v(TAG, "Built URIline " + urlLineList);
+        Timber.v( "Built URIline " + urlLineStatusList);
+        return urlLineStatusList;
     }
 
     public static URL buildStationUrl(String lineId)

@@ -29,14 +29,14 @@ public class TubeLineAsyncTask extends AsyncTask<URL, Void, ArrayList<Lines>>
     @Override
     protected ArrayList<Lines> doInBackground(URL... params)
     {
-        URL lineRequestUrl = NetworkUtils.buildLineUrl();
+        URL lineRequestUrl = NetworkUtils.buildLineStatusUrl();
 
         try
         {
             String jsonLineResponse = NetworkUtils
                     .makeHttpLineRequest(lineRequestUrl);
 
-            return JSONUtils.extractFeatureFromLineJson(jsonLineResponse);
+            return JSONUtils.extractFeatureFromLineStatusJson(jsonLineResponse);
         }
         catch (Exception e)
         {

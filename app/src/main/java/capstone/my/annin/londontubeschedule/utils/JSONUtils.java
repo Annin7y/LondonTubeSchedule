@@ -84,6 +84,54 @@ public class JSONUtils
         return lines;
     }
 
+    public static ArrayList<Lines> extractFeatureFromLineStatusJson(String lineStatusJSON)
+    {
+        // If the JSON string is empty or null, then return early.
+        if (TextUtils.isEmpty(lineStatusJSON))
+        {
+            return null;
+        }
+
+        ArrayList<Lines> lines = new ArrayList<>();
+        try
+        {
+            // Create a JSONObject from the JSON response string
+            JSONArray lineArray = new JSONArray(lineStatusJSON);
+
+            // For each line in the recipeArray, create an {@link Lines} object
+            for (int i = 0; i < lineArray.length(); i++)
+            {
+                // Get a single line description at position i within the list of lines
+                JSONObject currentLine = lineArray.getJSONObject(i);
+
+                String id = "";
+                if (currentLine.has("id"))
+                {
+                    id = currentLine.optString(KEY_LINE_ID);
+                }
+
+                String name = "";
+                if (currentLine.has("name"))
+                {
+                    name = currentLine.optString(KEY_LINE_NAME);
+                }
+                Lines line = new Lines(id, name);
+                lines.add(line);
+            }
+        }
+        catch (JSONException e)
+        {
+            // If an error is thrown when executing any of the above statements in the "try" block,
+            // catch the exception here, so the app doesn't crash. Print a log message
+            // with the message from the exception.
+            //Log.e("QueryUtils", "Problem parsing lines JSON results", e);
+            Timber.e("Problem parsing lines JSON results" );
+
+        }
+        // Return the list of lines
+        return lines;
+    }
+
     public static ArrayList<Stations> extractFeatureFromStationJson(String stationJSON)
     {
         // If the JSON string is empty or null, then return early.

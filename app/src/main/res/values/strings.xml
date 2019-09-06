@@ -25,5 +25,7 @@
     <string name="station_dup_instructions">Duplicate station names indicate different line branches.</string>
     <string name="station_dup_instructions_two">Terminus station displayed on the next page.</string>
     <string name="add_to_favourites">Add to Favourites</string>
+    <string name="line_status_text">Good Service</string>
+    <string name="line_reason_text">Drivers temporarily unavailable</string>
 
 </resources>

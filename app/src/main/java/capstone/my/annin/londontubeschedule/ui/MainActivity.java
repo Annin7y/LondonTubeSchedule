@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
                 if (isNetworkStatusAvailable(this))
                 {
                     TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(this);
-                    myLineTask.execute(NetworkUtils.buildLineUrl());
+                    myLineTask.execute(NetworkUtils.buildLineStatusUrl());
                 } else
                     {
                     Snackbar
