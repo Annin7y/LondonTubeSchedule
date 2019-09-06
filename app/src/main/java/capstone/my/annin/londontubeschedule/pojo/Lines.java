@@ -16,6 +16,16 @@ public class Lines implements Parcelable
     private String lineName;
 
     /**
+     * Line status description
+     */
+    private String lineStatusDesc;
+
+    /**
+     * Line status reason
+     */
+    private String lineStatusReason;
+
+    /**
      * List of lines
      */
     public Lines(String lineId, String lineName)
@@ -44,10 +54,33 @@ public class Lines implements Parcelable
         return lineName;
     }
 
+    public void setLineStatusDesc(String lineStatusDesc)
+    {
+        this.lineStatusDesc= lineStatusDesc;
+    }
+
+    public String getLineStatusDesc()
+    {
+        return lineStatusDesc;
+    }
+
+    public void setLineStatusReason(String lineStatusReason)
+    {
+        this.lineStatusReason = lineStatusReason;
+    }
+
+    public String getLineStatusReason()
+    {
+        return lineStatusReason;
+    }
+
+
     protected Lines(Parcel in)
     {
         lineId = in.readString();
         lineName = in.readString();
+        lineStatusDesc = in.readString();
+        lineStatusReason = in.readString();
     }
 
     @Override
@@ -61,6 +94,8 @@ public class Lines implements Parcelable
     {
         dest.writeString(lineId);
         dest.writeString(lineName);
+        dest.writeString(lineStatusDesc);
+        dest.writeString(lineStatusReason);
     }
 
     @SuppressWarnings("unused")

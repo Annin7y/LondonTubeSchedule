@@ -51,6 +51,12 @@ public class LinesAdapter extends RecyclerView.Adapter<LinesAdapter.LinesAdapter
         @BindView(R.id.line_name)
         public TextView lineName;
 
+        @BindView(R.id.line_status_name)
+        public TextView lineStatusDesc;
+
+        @BindView(R.id.line_status_reason)
+        public TextView lineStatusReason;
+
         public LinesAdapterViewHolder(View view)
         {
             super(view);
@@ -93,6 +99,8 @@ public class LinesAdapter extends RecyclerView.Adapter<LinesAdapter.LinesAdapter
         final Lines lineView = linesList.get(position);
 
         holder.lineName.setText(lineView.getLineName());
+        holder.lineStatusDesc.setText(lineView.getLineStatusDesc());
+        holder.lineStatusReason.setText(lineView.getLineStatusReason());
     }
 
     @Override

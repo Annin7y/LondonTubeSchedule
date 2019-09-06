@@ -24,7 +24,7 @@
         tools:text="@string/line_status_text" />
 
     <TextView
-        android:id="@+id/line_status_reason_name"
+        android:id="@+id/line_status_reason"
         style="@style/LineStationListStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
