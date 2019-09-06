@@ -118,8 +118,7 @@ public class JSONUtils
                     name = currentLine.optString(KEY_LINE_NAME);
                 }
 
-                JSONObject baseStatusJsonResponse = new JSONObject(lineStatusJSON);
-                    JSONArray lineStatusArrayList = baseStatusJsonResponse.getJSONArray("lineStatuses");
+                    JSONArray lineStatusArrayList = currentLine.getJSONArray("lineStatuses");
                     if (lineStatusArrayList != null)
                     {
                             for (int j = 0; j < lineStatusArrayList.length(); j++)
