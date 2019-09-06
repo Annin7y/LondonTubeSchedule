@@ -23,6 +23,8 @@ public class JSONUtils
 
     private static final String KEY_LINE_ID = "id";
     private static final String KEY_LINE_NAME = "name";
+    private static final String KEY_LINE_STATUS_DESC = "statusSeverityDescription";
+    private static final String KEY_LINE_STATUS_REASON = "reason";
     private static final String KEY_STATION_ID = "id";
     private static final String KEY_STATION_NAME = "name";
     private static final String KEY_STATION_NAPTAN_ID = "naptanId";
@@ -115,10 +117,30 @@ public class JSONUtils
                 {
                     name = currentLine.optString(KEY_LINE_NAME);
                 }
-                Lines line = new Lines(id, name);
-                lines.add(line);
-            }
-        }
+
+                JSONObject baseStatusJsonResponse = new JSONObject(lineStatusJSON);
+                    JSONArray lineStatusArrayList = baseStatusJsonResponse.getJSONArray("lineStatuses");
+                    if (lineStatusArrayList != null)
+                    {
+                            for (int j = 0; j < lineStatusArrayList.length(); j++)
+                            {
+                                JSONObject innerElem = lineStatusArrayList.getJSONObject(j);
+                                if (innerElem != null)
+                                {
+                                    String lineStatusDesc = "";
+                                    if (innerElem.has("statusSeverityDescription"))
+                                    {
+                                        lineStatusDesc= innerElem.optString(KEY_LINE_STATUS_DESC);
+                                    }
+                                    String lineStatusReason = "";
+                                    if (innerElem.has("reason"))
+                                    {
+                                        lineStatusReason = innerElem.optString(KEY_LINE_STATUS_REASON);
+                                    }
+
+                                    Lines line = new Lines(id, name, lineStatusDesc, lineStatusReason);
+                                lines.add(line);
+        }}}}}
         catch (JSONException e)
         {
             // If an error is thrown when executing any of the above statements in the "try" block,
