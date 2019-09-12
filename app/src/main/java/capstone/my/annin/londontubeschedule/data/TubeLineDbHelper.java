@@ -35,6 +35,8 @@ public class TubeLineDbHelper extends SQLiteOpenHelper
                 TubeLineContract.TubeLineEntry._ID + " INTEGER PRIMARY KEY , " +
                 TubeLineContract.TubeLineEntry.COLUMN_LINES_ID + " TEXT NOT NULL , " +
                 TubeLineContract.TubeLineEntry.COLUMN_LINES_NAME + " TEXT NOT NULL , " +
+                TubeLineContract.TubeLineEntry.COLUMN_LINES_STATUS_DESC + " TEXT NOT NULL , " +
+                TubeLineContract.TubeLineEntry.COLUMN_LINES_STATUS_REASON + " TEXT NOT NULL , " +
 
                 " UNIQUE (" + TubeLineContract.TubeLineEntry.COLUMN_LINES_NAME + ") ON CONFLICT REPLACE);";
 

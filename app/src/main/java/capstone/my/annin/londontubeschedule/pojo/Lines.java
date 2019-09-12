@@ -26,12 +26,20 @@ public class Lines implements Parcelable
     private String lineStatusReason;
 
     /**
+     * ArrayList to store lineStatus child objects
+     */
+
+
+    /**
      * List of lines
      */
-    public Lines(String lineId, String lineName)
+    public Lines(String lineId, String lineName, String lineStatusDesc, String lineStatusReason)
     {
         this.lineId = lineId;
         this.lineName = lineName;
+        this.lineStatusDesc = lineStatusDesc;
+        this.lineStatusReason = lineStatusReason;
+
     }
 
     public void setLineId(String lineId)

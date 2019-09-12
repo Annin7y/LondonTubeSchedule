@@ -71,5 +71,18 @@ public class TubeLineContract
          * LINE name. Type: TEXT
          */
         public final static String COLUMN_LINES_NAME = "line_name";
+
+        /**
+         * LINE status. Type: TEXT
+         */
+        public final static String COLUMN_LINES_STATUS_DESC = "line_status";
+
+        /**
+         * LINE status reason. Type: TEXT
+         */
+        public final static String COLUMN_LINES_STATUS_REASON= "line_reason";
+
+
+
     }
 }

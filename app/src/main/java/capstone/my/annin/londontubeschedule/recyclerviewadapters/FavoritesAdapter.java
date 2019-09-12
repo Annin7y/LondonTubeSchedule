@@ -48,8 +48,10 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
 
             String lineName = cursor.getString(cursor.getColumnIndexOrThrow(TubeLineContract.TubeLineEntry.COLUMN_LINES_NAME));
             String lineId = cursor.getString(cursor.getColumnIndexOrThrow(TubeLineContract.TubeLineEntry.COLUMN_LINES_ID));
+            String lineStatus= cursor.getString(cursor.getColumnIndexOrThrow(TubeLineContract.TubeLineEntry.COLUMN_LINES_STATUS_DESC));
+            String lineReason = cursor.getString(cursor.getColumnIndexOrThrow(TubeLineContract.TubeLineEntry.COLUMN_LINES_STATUS_REASON));
 
-            Lines lines = new Lines(lineName, lineId);
+            Lines lines = new Lines(lineName, lineId, lineStatus, lineReason);
 
             mClickHandler.onClick(lines);
         }

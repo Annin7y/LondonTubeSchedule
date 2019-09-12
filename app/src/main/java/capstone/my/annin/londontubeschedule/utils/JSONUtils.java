@@ -38,53 +38,53 @@ public class JSONUtils
     {
     }
 
-    public static ArrayList<Lines> extractFeatureFromLineJson(String lineJSON)
-    {
-        // If the JSON string is empty or null, then return early.
-        if (TextUtils.isEmpty(lineJSON))
-        {
-            return null;
-        }
-
-        ArrayList<Lines> lines = new ArrayList<>();
-        try
-        {
-            // Create a JSONObject from the JSON response string
-            JSONArray lineArray = new JSONArray(lineJSON);
-
-            // For each line in the recipeArray, create an {@link Lines} object
-            for (int i = 0; i < lineArray.length(); i++)
-            {
-                // Get a single line description at position i within the list of lines
-                JSONObject currentLine = lineArray.getJSONObject(i);
-
-                String id = "";
-                if (currentLine.has("id"))
-                {
-                    id = currentLine.optString(KEY_LINE_ID);
-                }
-
-                String name = "";
-                if (currentLine.has("name"))
-                {
-                    name = currentLine.optString(KEY_LINE_NAME);
-                }
-                Lines line = new Lines(id, name);
-                lines.add(line);
-            }
-        }
-        catch (JSONException e)
-        {
-            // If an error is thrown when executing any of the above statements in the "try" block,
-            // catch the exception here, so the app doesn't crash. Print a log message
-            // with the message from the exception.
-            //Log.e("QueryUtils", "Problem parsing lines JSON results", e);
-            Timber.e("Problem parsing lines JSON results" );
-
-        }
-        // Return the list of lines
-        return lines;
-    }
+//    public static ArrayList<Lines> extractFeatureFromLineJson(String lineJSON)
+//    {
+//        // If the JSON string is empty or null, then return early.
+//        if (TextUtils.isEmpty(lineJSON))
+//        {
+//            return null;
+//        }
+//
+//        ArrayList<Lines> lines = new ArrayList<>();
+//        try
+//        {
+//            // Create a JSONObject from the JSON response string
+//            JSONArray lineArray = new JSONArray(lineJSON);
+//
+//            // For each line in the recipeArray, create an {@link Lines} object
+//            for (int i = 0; i < lineArray.length(); i++)
+//            {
+//                // Get a single line description at position i within the list of lines
+//                JSONObject currentLine = lineArray.getJSONObject(i);
+//
+//                String id = "";
+//                if (currentLine.has("id"))
+//                {
+//                    id = currentLine.optString(KEY_LINE_ID);
+//                }
+//
+//                String name = "";
+//                if (currentLine.has("name"))
+//                {
+//                    name = currentLine.optString(KEY_LINE_NAME);
+//                }
+//                Lines line = new Lines(id, name);
+//                lines.add(line);
+//            }
+//        }
+//        catch (JSONException e)
+//        {
+//            // If an error is thrown when executing any of the above statements in the "try" block,
+//            // catch the exception here, so the app doesn't crash. Print a log message
+//            // with the message from the exception.
+//            //Log.e("QueryUtils", "Problem parsing lines JSON results", e);
+//            Timber.e("Problem parsing lines JSON results" );
+//
+//        }
+//        // Return the list of lines
+//        return lines;
+//    }
 
     public static ArrayList<Lines> extractFeatureFromLineStatusJson(String lineStatusJSON)
     {
@@ -118,28 +118,24 @@ public class JSONUtils
                     name = currentLine.optString(KEY_LINE_NAME);
                 }
 
-                    JSONArray lineStatusArrayList = currentLine.getJSONArray("lineStatuses");
+                JSONArray lineStatusArrayList = currentLine.getJSONArray("lineStatuses");
+
                     if (lineStatusArrayList != null)
                     {
-                            for (int j = 0; j < lineStatusArrayList.length(); j++)
-                            {
-                                JSONObject innerElem = lineStatusArrayList.getJSONObject(j);
-                                if (innerElem != null)
-                                {
+                        JSONObject innerElem = lineStatusArrayList.getJSONObject(0);
+                                if (innerElem != null) {
                                     String lineStatusDesc = "";
-                                    if (innerElem.has("statusSeverityDescription"))
-                                    {
-                                        lineStatusDesc= innerElem.optString(KEY_LINE_STATUS_DESC);
+                                    if (innerElem.has("statusSeverityDescription")) {
+                                        lineStatusDesc = innerElem.optString(KEY_LINE_STATUS_DESC);
                                     }
                                     String lineStatusReason = "";
-                                    if (innerElem.has("reason"))
-                                    {
+                                    if (innerElem.has("reason")) {
                                         lineStatusReason = innerElem.optString(KEY_LINE_STATUS_REASON);
                                     }
 
                                     Lines line = new Lines(id, name, lineStatusDesc, lineStatusReason);
                                 lines.add(line);
-        }}}}}
+        }}}}
         catch (JSONException e)
         {
             // If an error is thrown when executing any of the above statements in the "try" block,
