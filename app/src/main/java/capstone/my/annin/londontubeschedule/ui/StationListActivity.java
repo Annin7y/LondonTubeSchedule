@@ -93,6 +93,8 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
                 ContentValues values = new ContentValues();
                 values.put(TubeLineContract.TubeLineEntry.COLUMN_LINES_ID, lines.getLineId());
                 values.put(TubeLineContract.TubeLineEntry.COLUMN_LINES_NAME, lines.getLineName());
+                values.put(TubeLineContract.TubeLineEntry.COLUMN_LINES_STATUS_DESC, lines.getLineStatusDesc());
+                values.put(TubeLineContract.TubeLineEntry.COLUMN_LINES_STATUS_REASON, lines.getLineStatusReason());
                 Uri uri = getContentResolver().insert(TubeLineContract.TubeLineEntry.CONTENT_URI, values);
 
                 if (uri != null)
