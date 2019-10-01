@@ -1,28 +1,38 @@
 package capstone.my.annin.londontubeschedule.pojo;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
+@Entity(tableName = "lines")
 public class Lines implements Parcelable
 {
     /**
      * Line id
      */
+    @PrimaryKey
+    @NonNull
     private String lineId;
 
     /**
      * Line name
      */
+    @ColumnInfo(name = "line_name")
     private String lineName;
 
     /**
      * Line status description
      */
+    @ColumnInfo(name = "line_status")
     private String lineStatusDesc;
 
     /**
      * Line status reason
      */
+    @ColumnInfo(name = "line_reason")
     private String lineStatusReason;
 
     /**
