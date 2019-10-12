@@ -13,7 +13,7 @@ import java.util.List;
 import capstone.my.annin.londontubeschedule.pojo.Lines;
 
 @Dao
-public interface LineDao
+public interface LinesDao
 {
     @Query("SELECT * FROM lines ORDER BY line_name")
     LiveData<List<Lines>> loadAllLines();

@@ -36,11 +36,6 @@ public class Lines implements Parcelable
     private String lineStatusReason;
 
     /**
-     * ArrayList to store lineStatus child objects
-     */
-
-
-    /**
      * List of lines
      */
     public Lines(String lineId, String lineName, String lineStatusDesc, String lineStatusReason)
@@ -49,7 +44,6 @@ public class Lines implements Parcelable
         this.lineName = lineName;
         this.lineStatusDesc = lineStatusDesc;
         this.lineStatusReason = lineStatusReason;
-
     }
 
     public void setLineId(String lineId)
@@ -91,7 +85,6 @@ public class Lines implements Parcelable
     {
         return lineStatusReason;
     }
-
 
     protected Lines(Parcel in)
     {
