@@ -27,14 +27,14 @@ import butterknife.ButterKnife;
 import capstone.my.annin.londontubeschedule.R;
 import capstone.my.annin.londontubeschedule.asynctask.TubeStationAsyncTask;
 import capstone.my.annin.londontubeschedule.asynctask.TubeStationAsyncTaskInterface;
-import capstone.my.annin.londontubeschedule.data.TubeLineContract;
+//import capstone.my.annin.londontubeschedule.data.TubeLineContract;
 import capstone.my.annin.londontubeschedule.pojo.Lines;
 import capstone.my.annin.londontubeschedule.pojo.Stations;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.StationsAdapter;
 import timber.log.Timber;
 
-public class StationListActivity extends AppCompatActivity implements StationsAdapter.StationsAdapterOnClickHandler, TubeStationAsyncTaskInterface,
-        LoaderManager.LoaderCallbacks<Cursor>
+public class StationListActivity extends AppCompatActivity implements StationsAdapter.StationsAdapterOnClickHandler, TubeStationAsyncTaskInterface
+       // LoaderManager.LoaderCallbacks<Cursor>
 {
     //Tag for the log messages
     private static final String TAG = StationListActivity.class.getSimpleName();
@@ -63,7 +63,7 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
     /**
      * Identifier for the favorites data loader
      */
-    private static final int FAVORITES_LOADER = 0;
+    //private static final int FAVORITES_LOADER = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -84,27 +84,27 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         //add to favorites
-        favoritesButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                ContentValues values = new ContentValues();
-                values.put(TubeLineContract.TubeLineEntry.COLUMN_LINES_ID, lines.getLineId());
-                values.put(TubeLineContract.TubeLineEntry.COLUMN_LINES_NAME, lines.getLineName());
-                values.put(TubeLineContract.TubeLineEntry.COLUMN_LINES_STATUS_DESC, lines.getLineStatusDesc());
-                values.put(TubeLineContract.TubeLineEntry.COLUMN_LINES_STATUS_REASON, lines.getLineStatusReason());
-                Uri uri = getContentResolver().insert(TubeLineContract.TubeLineEntry.CONTENT_URI, values);
-
-                if (uri != null)
-                {
-                    Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
-                    Toast.makeText(StationListActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
-
-                    favoritesButton.setVisibility(View.GONE);
-                }
-            }
-        });
+//        favoritesButton.setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View view)
+//            {
+//                ContentValues values = new ContentValues();
+//                values.put(TubeLineContract.TubeLineEntry.COLUMN_LINES_ID, lines.getLineId());
+//                values.put(TubeLineContract.TubeLineEntry.COLUMN_LINES_NAME, lines.getLineName());
+//                values.put(TubeLineContract.TubeLineEntry.COLUMN_LINES_STATUS_DESC, lines.getLineStatusDesc());
+//                values.put(TubeLineContract.TubeLineEntry.COLUMN_LINES_STATUS_REASON, lines.getLineStatusReason());
+//                Uri uri = getContentResolver().insert(TubeLineContract.TubeLineEntry.CONTENT_URI, values);
+//
+//                if (uri != null)
+//                {
+//                    Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
+//                    Toast.makeText(StationListActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
+//
+//                    favoritesButton.setVisibility(View.GONE);
+//                }
+//            }
+//        });
 
         if (getIntent() != null && getIntent().getExtras() != null)
         {
@@ -136,7 +136,7 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
             }
         }
         // Kick off the loader
-        getSupportLoaderManager().initLoader(FAVORITES_LOADER, null, this);
+       // getSupportLoaderManager().initLoader(FAVORITES_LOADER, null, this);
     }
 
     @Override
@@ -170,39 +170,39 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
 
     }
 
-    @Override
-    public Loader<Cursor> onCreateLoader(int loaderId, Bundle bundle)
-    {
-        String[] projection = {TubeLineContract.TubeLineEntry._ID, TubeLineContract.TubeLineEntry.COLUMN_LINES_ID,};
-        String[] selectionArgs = new String[]{lineId};
-
-        switch (loaderId)
-        {
-            case FAVORITES_LOADER:
-                return new CursorLoader(this,   // Parent activity context
-                        TubeLineContract.TubeLineEntry.CONTENT_URI,   // Provider content URI to query
-                        projection,             // Columns to include in the resulting Cursor
-                        TubeLineContract.TubeLineEntry.COLUMN_LINES_ID + "=?",
-                        selectionArgs,
-                        null);                  // Default sort order
-
-            default:
-                throw new RuntimeException("Loader Not Implemented: " + loaderId);
-        }
-    }
-
-    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor)
-    {
-        if ((cursor != null) && (cursor.getCount() > 0))
-        {
-            //"Add to Favorites" button is disabled in the StationList Activity when the user clicks on a line stored in Favorites
-            favoritesButton.setEnabled(false);
-        }
-    }
-
-    public void onLoaderReset(Loader<Cursor> cursorLoader)
-    {
-    }
+//    @Override
+//    public Loader<Cursor> onCreateLoader(int loaderId, Bundle bundle)
+//    {
+//        String[] projection = {TubeLineContract.TubeLineEntry._ID, TubeLineContract.TubeLineEntry.COLUMN_LINES_ID,};
+//        String[] selectionArgs = new String[]{lineId};
+//
+//        switch (loaderId)
+//        {
+//            case FAVORITES_LOADER:
+//                return new CursorLoader(this,   // Parent activity context
+//                        TubeLineContract.TubeLineEntry.CONTENT_URI,   // Provider content URI to query
+//                        projection,             // Columns to include in the resulting Cursor
+//                        TubeLineContract.TubeLineEntry.COLUMN_LINES_ID + "=?",
+//                        selectionArgs,
+//                        null);                  // Default sort order
+//
+//            default:
+//                throw new RuntimeException("Loader Not Implemented: " + loaderId);
+//        }
+//    }
+//
+//    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor)
+//    {
+//        if ((cursor != null) && (cursor.getCount() > 0))
+//        {
+//            //"Add to Favorites" button is disabled in the StationList Activity when the user clicks on a line stored in Favorites
+//            favoritesButton.setEnabled(false);
+//        }
+//    }
+//
+//    public void onLoaderReset(Loader<Cursor> cursorLoader)
+//    {
+//    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState)

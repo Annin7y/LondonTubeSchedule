@@ -35,18 +35,18 @@ import butterknife.ButterKnife;
 import capstone.my.annin.londontubeschedule.R;
 import capstone.my.annin.londontubeschedule.asynctask.TubeLineAsyncTask;
 import capstone.my.annin.londontubeschedule.asynctask.TubeLineAsyncTaskInterface;
-import capstone.my.annin.londontubeschedule.data.TubeLineContract;
+//import capstone.my.annin.londontubeschedule.data.TubeLineContract;
 import capstone.my.annin.londontubeschedule.pojo.Lines;
-import capstone.my.annin.londontubeschedule.recyclerviewadapters.FavoritesAdapter;
+//import capstone.my.annin.londontubeschedule.recyclerviewadapters.FavoritesAdapter;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.LinesAdapter;
 import capstone.my.annin.londontubeschedule.utils.NetworkUtils;
 import timber.log.Timber;
 
-import static capstone.my.annin.londontubeschedule.data.TubeLineContentProvider.LOG_TAG;
+//import static capstone.my.annin.londontubeschedule.data.TubeLineContentProvider.LOG_TAG;
 
 
-public class MainActivity extends AppCompatActivity implements LinesAdapter.LinesAdapterOnClickHandler, TubeLineAsyncTaskInterface,
- LoaderManager.LoaderCallbacks<Cursor>
+public class MainActivity extends AppCompatActivity implements LinesAdapter.LinesAdapterOnClickHandler, TubeLineAsyncTaskInterface
+ //LoaderManager.LoaderCallbacks<Cursor>
 {
     // Tag for logging
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
     ProgressBar mLoadingIndicator;
 
     private AdView adView;
-    private FavoritesAdapter favoritesAdapter;
+    //private FavoritesAdapter favoritesAdapter;
     private static final int FAVORITES_LOADER_ID = 0;
     private int mPosition = RecyclerView.NO_POSITION;
     private FirebaseAnalytics mFirebaseAnalytics;
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
 
         mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
 
-        favoritesAdapter = new FavoritesAdapter(this, context);
+        //favoritesAdapter = new FavoritesAdapter(this, context);
         linesAdapter = new LinesAdapter(this, linesArrayList, context);
 
         mLineRecyclerView.setAdapter(linesAdapter);
@@ -101,44 +101,44 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         RecyclerView.LayoutManager mLineLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mLineRecyclerView.setLayoutManager(mLineLayoutManager);
 
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT)
-        {
-            @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target)
-            {
-                return false;
-            }
+//        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT)
+//        {
+//            @Override
+//            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target)
+//            {
+//                return false;
+//            }
 
-            @Override
-            public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder)
-            {
-                if (viewHolder instanceof LinesAdapter.LinesAdapterViewHolder) return 0;
-                return super.getSwipeDirs(recyclerView, viewHolder);
-            }
-
-            // Called when a user swipes left or right on a ViewHolder
-            @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir)
-            {
-                // Here is where you'll implement swipe to delete
-
-                //Construct the URI for the item to delete
-                //[Hint] Use getTag (from the adapter code) to get the id of the swiped item
-                // Retrieve the id of the task to delete
-                String id = (String) viewHolder.itemView.getTag();
-
-                // Build appropriate uri with String row id appended
-                String stringId = id;
-                Uri uri = TubeLineContract.TubeLineEntry.CONTENT_URI;
-                uri = uri.buildUpon().appendPath(stringId).build();
-
-                int rowsDeleted = getContentResolver().delete(uri, null, null);
-               // Log.v("CatalogActivity", rowsDeleted + " rows deleted from the line database");
-                Timber.v( "%s rows deleted from the line database", rowsDeleted);
-
-                getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
-            }
-        }).attachToRecyclerView(mLineRecyclerView);
+//            @Override
+//            public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder)
+//            {
+//                if (viewHolder instanceof LinesAdapter.LinesAdapterViewHolder) return 0;
+//                return super.getSwipeDirs(recyclerView, viewHolder);
+//            }
+//
+//            // Called when a user swipes left or right on a ViewHolder
+//            @Override
+//            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir)
+//            {
+//                // Here is where you'll implement swipe to delete
+//
+//                //Construct the URI for the item to delete
+//                //[Hint] Use getTag (from the adapter code) to get the id of the swiped item
+//                // Retrieve the id of the task to delete
+//                String id = (String) viewHolder.itemView.getTag();
+//
+//                // Build appropriate uri with String row id appended
+//                String stringId = id;
+//                Uri uri = TubeLineContract.TubeLineEntry.CONTENT_URI;
+//                uri = uri.buildUpon().appendPath(stringId).build();
+//
+//                int rowsDeleted = getContentResolver().delete(uri, null, null);
+//               // Log.v("CatalogActivity", rowsDeleted + " rows deleted from the line database");
+//                Timber.v( "%s rows deleted from the line database", rowsDeleted);
+//
+//                getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
+//            }
+//        }).attachToRecyclerView(mLineRecyclerView);
 
         /*
          *  Starting the asyncTask so that lines load upon launching the app.
@@ -161,8 +161,8 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
              selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "line_list");
                 if (selectedSortOrder == SORT_BY_FAVORITES)
                 {
-                    getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
-                    mLineRecyclerView.setAdapter(favoritesAdapter);
+//                    getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
+//                    mLineRecyclerView.setAdapter(favoritesAdapter);
                 } else
                     {
                     linesArrayList = savedInstanceState.getParcelableArrayList(KEY_LINES_LIST);
@@ -185,8 +185,8 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
             // Run the AsyncTask in response to the click
             if (selectedSortOrder == SORT_BY_FAVORITES)
             {
-              getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
-               mLineRecyclerView.setAdapter(favoritesAdapter);
+//              getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
+//               mLineRecyclerView.setAdapter(favoritesAdapter);
         } else
             {
 
@@ -247,90 +247,90 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
                 activeNetwork.isConnectedOrConnecting();
     }
 
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, final Bundle loaderArgs)
-    {
-        return new AsyncTaskLoader<Cursor>(this)
-        {
-
-            // Initialize a Cursor, this will hold all the task data
-            Cursor mFavoritesData = null;
-
-            // onStartLoading() is called when a loader first starts loading data
-            @Override
-            protected void onStartLoading()
-            {
-                if (mFavoritesData != null)
-                {
-                    // Delivers any previously loaded data immediately
-                    deliverResult(mFavoritesData);
-                }
-                else
-                {
-                    // Force a new load
-                    forceLoad();
-                }
-            }
-
-            // loadInBackground() performs asynchronous loading of data
-            @Override
-            public Cursor loadInBackground()
-            {
-                // Will implement to load data
-
-                // Query and load all task data in the background; sort by priority
-                // [Hint] use a try/catch block to catch any errors in loading data
-                try
-                {
-                    return getContentResolver().query(TubeLineContract.TubeLineEntry.CONTENT_URI,
-                            null,
-                            null,
-                            null,
-                             TubeLineContract.TubeLineEntry.COLUMN_LINES_ID);
-                }
-                catch (Exception e)
-                {
-                    Log.e(LOG_TAG, "Failed to asynchronously load data.");
-                    e.printStackTrace();
-                    return null;
-                }
-            }
-
-            // deliverResult sends the result of the load, a Cursor, to the registered listener
-            public void deliverResult(Cursor data)
-            {
-                mFavoritesData = data;
-                super.deliverResult(data);
-            }
-        };
-    }
-
-    /**
-     * Called when a previously created loader has finished its load.
-     *
-     * @param loader The Loader that has finished.
-     * @param data   The data generated by the Loader.
-     */
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data)
-    {
-        favoritesAdapter.swapCursor(data);
-        if (mPosition == RecyclerView.NO_POSITION) mPosition = 0;
-        mLineRecyclerView.smoothScrollToPosition(mPosition);
-    }
-
-    /**
-     * Called when a previously created loader is being reset, and thus
-     * making its data unavailable.
-     * onLoaderReset removes any references this activity had to the loader's data.
-     *
-     * @param loader The Loader that is being reset.
-     */
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader)
-    {
-        favoritesAdapter.swapCursor(null);
-    }
+//    @Override
+//    public Loader<Cursor> onCreateLoader(int id, final Bundle loaderArgs)
+//    {
+//        return new AsyncTaskLoader<Cursor>(this)
+//        {
+//
+//            // Initialize a Cursor, this will hold all the task data
+//            Cursor mFavoritesData = null;
+//
+//            // onStartLoading() is called when a loader first starts loading data
+//            @Override
+//            protected void onStartLoading()
+//            {
+//                if (mFavoritesData != null)
+//                {
+//                    // Delivers any previously loaded data immediately
+//                    deliverResult(mFavoritesData);
+//                }
+//                else
+//                {
+//                    // Force a new load
+//                    forceLoad();
+//                }
+//            }
+//
+//            // loadInBackground() performs asynchronous loading of data
+//            @Override
+//            public Cursor loadInBackground()
+//            {
+//                // Will implement to load data
+//
+//                // Query and load all task data in the background; sort by priority
+//                // [Hint] use a try/catch block to catch any errors in loading data
+//                try
+//                {
+//                    return getContentResolver().query(TubeLineContract.TubeLineEntry.CONTENT_URI,
+//                            null,
+//                            null,
+//                            null,
+//                             TubeLineContract.TubeLineEntry.COLUMN_LINES_ID);
+//                }
+//                catch (Exception e)
+//                {
+//                    Log.e(LOG_TAG, "Failed to asynchronously load data.");
+//                    e.printStackTrace();
+//                    return null;
+//                }
+//            }
+//
+//            // deliverResult sends the result of the load, a Cursor, to the registered listener
+//            public void deliverResult(Cursor data)
+//            {
+//                mFavoritesData = data;
+//                super.deliverResult(data);
+//            }
+//        };
+//    }
+//
+//    /**
+//     * Called when a previously created loader has finished its load.
+//     *
+//     * @param loader The Loader that has finished.
+//     * @param data   The data generated by the Loader.
+//     */
+//    @Override
+//    public void onLoadFinished(Loader<Cursor> loader, Cursor data)
+//    {
+//        favoritesAdapter.swapCursor(data);
+//        if (mPosition == RecyclerView.NO_POSITION) mPosition = 0;
+//        mLineRecyclerView.smoothScrollToPosition(mPosition);
+//    }
+//
+//    /**
+//     * Called when a previously created loader is being reset, and thus
+//     * making its data unavailable.
+//     * onLoaderReset removes any references this activity had to the loader's data.
+//     *
+//     * @param loader The Loader that is being reset.
+//     */
+//    @Override
+//    public void onLoaderReset(Loader<Cursor> loader)
+//    {
+//        favoritesAdapter.swapCursor(null);
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -352,10 +352,10 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         {
             case R.id.most_frequented_lines:
 
-                getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
-                favoritesAdapter = new FavoritesAdapter(this, MainActivity.this);
-                mLineRecyclerView.setAdapter(favoritesAdapter);
-                selectedSortOrder = SORT_BY_FAVORITES;
+//                getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
+//                favoritesAdapter = new FavoritesAdapter(this, MainActivity.this);
+//                mLineRecyclerView.setAdapter(favoritesAdapter);
+//                selectedSortOrder = SORT_BY_FAVORITES;
                 return true;
 
             case R.id.line_list:

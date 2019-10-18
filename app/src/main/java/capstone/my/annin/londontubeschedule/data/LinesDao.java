@@ -19,7 +19,8 @@ public interface LinesDao
     LiveData<List<Lines>> loadAllLines();
 
     @Query("SELECT * FROM lines WHERE lineId =:id")
-    LiveData<Lines> getSelectedLine(String id);
+    //LiveData<Lines> getSelectedLine(String id);
+    Lines getSelectedLine(String id);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     long insertLine(Lines lineEntry);
