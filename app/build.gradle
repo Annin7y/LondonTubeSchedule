@@ -29,6 +29,7 @@ android {
     buildTypes.each {
         it.buildConfigField 'String', 'UNIFIED_LONDON_TRANSPORT_APP_KEY', MyUnifiedLondonTransportAppKey
         it.buildConfigField 'String', 'UNIFIED_LONDON_TRANSPORT_APP_ID', MyUnifiedLondonTransportAppId
+        it.buildConfigField 'String', 'UNIFIED_GOOGLEMAPS_API_KEY', MyUnifiedGoogleMapsApiKey
 
     }
     configurations.all {
