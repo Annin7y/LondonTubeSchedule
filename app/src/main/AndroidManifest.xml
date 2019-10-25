@@ -23,8 +23,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="UNIFIED_GOOGLEMAPS_API_KEY"/>
-
+            android:value="@string/UNIFIED_GOOGLEMAPS_API_KEY"/>
 
         <activity android:name=".ui.MainActivity">
             <intent-filter>
