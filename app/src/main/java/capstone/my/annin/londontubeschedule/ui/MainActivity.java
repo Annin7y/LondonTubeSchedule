@@ -7,8 +7,13 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.annotation.Nullable;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import com.google.android.material.snackbar.Snackbar;
+
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.AsyncTaskLoader;
 import androidx.loader.content.Loader;
@@ -29,6 +34,7 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,8 +42,10 @@ import capstone.my.annin.londontubeschedule.R;
 import capstone.my.annin.londontubeschedule.asynctask.TubeLineAsyncTask;
 import capstone.my.annin.londontubeschedule.asynctask.TubeLineAsyncTaskInterface;
 //import capstone.my.annin.londontubeschedule.data.TubeLineContract;
+import capstone.my.annin.londontubeschedule.data.LinesViewModel;
 import capstone.my.annin.londontubeschedule.pojo.Lines;
 //import capstone.my.annin.londontubeschedule.recyclerviewadapters.FavoritesAdapter;
+import capstone.my.annin.londontubeschedule.recyclerviewadapters.FavoritesRoomAdapter;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.LinesAdapter;
 import capstone.my.annin.londontubeschedule.utils.NetworkUtils;
 import timber.log.Timber;
@@ -68,9 +76,13 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
 
     private AdView adView;
     //private FavoritesAdapter favoritesAdapter;
+    private FavoritesRoomAdapter favoritesRoomAdapter;
     private static final int FAVORITES_LOADER_ID = 0;
     private int mPosition = RecyclerView.NO_POSITION;
     private FirebaseAnalytics mFirebaseAnalytics;
+
+    //ViewModel variable
+    private LinesViewModel mLinesViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -94,6 +106,9 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
 
         //favoritesAdapter = new FavoritesAdapter(this, context);
+        favoritesRoomAdapter = new FavoritesRoomAdapter(this, context);
+        mLinesViewModel = ViewModelProviders.of(this).get(LinesViewModel.class);
+
         linesAdapter = new LinesAdapter(this, linesArrayList, context);
 
         mLineRecyclerView.setAdapter(linesAdapter);
@@ -101,13 +116,20 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         RecyclerView.LayoutManager mLineLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mLineRecyclerView.setLayoutManager(mLineLayoutManager);
 
-//        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT)
-//        {
-//            @Override
-//            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target)
-//            {
-//                return false;
-//            }
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT)
+        {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target)
+            {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir)
+            {
+
+                mLinesViewModel.delete(favoritesRoomAdapter.getMovieAt(viewHolder.getAdapterPosition()));
+            }
 
 //            @Override
 //            public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder)
@@ -115,6 +137,10 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
 //                if (viewHolder instanceof LinesAdapter.LinesAdapterViewHolder) return 0;
 //                return super.getSwipeDirs(recyclerView, viewHolder);
 //            }
+
+
+
+
 //
 //            // Called when a user swipes left or right on a ViewHolder
 //            @Override
@@ -138,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
 //
 //                getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
 //            }
-//        }).attachToRecyclerView(mLineRecyclerView);
+        }).attachToRecyclerView(mLineRecyclerView);
 
         /*
          *  Starting the asyncTask so that lines load upon launching the app.
@@ -161,8 +187,18 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
              selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "line_list");
                 if (selectedSortOrder == SORT_BY_FAVORITES)
                 {
+                    mLineRecyclerView.setAdapter(favoritesRoomAdapter);
+                    mLinesViewModel.loadAllLines().observe(this, new Observer<List<Lines>>() {
+                        @Override
+                        public void onChanged(@Nullable List<Lines> lines)
+                        {
+                            favoritesRoomAdapter.setLines(lines);
+                        }
+                    });
+
 //                    getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
 //                    mLineRecyclerView.setAdapter(favoritesAdapter);
+
                 } else
                     {
                     linesArrayList = savedInstanceState.getParcelableArrayList(KEY_LINES_LIST);
@@ -183,17 +219,17 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         public void onClick(View v)
         {
             // Run the AsyncTask in response to the click
-            if (selectedSortOrder == SORT_BY_FAVORITES)
-            {
+           // if (selectedSortOrder == SORT_BY_FAVORITES)
+  //          {
 //              getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
 //               mLineRecyclerView.setAdapter(favoritesAdapter);
-        } else
-            {
+     //   } else
+         //   {
 
             TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(MainActivity.this);
             myLineTask.execute();
         }
-    }}
+    }
 
     @Override
     public void returnLineData(ArrayList<Lines> simpleJsonLineData)
@@ -352,6 +388,16 @@ public class MainActivity extends AppCompatActivity implements LinesAdapter.Line
         {
             case R.id.most_frequented_lines:
 
+                favoritesRoomAdapter = new FavoritesRoomAdapter(this, MainActivity.this);
+                mLineRecyclerView.setAdapter(favoritesRoomAdapter);
+                mLinesViewModel.loadAllLines().observe(this, new Observer<List<Lines>>() {
+                    @Override
+                    public void onChanged(@Nullable List<Lines> lines)
+                    {
+                        favoritesRoomAdapter.setLines(lines);
+                    }
+                });
+                selectedSortOrder = SORT_BY_FAVORITES;
 //                getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
 //                favoritesAdapter = new FavoritesAdapter(this, MainActivity.this);
 //                mLineRecyclerView.setAdapter(favoritesAdapter);

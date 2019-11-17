@@ -11,7 +11,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
@@ -21,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,6 +32,8 @@ import capstone.my.annin.londontubeschedule.R;
 import capstone.my.annin.londontubeschedule.asynctask.TubeStationAsyncTask;
 import capstone.my.annin.londontubeschedule.asynctask.TubeStationAsyncTaskInterface;
 //import capstone.my.annin.londontubeschedule.data.TubeLineContract;
+import capstone.my.annin.londontubeschedule.data.AppDatabase;
+import capstone.my.annin.londontubeschedule.data.LinesViewModel;
 import capstone.my.annin.londontubeschedule.pojo.Lines;
 import capstone.my.annin.londontubeschedule.pojo.Stations;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.StationsAdapter;
@@ -60,6 +66,17 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
     @BindView(R.id.favorites_button)
     Button favoritesButton;
 
+    // Create AppDatabase member variable for the Database
+    // Member variable for the Database
+    private AppDatabase mDb;
+
+    //ViewModel variable
+    private LinesViewModel mLinesViewModel;
+
+
+    // Keep track of whether the selected movie is Favorite or not
+    private boolean isFavorite;
+
     /**
      * Identifier for the favorites data loader
      */
@@ -82,6 +99,55 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
         mStationRecyclerView.setLayoutManager(mStationLayoutManager);
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+        mDb = AppDatabase.getDatabase(getApplicationContext());
+
+        mLinesViewModel = ViewModelProviders.of(this).get(LinesViewModel.class);
+
+         favoritesButton.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+
+                                                    if (isFavorite) {
+                                                        // If the movie is already favorite, we remove it from the DB
+                                                        mLinesViewModel.delete(lines).observe(StationListActivity.this, new Observer<Boolean>() {
+                                                            @Override
+                                                            public void onChanged(@Nullable Boolean isDeleteOk) {
+                                                                if (isDeleteOk != null && isDeleteOk) {
+                                                                    // If everything was OK,
+                                                                    // we change the button text and set isFavorite to false
+                                                                    Toast.makeText(StationListActivity.this, getString(R.string.favorites_removed), Toast.LENGTH_SHORT).show();
+                                                                    favoritesButton.setText(R.string.favorites_button_text_add);
+                                                                    isFavorite = false;
+                                                                }
+                                                            }
+                                                        });
+
+                                                    } else {
+                                                        // If the movie is not favorite, we add it to the DB
+                                                        mLinesViewModel.insert(lines).observe(StationListActivity.this, new Observer<Boolean>() {
+
+                                                            @Override
+                                                            public void onChanged(@Nullable Boolean isInsertOk) {
+                                                                if (isInsertOk != null && isInsertOk) {
+                                                                    if (isInsertOk) {
+                                                                        Toast.makeText(getBaseContext(), isInsertOk.toString(), Toast.LENGTH_LONG).show();
+                                                                        Toast.makeText(StationListActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
+                                                                        favoritesButton.setVisibility(View.GONE);
+                                                                    }
+                                                                    // If everything was OK,
+                                                                    // we change the button text and set isFavorite to true
+                                                                    Toast.makeText(StationListActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
+                                                                    favoritesButton.setText((R.string.favorites_removed));
+                                                                    isFavorite = true;
+                                                                }
+                                                            }
+                                                        });
+                                                    }
+                                                }
+                                            });
+
+
 
         //add to favorites
 //        favoritesButton.setOnClickListener(new View.OnClickListener()
@@ -111,7 +177,9 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
             if (savedInstanceState == null)
             {
                 lines = getIntent().getExtras().getParcelable("Lines");
-                lineId = lines.getLineId();
+                // Extract the movie ID from the selected movie
+                String lineId = Objects.requireNonNull(lines).getLineId();
+                //lineId = lines.getLineId();
                // Log.i("lineId: ", lines.getLineId());
                 Timber.i(lines.getLineId(), "lineId: ");
 
@@ -119,6 +187,20 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
                 lineNameToString = lineNameStation.getText().toString();
                // Log.i("lineName: ", lines.getLineName());
                 Timber.i(lines.getLineName(),"lineName: ");
+
+
+                 isFavorite = mLinesViewModel.select(lineId);
+
+                // If the movie is favorite, we show the "Remove from Favorites" text.
+                // Otherwise, we show "Add to Favorites".
+            if (isFavorite)
+            {
+                favoritesButton.setText(getString(R.string.favorites_button_text_remove));
+            } else
+                {
+               favoritesButton.setText(getString(R.string.favorites_button_text_add));
+            }
+
 
 
                 /*
