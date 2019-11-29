@@ -74,7 +74,7 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
     private LinesViewModel mLinesViewModel;
 
 
-    // Keep track of whether the selected movie is Favorite or not
+    // Keep track of whether the selected line is Favorite or not
     private boolean isFavorite;
 
     /**
@@ -104,48 +104,70 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
 
         mLinesViewModel = ViewModelProviders.of(this).get(LinesViewModel.class);
 
-         favoritesButton.setOnClickListener(new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View view) {
+        // Set a click listener for the Favorite button
+        favoritesButton.setOnClickListener(view ->
+        {
+            if (favoritesButton.getText().equals(getString(R.string.favorites_button_text_remove)))
+            {
+                mLinesViewModel.delete(lines);
+                Toast.makeText(StationListActivity.this, getString(R.string.favorites_removed), Toast.LENGTH_SHORT).show();
+                favoritesButton.setText(R.string.favorites_button_text_add);
+            }
+            else {
+//             // If the line is not favorite, we add it to the DB
+                mLinesViewModel.insert(lines);
+                Toast.makeText(StationListActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
+                favoritesButton.setText((R.string.favorites_button_text_remove));
 
-                                                    if (isFavorite) {
-                                                        // If the movie is already favorite, we remove it from the DB
-                                                        mLinesViewModel.delete(lines).observe(StationListActivity.this, new Observer<Boolean>() {
-                                                            @Override
-                                                            public void onChanged(@Nullable Boolean isDeleteOk) {
-                                                                if (isDeleteOk != null && isDeleteOk) {
-                                                                    // If everything was OK,
-                                                                    // we change the button text and set isFavorite to false
-                                                                    Toast.makeText(StationListActivity.this, getString(R.string.favorites_removed), Toast.LENGTH_SHORT).show();
-                                                                    favoritesButton.setText(R.string.favorites_button_text_add);
-                                                                    isFavorite = false;
-                                                                }
-                                                            }
-                                                        });
+            }
 
-                                                    } else {
-                                                        // If the movie is not favorite, we add it to the DB
-                                                        mLinesViewModel.insert(lines).observe(StationListActivity.this, new Observer<Boolean>() {
+        });
 
-                                                            @Override
-                                                            public void onChanged(@Nullable Boolean isInsertOk) {
-                                                                if (isInsertOk != null && isInsertOk) {
-                                                                    if (isInsertOk) {
-                                                                        Toast.makeText(getBaseContext(), isInsertOk.toString(), Toast.LENGTH_LONG).show();
-                                                                        Toast.makeText(StationListActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
-                                                                        favoritesButton.setVisibility(View.GONE);
-                                                                    }
-                                                                    // If everything was OK,
-                                                                    // we change the button text and set isFavorite to true
-                                                                    Toast.makeText(StationListActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
-                                                                    favoritesButton.setText((R.string.favorites_removed));
-                                                                    isFavorite = true;
-                                                                }
-                                                            }
-                                                        });
-                                                    }
-                                                }
-                                            });
+
+
+ //        Code used when running the database on the main thread
+//         favoritesButton.setOnClickListener(new View.OnClickListener() {
+//                                                @Override
+//                                                public void onClick(View view) {
+//
+//                                                    if (isFavorite) {
+//                                                        // If the movie is already favorite, we remove it from the DB
+//                                                        mLinesViewModel.delete(lines).observe(StationListActivity.this, new Observer<Boolean>() {
+//                                                            @Override
+//                                                            public void onChanged(@Nullable Boolean isDeleteOk) {
+//                                                                if (isDeleteOk != null && isDeleteOk) {
+//                                                                    // If everything was OK,
+//                                                                    // we change the button text and set isFavorite to false
+//                                                                    Toast.makeText(StationListActivity.this, getString(R.string.favorites_removed), Toast.LENGTH_SHORT).show();
+//                                                                    favoritesButton.setText(R.string.favorites_button_text_add);
+//                                                                    isFavorite = false;
+//                                                                }
+//                                                            }
+//                                                        });
+//
+//                                                    } else {
+//                                                        // If the movie is not favorite, we add it to the DB
+//                                                        mLinesViewModel.insert(lines).observe(StationListActivity.this, new Observer<Boolean>() {
+//
+//                                                            @Override
+//                                                            public void onChanged(@Nullable Boolean isInsertOk) {
+//                                                                if (isInsertOk != null && isInsertOk) {
+//                                                                    if (isInsertOk) {
+//                                                                        Toast.makeText(getBaseContext(), isInsertOk.toString(), Toast.LENGTH_LONG).show();
+//                                                                        Toast.makeText(StationListActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
+//                                                                        favoritesButton.setVisibility(View.GONE);
+//                                                                    }
+//                                                                    // If everything was OK,
+//                                                                    // we change the button text and set isFavorite to true
+//                                                                    Toast.makeText(StationListActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
+//                                                                    favoritesButton.setText((R.string.favorites_removed));
+//                                                                    isFavorite = true;
+//                                                                }
+//                                                            }
+//                                                        });
+//                                                    }
+//                                                }
+//                                            });
 
 
 
@@ -188,21 +210,31 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
                // Log.i("lineName: ", lines.getLineName());
                 Timber.i(lines.getLineName(),"lineName: ");
 
+                mLinesViewModel.isFavorite().observe(this, isFavorite -> {
+                    if (isFavorite) {
+                        favoritesButton.setText(getString(R.string.favorites_button_text_remove));
 
-                 isFavorite = mLinesViewModel.select(lineId);
-
-                // If the movie is favorite, we show the "Remove from Favorites" text.
-                // Otherwise, we show "Add to Favorites".
-            if (isFavorite)
-            {
-                favoritesButton.setText(getString(R.string.favorites_button_text_remove));
-            } else
-                {
-               favoritesButton.setText(getString(R.string.favorites_button_text_add));
+                    } else {
+                        favoritesButton.setText(getString(R.string.favorites_button_text_add));
+                    }
+                });
             }
 
 
+                //The code below was used when running the Room Database on the main thread
+//                 isFavorite = mLinesViewModel.select(lineId);
+//
+//                // If the movie is favorite, we show the "Remove from Favorites" text.
+//                // Otherwise, we show "Add to Favorites".
+//            if (isFavorite)
+//            {
+//                favoritesButton.setText(getString(R.string.favorites_button_text_remove));
+//            } else
+//                {
+//               favoritesButton.setText(getString(R.string.favorites_button_text_add));
+//            }
 
+            
                 /*
                  *  Starting the asyncTask so that stations load when the activity opens.
                  */
@@ -219,7 +251,7 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
         }
         // Kick off the loader
        // getSupportLoaderManager().initLoader(FAVORITES_LOADER, null, this);
-    }
+
 
     @Override
     public void returnStationData(ArrayList<Stations> simpleJsonStationData)

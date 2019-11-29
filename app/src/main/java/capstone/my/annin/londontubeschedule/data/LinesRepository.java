@@ -14,8 +14,9 @@ public class LinesRepository
 {
     private LinesDao mLineDao;
     private LiveData<List<Lines>> mAllLines;
-    public static MutableLiveData<Boolean> isInsertOk = new MutableLiveData<>();
-    public static MutableLiveData<Boolean> isDeleteOk = new MutableLiveData<>();
+//    public static MutableLiveData<Boolean> isInsertOk = new MutableLiveData<>();
+//    public static MutableLiveData<Boolean> isDeleteOk = new MutableLiveData<>();
+    public static MutableLiveData<Boolean> isFavorite = new MutableLiveData<>();
 
     LinesRepository(Application application)
     {
@@ -39,18 +40,52 @@ public class LinesRepository
     }
 
 //Method used when testing running the database on the main thread
-    public boolean select(String id)
-    {
-        Lines line = mLineDao.getSelectedLine(id);
+//    public boolean select(String id)
+//    {
+//        Lines line = mLineDao.getSelectedLine(id);
+//
+//        return line != null;
+//    }
 
-        return line != null;
+    public void select(String id)
+    {
+        new selectAsyncTask().execute(id);
+    }
+
+    private class selectAsyncTask extends AsyncTask<String, Void,Lines>
+    {
+
+        @Override
+        protected Lines doInBackground(final String... params) {
+            return mLineDao.getSelectedLine(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Lines lines) {
+            if (lines != null) {
+                setFavorite(true);
+            } else {
+                setFavorite(false);
+            }
+        }
+    }
+    public void setFavorite(boolean value)
+    {
+        isFavorite.setValue(value);
+    }
+
+    public MutableLiveData<Boolean> isFavorite()
+    {
+        return isFavorite;
     }
 
 
-    public static void setInsertOk(boolean value)
-    {
-        isInsertOk.setValue(value);
-    }
+    //isInsertOk and isDeleteOk methods commented out: combined into a single isFavorite variable
+    //will be checked in the Repository instead of the DetailActivity
+//    public static void setInsertOk(boolean value)
+//    {
+//        isInsertOk.setValue(value);
+//    }
 
     private class insertAsyncTask extends AsyncTask<Lines, Void, Long>
     {
@@ -73,21 +108,23 @@ public class LinesRepository
         {
             if(id != -1)
             {
-                LinesRepository.this.setInsertOk(true);
+                //LinesRepository.this.setInsertOk(true);
+                LinesRepository.this.setFavorite(true);
             }
             else
             {
-                LinesRepository.this.setInsertOk(false);
+                //LinesRepository.this.setInsertOk(false);
+                LinesRepository.this.setFavorite(false);
             }
 
         }
 
     }
 
-    public static void setDeleteOk(boolean value)
-    {
-        isDeleteOk.setValue(value);
-    }
+//    public static void setDeleteOk(boolean value)
+//    {
+//        isDeleteOk.setValue(value);
+//    }
 
     private class deleteAsyncTask extends AsyncTask<Lines, Void, Integer>
     {
@@ -110,13 +147,14 @@ public class LinesRepository
         {
             if(rowsDeleted > 0)
             {
-                LinesRepository.this.setDeleteOk(true);
+               // LinesRepository.this.setDeleteOk(true);
+                LinesRepository.this.setFavorite(false);
             }
             else
             {
-                LinesRepository.this.setDeleteOk(false);
+               // LinesRepository.this.setDeleteOk(false);
+                LinesRepository.this.setFavorite(true);
             }
         }
     }
-
 }

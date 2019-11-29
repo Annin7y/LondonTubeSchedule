@@ -26,18 +26,38 @@ public class LinesViewModel extends AndroidViewModel
         return mAllLines;
     }
 
-    public LiveData<Boolean> insert(Lines lineEntry)
-    {
-        mRepository.insert(lineEntry);
-        return LinesRepository.isInsertOk;
+    public void insert(Lines linesEntry) {
+        mRepository.insert(linesEntry);
 
     }
 
-    public LiveData<Boolean> delete(Lines lineEntry)
-    {
-        mRepository.delete(lineEntry);
-        return LinesRepository.isDeleteOk;
+    public void delete(Lines linesEntry) {
+        mRepository.delete(linesEntry);
     }
+
+    public void select(String lineId) {
+        mRepository.select(lineId);
+    }
+
+    public LiveData<Boolean> isFavorite()
+    {
+        return mRepository.isFavorite();
+    }
+
+
+
+//    public LiveData<Boolean> insert(Lines lineEntry)
+//    {
+//        mRepository.insert(lineEntry);
+//        return LinesRepository.isInsertOk;
+//
+//    }
+//
+//    public LiveData<Boolean> delete(Lines lineEntry)
+//    {
+//        mRepository.delete(lineEntry);
+//        return LinesRepository.isDeleteOk;
+//    }
 
 //    public LiveData<Lines> select(String id)
 //    {
@@ -45,10 +65,10 @@ public class LinesViewModel extends AndroidViewModel
 //    }
 
     //Method used when testing running the database on the main thread
-    public boolean select(String lineId)
-    {
-        return mRepository.select(lineId);
-    }
+//    public boolean select(String lineId)
+//    {
+//        return mRepository.select(lineId);
+//    }
 }
 
 

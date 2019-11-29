@@ -20,7 +20,8 @@ public interface LinesDao
 
     @Query("SELECT * FROM lines WHERE lineId =:id")
     //LiveData<Lines> getSelectedLine(String id);
-    //Method used when testing running the database on the main thread
+    //Method used when testing running the database on the main thread &
+    //setting isFavorite in the Repository
     Lines getSelectedLine(String id);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
