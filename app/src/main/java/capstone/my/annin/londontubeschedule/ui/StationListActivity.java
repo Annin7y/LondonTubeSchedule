@@ -203,8 +203,8 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
             {
                 lines = getIntent().getExtras().getParcelable("Lines");
                 // Extract the movie ID from the selected movie
-                String lineId = Objects.requireNonNull(lines).getLineId();
-                //lineId = lines.getLineId();
+                lineId = Objects.requireNonNull(lines).getLineId();
+                lineId = lines.getLineId();
                // Log.i("lineId: ", lines.getLineId());
                 Timber.i(lines.getLineId(), "lineId: ");
 
