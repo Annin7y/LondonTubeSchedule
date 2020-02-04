@@ -38,6 +38,7 @@ public class JSONUtils
     {
     }
 
+    //Lines code commented out replaced by the one below which includes service updates
 //    public static ArrayList<Lines> extractFeatureFromLineJson(String lineJSON)
 //    {
 //        // If the JSON string is empty or null, then return early.

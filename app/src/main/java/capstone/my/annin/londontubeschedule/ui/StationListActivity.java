@@ -73,6 +73,9 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
     //ViewModel variable
     private LinesViewModel mLinesViewModel;
 
+    @BindView(R.id.empty_view_stations)
+    TextView emptyStations;
+
 
     // Keep track of whether the selected line is Favorite or not
     private boolean isFavorite;
@@ -234,7 +237,7 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
 //               favoritesButton.setText(getString(R.string.favorites_button_text_add));
 //            }
 
-            
+
                 /*
                  *  Starting the asyncTask so that stations load when the activity opens.
                  */
@@ -265,6 +268,7 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
         }
         else{
             Timber.e("Problem parsing stations JSON results" );
+            emptyStations.setVisibility(View.VISIBLE);
         }
 
     }
@@ -321,6 +325,14 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
     @Override
     protected void onSaveInstanceState(Bundle outState)
     {
+        if (emptyStations.getVisibility() == View.VISIBLE)
+        {
+            outState.putBoolean("visible", true);
+        } else {
+            outState.putBoolean("visible", false);
+        }
+
+
         outState.putParcelableArrayList(KEY_STATIONS_LIST, stationsArrayList);
         outState.putString(KEY_LINE_NAME, lineNameToString);
         outState.putParcelable(KEY_LINES_LIST, lines);

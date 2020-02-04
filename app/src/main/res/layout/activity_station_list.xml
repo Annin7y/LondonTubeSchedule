@@ -80,6 +80,19 @@
         android:descendantFocusability="afterDescendants"
         />
 
+    <TextView
+        android:id="@+id/empty_view_stations"
+        style="@style/ScheduleNameStyle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/schedule_empty_start"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/empty_schedule_top"
+        android:visibility="gone"
+        android:text = "@string/empty_view_text"/>
+
+
+
     <Button
         android:id="@+id/favorites_button"
         android:layout_width="wrap_content"
