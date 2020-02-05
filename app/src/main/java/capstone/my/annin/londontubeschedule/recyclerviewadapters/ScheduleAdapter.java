@@ -53,6 +53,8 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         @BindView(R.id.schedule_arrival)
         public TextView expectedArrival;
 
+
+
         public ScheduleAdapterViewHolder(View view)
         {
             super(view);
