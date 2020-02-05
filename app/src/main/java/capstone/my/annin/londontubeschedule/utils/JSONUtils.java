@@ -29,6 +29,8 @@ public class JSONUtils
     private static final String KEY_STATION_NAME = "name";
     private static final String KEY_STATION_NAPTAN_ID = "naptanId";
     private static final String KEY_STATION_SCHEDULE_NAME = "stationName";
+    private static final String KEY_STATION_LOCATION_LAT = "lat";
+    private static final String KEY_STATION_LOCATION_LON = "lon";
     private static final String KEY_DESTINATION_NAME = "destinationName";
     private static final String KEY_CURRENT_LOCATION = "currentLocation";
     private static final String KEY_DIRECTION_TOWARDS = "towards";
@@ -191,7 +193,18 @@ public class JSONUtils
                                     {
                                         nameStation = innerElem.optString(KEY_STATION_NAME);
                                     }
-                                    Stations station = new Stations(idStation, nameStation);
+                                    String stationLatLocation = "";
+                                    if (innerElem.has("lat"))
+                                    {
+                                        stationLatLocation = innerElem.optString(KEY_STATION_LOCATION_LAT);
+                                    }
+                                    String stationLonLocation = "";
+                                    if (innerElem.has("lon"))
+                                    {
+                                        stationLonLocation = innerElem.optString(KEY_STATION_LOCATION_LON);
+                                    }
+
+                                    Stations station = new Stations(idStation, nameStation, stationLatLocation, stationLonLocation);
                                     stations.add(station);
                                 }
                             }

@@ -15,10 +15,22 @@ public class Stations implements Parcelable
      */
     private String stationName;
 
-    public Stations(String stationId, String stationName)
+    /**
+     * Station lat location
+     */
+    private String latLocation;
+
+    /**
+     * Station lon location
+     */
+    private String lonLocation;
+
+    public Stations(String stationId, String stationName, String latLocation, String lonLocation)
     {
         this.stationId = stationId;
         this.stationName = stationName;
+        this.latLocation = latLocation;
+        this.lonLocation = lonLocation;
     }
 
     public void setStationId(String stationId)
@@ -41,10 +53,32 @@ public class Stations implements Parcelable
         return stationName;
     }
 
+    public void setLatLocation(String latLocation)
+    {
+        this.latLocation = latLocation;
+    }
+
+    public String getLatLocation()
+    {
+        return latLocation;
+    }
+
+    public void setLonLocation(String lonLocation)
+    {
+        this.lonLocation = lonLocation;
+    }
+
+    public String getLonLocation()
+    {
+        return lonLocation;
+    }
+
     protected Stations(Parcel in)
     {
         stationId = in.readString();
         stationName = in.readString();
+        latLocation = in.readString();
+        lonLocation = in.readString();
     }
 
     @Override

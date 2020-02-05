@@ -51,6 +51,8 @@ public class StationsAdapter extends RecyclerView.Adapter<StationsAdapter.Statio
         @BindView(R.id.station_name)
         public TextView stationName;
 
+
+
         public StationsAdapterViewHolder(View view)
         {
             super(view);
