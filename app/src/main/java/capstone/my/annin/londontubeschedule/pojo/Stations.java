@@ -92,6 +92,8 @@ public class Stations implements Parcelable
     {
         dest.writeString(stationId);
         dest.writeString(stationName);
+        dest.writeString(latLocation);
+        dest.writeString(lonLocation);
     }
 
     @SuppressWarnings("unused")
