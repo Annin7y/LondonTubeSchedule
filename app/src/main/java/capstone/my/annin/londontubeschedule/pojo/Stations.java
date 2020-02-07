@@ -18,14 +18,14 @@ public class Stations implements Parcelable
     /**
      * Station lat location
      */
-    private String latLocation;
+    private double latLocation;
 
     /**
      * Station lon location
      */
-    private String lonLocation;
+    private double lonLocation;
 
-    public Stations(String stationId, String stationName, String latLocation, String lonLocation)
+    public Stations(String stationId, String stationName, double latLocation, double lonLocation)
     {
         this.stationId = stationId;
         this.stationName = stationName;
@@ -53,22 +53,22 @@ public class Stations implements Parcelable
         return stationName;
     }
 
-    public void setLatLocation(String latLocation)
+    public void setLatLocation(double latLocation)
     {
         this.latLocation = latLocation;
     }
 
-    public String getLatLocation()
+    public double getLatLocation()
     {
         return latLocation;
     }
 
-    public void setLonLocation(String lonLocation)
+    public void setLonLocation(double lonLocation)
     {
         this.lonLocation = lonLocation;
     }
 
-    public String getLonLocation()
+    public double getLonLocation()
     {
         return lonLocation;
     }
@@ -77,8 +77,8 @@ public class Stations implements Parcelable
     {
         stationId = in.readString();
         stationName = in.readString();
-        latLocation = in.readString();
-        lonLocation = in.readString();
+        latLocation = in.readDouble();
+        lonLocation = in.readDouble();
     }
 
     @Override
@@ -92,8 +92,8 @@ public class Stations implements Parcelable
     {
         dest.writeString(stationId);
         dest.writeString(stationName);
-        dest.writeString(latLocation);
-        dest.writeString(lonLocation);
+        dest.writeDouble(latLocation);
+        dest.writeDouble(lonLocation);
     }
 
     @SuppressWarnings("unused")

@@ -53,8 +53,8 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     public String stationId;
     Lines lines;
     public String lineId;
-    public String latLocation;
-    public String lonLocation;
+    public double latLocation;
+    public double lonLocation;
     private Context context;
     private ShareActionProvider mShareActionProvider;
     Schedule stationArrival;
@@ -97,10 +97,10 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
                 Timber.v(stations.getStationId(), "stationId: ");
 
                 latLocation = stations.getLatLocation();
-                Timber.v(stations.getLatLocation(), "latLocation: ");
+                //Timber.v(stations.getLatLocation());
 
                 lonLocation = stations.getLonLocation();
-                Timber.v(stations.getLonLocation(), "lonLocation: ");
+                //Timber.v(stations.getLonLocation(), "lonLocation: ");
 
                 /*
                  *  Starting the asyncTask so that schedule loads when the activity opens.

@@ -193,15 +193,15 @@ public class JSONUtils
                                     {
                                         nameStation = innerElem.optString(KEY_STATION_NAME);
                                     }
-                                    String stationLatLocation = "";
+                                    double stationLatLocation = innerElem.getDouble("lat");
                                     if (innerElem.has("lat"))
                                     {
-                                        stationLatLocation = innerElem.optString(KEY_STATION_LOCATION_LAT);
+                                        stationLatLocation = innerElem.optDouble("lat");
                                     }
-                                    String stationLonLocation = "";
+                                    double stationLonLocation = innerElem.getDouble("lon");
                                     if (innerElem.has("lon"))
                                     {
-                                        stationLonLocation = innerElem.optString(KEY_STATION_LOCATION_LON);
+                                        stationLonLocation = innerElem.optDouble("lon");
                                     }
 
                                     Stations station = new Stations(idStation, nameStation, stationLatLocation, stationLonLocation);
