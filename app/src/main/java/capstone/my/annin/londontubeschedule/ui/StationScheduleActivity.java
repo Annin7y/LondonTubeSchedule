@@ -97,10 +97,10 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
                 Timber.v(stations.getStationId(), "stationId: ");
 
                 latLocation = stations.getLatLocation();
-                //Timber.v(stations.getLatLocation());
+                Timber.v(String.valueOf(stations.getLatLocation()));
 
                 lonLocation = stations.getLonLocation();
-                //Timber.v(stations.getLonLocation(), "lonLocation: ");
+                Timber.v(String.valueOf(stations.getLonLocation()));
 
                 /*
                  *  Starting the asyncTask so that schedule loads when the activity opens.
