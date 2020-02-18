@@ -30,6 +30,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -64,6 +65,10 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     @BindView(R.id.empty_view_schedule)
     TextView emptySchedule;
     private static final String KEY_EMPTY_VALUE = "empty_value";
+    @BindView(R.id.maps_button)
+    Button mapsButton;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

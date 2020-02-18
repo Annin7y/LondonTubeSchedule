@@ -1,23 +1,15 @@
 package capstone.my.annin.londontubeschedule.ui;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.CursorLoader;
-import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,13 +23,14 @@ import butterknife.ButterKnife;
 import capstone.my.annin.londontubeschedule.R;
 import capstone.my.annin.londontubeschedule.asynctask.TubeStationAsyncTask;
 import capstone.my.annin.londontubeschedule.asynctask.TubeStationAsyncTaskInterface;
-//import capstone.my.annin.londontubeschedule.data.TubeLineContract;
 import capstone.my.annin.londontubeschedule.data.AppDatabase;
 import capstone.my.annin.londontubeschedule.data.LinesViewModel;
 import capstone.my.annin.londontubeschedule.pojo.Lines;
 import capstone.my.annin.londontubeschedule.pojo.Stations;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.StationsAdapter;
 import timber.log.Timber;
+
+//import capstone.my.annin.londontubeschedule.data.TubeLineContract;
 
 public class StationListActivity extends AppCompatActivity implements StationsAdapter.StationsAdapterOnClickHandler, TubeStationAsyncTaskInterface
        // LoaderManager.LoaderCallbacks<Cursor>
