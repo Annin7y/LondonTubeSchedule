@@ -66,6 +66,29 @@
         android:text="@string/station_dup_instructions_two"
         />
 
+    <com.github.vipulasri.timelineview.TimelineView
+        android:id="@+id/timeline"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:markerSize="20dp"
+        app:lineWidth="3dp"
+        app:startLineColor="@color/colorAccent"
+        app:endLineColor="@color/colorAccent"
+        app:lineStyle="dash"/>
+
+    <com.github.vipulasri.timelineview.TimelineView
+        android:id="@+id/time_marker"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:markerSize="20dp"
+        app:lineSize="2dp"
+        app:line="@color/colorPrimary"
+        app:linePadding="5dp"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_station"
         android:layout_width="match_parent"
