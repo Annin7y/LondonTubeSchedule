@@ -7,6 +7,16 @@
     android:orientation="vertical"
     android:id="@+id/station_list">
 
+    <com.github.vipulasri.timelineview.TimelineView
+        android:id="@+id/timeline"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:markerSize="20dp"
+        app:lineWidth="3dp"
+        app:startLineColor="@color/colorAccent"
+        app:endLineColor="@color/colorAccent"
+        app:lineStyle="dash"/>
+
     <TextView
         android:id="@+id/station_name"
         style="@style/LineStationListStyle"
