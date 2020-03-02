@@ -33,6 +33,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.gson.Gson;
 
 import java.text.ParseException;
@@ -68,7 +70,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     @BindView(R.id.maps_button)
     Button mapsButton;
 
-
+    private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -228,6 +230,24 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
         shareIntent.putExtra(Intent.EXTRA_TEXT, data);
         return shareIntent;
     }
+
+    private boolean checkPlayServices(Context context)
+    {
+        GoogleApiAvailability googleAPI = GoogleApiAvailability.getInstance();
+        int result = googleAPI.isGooglePlayServicesAvailable(context);
+        if(result != ConnectionResult.SUCCESS) {
+            if(googleAPI.isUserResolvableError(result))
+            {
+                googleAPI.getErrorDialog(this,result,
+                        PLAY_SERVICES_RESOLUTION_REQUEST).show();
+            }
+
+            return false;
+        }
+
+        return true;
+    }
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState)
