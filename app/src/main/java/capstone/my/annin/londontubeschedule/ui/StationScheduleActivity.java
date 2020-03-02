@@ -231,23 +231,6 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
         return shareIntent;
     }
 
-    private boolean checkPlayServices(Context context)
-    {
-        GoogleApiAvailability googleAPI = GoogleApiAvailability.getInstance();
-        int result = googleAPI.isGooglePlayServicesAvailable(context);
-        if(result != ConnectionResult.SUCCESS) {
-            if(googleAPI.isUserResolvableError(result))
-            {
-                googleAPI.getErrorDialog(this,result,
-                        PLAY_SERVICES_RESOLUTION_REQUEST).show();
-            }
-
-            return false;
-        }
-
-        return true;
-    }
-
 
     @Override
     protected void onSaveInstanceState(Bundle outState)
