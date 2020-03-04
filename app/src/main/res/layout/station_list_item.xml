@@ -17,6 +17,17 @@
         app:endLineColor="@color/colorAccent"
         app:lineStyle="dash"/>
 
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_gravity="center_vertical"
+        app:cardBackgroundColor="@color/colorName"
+        app:contentPadding="15dp">
+
     <TextView
         android:id="@+id/station_name"
         style="@style/LineStationListStyle"
@@ -24,5 +35,7 @@
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:padding="@dimen/station_list_padding"
         tools:text="@string/station_name" />
+
+    </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>
