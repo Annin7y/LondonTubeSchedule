@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.github.vipulasri.timelineview.TimelineView;
+
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -51,11 +53,15 @@ public class StationsAdapter extends RecyclerView.Adapter<StationsAdapter.Statio
         @BindView(R.id.station_name)
         public TextView stationName;
 
-        public StationsAdapterViewHolder(View view)
+        @BindView(R.id.timeline)
+        public TimelineView mTimelineView;
+
+        public StationsAdapterViewHolder(View view, int viewType)
         {
             super(view);
             ButterKnife.bind(this, view);
             view.setOnClickListener(this);
+            mTimelineView.initLine(viewType);
         }
 
         /**
@@ -80,7 +86,7 @@ public class StationsAdapter extends RecyclerView.Adapter<StationsAdapter.Statio
         LayoutInflater inflater = LayoutInflater.from(context);
         boolean shouldAttachToParentImmediately = false;
         View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
-        return new StationsAdapterViewHolder(view);
+        return new StationsAdapterViewHolder(view, viewType);
     }
 
     /**
@@ -94,6 +100,12 @@ public class StationsAdapter extends RecyclerView.Adapter<StationsAdapter.Statio
 
         holder.stationName.setText(stationView.getStationName());
 
+    }
+
+    @Override
+    public int getItemViewType(int position)
+    {
+        return TimelineView.getTimeLineViewType(position,getItemCount());
     }
 
     @Override

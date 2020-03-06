@@ -30,5 +30,6 @@
     <string name="favorites_button_text_add">Add to the Most Frequented Lines</string>
     <string name="favorites_button_text_remove">Remove from the Most Frequented Lines</string>
     <string name="favorites_removed">Line removed from the Most Frequented Lines</string>
+    <string name="button_map_text">View on Google Maps</string>
 
 </resources>

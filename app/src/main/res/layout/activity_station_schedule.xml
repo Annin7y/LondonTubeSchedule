@@ -4,6 +4,19 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <Button
+        android:id="@+id/maps_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/fav_button_margin_start"
+        android:layout_marginTop="@dimen/fav_button_margin_top"
+        android:focusable="false"
+        android:text="@string/button_map_text"
+        app:layout_constraintBottom_toTopOf="@id/recyclerview_schedule"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_schedule"
         android:layout_width="match_parent"
@@ -12,22 +25,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="@dimen/recycler_schedule_start"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/maps_button"
         android:layout_marginTop="@dimen/recycler_schedule_top"
         />
-
-    <Button
-        android:id="@+id/maps_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/fav_button_margin_start"
-        android:layout_marginTop="@dimen/fav_button_margin_top"
-        android:focusable="false"
-        android:text="Go to Google Maps"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recyclerview_schedule" />
 
     <TextView
         android:id="@+id/empty_view_schedule"
