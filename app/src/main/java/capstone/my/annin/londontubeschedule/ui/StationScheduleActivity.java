@@ -10,6 +10,8 @@ import butterknife.ButterKnife;
 import capstone.my.annin.londontubeschedule.R;
 import capstone.my.annin.londontubeschedule.asynctask.TubeScheduleAsyncTask;
 import capstone.my.annin.londontubeschedule.asynctask.TubeScheduleAsyncTaskInterface;
+import capstone.my.annin.londontubeschedule.maps.MapsConnectionCheck;
+import capstone.my.annin.londontubeschedule.maps.StationMapActivity;
 import capstone.my.annin.londontubeschedule.pojo.Lines;
 import capstone.my.annin.londontubeschedule.pojo.Schedule;
 import capstone.my.annin.londontubeschedule.pojo.Stations;
@@ -82,6 +84,9 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
         // Bind the views
         ButterKnife.bind(this);
 
+        MapsConnectionCheck myMapsConnectionCheck = new MapsConnectionCheck(); // declaring the object
+        myMapsConnectionCheck.checkPlayServices(context);
+
         scheduleAdapter = new ScheduleAdapter(scheduleArrayList, context);
         mScheduleRecyclerView.setAdapter(scheduleAdapter);
 
@@ -129,6 +134,13 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
                 }
             }
         }
+        if (myMapsConnectionCheck.checkPlayServices(context)) {
+            // perform the API request
+        } else {
+            // show error/retry option
+        }
+
+
     }
 
     @Override
@@ -231,6 +243,15 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
         return shareIntent;
     }
 
+    private void init()
+    {
+      mapsButton.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              Intent intent = new Intent(StationScheduleActivity.this, StationMapActivity.class);
+          }
+      })
+    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState)

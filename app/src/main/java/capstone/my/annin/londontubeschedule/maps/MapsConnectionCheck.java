@@ -14,7 +14,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class MapsConnectionCheck
 {
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
-        private boolean checkPlayServices(Context context)
+        public boolean checkPlayServices(Context context)
         {
             Activity activity = (Activity) context;
         GoogleApiAvailability googleAPI = GoogleApiAvailability.getInstance();
