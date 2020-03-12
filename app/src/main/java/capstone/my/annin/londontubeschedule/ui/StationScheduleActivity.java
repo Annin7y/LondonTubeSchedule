@@ -84,8 +84,8 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
         // Bind the views
         ButterKnife.bind(this);
 
-        MapsConnectionCheck myMapsConnectionCheck = new MapsConnectionCheck(); // declaring the object
-        myMapsConnectionCheck.checkPlayServices(context);
+       // MapsConnectionCheck myMapsConnectionCheck = new MapsConnectionCheck(); // declaring the object
+       // myMapsConnectionCheck.checkPlayServices(context);
 
         scheduleAdapter = new ScheduleAdapter(scheduleArrayList, context);
         mScheduleRecyclerView.setAdapter(scheduleAdapter);
@@ -113,7 +113,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
 
                 lonLocation = stations.getLonLocation();
                 Timber.v(String.valueOf(stations.getLonLocation()));
-
+                if (MapsConnectionCheck.checkPlayServices(this)) {
                 /*
                  *  Starting the asyncTask so that schedule loads when the activity opens.
                  */
@@ -134,7 +134,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
                 }
             }
         }
-        if (myMapsConnectionCheck.checkPlayServices(context)) {
+
             // perform the API request
         } else {
             // show error/retry option
@@ -250,7 +250,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
           public void onClick(View v) {
               Intent intent = new Intent(StationScheduleActivity.this, StationMapActivity.class);
           }
-      })
+      });
     }
 
     @Override
