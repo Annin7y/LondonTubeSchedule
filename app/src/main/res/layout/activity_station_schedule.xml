@@ -48,8 +48,8 @@
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/share_fab"
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/extended_fab"
         style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
         android:text="@string/button_map_text"
         android:elevation="@dimen/fab_elevation"
         android:focusable="true"
-        android:src="@drawable/ic_share_black"
+        android:src="@drawable/baseline_place_black_18dp.png"
         android:translationZ="@dimen/fab_press_translation_z"
         app:layout_anchor="@id/recyclerview_schedule"
         app:layout_anchorGravity="bottom|right|end"

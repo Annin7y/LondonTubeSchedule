@@ -134,10 +134,10 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
                 }
             }
         }
-
-            // perform the API request
-        } else {
-            // show error/retry option
+            if (MapsConnectionCheck.checkPlayServices(this))
+            {
+                 init();
+        }
         }
 
 
@@ -249,6 +249,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
           @Override
           public void onClick(View v) {
               Intent intent = new Intent(StationScheduleActivity.this, StationMapActivity.class);
+              startActivity(intent);
           }
       });
     }
