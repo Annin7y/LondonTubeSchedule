@@ -37,6 +37,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.gson.Gson;
 
 import java.text.ParseException;
@@ -69,8 +70,8 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     @BindView(R.id.empty_view_schedule)
     TextView emptySchedule;
     private static final String KEY_EMPTY_VALUE = "empty_value";
-    @BindView(R.id.maps_button)
-    Button mapsButton;
+    @BindView(R.id.extended_fab)
+    ExtendedFloatingActionButton extendedFAB;
 
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 
@@ -245,7 +246,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
 
     private void init()
     {
-      mapsButton.setOnClickListener(new View.OnClickListener() {
+      extendedFAB.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
               Intent intent = new Intent(StationScheduleActivity.this, StationMapActivity.class);
