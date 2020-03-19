@@ -140,7 +140,20 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
                  init();
         }
         }
-
+        mScheduleRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener()
+        {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0 && extendedFAB.getVisibility() == View.VISIBLE)
+                {
+                    extendedFAB.hide();
+                } else if (dy < 0 && extendedFAB.getVisibility() != View.VISIBLE)
+                {
+                    extendedFAB.show();
+                }
+            }
+        });
 
     }
 
