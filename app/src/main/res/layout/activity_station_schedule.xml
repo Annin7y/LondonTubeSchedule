@@ -14,12 +14,12 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_schedule"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:scrollbars="vertical"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="@dimen/recycler_schedule_start"
-        app:layout_constraintTop_toBottomOf="@id/maps_button"
+
         android:layout_marginTop="@dimen/recycler_schedule_top"
         />
 
@@ -53,6 +53,9 @@
         android:translationZ="@dimen/fab_press_translation_z"
         app:layout_anchor="@id/recyclerview_schedule"
         app:layout_anchorGravity="bottom|right|end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         />
 
 

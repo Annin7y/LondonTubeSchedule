@@ -14,6 +14,8 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class MapsConnectionCheck
 {
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+
+    //check if you have the correct API version
         public static boolean checkPlayServices(Context context)
         {
             Activity activity = (Activity) context;

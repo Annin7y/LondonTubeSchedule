@@ -1,5 +1,6 @@
 package capstone.my.annin.londontubeschedule.ui;
 
+import android.Manifest;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -259,14 +260,22 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
 
     private void init()
     {
-      extendedFAB.setOnClickListener(new View.OnClickListener() {
+      extendedFAB.setOnClickListener(new View.OnClickListener()
+      {
           @Override
-          public void onClick(View v) {
+          public void onClick(View v)
+          {
               Intent intent = new Intent(StationScheduleActivity.this, StationMapActivity.class);
               startActivity(intent);
           }
       });
     }
+
+    private void getLocationPermission()
+    {
+        String [] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,};
+    }
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState)
