@@ -271,11 +271,6 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
       });
     }
 
-    private void getLocationPermission()
-    {
-        String [] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,};
-    }
-
 
     @Override
     protected void onSaveInstanceState(Bundle outState)
