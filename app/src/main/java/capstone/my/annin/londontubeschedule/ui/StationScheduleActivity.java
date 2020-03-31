@@ -110,12 +110,11 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
               // Log.i("stationId: ", stations.getStationId());
                 Timber.v(stations.getStationId(), "stationId: ");
 
-                latLocation = stations.getLatLocation();
-                Timber.v(String.valueOf(stations.getLatLocation()));
-
-                lonLocation = stations.getLonLocation();
-                Timber.v(String.valueOf(stations.getLonLocation()));
-                if (MapsConnectionCheck.checkPlayServices(this)) {
+//                latLocation = stations.getLatLocation();
+//                Timber.v(String.valueOf(stations.getLatLocation()));
+//
+//                lonLocation = stations.getLonLocation();
+//                Timber.v(String.valueOf(stations.getLonLocation()));
                 /*
                  *  Starting the asyncTask so that schedule loads when the activity opens.
                  */
@@ -140,7 +139,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
             {
                  init();
         }
-        }
+
         mScheduleRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener()
         {
             @Override
@@ -266,6 +265,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
           public void onClick(View v)
           {
               Intent intent = new Intent(StationScheduleActivity.this, StationMapActivity.class);
+              intent.putExtra("Stations", stations);
               startActivity(intent);
           }
       });
