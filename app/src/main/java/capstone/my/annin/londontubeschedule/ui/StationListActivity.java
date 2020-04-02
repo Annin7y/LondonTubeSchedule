@@ -192,8 +192,6 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
 
         if (getIntent() != null && getIntent().getExtras() != null)
         {
-            if (savedInstanceState == null)
-            {
                 lines = getIntent().getExtras().getParcelable("Lines");
                 // Extract the movie ID from the selected movie
                 lineId = Objects.requireNonNull(lines).getLineId();
@@ -207,15 +205,14 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
                 Timber.i(lines.getLineName(),"lineName: ");
 
                 mLinesViewModel.isFavorite().observe(this, isFavorite -> {
-                    if (isFavorite) {
+                    if (isFavorite)
+                    {
                         favoritesButton.setText(getString(R.string.favorites_button_text_remove));
 
                     } else {
                         favoritesButton.setText(getString(R.string.favorites_button_text_add));
                     }
                 });
-            }
-
 
                 //The code below was used when running the Room Database on the main thread
 //                 isFavorite = mLinesViewModel.select(lineId);

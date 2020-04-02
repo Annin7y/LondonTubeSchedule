@@ -97,8 +97,8 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
 
         if (getIntent() != null && getIntent().getExtras() != null)
         {
-            if (savedInstanceState == null)
-            {
+//            if (savedInstanceState == null)
+//            {
                 lines = getIntent().getExtras().getParcelable("Lines");
                 stations = getIntent().getExtras().getParcelable("Stations");
 
@@ -121,7 +121,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
                 TubeScheduleAsyncTask myScheduleTask = new TubeScheduleAsyncTask(this);
                 myScheduleTask.execute(lineId, stationId);
 
-            } else
+         //   } else
                 {
                 //emptySchedule visibility code based on the answer in this stackoverflow thread:
                 //https://stackoverflow.com/questions/51903851/keeping-textview-visibility-view-invisible-and-button-state-setenabledfalse
