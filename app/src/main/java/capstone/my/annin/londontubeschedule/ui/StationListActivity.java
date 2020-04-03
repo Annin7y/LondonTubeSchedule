@@ -231,6 +231,9 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
                 /*
                  *  Starting the asyncTask so that stations load when the activity opens.
                  */
+            if (savedInstanceState == null)
+           {
+
                 TubeStationAsyncTask myStationTask = new TubeStationAsyncTask(this);
                 myStationTask.execute(lineId);
             } else
@@ -241,7 +244,7 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
                 lineNameToString = savedInstanceState.getString(KEY_LINE_NAME);
                 lineNameStation.setText(lineNameToString);
             }
-        }
+        }}
         // Kick off the loader
        // getSupportLoaderManager().initLoader(FAVORITES_LOADER, null, this);
 
