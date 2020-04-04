@@ -45,8 +45,6 @@
         app:layout_constraintHorizontal_bias="0.366"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/station_list_instructions"
         android:text="@string/station_dup_instructions" />
 
