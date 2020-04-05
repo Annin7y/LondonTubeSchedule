@@ -97,8 +97,6 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
 
         if (getIntent() != null && getIntent().getExtras() != null)
         {
-            if (savedInstanceState == null)
-            {
                 lines = getIntent().getExtras().getParcelable("Lines");
                 stations = getIntent().getExtras().getParcelable("Stations");
 
@@ -110,11 +108,9 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
               // Log.i("stationId: ", stations.getStationId());
                 Timber.v(stations.getStationId(), "stationId: ");
 
-//                latLocation = stations.getLatLocation();
-//                Timber.v(String.valueOf(stations.getLatLocation()));
-//
-//                lonLocation = stations.getLonLocation();
-//                Timber.v(String.valueOf(stations.getLonLocation()));
+                if (savedInstanceState == null)
+                {
+
                 /*
                  *  Starting the asyncTask so that schedule loads when the activity opens.
                  */
