@@ -57,11 +57,12 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     private ArrayList<Schedule> scheduleArrayList = new ArrayList<>();
     private static final String KEY_SCHEDULE_LIST = "schedule_list";
     Stations stations;
+    private ArrayList<Stations> stationsArrayList = new ArrayList<>();
+    private ArrayList<Stations> linesArrayList = new ArrayList<>();
+    private static final String KEY_STATIONS_LIST = "stations_list";
     public String stationId;
     Lines lines;
     public String lineId;
-    public double latLocation;
-    public double lonLocation;
     private Context context;
     private ShareActionProvider mShareActionProvider;
     Schedule stationArrival;
@@ -260,9 +261,12 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
           @Override
           public void onClick(View v)
           {
-              Intent intent = new Intent(StationScheduleActivity.this, StationMapActivity.class);
-              intent.putExtra("Stations", stations);
-              startActivity(intent);
+             Intent intent = new Intent(StationScheduleActivity.this, StationMapActivity.class);
+             intent.putExtra("Stations", stations);
+              intent.putParcelableArrayListExtra("Stations", stationsArrayList);
+              intent.putParcelableArrayListExtra("Stations", linesArrayList);
+             startActivity(intent);
+
           }
       });
     }
