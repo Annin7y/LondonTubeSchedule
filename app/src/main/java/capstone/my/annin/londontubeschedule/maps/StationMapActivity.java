@@ -1,6 +1,5 @@
 package capstone.my.annin.londontubeschedule.maps;
 
-import android.Manifest;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,11 +13,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-import java.util.ArrayList;
-
 import capstone.my.annin.londontubeschedule.R;
-import capstone.my.annin.londontubeschedule.pojo.Lines;
-import capstone.my.annin.londontubeschedule.pojo.Stations;
+import capstone.my.annin.londontubeschedule.pojo.Station;
 import timber.log.Timber;
 
 public class StationMapActivity extends AppCompatActivity implements OnMapReadyCallback
@@ -32,7 +28,7 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
   //  private static final double LONDON_LON = 0.1278;
 
     private static final String TAG = "StationMapActivity";
-    Stations stations;
+    Station station;
     public String stationId;
   public double latLocation;
    public double lonLocation;
@@ -96,17 +92,17 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
 
         if (getIntent() != null && getIntent().getExtras() != null)
         {
-            stations = getIntent().getExtras().getParcelable("Stations");
+            station = getIntent().getExtras().getParcelable("Station");
 
-            stationId = stations.getStationId();
+            stationId = station.getStationId();
                 // Log.i("stationId: ", stations.getStationId());
-                Timber.v(stations.getStationId(), "stationId: ");
+                Timber.v(station.getStationId(), "stationId: ");
 
-                latLocation = stations.getLatLocation();
-                Timber.v(String.valueOf(stations.getLatLocation()));
+                latLocation = station.getLatLocation();
+                Timber.v(String.valueOf(station.getLatLocation()));
 
-                lonLocation = stations.getLonLocation();
-                Timber.v(String.valueOf(stations.getLonLocation()));
+                lonLocation = station.getLonLocation();
+                Timber.v(String.valueOf(station.getLonLocation()));
 
             }
     }
@@ -136,7 +132,7 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
         // double lat = stations.getLatLocation();
         //double lon = stations.getLonLocation();
 
-            String stationName = stations.getStationName();
+            String stationName = station.getStationName();
 
             // Create a LatLng with the coordinates of each station
            LatLng stationCoordinates = new LatLng(latLocation, lonLocation);

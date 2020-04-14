@@ -7,32 +7,32 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-import capstone.my.annin.londontubeschedule.pojo.Lines;
+import capstone.my.annin.londontubeschedule.pojo.Line;
 
-public class LinesViewModel extends AndroidViewModel
+public class LineViewModel extends AndroidViewModel
 {
-    private LinesRepository mRepository;
-    private LiveData<List<Lines>> mAllLines;
+    private LineRepository mRepository;
+    private LiveData<List<Line>> mAllLines;
 
-    public LinesViewModel(Application application)
+    public LineViewModel(Application application)
     {
         super(application);
-        mRepository = new LinesRepository(application);
+        mRepository = new LineRepository(application);
         mAllLines = mRepository.loadAllLines();
     }
 
-    public LiveData<List<Lines>> loadAllLines()
+    public LiveData<List<Line>> loadAllLines()
     {
         return mAllLines;
     }
 
-    public void insert(Lines linesEntry) {
+    public void insert(Line linesEntry) {
         mRepository.insert(linesEntry);
 
     }
 
-    public void delete(Lines linesEntry) {
-        mRepository.delete(linesEntry);
+    public void delete(Line lineEntry) {
+        mRepository.delete(lineEntry);
     }
 
     public void select(String lineId) {

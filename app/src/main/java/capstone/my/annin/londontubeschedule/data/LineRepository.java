@@ -8,33 +8,33 @@ import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
-import capstone.my.annin.londontubeschedule.pojo.Lines;
+import capstone.my.annin.londontubeschedule.pojo.Line;
 
-public class LinesRepository
+public class LineRepository
 {
-    private LinesDao mLineDao;
-    private LiveData<List<Lines>> mAllLines;
+    private LineDao mLineDao;
+    private LiveData<List<Line>> mAllLines;
 //    public static MutableLiveData<Boolean> isInsertOk = new MutableLiveData<>();
 //    public static MutableLiveData<Boolean> isDeleteOk = new MutableLiveData<>();
     public static MutableLiveData<Boolean> isFavorite = new MutableLiveData<>();
 
-    LinesRepository(Application application)
+    LineRepository(Application application)
     {
         AppDatabase db = AppDatabase.getDatabase(application);
-        mLineDao = db.linesDao();
+        mLineDao = db.lineDao();
         mAllLines = mLineDao.loadAllLines();
     }
-    LiveData<List<Lines>> loadAllLines()
+    LiveData<List<Line>> loadAllLines()
     {
         return mAllLines;
     }
 
-    public void insert(Lines lineEntry)
+    public void insert(Line lineEntry)
     {
         new insertAsyncTask(mLineDao).execute(lineEntry);
     }
 
-    public void delete(Lines lineEntry)
+    public void delete(Line lineEntry)
     {
         new deleteAsyncTask(mLineDao).execute(lineEntry);
     }
@@ -52,16 +52,16 @@ public class LinesRepository
         new selectAsyncTask().execute(id);
     }
 
-    private class selectAsyncTask extends AsyncTask<String, Void,Lines>
+    private class selectAsyncTask extends AsyncTask<String, Void, Line>
     {
 
         @Override
-        protected Lines doInBackground(final String... params) {
+        protected Line doInBackground(final String... params) {
             return mLineDao.getSelectedLine(params[0]);
         }
 
         @Override
-        protected void onPostExecute(Lines lines) {
+        protected void onPostExecute(Line lines) {
             if (lines != null) {
                 setFavorite(true);
             } else {
@@ -87,17 +87,17 @@ public class LinesRepository
 //        isInsertOk.setValue(value);
 //    }
 
-    private class insertAsyncTask extends AsyncTask<Lines, Void, Long>
+    private class insertAsyncTask extends AsyncTask<Line, Void, Long>
     {
-        private LinesDao mAsyncTaskDao;
+        private LineDao mAsyncTaskDao;
 
-        insertAsyncTask(LinesDao dao)
+        insertAsyncTask(LineDao dao)
         {
             mAsyncTaskDao = dao;
         }
 
         @Override
-        protected Long doInBackground(final Lines... params)
+        protected Long doInBackground(final Line... params)
         {
             return mAsyncTaskDao.insertLine(params[0]);
 
@@ -109,12 +109,12 @@ public class LinesRepository
             if(id != -1)
             {
                 //LinesRepository.this.setInsertOk(true);
-                LinesRepository.this.setFavorite(true);
+                LineRepository.this.setFavorite(true);
             }
             else
             {
                 //LinesRepository.this.setInsertOk(false);
-                LinesRepository.this.setFavorite(false);
+                LineRepository.this.setFavorite(false);
             }
 
         }
@@ -126,17 +126,17 @@ public class LinesRepository
 //        isDeleteOk.setValue(value);
 //    }
 
-    private class deleteAsyncTask extends AsyncTask<Lines, Void, Integer>
+    private class deleteAsyncTask extends AsyncTask<Line, Void, Integer>
     {
-        private LinesDao mAsyncTaskDao;
+        private LineDao mAsyncTaskDao;
 
-        deleteAsyncTask(LinesDao dao)
+        deleteAsyncTask(LineDao dao)
         {
             mAsyncTaskDao = dao;
         }
 
         @Override
-        protected Integer doInBackground(final Lines... params)
+        protected Integer doInBackground(final Line... params)
         {
             return mAsyncTaskDao.deleteLine(params[0]);
 
@@ -148,12 +148,12 @@ public class LinesRepository
             if(rowsDeleted > 0)
             {
                // LinesRepository.this.setDeleteOk(true);
-                LinesRepository.this.setFavorite(false);
+                LineRepository.this.setFavorite(false);
             }
             else
             {
                // LinesRepository.this.setDeleteOk(false);
-                LinesRepository.this.setFavorite(true);
+                LineRepository.this.setFavorite(true);
             }
         }
     }

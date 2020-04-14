@@ -7,8 +7,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
-@Entity(tableName = "lines")
-public class Lines implements Parcelable
+@Entity(tableName = "line")
+public class Line implements Parcelable
 {
     /**
      * Line id
@@ -38,7 +38,7 @@ public class Lines implements Parcelable
     /**
      * List of lines
      */
-    public Lines(String lineId, String lineName, String lineStatusDesc, String lineStatusReason)
+    public Line(String lineId, String lineName, String lineStatusDesc, String lineStatusReason)
     {
         this.lineId = lineId;
         this.lineName = lineName;
@@ -86,7 +86,7 @@ public class Lines implements Parcelable
         return lineStatusReason;
     }
 
-    protected Lines(Parcel in)
+    protected Line(Parcel in)
     {
         lineId = in.readString();
         lineName = in.readString();
@@ -110,18 +110,18 @@ public class Lines implements Parcelable
     }
 
     @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Lines> CREATOR = new Parcelable.Creator<Lines>()
+    public static final Parcelable.Creator<Line> CREATOR = new Parcelable.Creator<Line>()
     {
         @Override
-        public Lines createFromParcel(Parcel in)
+        public Line createFromParcel(Parcel in)
         {
-            return new Lines(in);
+            return new Line(in);
         }
 
         @Override
-        public Lines[] newArray(int size)
+        public Line[] newArray(int size)
         {
-            return new Lines[size];
+            return new Line[size];
         }
     };
 }

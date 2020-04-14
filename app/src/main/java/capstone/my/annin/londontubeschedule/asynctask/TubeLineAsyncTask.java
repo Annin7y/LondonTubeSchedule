@@ -5,11 +5,11 @@ import android.os.AsyncTask;
 import java.net.URL;
 import java.util.ArrayList;
 
-import capstone.my.annin.londontubeschedule.pojo.Lines;
+import capstone.my.annin.londontubeschedule.pojo.Line;
 import capstone.my.annin.londontubeschedule.utils.JSONUtils;
 import capstone.my.annin.londontubeschedule.utils.NetworkUtils;
 
-public class TubeLineAsyncTask extends AsyncTask<URL, Void, ArrayList<Lines>>
+public class TubeLineAsyncTask extends AsyncTask<URL, Void, ArrayList<Line>>
 {
     private static final String TAG = TubeLineAsyncTask.class.getSimpleName();
 
@@ -27,7 +27,7 @@ public class TubeLineAsyncTask extends AsyncTask<URL, Void, ArrayList<Lines>>
     }
 
     @Override
-    protected ArrayList<Lines> doInBackground(URL... params)
+    protected ArrayList<Line> doInBackground(URL... params)
     {
         URL lineRequestUrl = NetworkUtils.buildLineStatusUrl();
 
@@ -46,7 +46,7 @@ public class TubeLineAsyncTask extends AsyncTask<URL, Void, ArrayList<Lines>>
     }
 
    @Override
-    protected void onPostExecute(ArrayList<Lines> mLineList)
+    protected void onPostExecute(ArrayList<Line> mLineList)
     {
         super.onPostExecute(mLineList);
          /*the if method is commented out because the error message will be displayed if there is no internet connection

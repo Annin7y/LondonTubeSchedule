@@ -6,16 +6,16 @@ import androidx.room.RoomDatabase;
 import android.content.Context;
 import android.util.Log;
 
-import capstone.my.annin.londontubeschedule.pojo.Lines;
+import capstone.my.annin.londontubeschedule.pojo.Line;
 
-@Database(entities = {Lines.class}, version = 1, exportSchema = false)
+@Database(entities = {Line.class}, version = 1, exportSchema = false)
 
     public abstract class AppDatabase extends RoomDatabase
     {
-        public abstract LinesDao linesDao();
+        public abstract LineDao lineDao();
         private static final String LOG_TAG = AppDatabase.class.getSimpleName();
         private static final Object LOCK = new Object();
-        private static final String DATABASE_NAME = "linesFavorites";
+        private static final String DATABASE_NAME = "lineFavorites";
 
         private static AppDatabase sInstance;
 

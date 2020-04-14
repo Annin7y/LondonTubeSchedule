@@ -3,7 +3,7 @@ package capstone.my.annin.londontubeschedule.pojo;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Stations implements Parcelable
+public class Station implements Parcelable
 {
     /**
      * Station id
@@ -25,7 +25,7 @@ public class Stations implements Parcelable
      */
     private double lonLocation;
 
-    public Stations(String stationId, String stationName, double latLocation, double lonLocation)
+    public Station(String stationId, String stationName, double latLocation, double lonLocation)
     {
         this.stationId = stationId;
         this.stationName = stationName;
@@ -73,7 +73,7 @@ public class Stations implements Parcelable
         return lonLocation;
     }
 
-    protected Stations(Parcel in)
+    protected Station(Parcel in)
     {
         stationId = in.readString();
         stationName = in.readString();
@@ -97,18 +97,18 @@ public class Stations implements Parcelable
     }
 
     @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Stations> CREATOR = new Parcelable.Creator<Stations>()
+    public static final Parcelable.Creator<Station> CREATOR = new Parcelable.Creator<Station>()
     {
         @Override
-        public Stations createFromParcel(Parcel in)
+        public Station createFromParcel(Parcel in)
         {
-            return new Stations(in);
+            return new Station(in);
         }
 
         @Override
-        public Stations[] newArray(int size)
+        public Station[] newArray(int size)
         {
-            return new Stations[size];
+            return new Station[size];
         }
     };
 }

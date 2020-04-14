@@ -5,11 +5,11 @@ import android.os.AsyncTask;
 import java.net.URL;
 import java.util.ArrayList;
 
-import capstone.my.annin.londontubeschedule.pojo.Stations;
+import capstone.my.annin.londontubeschedule.pojo.Station;
 import capstone.my.annin.londontubeschedule.utils.JSONUtils;
 import capstone.my.annin.londontubeschedule.utils.NetworkUtils;
 
-public class TubeStationAsyncTask extends AsyncTask<String, Void, ArrayList<Stations>>
+public class TubeStationAsyncTask extends AsyncTask<String, Void, ArrayList<Station>>
 {
     private static final String TAG = TubeStationAsyncTask.class.getSimpleName();
 
@@ -27,7 +27,7 @@ public class TubeStationAsyncTask extends AsyncTask<String, Void, ArrayList<Stat
     }
 
     @Override
-    protected ArrayList<Stations> doInBackground(String... params)
+    protected ArrayList<Station> doInBackground(String... params)
     {
         if (params.length == 0)
         {
@@ -53,7 +53,7 @@ public class TubeStationAsyncTask extends AsyncTask<String, Void, ArrayList<Stat
     }
 
     @Override
-    protected void onPostExecute(ArrayList<Stations> mStationList)
+    protected void onPostExecute(ArrayList<Station> mStationList)
     {
         super.onPostExecute(mStationList);
         /*the if method is commented out because the error message will be displayed in the Main Activity if there is no internet connection

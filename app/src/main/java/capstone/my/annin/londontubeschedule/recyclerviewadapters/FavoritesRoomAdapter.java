@@ -13,17 +13,17 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import capstone.my.annin.londontubeschedule.R;
-import capstone.my.annin.londontubeschedule.pojo.Lines;
+import capstone.my.annin.londontubeschedule.pojo.Line;
 
 public class FavoritesRoomAdapter extends RecyclerView.Adapter<FavoritesRoomAdapter.FavoritesRoomAdapterViewHolder>
 {
     private static final String TAG = FavoritesRoomAdapter.class.getSimpleName();
 
-    public List<Lines> roomLinesList;
-    private LinesAdapter.LinesAdapterOnClickHandler mClickHandler;
+    public List<Line> roomLineList;
+    private LineAdapter.LineAdapterOnClickHandler mClickHandler;
     private Context context;
 
-    public FavoritesRoomAdapter(LinesAdapter.LinesAdapterOnClickHandler clickHandler, Context context)
+    public FavoritesRoomAdapter(LineAdapter.LineAdapterOnClickHandler clickHandler, Context context)
     {
         mClickHandler = clickHandler;
         this.context = context;
@@ -45,7 +45,7 @@ public class FavoritesRoomAdapter extends RecyclerView.Adapter<FavoritesRoomAdap
         public void onClick(View v)
         {
             int adapterPosition = getAdapterPosition();
-            Lines lineClick = roomLinesList.get(adapterPosition);
+            Line lineClick = roomLineList.get(adapterPosition);
             mClickHandler.onClick(lineClick);
         }
     }
@@ -54,19 +54,19 @@ public class FavoritesRoomAdapter extends RecyclerView.Adapter<FavoritesRoomAdap
     public void onBindViewHolder(FavoritesRoomAdapter.FavoritesRoomAdapterViewHolder holder, int position)
     {
         //Binding data
-        final Lines lineView = roomLinesList.get(position);
+        final Line lineView = roomLineList.get(position);
         holder.lineName.setText(lineView.getLineName());
     }
 
-    public void setLines(List<Lines> lines)
+    public void setLine(List<Line> line)
     {
-        roomLinesList = lines;
+        roomLineList = line;
         notifyDataSetChanged();
     }
 
-    public Lines getMovieAt(int position)
+    public Line getMovieAt(int position)
     {
-        return roomLinesList.get(position);
+        return roomLineList.get(position);
     }
 
     @Override
@@ -82,8 +82,8 @@ public class FavoritesRoomAdapter extends RecyclerView.Adapter<FavoritesRoomAdap
 
     public int getItemCount()
         {
-            if(roomLinesList != null)
-                return roomLinesList.size();
+            if(roomLineList != null)
+                return roomLineList.size();
             else return 0;
         }
 }

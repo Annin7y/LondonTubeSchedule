@@ -1,19 +1,7 @@
 package capstone.my.annin.londontubeschedule.recyclerviewadapters;
 
-import android.content.Context;
-import android.database.Cursor;
-import androidx.recyclerview.widget.RecyclerView;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import capstone.my.annin.londontubeschedule.R;
 //import capstone.my.annin.londontubeschedule.data.TubeLineContract;
-import capstone.my.annin.londontubeschedule.pojo.Lines;
+
 
 //public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.FavoritesAdapterViewHolder>
 //{

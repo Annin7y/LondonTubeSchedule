@@ -24,15 +24,15 @@ import capstone.my.annin.londontubeschedule.R;
 import capstone.my.annin.londontubeschedule.asynctask.TubeStationAsyncTask;
 import capstone.my.annin.londontubeschedule.asynctask.TubeStationAsyncTaskInterface;
 import capstone.my.annin.londontubeschedule.data.AppDatabase;
-import capstone.my.annin.londontubeschedule.data.LinesViewModel;
-import capstone.my.annin.londontubeschedule.pojo.Lines;
-import capstone.my.annin.londontubeschedule.pojo.Stations;
-import capstone.my.annin.londontubeschedule.recyclerviewadapters.StationsAdapter;
+import capstone.my.annin.londontubeschedule.data.LineViewModel;
+import capstone.my.annin.londontubeschedule.pojo.Line;
+import capstone.my.annin.londontubeschedule.pojo.Station;
+import capstone.my.annin.londontubeschedule.recyclerviewadapters.StationAdapter;
 import timber.log.Timber;
 
 //import capstone.my.annin.londontubeschedule.data.TubeLineContract;
 
-public class StationListActivity extends AppCompatActivity implements StationsAdapter.StationsAdapterOnClickHandler, TubeStationAsyncTaskInterface
+public class StationListActivity extends AppCompatActivity implements StationAdapter.StationAdapterOnClickHandler, TubeStationAsyncTaskInterface
        // LoaderManager.LoaderCallbacks<Cursor>
 {
     //Tag for the log messages
@@ -41,12 +41,12 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
     @BindView(R.id.recyclerview_station)
     RecyclerView mStationRecyclerView;
 
-    private StationsAdapter stationsAdapter;
-    private ArrayList<Stations> stationsArrayList = new ArrayList<>();
-    private static final String KEY_STATIONS_LIST = "stations_list";
-    private static final String KEY_LINES_LIST = "lines_list";
+    private StationAdapter stationAdapter;
+    private ArrayList<Station> stationArrayList = new ArrayList<>();
+    private static final String KEY_STATION_LIST = "station_list";
+    private static final String KEY_LINE_LIST = "line_list";
     private static final String KEY_LINE_NAME = "line_name";
-    Lines lines;
+    Line line;
     public String lineId;
     private Context context;
     private FirebaseAnalytics mFirebaseAnalytics;
@@ -64,7 +64,7 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
     private AppDatabase mDb;
 
     //ViewModel variable
-    private LinesViewModel mLinesViewModel;
+    private LineViewModel mLineViewModel;
 
     @BindView(R.id.empty_view_stations)
     TextView emptyStations;
@@ -88,8 +88,8 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
         // Bind the views
         ButterKnife.bind(this);
 
-        stationsAdapter = new StationsAdapter(this, stationsArrayList, context);
-        mStationRecyclerView.setAdapter(stationsAdapter);
+        stationAdapter = new StationAdapter(this, stationArrayList, context);
+        mStationRecyclerView.setAdapter(stationAdapter);
 
         RecyclerView.LayoutManager mStationLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mStationRecyclerView.setLayoutManager(mStationLayoutManager);
@@ -98,20 +98,20 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
 
         mDb = AppDatabase.getDatabase(getApplicationContext());
 
-        mLinesViewModel = ViewModelProviders.of(this).get(LinesViewModel.class);
+        mLineViewModel = ViewModelProviders.of(this).get(LineViewModel.class);
 
         // Set a click listener for the Favorite button
         favoritesButton.setOnClickListener(view ->
         {
             if (favoritesButton.getText().equals(getString(R.string.favorites_button_text_remove)))
             {
-                mLinesViewModel.delete(lines);
+                mLineViewModel.delete(line);
                 Toast.makeText(StationListActivity.this, getString(R.string.favorites_removed), Toast.LENGTH_SHORT).show();
                 favoritesButton.setText(R.string.favorites_button_text_add);
             }
             else {
 //             // If the line is not favorite, we add it to the DB
-                mLinesViewModel.insert(lines);
+                mLineViewModel.insert(line);
                 Toast.makeText(StationListActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
                 favoritesButton.setText((R.string.favorites_button_text_remove));
 
@@ -126,7 +126,7 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
 //                                                @Override
 //                                                public void onClick(View view) {
 //
-//                                                    if (isFavorite) {
+//                                                      if (isFavorite) {
 //                                                        // If the movie is already favorite, we remove it from the DB
 //                                                        mLinesViewModel.delete(lines).observe(StationListActivity.this, new Observer<Boolean>() {
 //                                                            @Override
@@ -192,19 +192,19 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
 
         if (getIntent() != null && getIntent().getExtras() != null)
         {
-                lines = getIntent().getExtras().getParcelable("Lines");
-                // Extract the movie ID from the selected movie
-                lineId = Objects.requireNonNull(lines).getLineId();
-                lineId = lines.getLineId();
+                line = getIntent().getExtras().getParcelable("Line");
+                // Extract the movie ID from the selected line
+                lineId = Objects.requireNonNull(line).getLineId();
+                lineId = line.getLineId();
                // Log.i("lineId: ", lines.getLineId());
-                Timber.i(lines.getLineId(), "lineId: ");
+                Timber.i(line.getLineId(), "lineId: ");
 
-                lineNameStation.setText(lines.getLineName());
+                lineNameStation.setText(line.getLineName());
                 lineNameToString = lineNameStation.getText().toString();
-               // Log.i("lineName: ", lines.getLineName());
-                Timber.i(lines.getLineName(),"lineName: ");
+               // Log.i("lineName: ", line.getLineName());
+                Timber.i(line.getLineName(),"lineName: ");
 
-                mLinesViewModel.isFavorite().observe(this, isFavorite -> {
+                mLineViewModel.isFavorite().observe(this, isFavorite -> {
                     if (isFavorite)
                     {
                         favoritesButton.setText(getString(R.string.favorites_button_text_remove));
@@ -238,9 +238,9 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
                 myStationTask.execute(lineId);
             } else
                 {
-                stationsArrayList = savedInstanceState.getParcelableArrayList(KEY_STATIONS_LIST);
-                stationsAdapter.setStationsList(stationsArrayList);
-                lines = savedInstanceState.getParcelable(KEY_LINES_LIST);
+                stationArrayList = savedInstanceState.getParcelableArrayList(KEY_STATION_LIST);
+                stationAdapter.setStationList(stationArrayList);
+                line = savedInstanceState.getParcelable(KEY_LINE_LIST);
                 lineNameToString = savedInstanceState.getString(KEY_LINE_NAME);
                 lineNameStation.setText(lineNameToString);
             }
@@ -250,14 +250,14 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
 
 
     @Override
-    public void returnStationData(ArrayList<Stations> simpleJsonStationData)
+    public void returnStationData(ArrayList<Station> simpleJsonStationData)
     {
         if (null != simpleJsonStationData)
         {
-            stationsAdapter = new StationsAdapter(this, simpleJsonStationData, StationListActivity.this);
-            stationsArrayList = simpleJsonStationData;
-            mStationRecyclerView.setAdapter(stationsAdapter);
-            stationsAdapter.setStationsList(stationsArrayList);
+            stationAdapter = new StationAdapter(this, simpleJsonStationData, StationListActivity.this);
+            stationArrayList = simpleJsonStationData;
+            mStationRecyclerView.setAdapter(stationAdapter);
+            stationAdapter.setStationList(stationArrayList);
         }
         else
             {
@@ -267,16 +267,16 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
     }
 
     @Override
-    public void onClick(Stations stations)
+    public void onClick(Station station)
     {
         Intent intent = new Intent(StationListActivity.this, StationScheduleActivity.class);
-        intent.putExtra("Lines", lines);
-        intent.putExtra("Stations", stations);
+        intent.putExtra("Line", line);
+        intent.putExtra("Station", station);
         startActivity(intent);
 
         //log event when the user selects a station
         Bundle params = new Bundle();
-        params.putParcelable("station_select", stations);
+        params.putParcelable("station_select", station);
         mFirebaseAnalytics.logEvent("station_select",params);
 
     }
@@ -326,9 +326,9 @@ public class StationListActivity extends AppCompatActivity implements StationsAd
         }
 
 
-        outState.putParcelableArrayList(KEY_STATIONS_LIST, stationsArrayList);
+        outState.putParcelableArrayList(KEY_STATION_LIST, stationArrayList);
         outState.putString(KEY_LINE_NAME, lineNameToString);
-        outState.putParcelable(KEY_LINES_LIST, lines);
+        outState.putParcelable(KEY_LINE_LIST, line);
         super.onSaveInstanceState(outState);
     }
 }

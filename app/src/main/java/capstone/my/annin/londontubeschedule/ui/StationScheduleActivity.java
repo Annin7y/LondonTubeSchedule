@@ -1,6 +1,5 @@
 package capstone.my.annin.londontubeschedule.ui;
 
-import android.Manifest;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -13,9 +12,9 @@ import capstone.my.annin.londontubeschedule.asynctask.TubeScheduleAsyncTask;
 import capstone.my.annin.londontubeschedule.asynctask.TubeScheduleAsyncTaskInterface;
 import capstone.my.annin.londontubeschedule.maps.MapsConnectionCheck;
 import capstone.my.annin.londontubeschedule.maps.StationMapActivity;
-import capstone.my.annin.londontubeschedule.pojo.Lines;
+import capstone.my.annin.londontubeschedule.pojo.Line;
 import capstone.my.annin.londontubeschedule.pojo.Schedule;
-import capstone.my.annin.londontubeschedule.pojo.Stations;
+import capstone.my.annin.londontubeschedule.pojo.Station;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.ScheduleAdapter;
 import capstone.my.annin.londontubeschedule.widget.ScheduleWidgetProvider;
 import timber.log.Timber;
@@ -33,11 +32,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.gson.Gson;
 
@@ -56,12 +52,13 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     private ScheduleAdapter scheduleAdapter;
     private ArrayList<Schedule> scheduleArrayList = new ArrayList<>();
     private static final String KEY_SCHEDULE_LIST = "schedule_list";
-    Stations stations;
-    private ArrayList<Stations> stationsArrayList = new ArrayList<>();
-    private ArrayList<Stations> linesArrayList = new ArrayList<>();
-    private static final String KEY_STATIONS_LIST = "stations_list";
+    Station station;
+    private ArrayList<Station> stationArrayList = new ArrayList<>();
+    private ArrayList<Station> lineArrayList = new ArrayList<>();
+    private static final String KEY_STATION_LIST = "station_list";
+    private static final String KEY_LINE_LIST = "line_list";
     public String stationId;
-    Lines lines;
+    Line line;
     public String lineId;
     private Context context;
     private ShareActionProvider mShareActionProvider;
@@ -98,16 +95,16 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
 
         if (getIntent() != null && getIntent().getExtras() != null)
         {
-                lines = getIntent().getExtras().getParcelable("Lines");
-                stations = getIntent().getExtras().getParcelable("Stations");
+                line = getIntent().getExtras().getParcelable("Line");
+                station = getIntent().getExtras().getParcelable("Station");
 
-                lineId = lines.getLineId();
-               // Log.i("lineId: ", lines.getLineId());
-                Timber.v(lines.getLineId(), "lineId: ");
+                lineId = line.getLineId();
+               // Log.i("lineId: ", line.getLineId());
+                Timber.v(line.getLineId(), "lineId: ");
 
-                stationId = stations.getStationId();
+                stationId = station.getStationId();
               // Log.i("stationId: ", stations.getStationId());
-                Timber.v(stations.getStationId(), "stationId: ");
+                Timber.v(station.getStationId(), "stationId: ");
 
                 if (savedInstanceState == null)
                 {
@@ -193,13 +190,13 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
             String json = gson.toJson(scheduleArrayList);
             prefsEditor.putString("ScheduleList_Widget", json);
 
-            //Save the Lines as a JSON string using Preferences.
-           String jsonLines = gson.toJson(lines);
-           prefsEditor.putString("Lines", jsonLines);
+            //Save the Line as a JSON string using Preferences.
+           String jsonLine = gson.toJson(line);
+           prefsEditor.putString("Lines", jsonLine);
 
             //Save the Stations as a JSON string using Preferences.
-            String jsonStations = gson.toJson(stations);
-            prefsEditor.putString("Stations", jsonStations);
+            String jsonStation = gson.toJson(station);
+            prefsEditor.putString("Stations", jsonStation);
 
             prefsEditor.apply();
 
@@ -262,7 +259,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
           public void onClick(View v)
           {
              Intent intent = new Intent(StationScheduleActivity.this, StationMapActivity.class);
-            intent.putExtra("Stations", stations);
+            intent.putExtra("Station", station);
              // intent.putParcelableArrayListExtra("Stations", stationsArrayList);
              // intent.putParcelableArrayListExtra("Stations", linesArrayList);
              startActivity(intent);

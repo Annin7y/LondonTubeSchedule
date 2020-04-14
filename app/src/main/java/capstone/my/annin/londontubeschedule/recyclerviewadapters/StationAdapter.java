@@ -14,22 +14,22 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import capstone.my.annin.londontubeschedule.R;
-import capstone.my.annin.londontubeschedule.pojo.Stations;
+import capstone.my.annin.londontubeschedule.pojo.Station;
 
-public class StationsAdapter extends RecyclerView.Adapter<StationsAdapter.StationsAdapterViewHolder>
+public class StationAdapter extends RecyclerView.Adapter<StationAdapter.StationAdapterViewHolder>
 {
-    private static final String TAG = StationsAdapter.class.getSimpleName();
+    private static final String TAG = StationAdapter.class.getSimpleName();
 
-    private ArrayList<Stations> stationsList = new ArrayList<Stations>();
+    private ArrayList<Station> stationList = new ArrayList<Station>();
     private Context context;
-    private StationsAdapterOnClickHandler mStationClickHandler;
+    private StationAdapterOnClickHandler mStationClickHandler;
 
     /**
      * The interface that receives onClick messages.
      */
-    public interface StationsAdapterOnClickHandler
+    public interface StationAdapterOnClickHandler
     {
-        void onClick(Stations textStationClick);
+        void onClick(Station textStationClick);
     }
 
     /**
@@ -38,17 +38,17 @@ public class StationsAdapter extends RecyclerView.Adapter<StationsAdapter.Statio
      * @param stationClickHandler The on-click handler for this adapter. This single handler is called
      *                            *                     when an item is clicked.
      */
-    public StationsAdapter(StationsAdapterOnClickHandler stationClickHandler, ArrayList<Stations> stationsList, Context context)
+    public StationAdapter(StationAdapterOnClickHandler stationClickHandler, ArrayList<Station> stationList, Context context)
     {
         mStationClickHandler = stationClickHandler;
-        this.stationsList = stationsList;
+        this.stationList = stationList;
         this.context = context;
     }
 
     /**
      * Cache of the children views for a station list item.
      */
-    public class StationsAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+    public class StationAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
         @BindView(R.id.station_name)
         public TextView stationName;
@@ -56,7 +56,7 @@ public class StationsAdapter extends RecyclerView.Adapter<StationsAdapter.Statio
         @BindView(R.id.timeline)
         public TimelineView mTimelineView;
 
-        public StationsAdapterViewHolder(View view, int viewType)
+        public StationAdapterViewHolder(View view, int viewType)
         {
             super(view);
             ButterKnife.bind(this, view);
@@ -73,30 +73,30 @@ public class StationsAdapter extends RecyclerView.Adapter<StationsAdapter.Statio
         public void onClick(View v)
         {
             int adapterPosition = getAdapterPosition();
-            Stations textStationClick = stationsList.get(adapterPosition);
+            Station textStationClick = stationList.get(adapterPosition);
             mStationClickHandler.onClick(textStationClick);
         }
     }
 
     @Override
-    public StationsAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType)
+    public StationAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType)
     {
         Context context = viewGroup.getContext();
         int layoutIdForListItem = R.layout.station_list_item;
         LayoutInflater inflater = LayoutInflater.from(context);
         boolean shouldAttachToParentImmediately = false;
         View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
-        return new StationsAdapterViewHolder(view, viewType);
+        return new StationAdapterViewHolder(view, viewType);
     }
 
     /**
      * Cache of the children views for a station list item.
      */
     @Override
-    public void onBindViewHolder(StationsAdapterViewHolder holder, int position)
+    public void onBindViewHolder(StationAdapterViewHolder holder, int position)
     {
         //Binding data
-        final Stations stationView = stationsList.get(position);
+        final Station stationView = stationList.get(position);
 
         holder.stationName.setText(stationView.getStationName());
 
@@ -111,12 +111,12 @@ public class StationsAdapter extends RecyclerView.Adapter<StationsAdapter.Statio
     @Override
     public int getItemCount()
     {
-        return stationsList.size();
+        return stationList.size();
     }
 
-    public void setStationsList(ArrayList<Stations> mStationsList)
+    public void setStationList(ArrayList<Station> mStationList)
     {
-        this.stationsList = mStationsList;
+        this.stationList = mStationList;
         notifyDataSetChanged();
     }
 }

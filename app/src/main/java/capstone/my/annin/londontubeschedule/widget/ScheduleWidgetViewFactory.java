@@ -18,17 +18,17 @@ import java.util.Date;
 import java.util.List;
 
 import capstone.my.annin.londontubeschedule.R;
-import capstone.my.annin.londontubeschedule.pojo.Lines;
+import capstone.my.annin.londontubeschedule.pojo.Line;
 import capstone.my.annin.londontubeschedule.pojo.Schedule;
-import capstone.my.annin.londontubeschedule.pojo.Stations;
+import capstone.my.annin.londontubeschedule.pojo.Station;
 
 public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViewsFactory
 {
     private ArrayList<Schedule> mScheduleList;
     private Context mContext;
     private String stationWidgetArrivalTime;
-    private Lines lines;
-    private Stations stations;
+    private Line lines;
+    private Station stations;
 
     public ScheduleWidgetViewFactory(Context context)
     {
@@ -54,11 +54,11 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
 
         //Extract the JSON lines from preferences and assign it to a Lines object.
         String jsonLines = sharedPreferences.getString("Lines", "");
-        lines = gson.fromJson(jsonLines, Lines.class);
+        lines = gson.fromJson(jsonLines, Line.class);
 
         //Extract the JSON stations from preferences and assign it to a Stations object.
        String jsonStations = sharedPreferences.getString("Stations", "");
-       stations = gson.fromJson(jsonStations, Stations.class);
+       stations = gson.fromJson(jsonStations, Station.class);
 
     }
 

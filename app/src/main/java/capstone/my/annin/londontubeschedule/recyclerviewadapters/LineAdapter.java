@@ -12,22 +12,22 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import capstone.my.annin.londontubeschedule.R;
-import capstone.my.annin.londontubeschedule.pojo.Lines;
+import capstone.my.annin.londontubeschedule.pojo.Line;
 
-public class LinesAdapter extends RecyclerView.Adapter<LinesAdapter.LinesAdapterViewHolder>
+public class LineAdapter extends RecyclerView.Adapter<LineAdapter.LineAdapterViewHolder>
 {
-    private static final String TAG = LinesAdapter.class.getSimpleName();
+    private static final String TAG = LineAdapter.class.getSimpleName();
 
-    private ArrayList<Lines> linesList = new ArrayList<Lines>();
+    private ArrayList<Line> lineList = new ArrayList<Line>();
     private Context context;
-    private LinesAdapterOnClickHandler mLineClickHandler;
+    private LineAdapterOnClickHandler mLineClickHandler;
 
     /**
      * The interface that receives onClick messages.
      */
-    public interface LinesAdapterOnClickHandler
+    public interface LineAdapterOnClickHandler
     {
-        void onClick(Lines textLineClick);
+        void onClick(Line textLineClick);
     }
 
     /**
@@ -36,17 +36,17 @@ public class LinesAdapter extends RecyclerView.Adapter<LinesAdapter.LinesAdapter
      * @param lineClickHandler The on-click handler for this adapter. This single handler is called
      *                         *                     when an item is clicked.
      */
-    public LinesAdapter(LinesAdapterOnClickHandler lineClickHandler, ArrayList<Lines> linesList, Context context)
+    public LineAdapter(LineAdapterOnClickHandler lineClickHandler, ArrayList<Line> lineList, Context context)
     {
         mLineClickHandler = lineClickHandler;
-        this.linesList = linesList;
+        this.lineList = lineList;
         this.context = context;
     }
 
     /**
      * Cache of the children views for a line list item.
      */
-    public class LinesAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+    public class LineAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
         @BindView(R.id.line_name)
         public TextView lineName;
@@ -57,7 +57,7 @@ public class LinesAdapter extends RecyclerView.Adapter<LinesAdapter.LinesAdapter
         @BindView(R.id.line_status_reason)
         public TextView lineStatusReason;
 
-        public LinesAdapterViewHolder(View view)
+        public LineAdapterViewHolder(View view)
         {
             super(view);
             ButterKnife.bind(this, view);
@@ -73,30 +73,30 @@ public class LinesAdapter extends RecyclerView.Adapter<LinesAdapter.LinesAdapter
         public void onClick(View v)
         {
             int adapterPosition = getAdapterPosition();
-            Lines textLineClick = linesList.get(adapterPosition);
+            Line textLineClick = lineList.get(adapterPosition);
             mLineClickHandler.onClick(textLineClick);
         }
     }
 
     @Override
-    public LinesAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType)
+    public LineAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType)
     {
         Context context = viewGroup.getContext();
         int layoutIdForListItem = R.layout.line_list_item;
         LayoutInflater inflater = LayoutInflater.from(context);
         boolean shouldAttachToParentImmediately = false;
         View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
-        return new LinesAdapterViewHolder(view);
+        return new LineAdapterViewHolder(view);
     }
 
     /**
      * Cache of the children views for a line list item.
      */
     @Override
-    public void onBindViewHolder(LinesAdapterViewHolder holder, int position)
+    public void onBindViewHolder(LineAdapterViewHolder holder, int position)
     {
         //Binding data
-        final Lines lineView = linesList.get(position);
+        final Line lineView = lineList.get(position);
 
         holder.lineName.setText(lineView.getLineName());
         holder.lineStatusDesc.setText(lineView.getLineStatusDesc());
@@ -106,12 +106,12 @@ public class LinesAdapter extends RecyclerView.Adapter<LinesAdapter.LinesAdapter
     @Override
     public int getItemCount()
     {
-        return linesList.size();
+        return lineList.size();
     }
 
-    public void setLinesList(ArrayList<Lines> mLinesList)
+    public void setLineList(ArrayList<Line> mLineList)
     {
-        this.linesList = mLinesList;
+        this.lineList = mLineList;
         notifyDataSetChanged();
     }
 }

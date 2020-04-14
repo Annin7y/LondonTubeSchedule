@@ -1,7 +1,6 @@
 package capstone.my.annin.londontubeschedule.utils;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -9,9 +8,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import capstone.my.annin.londontubeschedule.pojo.Lines;
+import capstone.my.annin.londontubeschedule.pojo.Line;
 import capstone.my.annin.londontubeschedule.pojo.Schedule;
-import capstone.my.annin.londontubeschedule.pojo.Stations;
+import capstone.my.annin.londontubeschedule.pojo.Station;
 import timber.log.Timber;
 
 public class JSONUtils
@@ -89,7 +88,7 @@ public class JSONUtils
 //        return lines;
 //    }
 
-    public static ArrayList<Lines> extractFeatureFromLineStatusJson(String lineStatusJSON)
+    public static ArrayList<Line> extractFeatureFromLineStatusJson(String lineStatusJSON)
     {
         // If the JSON string is empty or null, then return early.
         if (TextUtils.isEmpty(lineStatusJSON))
@@ -97,7 +96,7 @@ public class JSONUtils
             return null;
         }
 
-        ArrayList<Lines> lines = new ArrayList<>();
+        ArrayList<Line> lines = new ArrayList<>();
         try
         {
             // Create a JSONObject from the JSON response string
@@ -136,7 +135,7 @@ public class JSONUtils
                                         lineStatusReason = innerElem.optString(KEY_LINE_STATUS_REASON);
                                     }
 
-                                    Lines line = new Lines(id, name, lineStatusDesc, lineStatusReason);
+                                    Line line = new Line(id, name, lineStatusDesc, lineStatusReason);
                                 lines.add(line);
         }}}}
         catch (JSONException e)
@@ -152,14 +151,14 @@ public class JSONUtils
         return lines;
     }
 
-    public static ArrayList<Stations> extractFeatureFromStationJson(String stationJSON)
+    public static ArrayList<Station> extractFeatureFromStationJson(String stationJSON)
     {
         // If the JSON string is empty or null, then return early.
         if (TextUtils.isEmpty(stationJSON))
         {
             return null;
         }
-        ArrayList<Stations> stations = new ArrayList<>();
+        ArrayList<Station> stations = new ArrayList<>();
 
         try
         {
@@ -204,7 +203,7 @@ public class JSONUtils
                                         stationLonLocation = innerElem.optDouble("lon");
                                     }
 
-                                    Stations station = new Stations(idStation, nameStation, stationLatLocation, stationLonLocation);
+                                    Station station = new Station(idStation, nameStation, stationLatLocation, stationLonLocation);
                                     stations.add(station);
                                 }
                             }
