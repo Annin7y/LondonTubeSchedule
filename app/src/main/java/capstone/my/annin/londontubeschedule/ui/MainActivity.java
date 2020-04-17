@@ -248,6 +248,7 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
     {
         Intent intent = new Intent(MainActivity.this, StationListActivity.class);
         intent.putExtra("Line", line);
+        intent.putParcelableArrayListExtra("lineList", lineArrayList);
         startActivity(intent);
 
         //log event when the user selects a line

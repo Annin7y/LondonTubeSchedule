@@ -13,7 +13,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.util.ArrayList;
+
 import capstone.my.annin.londontubeschedule.R;
+import capstone.my.annin.londontubeschedule.pojo.Line;
 import capstone.my.annin.londontubeschedule.pojo.Station;
 import timber.log.Timber;
 
@@ -22,64 +25,40 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
     /*
     * Define constants for the London coordinates. Useful for positioning the map
      */
-
    // private static final double LONDON_LAT = 51.5074;
-
   //  private static final double LONDON_LON = 0.1278;
 
     private static final String TAG = "StationMapActivity";
     Station station;
     public String stationId;
-  public double latLocation;
+    public double latLocation;
    public double lonLocation;
    private GoogleMap mMap;
+    /**
+     * An ArrayList of Station objects.
+     * For each station we will place a marker on the map,
+     * and then we will draw a line through all of them.
+     */
+    private ArrayList<Station> stationArrayList = new ArrayList<>();
+    private ArrayList<Station> lineArrayList = new ArrayList<>();
+
 
     /**
-
      * Specify the zoom level (from 2.0 to 21.0)
-
      * Values below this range are set to 2.0, and values above it are set to 21.0.
-
      * Increase the value to zoom in.
-
      */
 
     private static final float ZOOM = 10;
 
 
-
-    /**
-
-     * An ArrayList of Station objects.
-
-     * For each station we will place a marker on the map,
-
-     * and then we will draw a line through all of them.
-
-     */
-
-    //private ArrayList<Stations> stationsArrayList = new ArrayList<>();
-   // private ArrayList<Lines> linesArrayList = new ArrayList<>();
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_station_map);
 
-        /*We assume we get an ArrayList of Station objects via Intent
-         */
-
-        //stationsArrayList = getIntent().getParcelableArrayListExtra("Stations");
-        //linesArrayList = getIntent().getParcelableArrayListExtra("Lines");
-
-
         // Get the SupportMapFragment and request notification when the map is ready to be used.
-
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
 
                 .findFragmentById(R.id.map);
@@ -87,7 +66,6 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
         if (mapFragment != null)
         {
             mapFragment.getMapAsync(this);
-
         }
 
         if (getIntent() != null && getIntent().getExtras() != null)
@@ -104,6 +82,8 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
                 lonLocation = station.getLonLocation();
                 Timber.v(String.valueOf(station.getLonLocation()));
 
+            stationArrayList = getIntent().getParcelableArrayListExtra("stationList");
+            lineArrayList = getIntent().getParcelableArrayListExtra("lineList");
             }
     }
 
@@ -119,18 +99,19 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
           https://developers.google.com/android/reference/com/google/android/gms/maps/model/PolylineOptions
          */
 
-        PolylineOptions polylineOptions = new PolylineOptions();
+        //PolylineOptions polylineOptions = new PolylineOptions();
 
         /*
           Here we go through each station in the ArrayList.
           For each of them we will extract its coordinates and station name
          */
 
-        //for (Stations stations : stationsArrayList) {
+       // for (Station station : stationArrayList)
+       // {
 
         // Station lat, lon and name
-        // double lat = stations.getLatLocation();
-        //double lon = stations.getLonLocation();
+        // double lat = station.getLatLocation();
+       // double lon = station.getLonLocation();
 
             String stationName = station.getStationName();
 
@@ -138,47 +119,32 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
            LatLng stationCoordinates = new LatLng(latLocation, lonLocation);
 
 
-
             // For each station, we are adding its coordinates to the PolyLineOptions.
-            polylineOptions.add(stationCoordinates);
-
+           // polylineOptions.add(stationCoordinates);
 
 
             /*
-
               Now we are going to draw a marker, also for each station.
-
               The MarkerOptions allows us to customize the marker (colors, thickness, icon, etc).
 
-
-
               https://developers.google.com/android/reference/com/google/android/gms/maps/model/MarkerOptions
-
              */
-
             MarkerOptions markerOptions = new MarkerOptions()
 
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.baseline_place_black_18dp))
                     .title(stationName)
                     .position(stationCoordinates);
 
-
-
             // Once the MarkerOptions is set up, we add the marker.
-
-            // This will be run for each station in the ArrayList.
+        // This will be run for each station in the ArrayList.
 
             googleMap.addMarker(markerOptions);
-
-
-
-
 
         // After the loop, and having already added all the coordinates to the PolylineOptions,
 
         // we draw the line on the map
 
-        googleMap.addPolyline(polylineOptions);
+      // googleMap.addPolyline(polylineOptions);
 
 
 
@@ -192,6 +158,23 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
         LatLng londonCoordinates = new LatLng(latLocation, lonLocation);
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(londonCoordinates, ZOOM));
 
+        PolylineOptions polylineOptions = new PolylineOptions();
+
+        for (Station station : stationArrayList)
+        {
+            // Station lat, lon and name
+             double lat = station.getLatLocation();
+            double lon = station.getLonLocation();
+
+            // Create a LatLng with the coordinates of each station
+            LatLng stationLineCoordinates = new LatLng(lat, lon);
+            polylineOptions.add(stationLineCoordinates);
+            googleMap.addPolyline(polylineOptions);
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(londonCoordinates, ZOOM));
+
+      }
+        }
+        
     }
 
 
@@ -240,5 +223,5 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
 //        mMap = googleMap;
 //
 //    }
-}
+
 

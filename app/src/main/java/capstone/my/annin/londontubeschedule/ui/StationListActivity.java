@@ -44,6 +44,7 @@ public class StationListActivity extends AppCompatActivity implements StationAda
     private StationAdapter stationAdapter;
     private ArrayList<Station> stationArrayList = new ArrayList<>();
     private static final String KEY_STATION_LIST = "station_list";
+    private ArrayList<Line> lineArrayList = new ArrayList<>();
     private static final String KEY_LINE_LIST = "line_list";
     private static final String KEY_LINE_NAME = "line_name";
     Line line;
@@ -71,7 +72,7 @@ public class StationListActivity extends AppCompatActivity implements StationAda
 
 
     // Keep track of whether the selected line is Favorite or not
-    private boolean isFavorite;
+   // private boolean isFavorite;
 
     /**
      * Identifier for the favorites data loader
@@ -204,6 +205,8 @@ public class StationListActivity extends AppCompatActivity implements StationAda
                // Log.i("lineName: ", line.getLineName());
                 Timber.i(line.getLineName(),"lineName: ");
 
+                lineArrayList = getIntent().getParcelableArrayListExtra("lineList");
+
                 mLineViewModel.isFavorite().observe(this, isFavorite -> {
                     if (isFavorite)
                     {
@@ -272,6 +275,8 @@ public class StationListActivity extends AppCompatActivity implements StationAda
         Intent intent = new Intent(StationListActivity.this, StationScheduleActivity.class);
         intent.putExtra("Line", line);
         intent.putExtra("Station", station);
+        intent.putParcelableArrayListExtra("lineList", lineArrayList);
+        intent.putParcelableArrayListExtra("stationList", stationArrayList);
         startActivity(intent);
 
         //log event when the user selects a station

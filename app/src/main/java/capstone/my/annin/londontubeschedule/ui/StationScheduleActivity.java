@@ -106,6 +106,9 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
               // Log.i("stationId: ", stations.getStationId());
                 Timber.v(station.getStationId(), "stationId: ");
 
+            lineArrayList = getIntent().getParcelableArrayListExtra("lineList");
+            stationArrayList = getIntent().getParcelableArrayListExtra("stationList");
+
                 if (savedInstanceState == null)
                 {
 
@@ -260,8 +263,8 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
           {
              Intent intent = new Intent(StationScheduleActivity.this, StationMapActivity.class);
             intent.putExtra("Station", station);
-             // intent.putParcelableArrayListExtra("Stations", stationsArrayList);
-             // intent.putParcelableArrayListExtra("Stations", linesArrayList);
+            intent.putParcelableArrayListExtra("lineList", lineArrayList);
+            intent.putParcelableArrayListExtra("stationList", stationArrayList);
              startActivity(intent);
 
           }
