@@ -1,5 +1,6 @@
 package capstone.my.annin.londontubeschedule.maps;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -158,8 +159,8 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
         LatLng londonCoordinates = new LatLng(latLocation, lonLocation);
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(londonCoordinates, ZOOM));
 
-        PolylineOptions polylineOptions = new PolylineOptions();
-
+        PolylineOptions polylineOptions = new PolylineOptions()
+                .color(Color.GREEN);
         for (Station station : stationArrayList)
         {
             // Station lat, lon and name
@@ -174,7 +175,7 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
 
       }
         }
-        
+
     }
 
 
