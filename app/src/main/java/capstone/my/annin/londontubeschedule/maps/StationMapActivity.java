@@ -167,16 +167,12 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
             double lat = station.getLatLocation();
             double lon = station.getLonLocation();
 
-
             // Create a LatLng with the coordinates of each station
             LatLng stationLineCoordinates = new LatLng(lat, lon);
             polylineOptions.add(stationLineCoordinates);
-            googleMap.addPolyline(polylineOptions);
-
-
         }
+        googleMap.addPolyline(polylineOptions);
     }
-
 }
 
 
