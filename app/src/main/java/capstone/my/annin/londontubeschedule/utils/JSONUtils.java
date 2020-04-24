@@ -224,6 +224,82 @@ public class JSONUtils
         return stations;
     }
 
+    public static ArrayList<Station> extractFeatureFromStationArrayJson(String stationJSON, ArrayList<ArrayList<Station>> stationsList )
+    {
+        // If the JSON string is empty or null, then return early.
+        if (TextUtils.isEmpty(stationJSON))
+        {
+            return null;
+        }
+        //ArrayList<Station> stations = new ArrayList<>();
+
+        try
+        {
+            // Create a JSONObject from the JSON response string
+            JSONObject baseJsonResponse = new JSONObject(stationJSON);
+            JSONArray stopPointSequenceArrayList = baseJsonResponse.getJSONArray("stopPointSequences");
+            //Parsing structure below based on the accepted answer in this stackoverflow thread:
+            //https://stackoverflow.com/questions/17673057/how-to-parse-this-nested-json-array-in-android
+            if (stopPointSequenceArrayList != null)
+            {
+                for (int i = 0; i < stopPointSequenceArrayList.length(); i++)
+                {
+                    ArrayList<Station> stations = new ArrayList<>();
+                    JSONObject elem = stopPointSequenceArrayList.getJSONObject(i);
+                    if (elem != null)
+                    {
+                        JSONArray stopPointArrayList = elem.getJSONArray("stopPoint");
+                        if (stopPointArrayList != null)
+                        {
+                            for (int j = 0; j < stopPointArrayList.length(); j++)
+                            {
+                                JSONObject innerElem = stopPointArrayList.getJSONObject(j);
+                                if (innerElem != null)
+                                {
+                                    String idStation = "";
+                                    if (innerElem.has("id"))
+                                    {
+                                        idStation = innerElem.optString(KEY_STATION_ID);
+                                    }
+                                    String nameStation = "";
+                                    if (innerElem.has("name"))
+                                    {
+                                        nameStation = innerElem.optString(KEY_STATION_NAME);
+                                    }
+                                    double stationLatLocation = innerElem.getDouble("lat");
+                                    if (innerElem.has("lat"))
+                                    {
+                                        stationLatLocation = innerElem.optDouble("lat");
+                                    }
+                                    double stationLonLocation = innerElem.getDouble("lon");
+                                    if (innerElem.has("lon"))
+                                    {
+                                        stationLonLocation = innerElem.optDouble("lon");
+                                    }
+
+                                    Station station = new Station(idStation, nameStation, stationLatLocation, stationLonLocation);
+                                    stations.add(station);
+                                }
+                            }
+                        }
+                    }
+                    stationsList.add(stations);
+                }
+            }
+        }
+        catch (JSONException e)
+        {
+            // If an error is thrown when executing any of the above statements in the "try" block,
+            // catch the exception here, so the app doesn't crash. Print a log message
+            // with the message from the exception.
+            //Log.e("QueryUtils", "Problem parsing stations JSON results", e);
+            Timber.e(e,"Problem parsing stations JSON results" );
+        }
+        // Return the list of stations
+        return null;
+    }
+
+
     public static ArrayList<Schedule> extractFeatureFromScheduleJson(String scheduleJSON)
     {
         // If the JSON string is empty or null, then return early.
