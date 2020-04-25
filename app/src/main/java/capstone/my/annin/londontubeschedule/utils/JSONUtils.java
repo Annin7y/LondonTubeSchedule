@@ -224,15 +224,14 @@ public class JSONUtils
         return stations;
     }
 
-    public static ArrayList<Station> extractFeatureFromStationArrayJson(String stationJSON, ArrayList<ArrayList<Station>> stationsList )
+    public static ArrayList<ArrayList<Station>> extractFeatureFromStationArrayJson(String stationJSON)
     {
         // If the JSON string is empty or null, then return early.
         if (TextUtils.isEmpty(stationJSON))
         {
             return null;
         }
-        //ArrayList<Station> stations = new ArrayList<>();
-
+        ArrayList<ArrayList<Station>> stationsList = new ArrayList<>();
         try
         {
             // Create a JSONObject from the JSON response string
@@ -296,7 +295,7 @@ public class JSONUtils
             Timber.e(e,"Problem parsing stations JSON results" );
         }
         // Return the list of stations
-        return null;
+        return stationsList;
     }
 
 
