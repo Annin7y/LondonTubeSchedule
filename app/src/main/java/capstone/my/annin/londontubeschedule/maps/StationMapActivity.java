@@ -18,11 +18,15 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import java.util.ArrayList;
 
 import capstone.my.annin.londontubeschedule.R;
+import capstone.my.annin.londontubeschedule.asynctask.TubeStationSubArrayAsyncTask;
+import capstone.my.annin.londontubeschedule.asynctask.TubeStationSubArrayAsyncTaskInterface;
 import capstone.my.annin.londontubeschedule.pojo.Line;
 import capstone.my.annin.londontubeschedule.pojo.Station;
+import capstone.my.annin.londontubeschedule.recyclerviewadapters.StationAdapter;
 import timber.log.Timber;
 
-public class StationMapActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class StationMapActivity extends AppCompatActivity implements OnMapReadyCallback, TubeStationSubArrayAsyncTaskInterface
+{
     /*
      * Define constants for the London coordinates. Useful for positioning the map
      */
@@ -35,6 +39,7 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
     public double latLocation;
     public double lonLocation;
     private GoogleMap mMap;
+
     /**
      * An ArrayList of Station objects.
      * For each station we will place a marker on the map,
@@ -42,6 +47,7 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
      */
     private ArrayList<Station> stationArrayList = new ArrayList<>();
     private ArrayList<Station> lineArrayList = new ArrayList<>();
+    private ArrayList<ArrayList<Station>> stationSubArrayList = new ArrayList<>();
 
 
     /**
@@ -84,6 +90,10 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
             stationArrayList = getIntent().getParcelableArrayListExtra("stationList");
             lineArrayList = getIntent().getParcelableArrayListExtra("lineList");
         }
+        TubeStationSubArrayAsyncTask myStationSubTask = new TubeStationSubArrayAsyncTask(this);
+        myStationSubTask.execute(stationId);
+
+
     }
 
 
@@ -173,6 +183,23 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
         }
         googleMap.addPolyline(polylineOptions);
     }
+
+@Override
+public void returnStationSubData(ArrayList<ArrayList<Station>> simpleJsonStationData)
+        {
+        if (null != simpleJsonStationData)
+        {
+
+        stationSubArrayList= simpleJsonStationData;
+            Timber.i("sublist: " + stationSubArrayList.size());
+        }
+        else
+        {
+        Timber.e("Problem parsing stations sub JSON results" );
+        }
+        }
+
+
 }
 
 

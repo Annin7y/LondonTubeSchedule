@@ -224,7 +224,7 @@ public class JSONUtils
         return stations;
     }
 
-    public static ArrayList<ArrayList<Station>> extractFeatureFromStationArrayJson(String stationJSON)
+    public static ArrayList<ArrayList<Station>> extractFeatureFromStationSubArrayJson(String stationJSON)
     {
         // If the JSON string is empty or null, then return early.
         if (TextUtils.isEmpty(stationJSON))
@@ -248,44 +248,34 @@ public class JSONUtils
                     if (elem != null)
                     {
                         JSONArray stopPointArrayList = elem.getJSONArray("stopPoint");
-                        if (stopPointArrayList != null)
-                        {
-                            for (int j = 0; j < stopPointArrayList.length(); j++)
-                            {
+                        if (stopPointArrayList != null) {
+                            for (int j = 0; j < stopPointArrayList.length(); j++) {
                                 JSONObject innerElem = stopPointArrayList.getJSONObject(j);
-                                if (innerElem != null)
-                                {
+                                if (innerElem != null) {
                                     String idStation = "";
-                                    if (innerElem.has("id"))
-                                    {
+                                    if (innerElem.has("id")) {
                                         idStation = innerElem.optString(KEY_STATION_ID);
                                     }
                                     String nameStation = "";
-                                    if (innerElem.has("name"))
-                                    {
+                                    if (innerElem.has("name")) {
                                         nameStation = innerElem.optString(KEY_STATION_NAME);
                                     }
                                     double stationLatLocation = innerElem.getDouble("lat");
-                                    if (innerElem.has("lat"))
-                                    {
-                                        stationLatLocation = innerElem.optDouble("lat");
+                                    if (innerElem.has("lat")) {
+                                        double stationLonLocation = innerElem.getDouble("lon");
+                                        if (innerElem.has("lon")) {
+                                            stationLonLocation = innerElem.optDouble("lon");
+                                        }
+                                        Station station = new Station(idStation, nameStation, stationLatLocation, stationLonLocation);
+                                        stations.add(station);
                                     }
-                                    double stationLonLocation = innerElem.getDouble("lon");
-                                    if (innerElem.has("lon"))
-                                    {
-                                        stationLonLocation = innerElem.optDouble("lon");
-                                    }
-
-                                    Station station = new Station(idStation, nameStation, stationLatLocation, stationLonLocation);
-                                    stations.add(station);
                                 }
                             }
                         }
                     }
                     stationsList.add(stations);
-                }
+                }}
             }
-        }
         catch (JSONException e)
         {
             // If an error is thrown when executing any of the above statements in the "try" block,
