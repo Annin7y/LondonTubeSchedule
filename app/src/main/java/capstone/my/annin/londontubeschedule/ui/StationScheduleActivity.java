@@ -262,6 +262,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
           public void onClick(View v)
           {
              Intent intent = new Intent(StationScheduleActivity.this, StationMapActivity.class);
+              intent.putExtra("Line", line);
             intent.putExtra("Station", station);
             intent.putParcelableArrayListExtra("lineList", lineArrayList);
             intent.putParcelableArrayListExtra("stationList", stationArrayList);

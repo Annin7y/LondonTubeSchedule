@@ -36,6 +36,8 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
     private static final String TAG = "StationMapActivity";
     Station station;
     public String stationId;
+    Line line;
+    public String lineId;
     public double latLocation;
     public double lonLocation;
     private GoogleMap mMap;
@@ -74,9 +76,15 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
             mapFragment.getMapAsync(this);
         }
 
-        if (getIntent() != null && getIntent().getExtras() != null) {
-            station = getIntent().getExtras().getParcelable("Station");
+        if (getIntent() != null && getIntent().getExtras() != null)
+        {
 
+            line = getIntent().getExtras().getParcelable("Line");
+            lineId = line.getLineId();
+            // Log.i("lineId: ", line.getLineId());
+            Timber.v(line.getLineId(), "lineId: ");
+
+            station = getIntent().getExtras().getParcelable("Station");
             stationId = station.getStationId();
             // Log.i("stationId: ", stations.getStationId());
             Timber.v(station.getStationId(), "stationId: ");
@@ -91,7 +99,7 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
             lineArrayList = getIntent().getParcelableArrayListExtra("lineList");
         }
         TubeStationSubArrayAsyncTask myStationSubTask = new TubeStationSubArrayAsyncTask(this);
-        myStationSubTask.execute(stationId);
+        myStationSubTask.execute(lineId);
 
 
     }

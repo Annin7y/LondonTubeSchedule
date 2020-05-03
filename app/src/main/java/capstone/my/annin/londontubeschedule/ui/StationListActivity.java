@@ -194,9 +194,9 @@ public class StationListActivity extends AppCompatActivity implements StationAda
         if (getIntent() != null && getIntent().getExtras() != null)
         {
                 line = getIntent().getExtras().getParcelable("Line");
-                // Extract the movie ID from the selected line
+                // Extract the line ID from the selected line
                 lineId = Objects.requireNonNull(line).getLineId();
-                lineId = line.getLineId();
+               lineId = line.getLineId();
                // Log.i("lineId: ", lines.getLineId());
                 Timber.i(line.getLineId(), "lineId: ");
 
