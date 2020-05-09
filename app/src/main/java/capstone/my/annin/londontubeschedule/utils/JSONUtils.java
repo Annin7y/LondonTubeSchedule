@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import capstone.my.annin.londontubeschedule.pojo.Line;
 import capstone.my.annin.londontubeschedule.pojo.Schedule;
@@ -288,7 +289,29 @@ public class JSONUtils
         return stationsList;
     }
 
+    public static List<String> extractRouteSequenceFromJson(String lineStatusJSON) {
 
+        if (TextUtils.isEmpty(lineStatusJSON)) {
+
+            return null;
+
+        }
+
+        try {
+
+            JSONObject jsonObject = new JSONObject(lineStatusJSON);
+
+            return jsonObject.getString("lineStrings");
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+            return null;
+
+        }
+
+    }
     public static ArrayList<Schedule> extractFeatureFromScheduleJson(String scheduleJSON)
     {
         // If the JSON string is empty or null, then return early.
