@@ -289,29 +289,32 @@ public class JSONUtils
         return stationsList;
     }
 
-    public static List<String> extractRouteSequenceFromJson(String lineStatusJSON) {
-
-        if (TextUtils.isEmpty(lineStatusJSON)) {
-
+    public static List<String> extractRouteSequenceFromJson(String lineStringJSON)
+    {
+        if (TextUtils.isEmpty(lineStringJSON))
+        {
             return null;
-
         }
+        List<String> lineStrings = new ArrayList<>();
 
-        try {
+        try
+        {
+            JSONObject baseJsonResponse = new JSONObject(lineStringJSON);
+            JSONArray lineStringsArrayList = baseJsonResponse.getJSONArray("lineStrings");
+            for(int i=0;i<lineStringsArrayList.length();i++)
+            {
+                lineStrings.s
 
-            JSONObject jsonObject = new JSONObject(lineStatusJSON);
+            }
 
-            return jsonObject.getString("lineStrings");
-
-        } catch (Exception e) {
-
+        } catch (Exception e)
+        {
             e.printStackTrace();
-
             return null;
-
         }
-
+        return lineStrings;
     }
+
     public static ArrayList<Schedule> extractFeatureFromScheduleJson(String scheduleJSON)
     {
         // If the JSON string is empty or null, then return early.
