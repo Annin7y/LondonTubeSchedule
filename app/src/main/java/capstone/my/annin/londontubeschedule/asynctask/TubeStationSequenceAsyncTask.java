@@ -2,13 +2,15 @@ package capstone.my.annin.londontubeschedule.asynctask;
 
 import android.os.AsyncTask;
 
+import org.json.JSONArray;
+
 import java.net.URL;
 import java.util.List;
 
 import capstone.my.annin.londontubeschedule.utils.JSONUtils;
 import capstone.my.annin.londontubeschedule.utils.NetworkUtils;
 
-public class TubeStationSequenceAsyncTask extends AsyncTask<String, Void, List<String>>
+public class TubeStationSequenceAsyncTask extends AsyncTask<String, Void, JSONArray>
 {
 
     private static final String TAG = TubeStationSequenceAsyncTask.class.getSimpleName();
@@ -27,7 +29,7 @@ public class TubeStationSequenceAsyncTask extends AsyncTask<String, Void, List<S
     }
 
     @Override
-    protected List<String> doInBackground(String... params)
+    protected JSONArray doInBackground(String... params)
     {
         if (params.length == 0)
         {
@@ -53,7 +55,7 @@ public class TubeStationSequenceAsyncTask extends AsyncTask<String, Void, List<S
     }
 
     @Override
-    protected void onPostExecute(List<String> mLineStringsList)
+    protected void onPostExecute(JSONArray mLineStringsList)
     {
         super.onPostExecute(mLineStringsList);
         /*the if method is commented out because the error message will be displayed in the Main Activity if there is no internet connection
