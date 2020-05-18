@@ -165,7 +165,7 @@ public class NetworkUtils
         catch (IOException e)
         {
            //Log.e(LOG_TAG, "Problem retrieving line list JSON results.", e);
-            Timber.e(e,"Problem retrieving schedule JSON results." );
+            Timber.e(e,"Problem retrieving line JSON results." );
         }
         finally
         {
@@ -222,7 +222,7 @@ public class NetworkUtils
         catch (IOException e)
         {
            // Log.e(LOG_TAG, "Problem retrieving station list JSON results.", e);
-            Timber.e(e,"Problem retrieving schedule JSON results." );
+            Timber.e(e,"Problem retrieving station JSON results." );
         }
         finally
         {

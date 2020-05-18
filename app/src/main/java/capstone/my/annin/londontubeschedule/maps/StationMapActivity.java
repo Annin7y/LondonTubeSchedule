@@ -14,21 +14,23 @@ import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.maps.android.data.geojson.GeoJsonLayer;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import capstone.my.annin.londontubeschedule.R;
+import capstone.my.annin.londontubeschedule.asynctask.TubeStationSequenceAsyncTask;
+import capstone.my.annin.londontubeschedule.asynctask.TubeStationSequenceAsyncTaskInterface;
 import capstone.my.annin.londontubeschedule.pojo.Line;
 import capstone.my.annin.londontubeschedule.pojo.Station;
 import timber.log.Timber;
 
-public class StationMapActivity extends AppCompatActivity implements OnMapReadyCallback
+public class StationMapActivity extends AppCompatActivity implements OnMapReadyCallback, TubeStationSequenceAsyncTaskInterface
 {
-    /*
-     * Define constants for the London coordinates. Useful for positioning the map
-     */
-    // private static final double LONDON_LAT = 51.5074;
-    //  private static final double LONDON_LON = 0.1278;
 
     private static final String TAG = "StationMapActivity";
     Station station;
@@ -38,6 +40,7 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
     public double latLocation;
     public double lonLocation;
     private GoogleMap mMap;
+    public GeoJsonLayer layer;
 
     /**
      * An ArrayList of Station objects.
@@ -59,8 +62,7 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_station_map);
 
@@ -73,8 +75,7 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
             mapFragment.getMapAsync(this);
         }
 
-        if (getIntent() != null && getIntent().getExtras() != null)
-        {
+        if (getIntent() != null && getIntent().getExtras() != null) {
 
             line = getIntent().getExtras().getParcelable("Line");
             lineId = line.getLineId();
@@ -95,12 +96,15 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
             stationArrayList = getIntent().getParcelableArrayListExtra("stationList");
             lineArrayList = getIntent().getParcelableArrayListExtra("lineList");
         }
+
+        TubeStationSequenceAsyncTask mySequenceTask = new TubeStationSequenceAsyncTask(this);
+        mySequenceTask.execute(lineId);
+
     }
 
 
     @Override
-    public void onMapReady(GoogleMap googleMap)
-    {
+    public void onMapReady(GoogleMap googleMap) {
         /*
           Define the options for a Polyline,
           Useful to draw a line on the map, so we can configure the line color, etc.
@@ -123,6 +127,7 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
         // Station lat, lon and name
         // double lat = station.getLatLocation();
         // double lon = station.getLonLocation();
+        mMap = googleMap;
 
         String stationName = station.getStationName();
 
@@ -146,8 +151,8 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
                 .title(stationName)
                 .position(stationCoordinates);
 
-       //Code copied and pasted from https://www.androidhub4you.com/2013/07/google-map-version-2-integration-in_8530.html
-        CircleOptions circle=new CircleOptions();
+        //Code copied and pasted from https://www.androidhub4you.com/2013/07/google-map-version-2-integration-in_8530.html
+        CircleOptions circle = new CircleOptions();
         circle.center(stationCoordinates).fillColor(Color.LTGRAY).radius(50);
         googleMap.addCircle(circle);
 
@@ -171,22 +176,44 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
         //LatLng londonCoordinates = new LatLng(latLocation, lonLocation);
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(stationCoordinates, ZOOM));
 
-        PolylineOptions polylineOptions = new PolylineOptions()
-                .color(Color.GREEN)
-                .width(5);
-        for (Station station : stationArrayList) {
-            // Station lat, lon and name
-            double lat = station.getLatLocation();
-            double lon = station.getLonLocation();
 
-            // Create a LatLng with the coordinates of each station
-            LatLng stationLineCoordinates = new LatLng(lat, lon);
-            polylineOptions.add(stationLineCoordinates);
-        }
-        googleMap.addPolyline(polylineOptions);
+//        PolylineOptions polylineOptions = new PolylineOptions()
+//                .color(Color.GREEN)
+//                .width(5);
+//        for (Station station : stationArrayList) {
+//            // Station lat, lon and name
+//            double lat = station.getLatLocation();
+//            double lon = station.getLonLocation();
+//
+//            // Create a LatLng with the coordinates of each station
+//            LatLng stationLineCoordinates = new LatLng(lat, lon);
+//            polylineOptions.add(stationLineCoordinates);
+//        }
+//        googleMap.addPolyline(polylineOptions);
     }
 
-}
+    @Override
+    public void returnStationSequenceData(JSONArray simpleJsonSequenceData)
+    {
+
+        try {
+            for (int i = 0; i < simpleJsonSequenceData.length(); i++) {
+                String json = "{\"type\":\"MultiLineString\",\"coordinates\":" + simpleJsonSequenceData.get(i).toString() + "}";
+
+                layer = new GeoJsonLayer(mMap, new JSONObject(json));
+
+                layer.addLayerToMap();
+            }
+            } catch (JSONException e) {
+
+                e.printStackTrace();
+
+            }
+
+        }
+
+        }
+
 
 
 

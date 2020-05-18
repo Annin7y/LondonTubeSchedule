@@ -41,10 +41,10 @@ public class TubeStationSequenceAsyncTask extends AsyncTask<String, Void, JSONAr
 
         try
         {
-            String jsonStationResponse = NetworkUtils
+            String jsonStationSequenceResponse = NetworkUtils
                     .makeHttpStationRequest(stationRequestUrl);
 
-            return JSONUtils.extractRouteSequenceFromJson(jsonStationResponse);
+            return JSONUtils.extractRouteSequenceFromJson(jsonStationSequenceResponse);
 
         }
         catch (Exception e)

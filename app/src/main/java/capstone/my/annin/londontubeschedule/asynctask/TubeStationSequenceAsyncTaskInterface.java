@@ -9,5 +9,5 @@ import capstone.my.annin.londontubeschedule.pojo.Station;
 
 public interface TubeStationSequenceAsyncTaskInterface
 {
-    void returnStationSequenceData(JSONArray simpleJsonStationData);
+    void returnStationSequenceData(JSONArray simpleJsonSequenceData);
 }
