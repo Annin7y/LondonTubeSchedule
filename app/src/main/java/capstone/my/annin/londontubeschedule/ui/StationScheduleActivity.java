@@ -84,9 +84,6 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
         // Bind the views
         ButterKnife.bind(this);
 
-       // MapsConnectionCheck myMapsConnectionCheck = new MapsConnectionCheck(); // declaring the object
-       // myMapsConnectionCheck.checkPlayServices(context);
-
         scheduleAdapter = new ScheduleAdapter(scheduleArrayList, context);
         mScheduleRecyclerView.setAdapter(scheduleAdapter);
 

@@ -1,5 +1,6 @@
 package capstone.my.annin.londontubeschedule.maps;
 
+import android.Manifest;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -51,18 +52,17 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
     private ArrayList<Station> lineArrayList = new ArrayList<>();
     private ArrayList<ArrayList<Station>> stationSubArrayList = new ArrayList<>();
 
-
     /**
      * Specify the zoom level (from 2.0 to 21.0)
      * Values below this range are set to 2.0, and values above it are set to 21.0.
      * Increase the value to zoom in.
      */
-
     private static final float ZOOM = 10;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_station_map);
 
@@ -71,12 +71,13 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
 
                 .findFragmentById(R.id.map);
 
-        if (mapFragment != null) {
+        if (mapFragment != null)
+        {
             mapFragment.getMapAsync(this);
         }
 
-        if (getIntent() != null && getIntent().getExtras() != null) {
-
+        if (getIntent() != null && getIntent().getExtras() != null)
+        {
             line = getIntent().getExtras().getParcelable("Line");
             lineId = line.getLineId();
             // Log.i("lineId: ", line.getLineId());
@@ -96,54 +97,29 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
             stationArrayList = getIntent().getParcelableArrayListExtra("stationList");
             lineArrayList = getIntent().getParcelableArrayListExtra("lineList");
         }
-
         TubeStationSequenceAsyncTask mySequenceTask = new TubeStationSequenceAsyncTask(this);
         mySequenceTask.execute(lineId);
+    }
 
+       //Explicitly check the permissions
+   private void getLocationPermission()
+    {
+       String [] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,};
     }
 
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-        /*
-          Define the options for a Polyline,
-          Useful to draw a line on the map, so we can configure the line color, etc.
-          A polyline is a list of points, where line segments are drawn between consecutive points.
-
-          https://developers.google.com/android/reference/com/google/android/gms/maps/model/Polyline
-          https://developers.google.com/android/reference/com/google/android/gms/maps/model/PolylineOptions
-         */
-
-        //PolylineOptions polylineOptions = new PolylineOptions();
-
-        /*
-          Here we go through each station in the ArrayList.
-          For each of them we will extract its coordinates and station name
-         */
-
-        // for (Station station : stationArrayList)
-        // {
-
-        // Station lat, lon and name
-        // double lat = station.getLatLocation();
-        // double lon = station.getLonLocation();
+    public void onMapReady(GoogleMap googleMap)
+    {
         mMap = googleMap;
-
         String stationName = station.getStationName();
-
         // Create a LatLng with the coordinates of each station
         LatLng stationCoordinates = new LatLng(latLocation, lonLocation);
-
-
-        // For each station, we are adding its coordinates to the PolyLineOptions.
-        // polylineOptions.add(stationCoordinates);
-
 
             /*
               Now we are going to draw a marker, also for each station.
               The MarkerOptions allows us to customize the marker (colors, thickness, icon, etc).
-
-              https://developers.google.com/android/reference/com/google/android/gms/maps/model/MarkerOptions
+               https://developers.google.com/android/reference/com/google/android/gms/maps/model/MarkerOptions
              */
         MarkerOptions markerOptions = new MarkerOptions()
 
@@ -156,27 +132,41 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
         circle.center(stationCoordinates).fillColor(Color.LTGRAY).radius(50);
         googleMap.addCircle(circle);
 
-// Once the MarkerOptions is set up, we add the marker.
+         // Once the MarkerOptions is set up, we add the marker.
         // This will be run for each station in the ArrayList.
         googleMap.addMarker(markerOptions);
 
-        // After the loop, and having already added all the coordinates to the PolylineOptions,
-        // we draw the line on the map
-        // googleMap.addPolyline(polylineOptions);
-
-
-
         /*
-           Finally we move the camera to the position specified by the London coordinates:
-          https://developers.google.com/android/reference/com/google/android/gms/maps/GoogleMap
-
-          https://developers.google.com/android/reference/com/google/android/gms/maps/CameraUpdateFactory
+         Finally we move the camera to the position specified by the coordinates:
+           https://developers.google.com/android/reference/com/google/android/gms/maps/GoogleMap
+           https://developers.google.com/android/reference/com/google/android/gms/maps/CameraUpdateFactory
          */
 
         //LatLng londonCoordinates = new LatLng(latLocation, lonLocation);
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(stationCoordinates, ZOOM));
 
+         //Polyline code commented out; geoJson used to draw route lines
+          /*
+          Define the options for a Polyline,
+          Useful to draw a line on the map, so we can configure the line color, etc.
+          A polyline is a list of points, where line segments are drawn between consecutive points.
 
+          https://developers.google.com/android/reference/com/google/android/gms/maps/model/Polyline
+          https://developers.google.com/android/reference/com/google/android/gms/maps/model/PolylineOptions
+         */
+        //PolylineOptions polylineOptions = new PolylineOptions();
+        /*
+          Here we go through each station in the ArrayList.
+          For each of them we will extract its coordinates and station name
+         */
+        // For each station, we are adding its coordinates to the PolyLineOptions.
+        // polylineOptions.add(stationCoordinates);
+        // for (Station station : stationArrayList)
+        // {
+
+        // Station lat, lon and name
+        // double lat = station.getLatLocation();
+        // double lon = station.getLonLocation();
 //        PolylineOptions polylineOptions = new PolylineOptions()
 //                .color(Color.GREEN)
 //                .width(5);
@@ -189,77 +179,28 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
 //            LatLng stationLineCoordinates = new LatLng(lat, lon);
 //            polylineOptions.add(stationLineCoordinates);
 //        }
+        // After the loop, and having already added all the coordinates to the PolylineOptions,
+        // we draw the line on the map
 //        googleMap.addPolyline(polylineOptions);
     }
 
     @Override
     public void returnStationSequenceData(JSONArray simpleJsonSequenceData)
     {
-
-        try {
-            for (int i = 0; i < simpleJsonSequenceData.length(); i++) {
+        try
+        {
+            for (int i = 0; i < simpleJsonSequenceData.length(); i++)
+            {
                 String json = "{\"type\":\"MultiLineString\",\"coordinates\":" + simpleJsonSequenceData.get(i).toString() + "}";
-
                 layer = new GeoJsonLayer(mMap, new JSONObject(json));
-
                 layer.addLayerToMap();
             }
-            } catch (JSONException e) {
-
-                e.printStackTrace();
-
+            } catch (JSONException e)
+        {
+            e.printStackTrace();
             }
-
+        }
         }
 
-        }
-
-
-
-
-//    private static final String TAG = "StationMapActivity";
-//    Stations stations;
-//    public String stationId;
-//    public double latLocation;
-//    public double lonLocation;
-//    private GoogleMap mMap;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState)
-//    {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_station_map);
-//
-//        if (getIntent() != null && getIntent().getExtras() != null)
-//        {
-//            if (savedInstanceState == null)
-//            {
-//                stations = getIntent().getExtras().getParcelable("Stations");
-//
-//                stationId = stations.getStationId();
-//                // Log.i("stationId: ", stations.getStationId());
-//                Timber.v(stations.getStationId(), "stationId: ");
-//
-//                latLocation = stations.getLatLocation();
-//                Timber.v(String.valueOf(stations.getLatLocation()));
-//
-//                lonLocation = stations.getLonLocation();
-//                Timber.v(String.valueOf(stations.getLonLocation()));
-//
-//            }
-//        }
-//    }
-//    //Explicitly check the permissions
-//    private void getLocationPermission()
-//    {
-//        String [] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,};
-//    }
-//
-//    @Override
-//    public void onMapReady(GoogleMap googleMap)
-//    {
-//        mMap = googleMap;
-//
-//    }
 
 

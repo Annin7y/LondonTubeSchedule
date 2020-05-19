@@ -2,14 +2,9 @@ package capstone.my.annin.londontubeschedule.maps;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-
-import capstone.my.annin.londontubeschedule.ui.StationScheduleActivity;
-
-import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class MapsConnectionCheck
 {
