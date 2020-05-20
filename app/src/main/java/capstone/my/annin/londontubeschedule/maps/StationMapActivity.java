@@ -16,6 +16,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.data.geojson.GeoJsonLayer;
+import com.google.maps.android.data.geojson.GeoJsonPolygonStyle;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,6 +43,8 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
     public double lonLocation;
     private GoogleMap mMap;
     public GeoJsonLayer layer;
+    private final int  FILL_GREEN   = 0x66aad2a5;
+    private final int  STROKE_GREEN = 0x387e40;
 
     /**
      * An ArrayList of Station objects.
@@ -109,8 +112,7 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
 
 
     @Override
-    public void onMapReady(GoogleMap googleMap)
-    {
+    public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         String stationName = station.getStationName();
         // Create a LatLng with the coordinates of each station
@@ -132,7 +134,7 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
         circle.center(stationCoordinates).fillColor(Color.LTGRAY).radius(50);
         googleMap.addCircle(circle);
 
-         // Once the MarkerOptions is set up, we add the marker.
+        // Once the MarkerOptions is set up, we add the marker.
         // This will be run for each station in the ArrayList.
         googleMap.addMarker(markerOptions);
 
@@ -145,7 +147,7 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
         //LatLng londonCoordinates = new LatLng(latLocation, lonLocation);
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(stationCoordinates, ZOOM));
 
-         //Polyline code commented out; geoJson used to draw route lines
+        //Polyline code commented out; geoJson used to draw route lines
           /*
           Define the options for a Polyline,
           Useful to draw a line on the map, so we can configure the line color, etc.
@@ -182,8 +184,8 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
         // After the loop, and having already added all the coordinates to the PolylineOptions,
         // we draw the line on the map
 //        googleMap.addPolyline(polylineOptions);
-    }
 
+    }
     @Override
     public void returnStationSequenceData(JSONArray simpleJsonSequenceData)
     {
@@ -194,12 +196,23 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
                 String json = "{\"type\":\"MultiLineString\",\"coordinates\":" + simpleJsonSequenceData.get(i).toString() + "}";
                 layer = new GeoJsonLayer(mMap, new JSONObject(json));
                 layer.addLayerToMap();
+                setPolygonGreen(layer);
+
             }
             } catch (JSONException e)
         {
             e.printStackTrace();
             }
         }
+    private void setPolygonGreen(GeoJsonLayer layer)
+    {
+        GeoJsonPolygonStyle polyStyle = layer.getDefaultPolygonStyle();
+        polyStyle.setFillColor(FILL_GREEN);
+        polyStyle.setStrokeColor(STROKE_GREEN);
+        polyStyle.setStrokeWidth(4f);
+
+    }
+
         }
 
 
