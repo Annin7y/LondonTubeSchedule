@@ -15,7 +15,10 @@ import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.maps.android.data.geojson.GeoJsonFeature;
 import com.google.maps.android.data.geojson.GeoJsonLayer;
+import com.google.maps.android.data.geojson.GeoJsonLineStringStyle;
+import com.google.maps.android.data.geojson.GeoJsonPointStyle;
 import com.google.maps.android.data.geojson.GeoJsonPolygonStyle;
 
 import org.json.JSONArray;
@@ -191,24 +194,31 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
     {
         try
         {
-            for (int i = 0; i < simpleJsonSequenceData.length(); i++)
-            {
+            for (int i = 0; i < simpleJsonSequenceData.length(); i++) {
                 String json = "{\"type\":\"MultiLineString\",\"coordinates\":" + simpleJsonSequenceData.get(i).toString() + "}";
                 layer = new GeoJsonLayer(mMap, new JSONObject(json));
                 layer.addLayerToMap();
-                setPolygonGreen(layer);
+               // setPolygonGreen(layer);
 
+                for (GeoJsonFeature feature : layer.getFeatures())
+                {
+
+                    GeoJsonLineStringStyle stringStyle = new GeoJsonLineStringStyle();
+                    stringStyle.setColor(Color.BLUE);
+                    stringStyle.setWidth(5F);
+                    feature.setLineStringStyle(stringStyle);
+                }
             }
             } catch (JSONException e)
         {
             e.printStackTrace();
             }
         }
-    private void setPolygonGreen(GeoJsonLayer layer)
+    public void setPolygonGreen(GeoJsonLayer layer)
     {
         GeoJsonPolygonStyle polyStyle = layer.getDefaultPolygonStyle();
-        polyStyle.setFillColor(FILL_GREEN);
-        polyStyle.setStrokeColor(STROKE_GREEN);
+        polyStyle.setFillColor(Color.GRAY);
+        polyStyle.setStrokeColor(Color.GRAY);
         polyStyle.setStrokeWidth(4f);
 
     }
