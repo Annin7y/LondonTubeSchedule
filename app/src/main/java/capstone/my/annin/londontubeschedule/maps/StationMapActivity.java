@@ -202,11 +202,18 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
 
                 for (GeoJsonFeature feature : layer.getFeatures())
                 {
-                    GeoJsonLineStringStyle stringStyle = new GeoJsonLineStringStyle();
-                    stringStyle.setColor(Color.GREEN);
-                    stringStyle.setWidth(4F);
-                    feature.setLineStringStyle(stringStyle);
+//                    GeoJsonLineStringStyle stringStyle = new GeoJsonLineStringStyle();
+//                    stringStyle.setColor(Color.GREEN);
+//                    stringStyle.setWidth(4F);
+//                    feature.setLineStringStyle(stringStyle);
+                    GeoJsonPolygonStyle stringStyle = new GeoJsonPolygonStyle();
+                    stringStyle.setFillColor(Color.GREEN);
+                    stringStyle.setStrokeWidth(4F);
+                    feature.setPolygonStyle(stringStyle);
+
                 }
+
+
             }
             } catch (JSONException e)
         {
