@@ -21,6 +21,9 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import org.hamcrest.BaseMatcher;
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import org.junit.Rule;
@@ -32,6 +35,7 @@ import capstone.my.annin.londontubeschedule.ui.MainActivity;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.core.AllOf.allOf;
 
 @RunWith(AndroidJUnit4ClassRunner.class)
     public class EspressoTest
@@ -112,31 +116,58 @@ import static org.hamcrest.Matchers.containsString;
         public void viewLineStationFlowTest()
         {
             // verify the visibility of recycler view on screen
+            onView((withId(R.id.recyclerview_main))).check(matches(isDisplayed()));
+           onView(ViewMatchers.withId(R.id.recyclerview_main)).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
+        onView((withId(R.id.recyclerview_station))).check(matches(isDisplayed()));
+            onView(ViewMatchers.withId(R.id.recyclerview_station)).perform(RecyclerViewActions.actionOnItemAtPosition(2, click()));
+           // String itemVal = "Debden Underground Station";
+
+          //  Espresso.onView(withText(itemVal)).check(matches(isDisplayed()));
+          //  onView(withId(R.id.recyclerview_station)).perform(RecyclerViewActions.actionOnItem(first(withText(itemVal)),
+                //    click()));
+//           onView(first(withId(R.id.recyclerview_station)))
+//                   .perform(RecyclerViewActions.actionOnItemAtPosition(2, click()));
+          // Espresso.onView(withText(itemVal)).check(matches(isDisplayed()));
+            //onView(withId(R.id.recyclerview_station))
+                   // .perform(actionOnItem(hasDescendant(withText(itemVal))).atPosition(2), click());
+
+          //  Espresso.onView(Matchers.allOf(ViewMatchers.withText(itemVal))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+//
 //            onView((withId(R.id.recyclerview_main))).check(matches(isDisplayed()));
 //            onView(ViewMatchers.withId(R.id.recyclerview_main)).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
 //            onView((withId(R.id.recyclerview_station))).check(matches(isDisplayed()));
-//            onView(ViewMatchers.withId(R.id.recyclerview_station)).perform(RecyclerViewActions.actionOnItemAtPosition(2, click()));
+//           // String itemVal = "North Wembley Underground Station";
 //            String itemVal = "Debden Underground Station";
-//            Espresso.onView(Matchers.allOf(ViewMatchers.withText(itemVal))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-
-            onView((withId(R.id.recyclerview_main))).check(matches(isDisplayed()));
-            onView(ViewMatchers.withId(R.id.recyclerview_main)).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
-            onView((withId(R.id.recyclerview_station))).check(matches(isDisplayed()));
-            String itemVal = "Debden Underground Station";
-
-            onView(withId(R.id.recyclerview_station))
-                    .perform(RecyclerViewActions.actionOnItem(
-                            hasDescendant(withText(itemVal)),
-                            click()));
-
-         //   Espresso.onView(Matchers.allOf(ViewMatchers.withText(itemVal))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-//      onView(withText(itemVal)).check(matches(isDisplayed()));
-             // .perform(RecyclerViewActions.actionOnItemAtPosition(2, click()));
 //            onView(withId(R.id.recyclerview_station))
 //                    .perform(RecyclerViewActions.actionOnItem(
-//                            hasDescendant(withText("North Wembley Underground Station")),
-//                            click()));
+//                            hasDescendant(withText(itemVal)), click()));
+
+
        }
+        private <T> Matcher<T> first(final Matcher<T> matcher)
+        {
+            return new BaseMatcher<T>() {
+                boolean isFirst = true;
+
+                @Override
+                public boolean matches(final Object item) {
+                    if (isFirst && matcher.matches(item)) {
+                        isFirst = false;
+                        return true;
+                    }
+
+                    return false;
+                }
+
+                @Override
+                public void describeTo(org.hamcrest.Description description) {
+
+                }
+            };
+        }
+
+
+
     }
 
 
