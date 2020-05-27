@@ -7,6 +7,7 @@ import androidx.test.espresso.Espresso;
 import androidx.test.espresso.NoMatchingViewException;
 import androidx.test.espresso.ViewAssertion;
 import androidx.test.espresso.action.ViewActions;
+import androidx.test.espresso.assertion.ViewAssertions;
 import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
@@ -14,10 +15,14 @@ import androidx.test.rule.ActivityTestRule;
 
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+
+import org.hamcrest.Matchers;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,8 +31,9 @@ import capstone.my.annin.londontubeschedule.ui.MainActivity;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static org.hamcrest.Matchers.containsString;
 
-    @RunWith(AndroidJUnit4ClassRunner.class)
+@RunWith(AndroidJUnit4ClassRunner.class)
     public class EspressoTest
     {
         private static final int ITEMFINDINLIST = 0;
@@ -87,14 +93,50 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
         Code based on the following YouTube video:
         https://www.youtube.com/watch?v=wWO0mA-OcZo
   */
-        @Test
-        public void viewMatchTest()
-        {
-            Espresso.onView(ViewMatchers.withId(R.id.recyclerview_main)).perform(RecyclerViewActions.actionOnItemAtPosition(ITEMFINDINLIST,click()));
-            String itemVal = "Bakerloo";
-            Espresso.onView(withText(itemVal)).check(matches(isDisplayed()));
-        }
+//        @Test
+//        public void viewMatchTest()
+//        {
+//            Espresso.onView(ViewMatchers.withId(R.id.recyclerview_main)).perform(RecyclerViewActions.actionOnItemAtPosition(ITEMFINDINLIST,click()));
+//            String itemVal = "Bakerloo";
+//            Espresso.onView(withText(itemVal)).check(matches(isDisplayed()));
+//        }
 
+
+      /*
+      Testing clicking on a position in the RecyclerViewCode from one activity to another based on the following:
+    https://www.pluralsight.com/guides/testing-in-android-with-espresso-part-2
+    https://github.com/dannyroa/espresso-samples/blob/master/RecyclerView/app/src/androidTest/java/com/dannyroa/espresso_samples/recyclerview/RecyclerViewTest.java
+  */
+
+        @Test
+        public void viewLineStationFlowTest()
+        {
+            // verify the visibility of recycler view on screen
+//            onView((withId(R.id.recyclerview_main))).check(matches(isDisplayed()));
+//            onView(ViewMatchers.withId(R.id.recyclerview_main)).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
+//            onView((withId(R.id.recyclerview_station))).check(matches(isDisplayed()));
+//            onView(ViewMatchers.withId(R.id.recyclerview_station)).perform(RecyclerViewActions.actionOnItemAtPosition(2, click()));
+//            String itemVal = "Debden Underground Station";
+//            Espresso.onView(Matchers.allOf(ViewMatchers.withText(itemVal))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+
+            onView((withId(R.id.recyclerview_main))).check(matches(isDisplayed()));
+            onView(ViewMatchers.withId(R.id.recyclerview_main)).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
+            onView((withId(R.id.recyclerview_station))).check(matches(isDisplayed()));
+            String itemVal = "Debden Underground Station";
+
+            onView(withId(R.id.recyclerview_station))
+                    .perform(RecyclerViewActions.actionOnItem(
+                            hasDescendant(withText(itemVal)),
+                            click()));
+
+         //   Espresso.onView(Matchers.allOf(ViewMatchers.withText(itemVal))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+//      onView(withText(itemVal)).check(matches(isDisplayed()));
+             // .perform(RecyclerViewActions.actionOnItemAtPosition(2, click()));
+//            onView(withId(R.id.recyclerview_station))
+//                    .perform(RecyclerViewActions.actionOnItem(
+//                            hasDescendant(withText("North Wembley Underground Station")),
+//                            click()));
+       }
     }
 
 
