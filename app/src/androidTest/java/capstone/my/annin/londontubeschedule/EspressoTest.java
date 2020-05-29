@@ -117,10 +117,15 @@ import static org.hamcrest.core.AllOf.allOf;
         {
             // verify the visibility of recycler view on screen
             onView((withId(R.id.recyclerview_main))).check(matches(isDisplayed()));
-           onView(ViewMatchers.withId(R.id.recyclerview_main)).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
-        onView((withId(R.id.recyclerview_station))).check(matches(isDisplayed()));
+            onView(ViewMatchers.withId(R.id.recyclerview_main)).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
+            onView((withId(R.id.recyclerview_station))).check(matches(isDisplayed()));
             onView(ViewMatchers.withId(R.id.recyclerview_station)).perform(RecyclerViewActions.actionOnItemAtPosition(2, click()));
-           // String itemVal = "Debden Underground Station";
+            String itemVal2 = "Debden Underground Station";
+            Espresso.onView(first(ViewMatchers.withText(itemVal2))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+//            onView(withId(R.id.recyclerview_schedule))
+//                    .perform(RecyclerViewActions.actionOnItem(
+//                            hasDescendant(withText(containsString("Data Currently Unavailable"))),
+//                            click())); // Second item on the list
 
           //  Espresso.onView(withText(itemVal)).check(matches(isDisplayed()));
           //  onView(withId(R.id.recyclerview_station)).perform(RecyclerViewActions.actionOnItem(first(withText(itemVal)),
@@ -143,7 +148,7 @@ import static org.hamcrest.core.AllOf.allOf;
 //                            hasDescendant(withText(itemVal)), click()));
 
 
-       }
+      }
         private <T> Matcher<T> first(final Matcher<T> matcher)
         {
             return new BaseMatcher<T>() {
@@ -160,12 +165,33 @@ import static org.hamcrest.core.AllOf.allOf;
                 }
 
                 @Override
-                public void describeTo(org.hamcrest.Description description) {
-
+                public void describeTo(org.hamcrest.Description description)
+                {
+                    description.appendText("should return first matching item");
                 }
             };
         }
+        private static Matcher<View> getElementFromMatchAtPosition(final Matcher<View> matcher, final int position) {
+            return new BaseMatcher<View>() {
+                int counter = 0;
+                @Override
+                public boolean matches(final Object item) {
+                    if (matcher.matches(item)) {
+                        if(counter == position) {
+                            counter++;
+                            return true;
+                        }
+                        counter++;
+                    }
+                    return false;
+                }
 
+                @Override
+                public void describeTo(final Description description) {
+                    description.appendText("Element at hierarchy position "+position);
+                }
+            };
+        }
 
 
     }
