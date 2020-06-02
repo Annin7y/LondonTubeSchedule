@@ -37,6 +37,8 @@ public class NetworkUtils
 
     private static final String BASE_URL_SCHEDULE = "https://api.tfl.gov.uk/Line/";
 
+    private static final String BASE_POLYLINE_URL = "https://raw.githubusercontent.com/oobrien/vis/master/tube/data/tfl_lines.json";
+
     public NetworkUtils()
     {
     }
@@ -125,6 +127,24 @@ public class NetworkUtils
         Log.v(TAG, "Built URISchedule " + urlSchedule);
         return urlSchedule;
     }
+
+    public static URL buildPolylineUrl()
+    {
+        URL urlPolyline= null;
+        try
+        {
+            Uri polylineQueryUri = Uri.parse(BASE_POLYLINE_URL).buildUpon()
+                    .build();
+            urlPolyline = new URL(polylineQueryUri.toString());
+        }
+        catch (MalformedURLException e)
+        {
+            e.printStackTrace();
+        }
+        Log.v(TAG, "Built URIPolyline " + urlPolyline);
+        return urlPolyline;
+    }
+
 
     /**
      * Make an HTTP request to the given URL and return a String as the response.
@@ -298,6 +318,65 @@ public class NetworkUtils
         }
         return jsonScheduleResponse;
     }
+
+    /**
+     * Make an HTTP request to the given URL and return a String as the response.
+     */
+    public static String makeHttpPolylineRequest(URL url) throws IOException
+    {
+        String jsonPolylineResponse = "";
+        // Log.i("URL: ", url.toString());
+        Timber.i(url.toString(),"URL: " );
+        // If the URL is null, then return early.
+        if (url == null)
+        {
+            return jsonPolylineResponse;
+        }
+
+        HttpURLConnection urlConnection = null;
+        InputStream inputStream = null;
+        try
+        {
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setReadTimeout(10000 /* milliseconds */);
+            urlConnection.setConnectTimeout(15000 /* milliseconds */);
+            urlConnection.setRequestMethod("GET");
+            urlConnection.connect();
+
+            // If the request was successful (response code 200),
+            // then read the input stream and parse the response.
+            if (urlConnection.getResponseCode() == 200)
+            {
+                inputStream = urlConnection.getInputStream();
+                jsonPolylineResponse = readFromStream(inputStream);
+            } else
+            {
+                Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
+
+            }
+        }
+        catch (IOException e)
+        {
+            // Log.e(LOG_TAG, "Problem retrieving polyline JSON results.", e);
+            Timber.e(e,"Problem retrieving polyline JSON results." );
+        }
+        finally
+        {
+            if (urlConnection != null)
+            {
+                urlConnection.disconnect();
+            }
+            if (inputStream != null)
+            {
+                // Closing the input stream could throw an IOException, which is why
+                // the makeHttpRequest(URL url) method signature specifies than an IOException
+                // could be thrown.
+                inputStream.close();
+            }
+        }
+        return jsonPolylineResponse;
+    }
+
 
     /**
      * Convert the {@link InputStream} into a String which contains the

@@ -119,8 +119,8 @@ import static org.hamcrest.core.AllOf.allOf;
             onView((withId(R.id.recyclerview_main))).check(matches(isDisplayed()));
             onView(ViewMatchers.withId(R.id.recyclerview_main)).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
             onView((withId(R.id.recyclerview_station))).check(matches(isDisplayed()));
-            onView(ViewMatchers.withId(R.id.recyclerview_station)).perform(RecyclerViewActions.actionOnItemAtPosition(2, click()));
-            String itemVal2 = "Debden Underground Station";
+            onView(ViewMatchers.withId(R.id.recyclerview_station)).perform(RecyclerViewActions.actionOnItemAtPosition(4, click()));
+            String itemVal2 = "Buckhurst Hill Underground Station";
             Espresso.onView(first(ViewMatchers.withText(itemVal2))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
 //            onView(withId(R.id.recyclerview_schedule))
 //                    .perform(RecyclerViewActions.actionOnItem(
