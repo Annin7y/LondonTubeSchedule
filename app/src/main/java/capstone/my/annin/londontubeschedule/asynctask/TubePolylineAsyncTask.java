@@ -6,7 +6,7 @@ import org.json.JSONArray;
 
 import java.net.URL;
 
-import capstone.my.annin.londontubeschedule.utils.NetworkUtils;
+
 
 public class TubePolylineAsyncTask extends AsyncTask<URL, Void, JSONArray>
 {
@@ -26,21 +26,16 @@ public class TubePolylineAsyncTask extends AsyncTask<URL, Void, JSONArray>
     }
 
     @Override
-    protected JSONArray doInBackground(URL... params)
-    {
-        URL polylineRequestUrl = NetworkUtils.buildPolylineUrl();
+    protected JSONArray doInBackground(URL... params) {
 
-        try
-        {
-            String jsonPolylineResponse = NetworkUtils
-                    .makeHttpPolylineRequest(polylineRequestUrl);
-            return jsonPolylineResponse;
-        }
-        catch (Exception e)
-        {
+        try {
+
+
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+        return null;
     }
 
     @Override
