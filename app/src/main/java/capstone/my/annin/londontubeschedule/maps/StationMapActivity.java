@@ -14,27 +14,17 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.PolylineOptions;
-import com.google.maps.android.data.geojson.GeoJsonFeature;
 import com.google.maps.android.data.geojson.GeoJsonLayer;
-import com.google.maps.android.data.geojson.GeoJsonLineStringStyle;
-import com.google.maps.android.data.geojson.GeoJsonPointStyle;
 import com.google.maps.android.data.geojson.GeoJsonPolygonStyle;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import capstone.my.annin.londontubeschedule.R;
-import capstone.my.annin.londontubeschedule.asynctask.TubeStationSequenceAsyncTask;
-import capstone.my.annin.londontubeschedule.asynctask.TubeStationSequenceAsyncTaskInterface;
 import capstone.my.annin.londontubeschedule.pojo.Line;
 import capstone.my.annin.londontubeschedule.pojo.Station;
 import timber.log.Timber;
 
-public class StationMapActivity extends AppCompatActivity implements OnMapReadyCallback, TubeStationSequenceAsyncTaskInterface
+public class StationMapActivity extends AppCompatActivity implements OnMapReadyCallback //TubeStationSequenceAsyncTaskInterface
 {
 
     private static final String TAG = "StationMapActivity";
@@ -103,8 +93,8 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
             stationArrayList = getIntent().getParcelableArrayListExtra("stationList");
             lineArrayList = getIntent().getParcelableArrayListExtra("lineList");
         }
-        TubeStationSequenceAsyncTask mySequenceTask = new TubeStationSequenceAsyncTask(this);
-        mySequenceTask.execute(lineId);
+//        TubeStationSequenceAsyncTask mySequenceTask = new TubeStationSequenceAsyncTask(this);
+//        mySequenceTask.execute(lineId);
     }
 
        //Explicitly check the permissions
@@ -189,37 +179,38 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
 //        googleMap.addPolyline(polylineOptions);
 
     }
-    @Override
-    public void returnStationSequenceData(JSONArray simpleJsonSequenceData)
-    {
-        try
-        {
-            for (int i = 0; i < simpleJsonSequenceData.length(); i++) {
-                String json = "{\"type\":\"MultiLineString\",\"coordinates\":" + simpleJsonSequenceData.get(i).toString() + "}";
-                layer = new GeoJsonLayer(mMap, new JSONObject(json));
-                layer.addLayerToMap();
-               // setPolygonGreen(layer);
-
-                for (GeoJsonFeature feature : layer.getFeatures())
-                {
+//    @Override
+//    public void returnStationSequenceData(JSONArray simpleJsonSequenceData)
+//    {
+//        try
+//        {
+//            for (int i = 0; i < simpleJsonSequenceData.length(); i++) {
+//                String json = "{\"type\":\"MultiLineString\",\"coordinates\":" + simpleJsonSequenceData.get(i).toString() + "}";
+//                layer = new GeoJsonLayer(mMap, new JSONObject(json));
+//                layer.addLayerToMap();
+//               // setPolygonGreen(layer);
+//
+//                for (GeoJsonFeature feature : layer.getFeatures())
+//                {
 //                    GeoJsonLineStringStyle stringStyle = new GeoJsonLineStringStyle();
 //                    stringStyle.setColor(Color.GREEN);
 //                    stringStyle.setWidth(4F);
 //                    feature.setLineStringStyle(stringStyle);
-                    GeoJsonPolygonStyle stringStyle = new GeoJsonPolygonStyle();
-                    stringStyle.setFillColor(Color.GREEN);
-                    stringStyle.setStrokeWidth(4F);
-                    feature.setPolygonStyle(stringStyle);
+//                    GeoJsonPolygonStyle stringStyle = new GeoJsonPolygonStyle();
+//                    stringStyle.setFillColor(Color.GREEN);
+//                    stringStyle.setStrokeWidth(4F);
+//                    feature.setPolygonStyle(stringStyle);
+//
+//                }
+//
+//
+//            }
+//            } catch (JSONException e)
+//        {
+//            e.printStackTrace();
+//            }
+//        }
 
-                }
-
-
-            }
-            } catch (JSONException e)
-        {
-            e.printStackTrace();
-            }
-        }
     public void setPolygonGreen(GeoJsonLayer layer)
     {
         GeoJsonPolygonStyle polyStyle = layer.getDefaultPolygonStyle();
