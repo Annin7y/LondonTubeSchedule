@@ -14,17 +14,24 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.data.geojson.GeoJsonFeature;
 import com.google.maps.android.data.geojson.GeoJsonLayer;
+import com.google.maps.android.data.geojson.GeoJsonLineStringStyle;
 import com.google.maps.android.data.geojson.GeoJsonPolygonStyle;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import capstone.my.annin.londontubeschedule.R;
+import capstone.my.annin.londontubeschedule.asynctask.TubeRawJsonAsyncTask;
+import capstone.my.annin.londontubeschedule.asynctask.TubeRawJsonAsyncTaskInterface;
 import capstone.my.annin.londontubeschedule.pojo.Line;
 import capstone.my.annin.londontubeschedule.pojo.Station;
 import timber.log.Timber;
 
-public class StationMapActivity extends AppCompatActivity implements OnMapReadyCallback //TubeStationSequenceAsyncTaskInterface
+public class StationMapActivity extends AppCompatActivity implements OnMapReadyCallback, TubeRawJsonAsyncTaskInterface
 {
 
     private static final String TAG = "StationMapActivity";
@@ -95,6 +102,8 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
         }
 //        TubeStationSequenceAsyncTask mySequenceTask = new TubeStationSequenceAsyncTask(this);
 //        mySequenceTask.execute(lineId);
+        TubeRawJsonAsyncTask myRawJsonTask = new TubeRawJsonAsyncTask(this);
+        myRawJsonTask.execute(lineId);
     }
 
        //Explicitly check the permissions
@@ -179,6 +188,36 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
 //        googleMap.addPolyline(polylineOptions);
 
     }
+
+
+    @Override
+    public void returnRawJsonData(String simpleGeoJsonString)
+    {
+         try
+         {
+             String json = simpleGeoJsonString;
+             layer = new GeoJsonLayer(mMap, new JSONObject(json));
+                layer.addLayerToMap();
+                setPolygonGreen(layer);
+
+                for (GeoJsonFeature feature : layer.getFeatures())
+                {
+                    GeoJsonLineStringStyle stringStyle = new GeoJsonLineStringStyle();
+                    stringStyle.setColor(Color.GREEN);
+                    stringStyle.setWidth(4F);
+                    feature.setLineStringStyle(stringStyle);
+
+
+                }
+
+    } catch (
+    JSONException e)
+        {
+           e.printStackTrace();
+            }
+        }
+
+
 //    @Override
 //    public void returnStationSequenceData(JSONArray simpleJsonSequenceData)
 //    {

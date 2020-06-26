@@ -11,17 +11,17 @@ import java.io.InputStreamReader;
 
 public class ReadRawFile
 {
-  public String readRawJson(Context context, String line)
+  public static String readRawJson(Context context, String lineId)
   {
       InputStream ins = context.getResources().openRawResource(
-                           context.getResources().getIdentifier(line,
+                           context.getResources().getIdentifier(lineId,
                                             "raw", context.getPackageName()));
 
                BufferedReader reader=new BufferedReader(new InputStreamReader(ins));
              String jsonString ="";
                StringBuilder builder=new StringBuilder();
                try { while ((jsonString = reader.readLine()) != null) {
-                           builder.append(line).append("\n");
+                           builder.append(jsonString).append("\n");
                        }
               } catch (IOException e) {
                    e.printStackTrace();
