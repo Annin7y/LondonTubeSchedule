@@ -13,6 +13,7 @@ import capstone.my.annin.londontubeschedule.maps.ReadRawFile;
 public class TubeRawJsonAsyncTask extends AsyncTask<String, Void, String>
 {
     Context context;
+
     private static final String TAG = TubeRawJsonAsyncTask.class.getSimpleName();
 
     private TubeRawJsonAsyncTaskInterface listener;
@@ -41,7 +42,8 @@ public class TubeRawJsonAsyncTask extends AsyncTask<String, Void, String>
             String rawGeoJson = ReadRawFile.readRawJson(context, lineId);
             return rawGeoJson;
 
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             e.printStackTrace();
             return null;
         }
