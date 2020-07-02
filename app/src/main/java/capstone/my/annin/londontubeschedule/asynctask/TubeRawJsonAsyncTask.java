@@ -12,15 +12,14 @@ import capstone.my.annin.londontubeschedule.maps.ReadRawFile;
 
 public class TubeRawJsonAsyncTask extends AsyncTask<String, Void, String>
 {
-    Context context;
-
     private static final String TAG = TubeRawJsonAsyncTask.class.getSimpleName();
-
     private TubeRawJsonAsyncTaskInterface listener;
+    private Context context;
 
-    public TubeRawJsonAsyncTask(TubeRawJsonAsyncTaskInterface listener)
+    public TubeRawJsonAsyncTask(TubeRawJsonAsyncTaskInterface listener, Context context)
     {
         this.listener = listener;
+        this.context = context;
     }
 
     @Override
