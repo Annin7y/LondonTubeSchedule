@@ -7,20 +7,26 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.ref.WeakReference;
 
 import timber.log.Timber;
 
 public class ReadRawFile
 {
-    public static String readRawJson(Context context, String lineId) {
+
+    public static String readJsonFromAssets(String lineId, WeakReference<Context> contextRef)
+    {
+
         //Code based on the following code sample:
         //https://readyandroid.wordpress.com/read-json-or-txt-file-from-assets-folder/
         String ret = "";
+
         try {
-            InputStream ins = context.getResources().openRawResource(
-                    context.getResources().getIdentifier(lineId,
-                            "raw", context.getPackageName()));
-            if (ins != null) {
+            String fileName = "json/" + lineId + ".json";
+            InputStream ins = contextRef.get().getAssets().open(fileName);
+
+            if (ins != null)
+            {
                 InputStreamReader inputStreamReader = new InputStreamReader(ins);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                 String receiveString = "";

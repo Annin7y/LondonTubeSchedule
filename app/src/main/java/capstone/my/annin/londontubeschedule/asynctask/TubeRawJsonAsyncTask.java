@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 
 import org.json.JSONArray;
 
+import java.lang.ref.WeakReference;
 import java.net.URL;
 
 import capstone.my.annin.londontubeschedule.maps.ReadRawFile;
@@ -14,12 +15,12 @@ public class TubeRawJsonAsyncTask extends AsyncTask<String, Void, String>
 {
     private static final String TAG = TubeRawJsonAsyncTask.class.getSimpleName();
     private TubeRawJsonAsyncTaskInterface listener;
-    private Context context;
+    private WeakReference<Context> contextRef;
 
     public TubeRawJsonAsyncTask(TubeRawJsonAsyncTaskInterface listener, Context context)
     {
         this.listener = listener;
-        this.context = context;
+        contextRef = new WeakReference<>(context);
     }
 
     @Override
@@ -29,36 +30,34 @@ public class TubeRawJsonAsyncTask extends AsyncTask<String, Void, String>
     }
 
     @Override
-    protected String doInBackground(String... params)
-    {
-        if (params.length == 0)
-        {
+    protected String doInBackground(String... params) {
+        if (params.length == 0) {
             return null;
         }
         String lineId = params[0];
 
-        try {
-            String rawGeoJson = ReadRawFile.readRawJson(context, lineId);
-            return rawGeoJson;
+            try {
 
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-            return null;
-        }
+                String rawGeoJson = ReadRawFile.readJsonFromAssets(lineId, contextRef);
+                    return rawGeoJson;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
 
     }
 
+
     @Override
-    protected void onPostExecute(String rawGeoJson)
-    {
-        super.onPostExecute(rawGeoJson);
+    protected void onPostExecute(String rawGeoJson) {
+        Context context = contextRef.get();
+        if (context != null) {
+            super.onPostExecute(rawGeoJson);
          /*the if method is commented out because the error message will be displayed if there is no internet connection
         the if statement is included in the returnData method in the Main Activity
         */
-        listener.returnRawJsonData(rawGeoJson);
+            listener.returnRawJsonData(rawGeoJson);
+        }
     }
-
-
-
 }

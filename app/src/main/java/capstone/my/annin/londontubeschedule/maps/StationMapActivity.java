@@ -102,7 +102,7 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
         }
 //        TubeStationSequenceAsyncTask mySequenceTask = new TubeStationSequenceAsyncTask(this);
 //        mySequenceTask.execute(lineId);
-        TubeRawJsonAsyncTask myRawJsonTask = new TubeRawJsonAsyncTask(this);
+        TubeRawJsonAsyncTask myRawJsonTask = new TubeRawJsonAsyncTask(this, getApplicationContext());
         myRawJsonTask.execute(lineId);
     }
 
