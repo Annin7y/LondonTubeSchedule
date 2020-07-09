@@ -53,7 +53,7 @@ public class ReadRawFile
     {
         String ret2 = "";
         try {
-            InputStream inputStream = contextRef2.get().getAssets().open("allLines.json");
+            InputStream inputStream = contextRef2.get().getAssets().open("json/allLines.json");
 
             if (inputStream != null)
             {
