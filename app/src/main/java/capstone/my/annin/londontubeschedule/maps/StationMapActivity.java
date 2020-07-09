@@ -25,15 +25,16 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import capstone.my.annin.londontubeschedule.R;
+import capstone.my.annin.londontubeschedule.asynctask.AllLinesAsyncTaskInterface;
+import capstone.my.annin.londontubeschedule.asynctask.TubeGeoJsonAllLinesAsyncTask;
 import capstone.my.annin.londontubeschedule.asynctask.TubeRawJsonAsyncTask;
 import capstone.my.annin.londontubeschedule.asynctask.TubeRawJsonAsyncTaskInterface;
 import capstone.my.annin.londontubeschedule.pojo.Line;
 import capstone.my.annin.londontubeschedule.pojo.Station;
 import timber.log.Timber;
 
-public class StationMapActivity extends AppCompatActivity implements OnMapReadyCallback, TubeRawJsonAsyncTaskInterface
+public class StationMapActivity extends AppCompatActivity implements OnMapReadyCallback, TubeRawJsonAsyncTaskInterface, AllLinesAsyncTaskInterface
 {
-
     private static final String TAG = "StationMapActivity";
     Station station;
     public String stationId;
@@ -104,6 +105,9 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
 //        mySequenceTask.execute(lineId);
         TubeRawJsonAsyncTask myRawJsonTask = new TubeRawJsonAsyncTask(this, getApplicationContext());
         myRawJsonTask.execute(lineId);
+
+        TubeGeoJsonAllLinesAsyncTask myAllTask = new TubeGeoJsonAllLinesAsyncTask(this, getApplicationContext());
+        myAllTask.execute();
     }
 
        //Explicitly check the permissions
@@ -218,7 +222,32 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
            e.printStackTrace();
             }
         }
+    @Override
+    public void returnAllLinesJsonData(String simpleAllGeoJsonString)
+    {
+        try
+        {
+            String json = simpleAllGeoJsonString;
+            layer = new GeoJsonLayer(mMap, new JSONObject(json));
+            layer.addLayerToMap();
+            setPolygonGreen(layer);
 
+            for (GeoJsonFeature feature : layer.getFeatures())
+            {
+                GeoJsonLineStringStyle stringStyle = new GeoJsonLineStringStyle();
+                stringStyle.setColor(Color.BLUE);
+                stringStyle.setWidth(4F);
+                feature.setLineStringStyle(stringStyle);
+
+
+            }
+
+        } catch (
+                JSONException e)
+        {
+            e.printStackTrace();
+        }
+    }
 
 //    @Override
 //    public void returnStationSequenceData(JSONArray simpleJsonSequenceData)

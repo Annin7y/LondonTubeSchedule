@@ -48,7 +48,37 @@ public class ReadRawFile
         }
         return ret;
 
-    }}
+    }
+    public static String readFromFile(WeakReference<Context> contextRef2)
+    {
+        String ret2 = "";
+        try {
+            InputStream inputStream = contextRef2.get().getAssets().open("allLines.json");
+
+            if (inputStream != null)
+            {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+                while ((receiveString = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(receiveString);
+                }
+                inputStream.close();
+                ret2 = stringBuilder.toString();
+            }
+        } catch (FileNotFoundException e)
+        {
+            Timber.e(e, "Problem parsing raw JSON results");
+        }
+        catch (IOException e)
+        {
+            Timber.e(e, "Problem parsing raw JSON results");
+        }
+        return ret2;
+    }
+
+}
 
 
 
