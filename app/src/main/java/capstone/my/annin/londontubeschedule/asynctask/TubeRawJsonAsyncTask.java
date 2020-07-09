@@ -41,7 +41,8 @@ public class TubeRawJsonAsyncTask extends AsyncTask<String, Void, String>
                 String rawGeoJson = ReadRawFile.readJsonFromAssets(lineId, contextRef);
                     return rawGeoJson;
 
-            } catch (Exception e) {
+            } catch (Exception e)
+            {
                 e.printStackTrace();
                 return null;
             }
@@ -50,11 +51,12 @@ public class TubeRawJsonAsyncTask extends AsyncTask<String, Void, String>
 
 
     @Override
-    protected void onPostExecute(String rawGeoJson) {
+    protected void onPostExecute(String rawGeoJson)
+    {
         Context context = contextRef.get();
-        if (context != null) {
-            super.onPostExecute(rawGeoJson);
-         /*the if method is commented out because the error message will be displayed if there is no internet connection
+        if (context != null)
+        {
+            /*the if method is commented out because the error message will be displayed if there is no internet connection
         the if statement is included in the returnData method in the Main Activity
         */
             listener.returnRawJsonData(rawGeoJson);

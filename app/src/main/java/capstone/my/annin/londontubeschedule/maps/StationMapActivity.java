@@ -127,14 +127,16 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
              */
         MarkerOptions markerOptions = new MarkerOptions()
 
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.baseline_place_black_18dp))
+               // .icon(BitmapDescriptorFactory.fromResource(R.drawable.baseline_place_black_18dp))
+                .icon(BitmapDescriptorFactory
+                        .defaultMarker(BitmapDescriptorFactory.HUE_CYAN))
                 .title(stationName)
                 .position(stationCoordinates);
 
         //Code copied and pasted from https://www.androidhub4you.com/2013/07/google-map-version-2-integration-in_8530.html
-        CircleOptions circle = new CircleOptions();
-        circle.center(stationCoordinates).fillColor(Color.LTGRAY).radius(50);
-        googleMap.addCircle(circle);
+//        CircleOptions circle = new CircleOptions();
+//        circle.center(stationCoordinates).fillColor(Color.LTGRAY).radius(50);
+//        googleMap.addCircle(circle);
 
         // Once the MarkerOptions is set up, we add the marker.
         // This will be run for each station in the ArrayList.
