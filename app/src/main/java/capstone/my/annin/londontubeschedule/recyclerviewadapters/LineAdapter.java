@@ -2,6 +2,8 @@ package capstone.my.annin.londontubeschedule.recyclerviewadapters;
 
 import android.content.Context;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,6 +103,53 @@ public class LineAdapter extends RecyclerView.Adapter<LineAdapter.LineAdapterVie
         holder.lineName.setText(lineView.getLineName());
         holder.lineStatusDesc.setText(lineView.getLineStatusDesc());
         holder.lineStatusReason.setText(lineView.getLineStatusReason());
+
+        switch(position)
+        {
+            case 0: holder.lineName.getText().toString().contains("Bakerloo");
+                holder.lineName.setTextColor(Color.parseColor("#6E3719"));
+                break;
+
+            case 1: holder.lineName.getText().toString().contains("Central");
+            holder.lineName.setTextColor(Color.parseColor("#FF0000"));
+            break;
+
+            case 2: holder.lineName.getText().toString().contains("Circle");
+                holder.lineName.setTextColor(Color.parseColor("#FFCA28"));
+                break;
+
+            case 3: holder.lineName.getText().toString().contains("District");
+                holder.lineName.setTextColor(Color.parseColor("#3A6530"));
+                break;
+
+            case 4: holder.lineName.getText().toString().contains("Hammersmith");
+                holder.lineName.setTextColor(Color.parseColor("#EA8CAC"));
+                break;
+
+            case 5: holder.lineName.getText().toString().contains("Jubilee");
+                holder.lineName.setTextColor(Color.parseColor("#CCCCBF"));
+                break;
+
+            case 6: holder.lineName.getText().toString().contains("Metropolitan");
+                holder.lineName.setTextColor(Color.parseColor("#B54F71"));
+                break;
+
+            case 7: holder.lineName.getText().toString().contains("Northern");
+                holder.lineName.setTextColor(Color.parseColor("#000000"));
+                break;
+
+                case 8: holder.lineName.getText().toString().contains("Piccadilly");
+                holder.lineName.setTextColor(Color.parseColor("#1D5587"));
+                break;
+
+            case 9: holder.lineName.getText().toString().contains("Victoria");
+                holder.lineName.setTextColor(Color.parseColor("#5766FA"));
+                break;
+
+            case 10: holder.lineName.getText().toString().contains("Waterloo");
+                holder.lineName.setTextColor(Color.parseColor("#BBDEFB"));
+                break;
+        }
     }
 
     @Override

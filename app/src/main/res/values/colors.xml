@@ -5,4 +5,15 @@
     <color name="colorAccent">#D81B60</color>
     <color name="theme_accent">#04561A</color>
     <color name="colorName">#FFF4F1F2</color>
+    <color name="colorBakerloo">#6E3719</color>
+    <color name="colorCentral">#FF0000</color>
+    <color name="colorCircle">#FFCA28</color>
+    <color name="colorDistrict">#3A6530</color>
+    <color name="colorHammersmithCity">#EA8CAC</color>
+    <color name="colorJubilee">#CCCCBF</color>
+    <color name="colorMetropolitan">#B54F71</color>
+    <color name="colorNorthern">#000000</color>
+    <color name="colorPiccadilly">#1D5587</color>
+    <color name="colorVictoria">#5766FA</color>
+    <color name="colorWaterloo">#BBDEFB</color>
 </resources>

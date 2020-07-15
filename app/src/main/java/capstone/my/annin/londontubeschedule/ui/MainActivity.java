@@ -172,10 +172,11 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
                     myLineTask.execute(NetworkUtils.buildLineStatusUrl());
                 } else
                     {
-                    Snackbar
-                            .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
-                            .setAction(R.string.snackbar_retry, new MyClickListener())
-                            .show();
+//                    Snackbar
+//                            .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+//                            .setAction(R.string.snackbar_retry, new MyClickListener())
+//                            .show();
+                        showErrorMessage();
                 }
             } else
                 {
