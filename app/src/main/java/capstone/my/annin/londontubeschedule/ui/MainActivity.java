@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
         /*
          *  Starting the asyncTask so that lines load upon launching the app.
          */
-        if (savedInstanceState == null)
+      if (savedInstanceState == null)
         {
                 if (isNetworkStatusAvailable(this))
                 {
@@ -178,7 +178,9 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
 //                            .show();
                         showErrorMessage();
                 }
-            } else
+            }
+
+            else
                 {
              selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "line_list");
                 if (selectedSortOrder == SORT_BY_FAVORITES)

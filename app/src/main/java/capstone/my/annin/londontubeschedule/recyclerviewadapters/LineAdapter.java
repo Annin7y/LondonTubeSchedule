@@ -1,6 +1,8 @@
 package capstone.my.annin.londontubeschedule.recyclerviewadapters;
 
 import android.content.Context;
+
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Color;
@@ -107,47 +109,47 @@ public class LineAdapter extends RecyclerView.Adapter<LineAdapter.LineAdapterVie
         switch(position)
         {
             case 0: holder.lineName.getText().toString().contains("Bakerloo");
-                holder.lineName.setTextColor(Color.parseColor("#6E3719"));
+                holder.lineName.setTextColor(ContextCompat.getColor(context, R.color.colorBakerloo));
                 break;
 
             case 1: holder.lineName.getText().toString().contains("Central");
-            holder.lineName.setTextColor(Color.parseColor("#FF0000"));
+            holder.lineName.setTextColor(ContextCompat.getColor(context, R.color.colorCentral));
             break;
 
             case 2: holder.lineName.getText().toString().contains("Circle");
-                holder.lineName.setTextColor(Color.parseColor("#FFCA28"));
+                holder.lineName.setTextColor(ContextCompat.getColor(context, R.color.colorCentral));
                 break;
 
             case 3: holder.lineName.getText().toString().contains("District");
-                holder.lineName.setTextColor(Color.parseColor("#3A6530"));
+                holder.lineName.setTextColor(ContextCompat.getColor(context, R.color.colorDistrict));
                 break;
 
             case 4: holder.lineName.getText().toString().contains("Hammersmith");
-                holder.lineName.setTextColor(Color.parseColor("#EA8CAC"));
+                holder.lineName.setTextColor(ContextCompat.getColor(context, R.color.colorHammersmithCity));
                 break;
 
             case 5: holder.lineName.getText().toString().contains("Jubilee");
-                holder.lineName.setTextColor(Color.parseColor("#CCCCBF"));
+                holder.lineName.setTextColor(ContextCompat.getColor(context, R.color.colorJubilee));
                 break;
 
             case 6: holder.lineName.getText().toString().contains("Metropolitan");
-                holder.lineName.setTextColor(Color.parseColor("#B54F71"));
+                holder.lineName.setTextColor(ContextCompat.getColor(context, R.color.colorMetropolitan));
                 break;
 
             case 7: holder.lineName.getText().toString().contains("Northern");
-                holder.lineName.setTextColor(Color.parseColor("#000000"));
+                holder.lineName.setTextColor(ContextCompat.getColor(context, R.color.colorNorthern));
                 break;
 
                 case 8: holder.lineName.getText().toString().contains("Piccadilly");
-                holder.lineName.setTextColor(Color.parseColor("#1D5587"));
+                holder.lineName.setTextColor(ContextCompat.getColor(context, R.color.colorPiccadilly));
                 break;
 
             case 9: holder.lineName.getText().toString().contains("Victoria");
-                holder.lineName.setTextColor(Color.parseColor("#5766FA"));
+                holder.lineName.setTextColor(ContextCompat.getColor(context, R.color.colorVictoria));
                 break;
 
             case 10: holder.lineName.getText().toString().contains("Waterloo");
-                holder.lineName.setTextColor(Color.parseColor("#BBDEFB"));
+                holder.lineName.setTextColor(ContextCompat.getColor(context, R.color.colorWaterloo));
                 break;
         }
     }
