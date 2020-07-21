@@ -108,19 +108,20 @@ public class LineAdapter extends RecyclerView.Adapter<LineAdapter.LineAdapterVie
 
         switch(position)
         {
-            case 0: holder.lineName.getText().toString().contains("Bakerloo");
+            case 0:
                 holder.lineName.setTextColor(ContextCompat.getColor(context, R.color.colorBakerloo));
                 break;
 
-            case 1: holder.lineName.getText().toString().contains("Central");
+            case 1:
             holder.lineName.setTextColor(ContextCompat.getColor(context, R.color.colorCentral));
+
             break;
 
-            case 2: holder.lineName.getText().toString().contains("Circle");
-                holder.lineName.setTextColor(ContextCompat.getColor(context, R.color.colorCentral));
+            case 2:
+                holder.lineName.setTextColor(ContextCompat.getColor(context, R.color.colorCircle));
                 break;
 
-            case 3: holder.lineName.getText().toString().contains("District");
+            case 3:
                 holder.lineName.setTextColor(ContextCompat.getColor(context, R.color.colorDistrict));
                 break;
 
@@ -128,27 +129,27 @@ public class LineAdapter extends RecyclerView.Adapter<LineAdapter.LineAdapterVie
                 holder.lineName.setTextColor(ContextCompat.getColor(context, R.color.colorHammersmithCity));
                 break;
 
-            case 5: holder.lineName.getText().toString().contains("Jubilee");
+            case 5:
                 holder.lineName.setTextColor(ContextCompat.getColor(context, R.color.colorJubilee));
                 break;
 
-            case 6: holder.lineName.getText().toString().contains("Metropolitan");
+            case 6:
                 holder.lineName.setTextColor(ContextCompat.getColor(context, R.color.colorMetropolitan));
                 break;
 
-            case 7: holder.lineName.getText().toString().contains("Northern");
+            case 7:
                 holder.lineName.setTextColor(ContextCompat.getColor(context, R.color.colorNorthern));
                 break;
 
-                case 8: holder.lineName.getText().toString().contains("Piccadilly");
+                case 8:
                 holder.lineName.setTextColor(ContextCompat.getColor(context, R.color.colorPiccadilly));
                 break;
 
-            case 9: holder.lineName.getText().toString().contains("Victoria");
+            case 9:
                 holder.lineName.setTextColor(ContextCompat.getColor(context, R.color.colorVictoria));
                 break;
 
-            case 10: holder.lineName.getText().toString().contains("Waterloo");
+            case 10:
                 holder.lineName.setTextColor(ContextCompat.getColor(context, R.color.colorWaterloo));
                 break;
         }
