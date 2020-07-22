@@ -168,6 +168,7 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
         {
                 if (isNetworkStatusAvailable(this))
                 {
+
                     TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(this);
                     myLineTask.execute(NetworkUtils.buildLineStatusUrl());
                 } else

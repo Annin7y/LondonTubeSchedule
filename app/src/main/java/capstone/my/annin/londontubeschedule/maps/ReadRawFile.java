@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 
 import timber.log.Timber;
 
@@ -49,9 +50,9 @@ public class ReadRawFile
         return ret;
 
     }
-    public static String readFromFile(WeakReference<Context> contextRef2)
+    public static ArrayList<String> readFromFile(WeakReference<Context> contextRef2)
     {
-        String ret2 = "";
+        ArrayList<String> list = new ArrayList<>();
         try {
             InputStream inputStream = contextRef2.get().getAssets().open("json/allLines.txt");
 
@@ -60,12 +61,14 @@ public class ReadRawFile
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                 String receiveString = "";
-                StringBuilder stringBuilder = new StringBuilder();
-                while ((receiveString = bufferedReader.readLine()) != null) {
+               StringBuilder stringBuilder = new StringBuilder();
+                while ((receiveString = bufferedReader.readLine()) != null)
+                {
                     stringBuilder.append(receiveString);
+                    list.add(receiveString);
                 }
                 inputStream.close();
-                ret2 = stringBuilder.toString();
+
             }
         } catch (FileNotFoundException e)
         {
@@ -75,7 +78,7 @@ public class ReadRawFile
         {
             Timber.e(e, "Problem parsing raw JSON results");
         }
-        return ret2;
+        return list;
     }
 
 }
