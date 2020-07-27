@@ -41,18 +41,18 @@
     </activity>
         <activity
             android:name="capstone.my.annin.londontubeschedule.ui.StationScheduleActivity"
-            android:parentActivityName="capstone.my.annin.londontubeschedule.ui.MainActivity">
+            android:parentActivityName="capstone.my.annin.londontubeschedule.ui.StationListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="capstone.my.annin.londontubeschedule.ui.MainActivity" />
+                android:value="capstone.my.annin.londontubeschedule.ui.StationListActivity" />
         </activity>
 
         <activity
             android:name="capstone.my.annin.londontubeschedule.maps.StationMapActivity"
-            android:parentActivityName="capstone.my.annin.londontubeschedule.ui.MainActivity">
+            android:parentActivityName="capstone.my.annin.londontubeschedule.ui.StationScheduleActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="capstone.my.annin.londontubeschedule.ui.MainActivity" />
+                android:value="capstone.my.annin.londontubeschedule.ui.StationScheduleActivity" />
         </activity>
 
     <receiver android:name=".widget.ScheduleWidgetProvider">

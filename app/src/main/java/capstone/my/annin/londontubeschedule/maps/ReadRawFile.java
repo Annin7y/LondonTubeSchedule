@@ -61,10 +61,8 @@ public class ReadRawFile
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                 String receiveString = "";
-               StringBuilder stringBuilder = new StringBuilder();
                 while ((receiveString = bufferedReader.readLine()) != null)
                 {
-                    stringBuilder.append(receiveString);
                     list.add(receiveString);
                 }
                 inputStream.close();

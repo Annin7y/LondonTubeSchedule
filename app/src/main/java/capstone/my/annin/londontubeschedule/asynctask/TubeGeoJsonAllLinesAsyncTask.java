@@ -4,10 +4,12 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
 
 import capstone.my.annin.londontubeschedule.maps.ReadRawFile;
 
-public class TubeGeoJsonAllLinesAsyncTask extends AsyncTask<String, Void, String>
+public class TubeGeoJsonAllLinesAsyncTask extends AsyncTask<String, Void, ArrayList<String>>
     {
         //private static final String TAG = capstone.my.annin.londontubeschedule.asynctask.TubeRawJsonAsyncTask.class.getSimpleName();
         private AllLinesAsyncTaskInterface listener;
@@ -27,11 +29,11 @@ public class TubeGeoJsonAllLinesAsyncTask extends AsyncTask<String, Void, String
         }
 
         @Override
-        protected String doInBackground(String... params)
+        protected ArrayList<String> doInBackground(String... params)
         {
             try
             {
-                String allGeoJson = ReadRawFile.readFromFile(contextRef2);
+                ArrayList<String> allGeoJson = ReadRawFile.readFromFile(contextRef2);
                 return allGeoJson;
 
             } catch (Exception e)
@@ -45,7 +47,7 @@ public class TubeGeoJsonAllLinesAsyncTask extends AsyncTask<String, Void, String
 
 
         @Override
-        protected void onPostExecute(String allGeoJson)
+        protected void onPostExecute(ArrayList<String> allGeoJson)
         {
             Context context = contextRef2.get();
             if (context != null)
