@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import timber.log.Timber;
 
@@ -56,19 +57,17 @@ public class ReadRawFile
         try {
             InputStream inputStream = contextRef2.get().getAssets().open("json/allLines.txt");
 
-            if (inputStream != null)
-            {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                String receiveString = "";
-                while ((receiveString = bufferedReader.readLine()) != null)
+                Scanner pieces = new Scanner(inputStreamReader);
+                pieces.useDelimiter("\n\n");
+                while(pieces.hasNext())
                 {
-                    list.add(receiveString);
+                    list.add(pieces.next());
                 }
                 inputStream.close();
 
-            }
-        } catch (FileNotFoundException e)
+                    } catch (FileNotFoundException e)
+
         {
             Timber.e(e, "Problem parsing raw JSON results");
         }
