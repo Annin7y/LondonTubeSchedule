@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -23,6 +25,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import capstone.my.annin.londontubeschedule.R;
@@ -218,8 +221,7 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
 //
 //                }
 //
-//    } catch (
-//    JSONException e)
+
 //        {
 //           e.printStackTrace();
 //            }
@@ -228,6 +230,14 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
     @Override
     public void returnAllLinesJsonData(ArrayList<String> simpleAllGeoJsonString)
     {
+
+        ArrayList<Integer> colors = new ArrayList<>(Arrays.asList(ContextCompat.getColor(this, R.color.colorBakerloo),
+                ContextCompat.getColor(this, R.color.colorCentral),ContextCompat.getColor(this,R.color.colorCircle),
+                ContextCompat.getColor(this, R.color.colorDistrict), ContextCompat.getColor(this, R.color.colorHammersmithCity),
+                ContextCompat.getColor(this, R.color.colorJubilee),ContextCompat.getColor(this,R.color.colorMetropolitan),
+                ContextCompat.getColor(this, R.color.colorNorthern), ContextCompat.getColor(this,R.color.colorPiccadilly),
+                ContextCompat.getColor(this, R.color.colorVictoria),ContextCompat.getColor(this,R.color.colorWaterloo)));
+
         for (int i = 0; i < simpleAllGeoJsonString.size(); i++)
         {
             try
@@ -239,7 +249,7 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
                 for (GeoJsonFeature feature : layer.getFeatures())
                 {
                     GeoJsonLineStringStyle stringStyle = new GeoJsonLineStringStyle();
-                    stringStyle.setColor(Color.BLUE);
+                    stringStyle.setColor(colors.get(i));
                     stringStyle.setWidth(4F);
                     feature.setLineStringStyle(stringStyle);
                 }

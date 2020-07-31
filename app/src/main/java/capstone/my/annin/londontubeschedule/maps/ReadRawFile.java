@@ -59,7 +59,7 @@ public class ReadRawFile
 
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 Scanner pieces = new Scanner(inputStreamReader);
-                pieces.useDelimiter("\n\n");
+                pieces.useDelimiter("--");
                 while(pieces.hasNext())
                 {
                     list.add(pieces.next());
