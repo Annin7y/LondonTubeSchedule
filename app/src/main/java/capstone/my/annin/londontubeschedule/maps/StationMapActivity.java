@@ -231,12 +231,9 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
     public void returnAllLinesJsonData(ArrayList<String> simpleAllGeoJsonString)
     {
 
-        ArrayList<Integer> colors = new ArrayList<>(Arrays.asList(ContextCompat.getColor(this, R.color.colorBakerloo),
-                ContextCompat.getColor(this, R.color.colorCentral),ContextCompat.getColor(this,R.color.colorCircle),
-                ContextCompat.getColor(this, R.color.colorDistrict), ContextCompat.getColor(this, R.color.colorHammersmithCity),
-                ContextCompat.getColor(this, R.color.colorJubilee),ContextCompat.getColor(this,R.color.colorMetropolitan),
-                ContextCompat.getColor(this, R.color.colorNorthern), ContextCompat.getColor(this,R.color.colorPiccadilly),
-                ContextCompat.getColor(this, R.color.colorVictoria),ContextCompat.getColor(this,R.color.colorWaterloo)));
+        ArrayList<Integer> colors = new ArrayList<>(Arrays.asList(R.color.colorBakerloo, R.color.colorCentral, R.color.colorCircle,
+                R.color.colorDistrict, R.color.colorHammersmithCity, R.color.colorJubilee,R.color.colorMetropolitan, R.color.colorNorthern,
+                R.color.colorPiccadilly, R.color.colorVictoria, R.color.colorWaterloo));
 
         for (int i = 0; i < simpleAllGeoJsonString.size(); i++)
         {
@@ -249,7 +246,7 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
                 for (GeoJsonFeature feature : layer.getFeatures())
                 {
                     GeoJsonLineStringStyle stringStyle = new GeoJsonLineStringStyle();
-                    stringStyle.setColor(colors.get(i));
+                    stringStyle.setColor(ContextCompat.getColor(StationMapActivity.this, colors.get(i)));
                     stringStyle.setWidth(4F);
                     feature.setLineStringStyle(stringStyle);
                 }
