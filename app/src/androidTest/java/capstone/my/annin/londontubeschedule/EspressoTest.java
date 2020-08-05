@@ -62,35 +62,35 @@ import static org.hamcrest.core.AllOf.allOf;
 //        //https://github.com/twilio/mobile-sdk-sample-android/blob/master/twilio-auth-sample/src/androidTest/java/com/twilio/authsample/matchers/RecyclerViewItemCountAssertion.java
 //        //https://stackoverflow.com/questions/36399787/how-to-count-recyclerview-items-with-espresso/37339656
 //        //https://stackoverflow.com/questions/51678563/how-to-test-recyclerview-viewholder-text-with-espresso
-//        public class RecyclerViewItemCountAssertion implements ViewAssertion
-//        {
-//            private final int expectedCount;
+        public class RecyclerViewItemCountAssertion implements ViewAssertion
+        {
+            private final int expectedCount;
+
+
+            public RecyclerViewItemCountAssertion(int expectedCount)
+            {
+                this.expectedCount = expectedCount;
+            }
+
+            @Override
+            public void check(View view, NoMatchingViewException noViewFoundException)
+            {
+                if (noViewFoundException != null)
+                {
+                    throw noViewFoundException;
+                }
+                RecyclerView recyclerView = (RecyclerView) view;
+                RecyclerView.Adapter adapter = recyclerView.getAdapter();
+                assertThat(adapter.getItemCount(), is(expectedCount));
+
+            }
+        }
 //
-//
-//            public RecyclerViewItemCountAssertion(int expectedCount)
-//            {
-//                this.expectedCount = expectedCount;
-//            }
-//
-//            @Override
-//            public void check(View view, NoMatchingViewException noViewFoundException)
-//            {
-//                if (noViewFoundException != null)
-//                {
-//                    throw noViewFoundException;
-//                }
-//                RecyclerView recyclerView = (RecyclerView) view;
-//                RecyclerView.Adapter adapter = recyclerView.getAdapter();
-//                assertThat(adapter.getItemCount(), is(expectedCount));
-//
-//            }
-//        }
-//
-//        @Test
-//        public void lineCountTest()
-//        {
-//            onView(withId(R.id.recyclerview_main)).check(new RecyclerViewItemCountAssertion(11));
-//        }
+        @Test
+        public void lineCountTest()
+        {
+            onView(withId(R.id.recyclerview_main)).check(new RecyclerViewItemCountAssertion(11));
+        }
 
 /*
  Testing clicking on a position in the RecyclerView
@@ -112,16 +112,16 @@ import static org.hamcrest.core.AllOf.allOf;
     https://github.com/dannyroa/espresso-samples/blob/master/RecyclerView/app/src/androidTest/java/com/dannyroa/espresso_samples/recyclerview/RecyclerViewTest.java
   */
 
-        @Test
-        public void viewLineStationFlowTest()
-        {
+//        @Test
+//        public void viewLineStationFlowTest()
+//        {
             // verify the visibility of recycler view on screen
-            onView((withId(R.id.recyclerview_main))).check(matches(isDisplayed()));
-            onView(ViewMatchers.withId(R.id.recyclerview_main)).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
-            onView((withId(R.id.recyclerview_station))).check(matches(isDisplayed()));
-            onView(ViewMatchers.withId(R.id.recyclerview_station)).perform(RecyclerViewActions.actionOnItemAtPosition(4, click()));
-            String itemVal2 = "Buckhurst Hill Underground Station";
-            Espresso.onView(first(ViewMatchers.withText(itemVal2))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+//            onView((withId(R.id.recyclerview_main))).check(matches(isDisplayed()));
+//            onView(ViewMatchers.withId(R.id.recyclerview_main)).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
+//            onView((withId(R.id.recyclerview_station))).check(matches(isDisplayed()));
+//            onView(ViewMatchers.withId(R.id.recyclerview_station)).perform(RecyclerViewActions.actionOnItemAtPosition(4, click()));
+//            String itemVal2 = "Buckhurst Hill Underground Station";
+//            Espresso.onView(first(ViewMatchers.withText(itemVal2))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
 //            onView(withId(R.id.recyclerview_schedule))
 //                    .perform(RecyclerViewActions.actionOnItem(
 //                            hasDescendant(withText(containsString("Data Currently Unavailable"))),
@@ -148,7 +148,7 @@ import static org.hamcrest.core.AllOf.allOf;
 //                            hasDescendant(withText(itemVal)), click()));
 
 
-      }
+   //   }
         private <T> Matcher<T> first(final Matcher<T> matcher)
         {
             return new BaseMatcher<T>() {

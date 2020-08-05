@@ -23,6 +23,7 @@
     <!--  Lists & Activities padding & margins -->
     <dimen name="station_list_padding">8dp</dimen>
     <dimen name="station_dup_instructions_start_one">18dp</dimen>
+    <dimen name="station_dup_instructions_start_one_land">14dp</dimen>
     <dimen name="station_dup_instructions_start">12dp</dimen>
     <dimen name="station_dup_instructions_top">20dp</dimen>
     <dimen name="station_dup_instructions_end">30dp</dimen>

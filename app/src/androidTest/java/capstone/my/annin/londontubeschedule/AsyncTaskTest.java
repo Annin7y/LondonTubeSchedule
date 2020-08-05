@@ -24,7 +24,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4ClassRunner.class)
-public class EspressoAsyncTaskTest
+public class AsyncTaskTest
 {
   //Code samples consulted:
   //https://stackoverflow.com/questions/2321829/android-asynctask-testing-with-android-test-framework

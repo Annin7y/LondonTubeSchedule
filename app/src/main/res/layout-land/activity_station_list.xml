@@ -39,7 +39,7 @@
     <TextView
         android:id="@+id/station_duplicate_instructions"
         style="@style/StationInstructionStyle"
-        android:layout_marginStart="@dimen/station_dup_instructions_start_one"
+        android:layout_marginStart="@dimen/station_dup_instructions_start_one_land"
         android:layout_marginTop="@dimen/station_dup_instructions_top"
         app:layout_constraintBottom_toTopOf="@id/station_duplicate_instructions_two"
         app:layout_constraintHorizontal_bias="0.366"
