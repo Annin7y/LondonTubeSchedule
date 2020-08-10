@@ -233,14 +233,28 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
             // Run the AsyncTask in response to the click
            // if (selectedSortOrder == SORT_BY_FAVORITES)
   //          {
+
+            
 //              getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
 //               mLineRecyclerView.setAdapter(favoritesAdapter);
      //   } else
          //   {
 
-            isSnackbarShowing = false;
-            TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(MainActivity.this);
-            myLineTask.execute();
+            if (isNetworkStatusAvailable(context))
+            {
+
+                TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(MainActivity.this);
+                myLineTask.execute();
+            }
+            else
+            {
+                Snackbar
+                        .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+                        .setAction(R.string.snackbar_retry, new MyClickListener())
+                        .show();
+                isSnackbarShowing = true;
+                showErrorMessage();
+            }
         }
     }
 
@@ -279,10 +293,10 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
     //Display if there is no internet connection
     public void showErrorMessage()
     {
-//        Snackbar
-//               .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
-//                .setAction(R.string.snackbar_retry, new MyClickListener())
-//               .show();
+        Snackbar
+               .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+                .setAction(R.string.snackbar_retry, new MyClickListener())
+              .show();
         mLineRecyclerView.setVisibility(View.INVISIBLE);
         mLoadingIndicator.setVisibility(View.VISIBLE);
     }

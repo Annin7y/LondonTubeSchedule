@@ -121,7 +121,7 @@ public class StationListActivity extends AppCompatActivity implements StationAda
             }
 
         });
-        
+
  //        Code used when declaring isFavorite in the Repository
 //         favoritesButton.setOnClickListener(new View.OnClickListener() {
 //                                                @Override
