@@ -47,7 +47,6 @@ public class AsyncTaskTest
        });
 
         mainTaskTest.execute();
-
         signal.await(30,TimeUnit.SECONDS);
     }
 }

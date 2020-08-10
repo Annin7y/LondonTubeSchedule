@@ -19,7 +19,9 @@ public interface LineDao
     LiveData<List<Line>> loadAllLines();
 
     @Query("SELECT * FROM Line WHERE lineId =:id")
-    //LiveData<Lines> getSelectedLine(String id);
+        //Method used when testing running the database on the main thread &
+        //setting isFavorite in the Repository
+   //LiveData<Line> getSelectedLine(String id);
     //Method used when testing running the database on the main thread &
     //setting isFavorite in the Repository
     Line getSelectedLine(String id);

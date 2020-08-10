@@ -42,11 +42,17 @@ public class LineRepository
 //Method used when testing running the database on the main thread
 //    public boolean select(String id)
 //    {
-//        Lines line = mLineDao.getSelectedLine(id);
-//
+//        Line line = mLineDao.getSelectedLine(id);
 //        return line != null;
 //    }
 
+    //Method used when declaring isFavorite in the StationListActivity
+//   public LiveData<Line> select(String id)
+//    {
+//       return mLineDao.getSelectedLine(id);
+//   }
+
+    //Method used when declaring isFavorite in the Repository
     public void select(String id)
     {
         new selectAsyncTask().execute(id);
@@ -108,12 +114,12 @@ public class LineRepository
         {
             if(id != -1)
             {
-                //LinesRepository.this.setInsertOk(true);
+                //LineRepository.this.setInsertOk(true);
                 LineRepository.this.setFavorite(true);
             }
             else
             {
-                //LinesRepository.this.setInsertOk(false);
+                //LineRepository.this.setInsertOk(false);
                 LineRepository.this.setFavorite(false);
             }
 
@@ -143,16 +149,16 @@ public class LineRepository
         }
 
         @Override
-        protected void onPostExecute(Integer  rowsDeleted)
+        protected void onPostExecute(Integer rowsDeleted)
         {
             if(rowsDeleted > 0)
             {
-               // LinesRepository.this.setDeleteOk(true);
+               // LineRepository.this.setDeleteOk(true);
                 LineRepository.this.setFavorite(false);
             }
             else
             {
-               // LinesRepository.this.setDeleteOk(false);
+               // LineRepository.this.setDeleteOk(false);
                 LineRepository.this.setFavorite(true);
             }
         }

@@ -8,7 +8,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -72,7 +74,7 @@ public class StationListActivity extends AppCompatActivity implements StationAda
 
 
     // Keep track of whether the selected line is Favorite or not
-   // private boolean isFavorite;
+    private boolean isFavorite;
 
     /**
      * Identifier for the favorites data loader
@@ -119,17 +121,15 @@ public class StationListActivity extends AppCompatActivity implements StationAda
             }
 
         });
-
-
-
- //        Code used when running the database on the main thread
+        
+ //        Code used when declaring isFavorite in the Repository
 //         favoritesButton.setOnClickListener(new View.OnClickListener() {
 //                                                @Override
-//                                                public void onClick(View view) {
+//                                               public void onClick(View view) {
 //
 //                                                      if (isFavorite) {
 //                                                        // If the movie is already favorite, we remove it from the DB
-//                                                        mLinesViewModel.delete(lines).observe(StationListActivity.this, new Observer<Boolean>() {
+//                                                       mLineViewModel.delete(line).observe(StationListActivity.this, new Observer<Boolean>() {
 //                                                            @Override
 //                                                            public void onChanged(@Nullable Boolean isDeleteOk) {
 //                                                                if (isDeleteOk != null && isDeleteOk) {
@@ -144,16 +144,16 @@ public class StationListActivity extends AppCompatActivity implements StationAda
 //
 //                                                    } else {
 //                                                        // If the movie is not favorite, we add it to the DB
-//                                                        mLinesViewModel.insert(lines).observe(StationListActivity.this, new Observer<Boolean>() {
+//                                                      mLineViewModel.insert(line).observe(StationListActivity.this, new Observer<Boolean>() {
 //
-//                                                            @Override
+//                                                           @Override
 //                                                            public void onChanged(@Nullable Boolean isInsertOk) {
-//                                                                if (isInsertOk != null && isInsertOk) {
+//                                                               if (isInsertOk != null && isInsertOk) {
 //                                                                    if (isInsertOk) {
-//                                                                        Toast.makeText(getBaseContext(), isInsertOk.toString(), Toast.LENGTH_LONG).show();
+//                                                                      //  Toast.makeText(getBaseContext(), isInsertOk.toString(), Toast.LENGTH_LONG).show();
 //                                                                        Toast.makeText(StationListActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
 //                                                                        favoritesButton.setVisibility(View.GONE);
-//                                                                    }
+//                                                                   }
 //                                                                    // If everything was OK,
 //                                                                    // we change the button text and set isFavorite to true
 //                                                                    Toast.makeText(StationListActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
@@ -167,8 +167,87 @@ public class StationListActivity extends AppCompatActivity implements StationAda
 //                                            });
 
 
+        if (getIntent() != null && getIntent().getExtras() != null)
+        {
+                line = getIntent().getExtras().getParcelable("Line");
+                // Extract the line ID from the selected line
+                lineId = Objects.requireNonNull(line).getLineId();
+                lineId = line.getLineId();
+               // Log.i("lineId: ", lines.getLineId());
+                Timber.i(line.getLineId(), "lineId: ");
 
-        //add to favorites
+                lineNameStation.setText(line.getLineName());
+                lineNameToString = lineNameStation.getText().toString();
+               // Log.i("lineName: ", line.getLineName());
+                Timber.i(line.getLineName(),"lineName: ");
+
+                lineArrayList = getIntent().getParcelableArrayListExtra("lineList");
+
+
+                //Code when setting isFavorite in the Repository
+               // If the movie is favorite, we show the "Remove from Favorites" text.
+                mLineViewModel.select(lineId);
+                mLineViewModel.isFavorite().observe(this, isFavorite -> {
+                    if (isFavorite)
+                    {
+                        favoritesButton.setText(getString(R.string.favorites_button_text_remove));
+
+                    } else {
+                        favoritesButton.setText(getString(R.string.favorites_button_text_add));
+                    }
+                });
+
+                //The code below was used when running the Room Database on the main thread
+              //   isFavorite = mLineViewModel.select(lineId);
+//
+//                // If the movie is favorite, we show the "Remove from Favorites" text.
+//                // Otherwise, we show "Add to Favorites".
+//           if (isFavorite)
+//            {
+//               favoritesButton.setText(getString(R.string.favorites_button_text_remove));
+//           } else
+//                {
+//              favoritesButton.setText(getString(R.string.favorites_button_text_add));
+//            }
+//                mLineViewModel.select(lineId).observe(StationListActivity.this, new Observer<Line>()
+//               {
+//                    @Override
+//                    public void onChanged(@Nullable Line line)
+//                    {
+//                        if (line!= null)
+//                        {
+//                            isFavorite = true;
+//                            favoritesButton.setText(getString(R.string.favorites_button_text_remove));
+//                        }
+//                    }
+//                });
+//
+//            } else
+//                {
+//                    favoritesButton.setText(getString(R.string.favorites_button_text_add));
+//
+//                    isFavorite = false;
+//                           }
+
+
+                /*
+                 *  Starting the asyncTask so that stations load when the activity opens.
+                 */
+            if (savedInstanceState == null)
+           {
+
+                TubeStationAsyncTask myStationTask = new TubeStationAsyncTask(this);
+                myStationTask.execute(lineId);
+            } else
+                {
+                stationArrayList = savedInstanceState.getParcelableArrayList(KEY_STATION_LIST);
+                stationAdapter.setStationList(stationArrayList);
+                line = savedInstanceState.getParcelable(KEY_LINE_LIST);
+                lineNameToString = savedInstanceState.getString(KEY_LINE_NAME);
+                lineNameStation.setText(lineNameToString);
+            }
+        }}
+    //add to favorites Content Provider code commented out
 //        favoritesButton.setOnClickListener(new View.OnClickListener()
 //        {
 //            @Override
@@ -191,63 +270,7 @@ public class StationListActivity extends AppCompatActivity implements StationAda
 //            }
 //        });
 
-        if (getIntent() != null && getIntent().getExtras() != null)
-        {
-                line = getIntent().getExtras().getParcelable("Line");
-                // Extract the line ID from the selected line
-                lineId = Objects.requireNonNull(line).getLineId();
-               lineId = line.getLineId();
-               // Log.i("lineId: ", lines.getLineId());
-                Timber.i(line.getLineId(), "lineId: ");
 
-                lineNameStation.setText(line.getLineName());
-                lineNameToString = lineNameStation.getText().toString();
-               // Log.i("lineName: ", line.getLineName());
-                Timber.i(line.getLineName(),"lineName: ");
-
-                lineArrayList = getIntent().getParcelableArrayListExtra("lineList");
-
-                mLineViewModel.isFavorite().observe(this, isFavorite -> {
-                    if (isFavorite)
-                    {
-                        favoritesButton.setText(getString(R.string.favorites_button_text_remove));
-
-                    } else {
-                        favoritesButton.setText(getString(R.string.favorites_button_text_add));
-                    }
-                });
-
-                //The code below was used when running the Room Database on the main thread
-//                 isFavorite = mLinesViewModel.select(lineId);
-//
-//                // If the movie is favorite, we show the "Remove from Favorites" text.
-//                // Otherwise, we show "Add to Favorites".
-//            if (isFavorite)
-//            {
-//                favoritesButton.setText(getString(R.string.favorites_button_text_remove));
-//            } else
-//                {
-//               favoritesButton.setText(getString(R.string.favorites_button_text_add));
-//            }
-
-
-                /*
-                 *  Starting the asyncTask so that stations load when the activity opens.
-                 */
-            if (savedInstanceState == null)
-           {
-
-                TubeStationAsyncTask myStationTask = new TubeStationAsyncTask(this);
-                myStationTask.execute(lineId);
-            } else
-                {
-                stationArrayList = savedInstanceState.getParcelableArrayList(KEY_STATION_LIST);
-                stationAdapter.setStationList(stationArrayList);
-                line = savedInstanceState.getParcelable(KEY_LINE_LIST);
-                lineNameToString = savedInstanceState.getString(KEY_LINE_NAME);
-                lineNameStation.setText(lineNameToString);
-            }
-        }}
         // Kick off the loader
        // getSupportLoaderManager().initLoader(FAVORITES_LOADER, null, this);
 

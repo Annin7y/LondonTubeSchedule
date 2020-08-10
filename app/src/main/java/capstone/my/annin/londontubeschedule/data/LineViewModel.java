@@ -46,20 +46,20 @@ public class LineViewModel extends AndroidViewModel
 
 
 
-//    public LiveData<Boolean> insert(Lines lineEntry)
+//    public LiveData<Boolean> insert(Line lineEntry)
 //    {
 //        mRepository.insert(lineEntry);
-//        return LinesRepository.isInsertOk;
+//        return LineRepository.isInsertOk;
 //
 //    }
 //
-//    public LiveData<Boolean> delete(Lines lineEntry)
+//    public LiveData<Boolean> delete(Line lineEntry)
 //    {
 //        mRepository.delete(lineEntry);
-//        return LinesRepository.isDeleteOk;
+//        return LineRepository.isDeleteOk;
 //    }
 
-//    public LiveData<Lines> select(String id)
+//    public LiveData<Line> select(String id)
 //    {
 //        return mRepository.select(id);
 //    }

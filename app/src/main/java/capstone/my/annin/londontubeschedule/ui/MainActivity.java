@@ -78,6 +78,9 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
 
     //ViewModel variable
     private LineViewModel mLineViewModel;
+    private static final String SNACKBAR_STATE = "snackbar_state";
+    private boolean isSnackbarShowing = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -177,6 +180,7 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
                             .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
                             .setAction(R.string.snackbar_retry, new MyClickListener())
                             .show();
+                        isSnackbarShowing = true;
                         showErrorMessage();
                 }
             }
@@ -184,6 +188,14 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
             else
                 {
              selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "line_list");
+                    isSnackbarShowing = savedInstanceState.getBoolean(SNACKBAR_STATE);
+                    if (isSnackbarShowing)
+                    {
+                        Snackbar
+                                .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+                                .setAction(R.string.snackbar_retry, new MyClickListener())
+                                .show();
+                    }
                 if (selectedSortOrder == SORT_BY_FAVORITES)
                 {
                     mLineRecyclerView.setAdapter(favoritesRoomAdapter);
@@ -217,6 +229,7 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
         @Override
         public void onClick(View v)
         {
+            //CP Provider Code Commented out
             // Run the AsyncTask in response to the click
            // if (selectedSortOrder == SORT_BY_FAVORITES)
   //          {
@@ -225,6 +238,7 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
      //   } else
          //   {
 
+            isSnackbarShowing = false;
             TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(MainActivity.this);
             myLineTask.execute();
         }
@@ -265,10 +279,10 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
     //Display if there is no internet connection
     public void showErrorMessage()
     {
-        Snackbar
-                .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
-                .setAction(R.string.snackbar_retry, new MyClickListener())
-                .show();
+//        Snackbar
+//               .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+//                .setAction(R.string.snackbar_retry, new MyClickListener())
+//               .show();
         mLineRecyclerView.setVisibility(View.INVISIBLE);
         mLoadingIndicator.setVisibility(View.VISIBLE);
     }
@@ -419,6 +433,7 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
     {
         outState.putString(KEY_SORT_ORDER, selectedSortOrder);
         outState.putParcelableArrayList(KEY_LINES_LIST, lineArrayList);
+        outState.putBoolean(SNACKBAR_STATE, isSnackbarShowing);
         super.onSaveInstanceState(outState);
     }
 }
