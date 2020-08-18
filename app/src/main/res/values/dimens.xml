@@ -23,7 +23,7 @@
     <!--  Lists & Activities padding & margins -->
     <dimen name="station_list_padding">8dp</dimen>
     <dimen name="station_dup_instructions_start_one">18dp</dimen>
-    <dimen name="station_dup_instructions_start_one_land">12dp</dimen>
+    <dimen name="station_dup_instructions_start_one_land">5dp</dimen>
     <dimen name="station_dup_instructions_start">12dp</dimen>
     <dimen name="station_dup_instructions_top">20dp</dimen>
     <dimen name="station_dup_instructions_end">30dp</dimen>
@@ -52,7 +52,8 @@
     <dimen name="loading_width">0dp</dimen>
     <dimen name="loading_height">45dp</dimen>
     <dimen name="loading_bottom">40dp</dimen>
-    <dimen name="station_dup_instr_start_tablet">14dp</dimen>
+    <dimen name="station_dup_instr_start_tablet">5dp</dimen>
+    <dimen name="station_dup_instr_start_tablet_land">5dp</dimen>
     <dimen name="fab_elevation">6dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="fab_press_translation_z">6dp</dimen>

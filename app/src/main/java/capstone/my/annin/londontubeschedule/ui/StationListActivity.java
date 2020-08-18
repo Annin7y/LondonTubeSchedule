@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
@@ -59,8 +60,8 @@ public class StationListActivity extends AppCompatActivity implements StationAda
 
     String lineNameToString;
 
-    @BindView(R.id.favorites_button)
-    Button favoritesButton;
+//    @BindView(R.id.favorites_button)
+//    Button favoritesButton;
 
     // Create AppDatabase member variable for the Database
     // Member variable for the Database
@@ -72,6 +73,8 @@ public class StationListActivity extends AppCompatActivity implements StationAda
     @BindView(R.id.empty_view_stations)
     TextView emptyStations;
 
+    @BindView(R.id.extended_fab_add)
+    ExtendedFloatingActionButton extendedFABAdd;
 
     // Keep track of whether the selected line is Favorite or not
     private boolean isFavorite;
@@ -104,19 +107,19 @@ public class StationListActivity extends AppCompatActivity implements StationAda
         mLineViewModel = ViewModelProviders.of(this).get(LineViewModel.class);
 
         // Set a click listener for the Favorite button
-        favoritesButton.setOnClickListener(view ->
+        extendedFABAdd.setOnClickListener(view ->
         {
-            if (favoritesButton.getText().equals(getString(R.string.favorites_button_text_remove)))
+            if (extendedFABAdd.getText().equals(getString(R.string.favorites_button_text_remove)))
             {
                 mLineViewModel.delete(line);
                 Toast.makeText(StationListActivity.this, getString(R.string.favorites_removed), Toast.LENGTH_SHORT).show();
-                favoritesButton.setText(R.string.favorites_button_text_add);
+                extendedFABAdd.setText(R.string.favorites_button_text_add);
             }
             else {
 //             // If the line is not favorite, we add it to the DB
                 mLineViewModel.insert(line);
                 Toast.makeText(StationListActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
-                favoritesButton.setText((R.string.favorites_button_text_remove));
+                extendedFABAdd.setText((R.string.favorites_button_text_remove));
 
             }
 
@@ -190,10 +193,10 @@ public class StationListActivity extends AppCompatActivity implements StationAda
                 mLineViewModel.isFavorite().observe(this, isFavorite -> {
                     if (isFavorite)
                     {
-                        favoritesButton.setText(getString(R.string.favorites_button_text_remove));
+                        extendedFABAdd.setText(getString(R.string.favorites_button_text_remove));
 
                     } else {
-                        favoritesButton.setText(getString(R.string.favorites_button_text_add));
+                        extendedFABAdd.setText(getString(R.string.favorites_button_text_add));
                     }
                 });
 
@@ -246,7 +249,25 @@ public class StationListActivity extends AppCompatActivity implements StationAda
                 lineNameToString = savedInstanceState.getString(KEY_LINE_NAME);
                 lineNameStation.setText(lineNameToString);
             }
-        }}
+        }
+        mStationRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener()
+        {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0 && extendedFABAdd.getVisibility() == View.VISIBLE)
+                {
+                    extendedFABAdd.hide();
+                } else if (dy < 0 && extendedFABAdd.getVisibility() != View.VISIBLE)
+                {
+                    extendedFABAdd.show();
+                }
+            }
+        });
+
+
+
+    }
     //add to favorites Content Provider code commented out
 //        favoritesButton.setOnClickListener(new View.OnClickListener()
 //        {

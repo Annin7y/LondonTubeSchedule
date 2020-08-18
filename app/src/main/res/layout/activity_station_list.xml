@@ -90,6 +90,26 @@
         android:visibility="gone"
         android:text = "@string/empty_view_text"/>
 
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/extended_fab_add"
+        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:background="@drawable/add_fab_background"
+        android:clickable="true"
+        android:contentDescription="@string/button_map_fab_text"
+        android:text="@string/button_map_text"
+        android:elevation="@dimen/fab_elevation"
+        android:focusable="true"
+        android:translationZ="@dimen/fab_press_translation_z"
+        app:layout_anchorGravity="bottom|right|end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
     <Button
         android:id="@+id/favorites_button"
         android:layout_width="wrap_content"

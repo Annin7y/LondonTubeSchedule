@@ -297,7 +297,7 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
                .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
                 .setAction(R.string.snackbar_retry, new MyClickListener())
               .show();
-        mLineRecyclerView.setVisibility(View.INVISIBLE);
+       // mLineRecyclerView.setVisibility(View.VISIBLE);
         mLoadingIndicator.setVisibility(View.VISIBLE);
     }
 
