@@ -32,5 +32,7 @@
     <string name="favorites_removed">Line removed from the Most Frequented Lines</string>
     <string name="button_map_text">View on Google Maps</string>
     <string name="button_map_fab_text">View on Google Maps</string>
-
+    <string name="station_list">Stations</string>
+    <string name="station_schedule">Train Schedule</string>
+    <string name="station_map">London Tube Map</string>
 </resources>
