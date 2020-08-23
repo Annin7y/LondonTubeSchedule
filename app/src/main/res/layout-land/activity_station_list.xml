@@ -39,7 +39,7 @@
     <TextView
         android:id="@+id/station_duplicate_instructions"
         style="@style/StationInstructionStyle"
-        android:layout_marginStart="@dimen/station_dup_instructions_start_one_land"
+        android:layout_marginStart="@dimen/station_dup_instructions_start_land"
         android:layout_marginTop="@dimen/station_dup_instructions_top"
         app:layout_constraintBottom_toTopOf="@id/station_duplicate_instructions_two"
         app:layout_constraintHorizontal_bias="0.366"
@@ -72,7 +72,6 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="@dimen/station_recycler_start"
         app:layout_constraintTop_toBottomOf="@id/station_duplicate_instructions"
-        app:layout_constraintBottom_toTopOf="@id/favorites_button"
         android:layout_marginTop="@dimen/station_recycler_top"
         android:descendantFocusability="afterDescendants"
         />
@@ -88,18 +87,25 @@
         android:visibility="gone"
         android:text = "@string/empty_view_text"/>
 
-    <Button
-        android:id="@+id/favorites_button"
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/extended_fab_add"
+        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/fav_button_margin_start"
-        android:layout_marginTop="@dimen/fav_button_margin_top"
-        android:focusable="false"
-        android:text="@string/add_to_favourites"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:background="@drawable/add_fab_background"
+        android:clickable="true"
+        android:contentDescription="@string/button_map_fab_text"
+        android:text="@string/button_map_text"
+        android:elevation="@dimen/fab_elevation"
+        android:focusable="true"
+        android:translationZ="@dimen/fab_press_translation_z"
+        app:layout_anchorGravity="bottom|right|end"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recyclerview_station" />
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
