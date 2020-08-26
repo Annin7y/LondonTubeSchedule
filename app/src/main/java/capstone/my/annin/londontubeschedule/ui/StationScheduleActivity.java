@@ -189,13 +189,16 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
             {
                 date = simpleDateFormat.parse(stationArrival.getExpectedArrival());
                 date.toString();
-            } catch (ParseException e) {
+
+            } catch (ParseException e)
+            {
                 e.printStackTrace();
             }
             SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
             String finalDate = newDateFormat.format(date);
 
             stationShareArrivalTime = finalDate;
+
 
             //Store Schedule Info in SharedPreferences
             SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
