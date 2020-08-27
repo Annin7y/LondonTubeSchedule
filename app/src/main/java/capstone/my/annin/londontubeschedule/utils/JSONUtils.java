@@ -31,6 +31,7 @@ import timber.log.Timber;
 
 public class JSONUtils
 {
+
     /**
      * Tag for the log messages
      */
