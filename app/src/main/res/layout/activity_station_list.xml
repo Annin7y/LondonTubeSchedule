@@ -42,11 +42,13 @@
         android:layout_marginStart="@dimen/station_dup_instructions_start"
         android:layout_marginEnd="@dimen/station_dup_instructions_end"
         android:layout_marginTop="@dimen/station_dup_instructions_top"
+         android:textSize="@dimen/station_instr_text_size"
         app:layout_constraintBottom_toTopOf="@id/station_duplicate_instructions_two"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/station_list_instructions"
+
         android:text="@string/station_dup_instructions" />
 
     <TextView
