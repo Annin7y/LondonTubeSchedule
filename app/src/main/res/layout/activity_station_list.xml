@@ -46,9 +46,7 @@
         app:layout_constraintBottom_toTopOf="@id/station_duplicate_instructions_two"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/station_list_instructions"
-
         android:text="@string/station_dup_instructions" />
 
     <TextView
