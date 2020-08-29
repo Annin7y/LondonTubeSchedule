@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
 
-        android:name=".timberlog.TimberApplication"
+        android:name=".timberlog.MyApplication"
         android:theme="@style/AppTheme">
         <!-- Sample AdMob App ID: ca-app-pub-9580291377897056~9472538876-->
         <meta-data

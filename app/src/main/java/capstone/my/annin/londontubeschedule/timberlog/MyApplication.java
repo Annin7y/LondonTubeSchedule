@@ -17,10 +17,12 @@ package capstone.my.annin.londontubeschedule.timberlog;
 
 import android.app.Application;
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
 import capstone.my.annin.londontubeschedule.BuildConfig;
 import timber.log.Timber;
 
-public class TimberApplication extends Application
+public class MyApplication extends Application
 {
     //Based on the code in these links:
     //https://www.youtube.com/watch?v=0BEkVaPlU9A&t=1s&list=LLC3tmBcY0VaQGiTyNWKN70g&index=2
@@ -30,14 +32,13 @@ public class TimberApplication extends Application
     public void onCreate()
     {
         super.onCreate();
-
+        JodaTimeAndroid.init(this);
         if (BuildConfig.DEBUG)
         {
             Timber.plant(new Timber.DebugTree());
-
         } else
-            {
-        Timber.plant(new ReleaseTree());
-    }
+        {
+            Timber.plant(new ReleaseTree());
+        }
     }
 }
