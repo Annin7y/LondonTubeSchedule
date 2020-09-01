@@ -17,15 +17,21 @@ package capstone.my.annin.londontubeschedule.recyclerviewadapters;
 
 import android.content.Context;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.joda.time.DateTimeZone;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,7 +44,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
 
     private ArrayList<Schedule> scheduleList = new ArrayList<Schedule>();
     private Context context;
-
+    Date currentDate;
     /**
      * Creates a Schedule Adapter.
      */
@@ -109,6 +115,11 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         try
         {
             date = simpleDateFormat.parse(stationView.getExpectedArrival());
+            TimeZone timezone = TimeZone.getTimeZone("Europe/London");
+            simpleDateFormat.setTimeZone(timezone);
+            Date now = Calendar.getInstance().getTime();
+            simpleDateFormat.format(now);
+            final long diff = now.getTime() - date.getTime();
             date.toString();
         }
         catch (ParseException e)
@@ -132,4 +143,12 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         this.scheduleList = mScheduleList;
         notifyDataSetChanged();
     }
+
+    public static void TimeFromNow(Date date)
+    {
+        Date now = Calendar.getInstance().getTime();
+        final long diff = now.getTime() - date.getTime();
+    }
+
+
 }
