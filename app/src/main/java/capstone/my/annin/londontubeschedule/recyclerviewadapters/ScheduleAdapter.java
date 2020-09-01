@@ -143,12 +143,4 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         this.scheduleList = mScheduleList;
         notifyDataSetChanged();
     }
-
-    public static void TimeFromNow(Date date)
-    {
-        Date now = Calendar.getInstance().getTime();
-        final long diff = now.getTime() - date.getTime();
-    }
-
-
 }
