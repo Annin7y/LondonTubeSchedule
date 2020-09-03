@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="station_click_instructions_start">15dp</dimen>
+    <dimen name="station_dup_instructions_start">15dp</dimen>
+    <dimen name="station_dup_instructions_end">70dp</dimen>
+    <dimen name="station_instr_text_size">25sp</dimen>
+
+</resources>

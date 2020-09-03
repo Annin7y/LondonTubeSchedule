@@ -18,16 +18,19 @@ package capstone.my.annin.londontubeschedule.recyclerviewadapters;
 import android.content.Context;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.joda.time.DateTimeUtils;
 import org.joda.time.DateTimeZone;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -110,26 +113,40 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         holder.expectedArrival.setText(stationView.getExpectedArrival());
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        //convert time zone to London UK time(GMT)
+        //Code based on the first answer in the following stackoverflow post:
+       // https://stackoverflow.com/questions/22814263/how-to-set-the-timezone-for-string-parsing-in-android
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
         Date date = null;
 
         try
         {
+            //Relative date code based on this example:
+            //https://stackoverflow.com/questions/49441035/dateutils-getrelativetimespanstring-returning-a-formatted-date-string-instead-of
             date = simpleDateFormat.parse(stationView.getExpectedArrival());
-            TimeZone timezone = TimeZone.getTimeZone("Europe/London");
-            simpleDateFormat.setTimeZone(timezone);
-            Date now = Calendar.getInstance().getTime();
-            simpleDateFormat.format(now);
-            final long diff = now.getTime() - date.getTime();
-            date.toString();
+            //convert the date to milliseconds; CharSequence parameter below must be a long
+            long timeInMilliseconds = date.getTime();
+
+            //Convert the date to a relative future date("in 4 minutes); code based on this example:
+            //https://stackoverflow.com/questions/49441035/dateutils-getrelativetimespanstring-returning-a-formatted-date-string-instead-of
+           CharSequence relativeDate = DateUtils.getRelativeTimeSpanString(timeInMilliseconds,
+                    System.currentTimeMillis(),
+                    DateUtils.MINUTE_IN_MILLIS,
+                    DateUtils.FORMAT_ABBREV_RELATIVE);
+
+           //convert CharSequence to String
+            String futureDate =  String.valueOf(relativeDate);
+            holder.expectedArrival.setText(futureDate);
         }
         catch (ParseException e)
         {
             e.printStackTrace();
         }
-        SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
-        String finalDate = newDateFormat.format(date);
+        //Previous code displaying time commented out; replaced with the relative date above
+      //  SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
+      //  String finalDate = newDateFormat.format(date);
 
-        holder.expectedArrival.setText(finalDate);
+      //  holder.expectedArrival.setText(relativeDate);
     }
 
     @Override
