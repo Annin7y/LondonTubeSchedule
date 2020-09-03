@@ -134,7 +134,8 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
                     DateUtils.MINUTE_IN_MILLIS,
                     DateUtils.FORMAT_ABBREV_RELATIVE);
 
-           //convert CharSequence to String
+           //convert CharSequence to String; Based on the following StackOverflow post:
+           // https://stackoverflow.com/questions/35305236/converting-from-charsequence-to-string-in-java
             String futureDate =  String.valueOf(relativeDate);
             holder.expectedArrival.setText(futureDate);
         }
