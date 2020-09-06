@@ -16,23 +16,17 @@
 package capstone.my.annin.londontubeschedule.recyclerviewadapters;
 
 import android.content.Context;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.joda.time.DateTimeUtils;
-import org.joda.time.DateTimeZone;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -47,7 +41,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
 
     private ArrayList<Schedule> scheduleList = new ArrayList<Schedule>();
     private Context context;
-    Date currentDate;
+
     /**
      * Creates a Schedule Adapter.
      */
@@ -125,9 +119,11 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
             //https://stackoverflow.com/questions/49441035/dateutils-getrelativetimespanstring-returning-a-formatted-date-string-instead-of
             date = simpleDateFormat.parse(stationView.getExpectedArrival());
             //convert the date to milliseconds; CharSequence parameter below must be a long
+            if(date != null)
+            {
             long timeInMilliseconds = date.getTime();
 
-            //Convert the date to a relative future date("in 4 minutes); code based on this example:
+            //Convert the date to a relative future date("in 4 minutes"); code based on this example:
             //https://stackoverflow.com/questions/49441035/dateutils-getrelativetimespanstring-returning-a-formatted-date-string-instead-of
            CharSequence relativeDate = DateUtils.getRelativeTimeSpanString(timeInMilliseconds,
                     System.currentTimeMillis(),
@@ -138,7 +134,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
            // https://stackoverflow.com/questions/35305236/converting-from-charsequence-to-string-in-java
             String futureDate =  String.valueOf(relativeDate);
             holder.expectedArrival.setText(futureDate);
-        }
+        }}
         catch (ParseException e)
         {
             e.printStackTrace();
