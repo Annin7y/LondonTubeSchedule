@@ -51,6 +51,7 @@
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:padding="@dimen/station_list_padding"
+        android:textSize="@dimen/station_list_text_size"
         tools:text="@string/station_name" />
 
     </com.google.android.material.card.MaterialCardView>

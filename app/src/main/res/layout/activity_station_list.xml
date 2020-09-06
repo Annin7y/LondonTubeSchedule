@@ -117,7 +117,7 @@
         android:layout_margin="@dimen/fab_margin"
         android:background="@drawable/add_fab_background"
         android:clickable="true"
-        android:contentDescription="@string/button_map_fab_text"
+        android:contentDescription="@string/favorites_button_text_add"
         android:text="@string/button_map_text"
         android:elevation="@dimen/fab_elevation"
         android:focusable="true"

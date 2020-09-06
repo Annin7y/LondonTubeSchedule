@@ -30,6 +30,7 @@
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:padding="@dimen/line_list_padding"
+        android:textSize="@dimen/line_name_text_size"
         tools:text="@string/line_name" />
 
     <TextView
@@ -38,6 +39,7 @@
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:padding="@dimen/line_list_padding"
+        android:textSize="@dimen/line_status_text_size"
         tools:text="@string/line_status_text" />
 
     <TextView
@@ -46,6 +48,7 @@
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:padding="@dimen/line_list_padding"
+        android:textSize="@dimen/line_status_text_size"
         tools:text="@string/line_reason_text" />
 
 </LinearLayout>

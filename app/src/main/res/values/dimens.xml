@@ -76,5 +76,9 @@
     <dimen name="fab_margin_land_tablet">24dp</dimen>
     <dimen name="fab_press_translation_z">6dp</dimen>
     <dimen name="station_instr_text_size">14sp</dimen>
+    <dimen name="main_instr_text">20sp</dimen>
+    <dimen name="line_name_text_size">22sp</dimen>
+    <dimen name="line_status_text_size">20sp</dimen>
+    <dimen name="station_list_text_size">25sp</dimen>
 
 </resources>

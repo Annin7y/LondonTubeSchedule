@@ -44,6 +44,7 @@
               style="@style/MainInstructionStyle"
               android:layout_marginStart="@dimen/main_instr_start"
               android:layout_marginTop="@dimen/main_instr_top"
+              android:textSize="@dimen/main_instr_text"
               android:text="@string/tube_list_instructions"
               app:layout_constraintLeft_toLeftOf="parent"
               app:layout_constraintStart_toStartOf="parent"
@@ -60,25 +61,6 @@
               app:layout_constraintLeft_toLeftOf="parent"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toBottomOf="@id/tube_list_instructions" />
-
-          <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-              android:id="@+id/adView"
-              android:layout_width="wrap_content"
-              android:layout_height="80dp"
-              android:layout_centerHorizontal="true"
-              android:layout_marginStart="20dp"
-              android:layout_marginTop="@dimen/adview_top"
-              android:layout_marginEnd="30dp"
-              ads:adSize="BANNER"
-              ads:adUnitId="ca-app-pub-9580291377897056/7393170448"
-              ads:layout_constraintEnd_toEndOf="parent"
-              ads:layout_constraintVertical_bias="0.0"
-              app:layout_constraintBottom_toBottomOf="parent"
-              app:layout_constraintLeft_toLeftOf="parent"
-              app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintTop_toBottomOf="@id/recyclerview_main">
-
-          </com.google.android.gms.ads.AdView>
 
           <ProgressBar
               android:id="@+id/pb_loading_indicator"

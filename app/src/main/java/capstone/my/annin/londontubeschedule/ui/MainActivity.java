@@ -37,15 +37,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
-
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.analytics.FirebaseAnalytics;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import capstone.my.annin.londontubeschedule.R;
@@ -84,7 +78,6 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
     @BindView(R.id.pb_loading_indicator)
     ProgressBar mLoadingIndicator;
 
-    private AdView adView;
     //private FavoritesAdapter favoritesAdapter;
     private FavoritesRoomAdapter favoritesRoomAdapter;
     private static final int FAVORITES_LOADER_ID = 0;
@@ -107,12 +100,6 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
 
         // Bind the views
         ButterKnife.bind(this);
-
-
-        MobileAds.initialize(this, "ca-app-pub-9580291377897056~9472538876");
-        AdRequest request = new AdRequest.Builder().build();
-        adView = (AdView) findViewById(R.id.adView);
-        adView.loadAd(request);
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
