@@ -37,6 +37,9 @@ public class SettingsActivity extends AppCompatActivity {
     }
         private String readAssetsFile ()
         {
+            //Read a file from assets and set it to TextView based on the following code samples:
+            //https://nbasercode.com/net/android-read-text-file-from-assets-folder-in-android-studio/
+            //https://readyandroid.wordpress.com/read-json-or-txt-file-from-assets-folder/
             String textPolicy = "";
             try {
                 InputStream inputStream = getAssets().open("json/privacypolicy.txt");
