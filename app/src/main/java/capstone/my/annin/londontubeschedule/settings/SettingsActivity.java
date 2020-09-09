@@ -19,8 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import capstone.my.annin.londontubeschedule.R;
 
-public class SettingsActivity extends AppCompatActivity
-{
+public class SettingsActivity extends AppCompatActivity {
     private Context context;
     @BindView(R.id.privacy_policy_txt_file)
     TextView privacyPolicyText;
@@ -34,40 +33,36 @@ public class SettingsActivity extends AppCompatActivity
 
         // Bind the views
         ButterKnife.bind(this);
-
+        privacyPolicyText.setText(readAssetsFile());
     }
+        private String readAssetsFile ()
+        {
+            String textPolicy = "";
+            try {
+                InputStream inputStream = getAssets().open("json/privacypolicy.txt");
+                if (inputStream != null) {
+                    InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                    String receiveString = "";
+                    StringBuilder stringBuilder = new StringBuilder();
+                    while ((receiveString = bufferedReader.readLine()) != null) {
+                        stringBuilder.append(receiveString);
+                    }
+                    inputStream.close();
+                    textPolicy = stringBuilder.toString();
 
-    private String readAssetsFile()
-    {
-        String textPolicy = "";
-        try {
-            InputStream inputStream = getAssets().open("json/privacypolicy.txt");
-            if (inputStream != null)
-            {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                String receiveString = "";
-                StringBuilder stringBuilder = new StringBuilder();
-                while ((receiveString = bufferedReader.readLine()) != null)
-                {
-                    stringBuilder.append(receiveString);
+
                 }
-                inputStream.close();
-                textPolicy = stringBuilder.toString();
-
-
-            } }catch(IOException e)
-            {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
-        return textPolicy;
-    }
+            return textPolicy;
+        }
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         /* Use AppCompatActivity's method getMenuInflater to get a handle on the menu inflater */
         MenuInflater inflater = getMenuInflater();
         /* Use the inflater's inflate method to inflate our menu layout to this menu */
@@ -77,15 +72,20 @@ public class SettingsActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        switch (item.getItemId())
-        {
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case R.id.privacy_policy:
-              privacyPolicyText.setText(readAssetsFile());
+                privacyPolicyText.setText(readAssetsFile());
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState)
+    {
+        super.onSaveInstanceState(outState);
+    }
+
 }
