@@ -51,6 +51,7 @@ import capstone.my.annin.londontubeschedule.pojo.Line;
 //import capstone.my.annin.londontubeschedule.recyclerviewadapters.FavoritesAdapter;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.FavoritesRoomAdapter;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.LineAdapter;
+import capstone.my.annin.londontubeschedule.settings.SettingsActivity;
 import capstone.my.annin.londontubeschedule.utils.NetworkUtils;
 import timber.log.Timber;
 
@@ -439,8 +440,16 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
                 selectedSortOrder = SORT_BY_LINES;
                 return true;
 
-                default:
+            default:
                 return super.onOptionsItemSelected(item);
+
+
+            case R.id.settings:
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+                return true;
+
+
     }}
 
 

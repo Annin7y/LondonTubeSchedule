@@ -26,5 +26,8 @@
     <dimen name="main_instr_text">35sp</dimen>
     <dimen name="line_name_text_size">30sp</dimen>
     <dimen name="line_status_text_size">25sp</dimen>
+    <dimen name="line_list_padding">14dp</dimen>
     <dimen name="station_list_text_size">30sp</dimen>
+    <dimen name="sched_label_text_size">30sp</dimen>
+    <dimen name="sched_name_text_size">35sp</dimen>
 </resources>

@@ -55,7 +55,16 @@
                 android:value="capstone.my.annin.londontubeschedule.ui.StationScheduleActivity" />
         </activity>
 
+        <activity
+            android:name="capstone.my.annin.londontubeschedule.settings.SettingsActivity"
+            android:label="@string/settings_label_manifest"
+            android:parentActivityName="capstone.my.annin.londontubeschedule.ui.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="capstone.my.annin.londontubeschedule.ui.MainActivity" />
+        </activity>
     <receiver android:name=".widget.ScheduleWidgetProvider">
+
         <intent-filter>
             <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
         </intent-filter>

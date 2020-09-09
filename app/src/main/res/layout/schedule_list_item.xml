@@ -47,6 +47,7 @@
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:layout_marginTop="@dimen/sch_label_top_padding"
+        android:textSize="@dimen/sched_label_text_size"
         android:text="@string/arrival_label"/>
 
     <TextView
@@ -72,6 +73,7 @@
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:padding="@dimen/sch_text_padding"
+        android:textSize="@dimen/sched_name_text_size"
         tools:text="@string/destination_text"
       />
 

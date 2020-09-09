@@ -80,5 +80,7 @@
     <dimen name="line_name_text_size">22sp</dimen>
     <dimen name="line_status_text_size">20sp</dimen>
     <dimen name="station_list_text_size">25sp</dimen>
+    <dimen name="sched_label_text_size">15sp</dimen>
+    <dimen name="sched_name_text_size">20sp</dimen>
 
 </resources>
