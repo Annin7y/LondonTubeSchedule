@@ -63,6 +63,17 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="capstone.my.annin.londontubeschedule.ui.MainActivity" />
         </activity>
+
+        <activity
+            android:name="capstone.my.annin.londontubeschedule.settings.PrivacyPolicyActivity"
+            android:label="@string/privacy_policy_label_manifest"
+            android:parentActivityName="capstone.my.annin.londontubeschedule.settings.SettingsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="capstone.my.annin.londontubeschedule.settings.SettingsActivity" />
+        </activity>
+
+
     <receiver android:name=".widget.ScheduleWidgetProvider">
 
         <intent-filter>
