@@ -5,12 +5,14 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <Button
-        android:id="@+id/privacy_button"
+    <TextView
+        android:id="@+id/privacy_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/fav_button_margin_start"
-        android:layout_marginTop="@dimen/fav_button_margin_top"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:textSize="25sp"
+        android:textStyle="bold"
         android:focusable="false"
         android:text="Privacy Policy"
         app:layout_constraintTop_toTopOf="parent"

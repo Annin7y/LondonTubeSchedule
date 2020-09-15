@@ -19,5 +19,5 @@ import org.json.JSONArray;
 
 public interface TubeRawJsonAsyncTaskInterface
 {
-    void returnRawJsonData(String simpleGeoJsonString);
+   // void returnRawJsonData(String simpleGeoJsonString);
 }

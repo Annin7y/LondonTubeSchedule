@@ -25,8 +25,8 @@ import capstone.my.annin.londontubeschedule.R;
 public class SettingsActivity extends AppCompatActivity
 {
       private Context context;
-      @BindView(R.id.privacy_button)
-      Button privacyButton;
+      @BindView(R.id.privacy_text)
+      TextView privacyText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -37,7 +37,7 @@ public class SettingsActivity extends AppCompatActivity
 
         // Bind the views
         ButterKnife.bind(this);
-        privacyButton.setOnClickListener(new View.OnClickListener()
+        privacyText.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)

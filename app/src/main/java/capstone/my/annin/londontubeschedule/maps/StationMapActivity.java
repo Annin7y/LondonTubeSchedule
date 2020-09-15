@@ -21,14 +21,12 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.data.geojson.GeoJsonFeature;
@@ -41,16 +39,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import capstone.my.annin.londontubeschedule.R;
 import capstone.my.annin.londontubeschedule.asynctask.AllLinesAsyncTaskInterface;
 import capstone.my.annin.londontubeschedule.asynctask.TubeGeoJsonAllLinesAsyncTask;
-import capstone.my.annin.londontubeschedule.asynctask.TubeRawJsonAsyncTask;
-import capstone.my.annin.londontubeschedule.asynctask.TubeRawJsonAsyncTaskInterface;
 import capstone.my.annin.londontubeschedule.pojo.Line;
 import capstone.my.annin.londontubeschedule.pojo.Station;
-import capstone.my.annin.londontubeschedule.ui.StationScheduleActivity;
 import timber.log.Timber;
 
 public class StationMapActivity extends AppCompatActivity implements OnMapReadyCallback, AllLinesAsyncTaskInterface

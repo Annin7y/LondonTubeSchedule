@@ -40,7 +40,7 @@ public class PrivacyPolicyActivity extends AppCompatActivity
         String textPolicy = "";
         try
         {
-            InputStream inputStream = getAssets().open("json/privacypolicy.txt");
+            InputStream inputStream = getAssets().open("settings/privacypolicy.txt");
             if (inputStream != null)
             {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
