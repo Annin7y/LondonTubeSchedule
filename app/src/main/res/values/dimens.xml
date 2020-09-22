@@ -82,5 +82,9 @@
     <dimen name="station_list_text_size">20sp</dimen>
     <dimen name="sched_label_text_size">15sp</dimen>
     <dimen name="sched_name_text_size">20sp</dimen>
+    <dimen name="privacy_pol_set_text">25sp</dimen>
+    <dimen name="privacy_pol_text_start">40dp</dimen>
+    <dimen name="privacy_pol_text_top">20dp</dimen>
+    <dimen name="empty_sched_text_size">20sp</dimen>
 
 </resources>

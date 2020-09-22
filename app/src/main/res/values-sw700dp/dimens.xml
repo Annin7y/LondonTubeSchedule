@@ -30,4 +30,10 @@
     <dimen name="station_list_text_size">30sp</dimen>
     <dimen name="sched_label_text_size">30sp</dimen>
     <dimen name="sched_name_text_size">35sp</dimen>
+    <dimen name="empty_sched_text_size">40sp</dimen>
+    <dimen name="fab_margin">100dp</dimen>
+    <dimen name="privacy_pol_set_text">40sp</dimen>
+    <dimen name="privacy_pol_text_start">50dp</dimen>
+    <dimen name="privacy_pol_text_top">30dp</dimen>
+
 </resources>

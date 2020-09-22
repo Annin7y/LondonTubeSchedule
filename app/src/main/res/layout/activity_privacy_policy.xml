@@ -18,7 +18,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:textSize="@dimen/station_instr_text_size"
-            android:text="Privacy Policy"
+            android:text="@string/privacy_policy"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

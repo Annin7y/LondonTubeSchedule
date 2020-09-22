@@ -38,5 +38,4 @@
             android:title="@string/settings_menu_main"
             app:showAsAction="never" />
 
-
 </menu>

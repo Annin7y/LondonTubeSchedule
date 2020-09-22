@@ -40,6 +40,7 @@
         android:layout_marginStart="@dimen/schedule_empty_start"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="@dimen/empty_schedule_top"
+        android:textSize="@dimen/empty_sched_text_size"
         android:visibility="gone"
         android:text = "@string/empty_view_text"/>
 
