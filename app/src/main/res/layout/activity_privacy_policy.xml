@@ -17,6 +17,11 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginStart="@dimen/main_recycler_start"
+            android:layout_marginEnd="@dimen/station_dup_instructions_end"
+            android:layout_marginTop="@dimen/main_recycler_top"
             android:textSize="@dimen/station_instr_text_size"
             android:text="@string/privacy_policy"
             />

@@ -49,7 +49,7 @@ public class PrivacyPolicyActivity extends AppCompatActivity
                 StringBuilder stringBuilder = new StringBuilder();
                 while ((receiveString = bufferedReader.readLine()) != null)
                 {
-                    stringBuilder.append(receiveString);
+                    stringBuilder.append(receiveString + "\n\n");
                 }
                 inputStream.close();
                 textPolicy = stringBuilder.toString();
