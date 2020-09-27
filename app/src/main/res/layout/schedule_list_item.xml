@@ -29,6 +29,7 @@
         style="@style/ScheduleLabelStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
+        android:textSize="@dimen/sched_label_text_size"
         android:text="@string/name_label"
         />
 
@@ -37,8 +38,8 @@
         style="@style/ScheduleNameStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
-        android:textSize="15sp"
         android:padding="@dimen/sch_text_padding"
+        android:textSize="@dimen/sched_name_text_size"
         tools:text="@string/station_name"
         />
 
@@ -57,6 +58,7 @@
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:padding="@dimen/sch_text_padding"
+        android:textSize="@dimen/sched_name_text_size"
         tools:text="@string/arrival_text" />
 
     <TextView
@@ -65,6 +67,7 @@
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:layout_marginTop="@dimen/sch_label_top_padding"
+        android:textSize="@dimen/sched_label_text_size"
         android:text="@string/destination_label"
         />
 
@@ -84,6 +87,7 @@
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:layout_marginTop="@dimen/sch_label_top_padding"
+        android:textSize="@dimen/sched_label_text_size"
         android:text="@string/location_label"
         />
 
@@ -93,6 +97,7 @@
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:padding="@dimen/sch_text_padding"
+        android:textSize="@dimen/sched_name_text_size"
         tools:text="@string/location_text" />
 
     <TextView
@@ -101,6 +106,7 @@
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:layout_marginTop="@dimen/sch_label_top_padding"
+        android:textSize="@dimen/sched_label_text_size"
         android:text="@string/towards_label"/>
 
     <TextView
@@ -109,6 +115,7 @@
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:padding="@dimen/sch_text_padding"
+        android:textSize="@dimen/sched_name_text_size"
         tools:text="@string/towards_text" />
 
     <TextView
@@ -135,8 +142,5 @@
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:padding="@dimen/station_list_padding"
         tools:text="-5.999" />
-
-
-
 
 </LinearLayout>

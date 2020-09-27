@@ -20,14 +20,15 @@
   xmlns:tools="http://schemas.android.com/tools"
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:id="@+id/scroll"
+    android:fillViewport="true"
   android:layout_width="match_parent"
-  android:layout_height="wrap_content">
+  android:layout_height="match_parent">
 
   <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:tools="http://schemas.android.com/tools"
       android:id="@+id/coordinatorLayout"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
+      android:layout_height="match_parent"
       android:focusable="true"
       tools:context="capstone.my.annin.londontubeschedule.ui.MainActivity">
 
@@ -66,13 +67,11 @@
               android:id="@+id/pb_loading_indicator"
               android:layout_width="@dimen/loading_width"
               android:layout_height="@dimen/loading_height"
-              android:layout_marginBottom="@dimen/loading_bottom"
               android:visibility="invisible"
               app:layout_constraintBottom_toBottomOf="parent"
-              app:layout_constraintLeft_toLeftOf="parent"
               app:layout_constraintStart_toStartOf="parent"
-              android:layout_marginTop="80dp"
-              app:layout_constraintVertical_bias="1.0"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintTop_toTopOf="parent"
               tools:layout_editor_absoluteX="10dp" />
 
       </androidx.constraintlayout.widget.ConstraintLayout>

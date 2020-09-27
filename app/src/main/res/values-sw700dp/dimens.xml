@@ -24,6 +24,9 @@
     <dimen name="station_recycler_top">50dp</dimen>
     <dimen name="main_instr_start">28dp</dimen>
     <dimen name="main_instr_text">35sp</dimen>
+    <dimen name="main_recycler_top">30dp</dimen>
+    <dimen name="main_instr_top">16dp</dimen>
+    <dimen name="main_name_top">35dp</dimen>
     <dimen name="line_name_text_size">30sp</dimen>
     <dimen name="line_status_text_size">25sp</dimen>
     <dimen name="line_list_padding">14dp</dimen>
@@ -35,5 +38,6 @@
     <dimen name="privacy_pol_set_text">40sp</dimen>
     <dimen name="privacy_pol_text_start">50dp</dimen>
     <dimen name="privacy_pol_text_top">30dp</dimen>
-
+    <dimen name="line_status_reason_padding">8dp</dimen>
+    <dimen name="line_station_reason_margin_start">18dp</dimen>
 </resources>

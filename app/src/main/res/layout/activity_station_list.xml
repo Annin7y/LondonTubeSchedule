@@ -39,6 +39,7 @@
         app:layout_constraintTop_toBottomOf="@id/station_list_instructions"
         android:layout_marginStart="@dimen/station_name_start"
         android:layout_marginTop="@dimen/station_name_top"
+        android:textSize="@dimen/station_name_list_size"
         tools:text="@string/station_name"
         />
 
