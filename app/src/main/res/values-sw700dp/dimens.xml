@@ -17,27 +17,33 @@
 -->
 
 <resources>
-    <dimen name="station_click_instructions_start">20dp</dimen>
-    <dimen name="station_dup_instructions_start">20dp</dimen>
-    <dimen name="station_dup_instructions_end">70dp</dimen>
-    <dimen name="station_instr_text_size">25sp</dimen>
-    <dimen name="station_recycler_top">50dp</dimen>
-    <dimen name="main_instr_start">28dp</dimen>
+    <dimen name="main_instr_start">37dp</dimen>
     <dimen name="main_instr_text">35sp</dimen>
     <dimen name="main_recycler_top">30dp</dimen>
     <dimen name="main_instr_top">16dp</dimen>
     <dimen name="main_name_top">35dp</dimen>
+    <dimen name="station_name_start">14dp</dimen>
+    <dimen name="station_click_instructions_start">20dp</dimen>
+    <dimen name="station_dup_instructions_start">20dp</dimen>
+    <dimen name="station_dup_instructions_end">70dp</dimen>
+    <dimen name="station_instr_text_size">30sp</dimen>
+    <dimen name="station_recycler_top">50dp</dimen>
+    <dimen name="station_name_list_size">20sp</dimen>
+    <dimen name="station_list_text_size">35sp</dimen>
     <dimen name="line_name_text_size">30sp</dimen>
     <dimen name="line_status_text_size">25sp</dimen>
+    <dimen name="line_status_reason_padding">8dp</dimen>
+    <dimen name="fav_button_margin_start">50dp</dimen>
+    <dimen name="line_station_reason_margin_start">18dp</dimen>
     <dimen name="line_list_padding">14dp</dimen>
-    <dimen name="station_list_text_size">30sp</dimen>
-    <dimen name="sched_label_text_size">30sp</dimen>
+    <dimen name="sched_label_text_size">27sp</dimen>
     <dimen name="sched_name_text_size">35sp</dimen>
+    <dimen name="sch_label_top_padding">10dp</dimen>
     <dimen name="empty_sched_text_size">40sp</dimen>
     <dimen name="fab_margin">100dp</dimen>
     <dimen name="privacy_pol_set_text">40sp</dimen>
     <dimen name="privacy_pol_text_start">50dp</dimen>
     <dimen name="privacy_pol_text_top">30dp</dimen>
-    <dimen name="line_status_reason_padding">8dp</dimen>
-    <dimen name="line_station_reason_margin_start">18dp</dimen>
+    <dimen name="fab_size">150dp</dimen>
+    <dimen name="menu_text_size">30sp</dimen>
 </resources>

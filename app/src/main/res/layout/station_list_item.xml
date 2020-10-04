@@ -47,7 +47,7 @@
 
     <TextView
         android:id="@+id/station_name"
-        style="@style/LineStationListStyle"
+        style="@style/LineNameStationListStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:padding="@dimen/station_list_padding"

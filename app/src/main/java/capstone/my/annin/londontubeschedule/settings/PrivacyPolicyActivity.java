@@ -2,7 +2,6 @@ package capstone.my.annin.londontubeschedule.settings;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.webkit.WebView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +21,7 @@ public class PrivacyPolicyActivity extends AppCompatActivity
     @BindView(R.id.privacy_policy_txt_file)
     TextView privacyPolicyText;
 
-    WebView webView;
+
     public String fileName = "settings/privacypolicy.txt";
 
     @Override
@@ -35,10 +34,7 @@ public class PrivacyPolicyActivity extends AppCompatActivity
         // Bind the views
         ButterKnife.bind(this);
         privacyPolicyText.setText(readAssetsFile());
-        webView = (WebView) findViewById(R.id.simpleWebView);
-        // displaying content in WebView from html file that stored in assets folder
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl("file:///android_asset/settings/privacypolicy.html");
+
     }
     private String readAssetsFile ()
     {

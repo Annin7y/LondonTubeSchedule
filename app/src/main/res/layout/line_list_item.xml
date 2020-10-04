@@ -36,7 +36,7 @@
 
     <TextView
         android:id="@+id/line_status_name"
-        style="@style/LineStationListStyle"
+        style="@style/LineStationStatusStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:padding="@dimen/line_list_padding"
@@ -45,7 +45,7 @@
 
     <TextView
         android:id="@+id/line_status_reason"
-        style="@style/LineStationListStyle"
+        style="@style/LineStationStatusReasonStyle"
         android:layout_marginStart="@dimen/line_station_reason_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:padding="@dimen/line_status_reason_padding"
