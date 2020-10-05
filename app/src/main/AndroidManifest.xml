@@ -71,6 +71,14 @@
                 android:value="capstone.my.annin.londontubeschedule.settings.SettingsActivity" />
         </activity>
 
+        <activity
+            android:name="capstone.my.annin.londontubeschedule.settings.OpenSourceLicensesActivity"
+            android:label="Open Source Licenses"
+            android:parentActivityName="capstone.my.annin.londontubeschedule.settings.SettingsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="capstone.my.annin.londontubeschedule.settings.SettingsActivity" />
+        </activity>
 
     <receiver android:name=".widget.ScheduleWidgetProvider">
 

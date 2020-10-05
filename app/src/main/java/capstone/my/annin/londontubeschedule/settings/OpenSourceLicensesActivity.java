@@ -15,33 +15,33 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import capstone.my.annin.londontubeschedule.R;
 
-public class PrivacyPolicyActivity extends AppCompatActivity
+public class OpenSourceLicensesActivity extends AppCompatActivity
 {
     private Context context;
-    @BindView(R.id.privacy_policy_txt_file)
-    TextView privacyPolicyText;
+    @BindView(R.id.open_licenses_txt_file)
+    TextView openLicensePolicyText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_privacy_policy);
+        setContentView(R.layout.activity_open_source_licenses);
         context = getApplicationContext();
 
         // Bind the views
         ButterKnife.bind(this);
-        privacyPolicyText.setText(readAssetsFile());
-
+        openLicensePolicyText.setText(readAssetsFile());
     }
+
     private String readAssetsFile ()
     {
         //Read a file from assets and set it to TextView based on the following code samples:
         //https://nbasercode.com/net/android-read-text-file-from-assets-folder-in-android-studio/
         //https://readyandroid.wordpress.com/read-json-or-txt-file-from-assets-folder/
-        String textPolicy = "";
+        String openLicenses = "";
         try
         {
-            InputStream inputStream = getAssets().open("settings/privacypolicy.txt");
+            InputStream inputStream = getAssets().open("settings/opensourcelicenses.txt");
             if (inputStream != null)
             {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
@@ -53,14 +53,14 @@ public class PrivacyPolicyActivity extends AppCompatActivity
                     stringBuilder.append(receiveString + "\n\n");
                 }
                 inputStream.close();
-                textPolicy = stringBuilder.toString();
+                openLicenses = stringBuilder.toString();
             }
         } catch (IOException e)
         {
             e.printStackTrace();
         }
 
-        return textPolicy;
+        return openLicenses;
     }
 
 }

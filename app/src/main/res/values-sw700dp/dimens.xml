@@ -40,6 +40,7 @@
     <dimen name="sched_name_text_size">35sp</dimen>
     <dimen name="sch_label_top_padding">10dp</dimen>
     <dimen name="empty_sched_text_size">40sp</dimen>
+    <dimen name="schedule_empty_start">16dp</dimen>
     <dimen name="fab_margin">100dp</dimen>
     <dimen name="privacy_pol_set_text">40sp</dimen>
     <dimen name="privacy_pol_text_start">50dp</dimen>

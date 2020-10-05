@@ -20,4 +20,20 @@
         app:layout_constraintStart_toStartOf="parent"
          />
 
+    <TextView
+        android:id="@+id/open_licenses_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/privacy_pol_text_start"
+        android:layout_marginTop="@dimen/privacy_pol_text_top"
+        android:textSize="@dimen/privacy_pol_set_text"
+        android:textStyle="bold"
+        android:focusable="false"
+        android:text="@string/open_source_licenses_settings"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/privacy_text"
+        />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

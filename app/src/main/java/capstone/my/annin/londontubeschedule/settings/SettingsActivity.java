@@ -28,6 +28,9 @@ public class SettingsActivity extends AppCompatActivity
       @BindView(R.id.privacy_text)
       TextView privacyText;
 
+      @BindView(R.id.open_licenses_text)
+      TextView openLicensesText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -46,6 +49,17 @@ public class SettingsActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
+
+        openLicensesText.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(getApplicationContext(), OpenSourceLicensesActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
