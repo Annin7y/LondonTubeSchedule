@@ -30,6 +30,7 @@
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:textSize="@dimen/sched_label_text_size"
+        android:layout_marginTop="@dimen/sched_station_name_top"
         android:text="@string/name_label"
         />
 
@@ -126,21 +127,5 @@
         android:padding="@dimen/sch_text_padding"
         android:visibility="gone"
         android:text = "@string/empty_view_text" />
-
-    <TextView
-        android:id="@+id/lat_location_schedule"
-        style="@style/LineStationListStyle"
-        android:layout_marginStart="@dimen/line_station_margin_start"
-        android:layout_marginEnd="@dimen/line_station_margin_end"
-        android:padding="@dimen/station_list_padding"
-        tools:text="51.9999" />
-
-    <TextView
-        android:id="@+id/lon_location_schedule"
-        style="@style/LineStationListStyle"
-        android:layout_marginStart="@dimen/line_station_margin_start"
-        android:layout_marginEnd="@dimen/line_station_margin_end"
-        android:padding="@dimen/station_list_padding"
-        tools:text="-5.999" />
 
 </LinearLayout>

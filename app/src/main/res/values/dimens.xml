@@ -72,14 +72,16 @@
     <dimen name="station_dup_instructions_top">20dp</dimen>
     <dimen name="station_dup_instructions_end">30dp</dimen>
     <dimen name="fab_elevation">6dp</dimen>
-    <dimen name="fab_margin">35dp</dimen>
+    <dimen name="fab_size">5dp</dimen>
+    <dimen name="fab_margin">10dp</dimen>
+    <dimen name="fab_add_margin">1dp</dimen>
     <dimen name="fab_margin_station">20dp</dimen>
     <dimen name="fab_margin_land_tablet">24dp</dimen>
     <dimen name="fab_press_translation_z">6dp</dimen>
     <dimen name="line_name_text_size">25sp</dimen>
     <dimen name="line_status_text_size">20sp</dimen>
     <dimen name="sched_label_text_size">18sp</dimen>
-    <dimen name="sched_name_text_size">22sp</dimen>
+    <dimen name="sched_name_text_size">24sp</dimen>
     <dimen name="sch_text_padding">1dp</dimen>
     <dimen name="recycler_schedule_start">16dp</dimen>
     <dimen name="recycler_schedule_top">20dp</dimen>
@@ -90,7 +92,7 @@
     <dimen name="privacy_pol_text_top">20dp</dimen>
     <dimen name="empty_sched_text_size">20sp</dimen>
     <dimen name="line_status_reason_padding">10dp</dimen>
-    <dimen name="fab_size">80dp</dimen>
     <dimen name="menu_text_size">20sp</dimen>
+    <dimen name="sched_station_name_top">40dp</dimen>
 
 </resources>
