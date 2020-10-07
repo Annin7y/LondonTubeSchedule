@@ -121,7 +121,7 @@
         android:elevation="@dimen/fab_elevation"
         android:focusable="true"
         android:text="@string/favorites_button_text_add"
-        android:textSize="@dimen/station_instr_text_size"
+        android:textSize="@dimen/fab_add_text_size"
         android:translationZ="@dimen/fab_press_translation_z"
         app:layout_anchorGravity="bottom|right|end"
         app:layout_constraintBottom_toBottomOf="parent"

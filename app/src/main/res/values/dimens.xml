@@ -94,5 +94,6 @@
     <dimen name="line_status_reason_padding">10dp</dimen>
     <dimen name="menu_text_size">20sp</dimen>
     <dimen name="sched_station_name_top">40dp</dimen>
+    <dimen name="fab_add_text_size">15sp</dimen>
 
 </resources>
