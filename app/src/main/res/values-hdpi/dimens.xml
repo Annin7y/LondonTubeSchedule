@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~  Copyright 2020 Anastasia Annin
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+-->
+
+<resources>
+    <dimen name="main_recycler_top">30dp</dimen>
+    <dimen name="main_instr_text">15sp</dimen>
+    <dimen name="main_instr_start">15dp</dimen>
+    <dimen name="main_instr_top">16dp</dimen>
+    <dimen name="line_name_text_size">20sp</dimen>
+    <dimen name="line_status_text_size">15sp</dimen>
+    <dimen name="station_name_start">9dp</dimen>
+    <dimen name="station_name_top">16dp</dimen>
+    <dimen name="station_click_instructions_start">10dp</dimen>
+    <dimen name="station_dup_instructions_start">12dp</dimen>
+    <dimen name="station_dup_instructions_end">70dp</dimen>
+    <dimen name="station_name_list_size">14sp</dimen>
+    <dimen name="station_instr_text_size">14sp</dimen>
+    <dimen name="station_list_padding">4dp</dimen>
+    <dimen name="station_recycler_top">45dp</dimen>
+    <dimen name="sched_label_text_size">12sp</dimen>
+    <dimen name="sched_name_text_size">17sp</dimen>
+    <dimen name="loading_bottom">40dp</dimen>
+    <dimen name="fab_elevation">6dp</dimen>
+    <dimen name="fab_size">5dp</dimen>
+    <dimen name="fab_margin">10dp</dimen>
+    <dimen name="fab_add_margin">1dp</dimen>
+    <dimen name="fab_add_text_size">10sp</dimen>
+    <dimen name="fab_map_text_size">15sp</dimen>
+</resources>

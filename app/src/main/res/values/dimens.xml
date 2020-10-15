@@ -51,8 +51,6 @@
     <dimen name="main_name_top">18dp</dimen>
     <dimen name="main_recycler_start">16dp</dimen>
     <dimen name="main_recycler_top">30dp</dimen>
-    <dimen name="adview_start">200dp</dimen>
-    <dimen name="adview_top">60dp</dimen>
     <dimen name="loading_width">0dp</dimen>
     <dimen name="loading_height">45dp</dimen>
     <dimen name="loading_bottom">40dp</dimen>
@@ -95,5 +93,5 @@
     <dimen name="menu_text_size">20sp</dimen>
     <dimen name="sched_station_name_top">40dp</dimen>
     <dimen name="fab_add_text_size">15sp</dimen>
-
+    <dimen name="fab_map_text_size">15sp</dimen>
 </resources>

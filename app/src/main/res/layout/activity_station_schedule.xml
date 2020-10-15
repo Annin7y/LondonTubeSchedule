@@ -55,6 +55,7 @@
         android:clickable="true"
         android:contentDescription="@string/button_map_fab_text"
         android:text="@string/button_map_text"
+        android:textSize="@dimen/fab_map_text_size"
         android:elevation="@dimen/fab_elevation"
         android:focusable="true"
         app:icon="@drawable/baseline_place_black_18dp"
