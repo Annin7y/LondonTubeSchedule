@@ -125,11 +125,25 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
                 return false;
             }
 
+            //Disable swipe for items not in Favorites; code sample based on the first answer in this stackoverflow post:
+            //https://stackoverflow.com/questions/30713121/disable-swipe-for-position-in-recyclerview-using-itemtouchhelper-simplecallback
+            @Override
+            public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder)
+            {
+               if(!(viewHolder instanceof FavoritesRoomAdapter.FavoritesRoomAdapterViewHolder))
+               {
+                   return 0;
+               }
+               return super.getSwipeDirs(recyclerView, viewHolder);
+            }
+
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir)
             {
+                int position = viewHolder.getAdapterPosition();
+                mLineViewModel.delete(favoritesRoomAdapter.getMovieAt(position));
 
-                mLineViewModel.delete(favoritesRoomAdapter.getMovieAt(viewHolder.getAdapterPosition()));
+
             }
 
         }).attachToRecyclerView(mLineRecyclerView);
