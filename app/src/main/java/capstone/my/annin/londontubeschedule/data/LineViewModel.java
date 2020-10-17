@@ -41,7 +41,8 @@ public class LineViewModel extends AndroidViewModel
         return mAllLines;
     }
 
-    public void insert(Line linesEntry) {
+    public void insert(Line linesEntry)
+    {
         mRepository.insert(linesEntry);
 
     }

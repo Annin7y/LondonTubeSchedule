@@ -38,7 +38,8 @@
         <activity
             android:name="capstone.my.annin.londontubeschedule.ui.StationScheduleActivity"
             android:label="@string/station_schedule"
-            android:parentActivityName="capstone.my.annin.londontubeschedule.ui.StationListActivity">
+            android:parentActivityName="capstone.my.annin.londontubeschedule.ui.StationListActivity"
+            android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="capstone.my.annin.londontubeschedule.ui.StationListActivity" />

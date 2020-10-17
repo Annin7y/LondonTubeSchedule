@@ -132,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
                 mLineViewModel.delete(favoritesRoomAdapter.getMovieAt(viewHolder.getAdapterPosition()));
             }
 
+        }).attachToRecyclerView(mLineRecyclerView);
 //            @Override
 //            public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder)
 //            {
@@ -165,7 +166,6 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
 //
 //                getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
 //            }
-        }).attachToRecyclerView(mLineRecyclerView);
 
         /*
          *  Starting the asyncTask so that lines load upon launching the app.

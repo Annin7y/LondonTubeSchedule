@@ -31,6 +31,7 @@
     <dimen name="station_name_list_size">14sp</dimen>
     <dimen name="station_instr_text_size">14sp</dimen>
     <dimen name="station_list_padding">4dp</dimen>
+    <dimen name="station_list_text_size">15sp</dimen>
     <dimen name="station_recycler_top">45dp</dimen>
     <dimen name="sched_label_text_size">12sp</dimen>
     <dimen name="sched_name_text_size">17sp</dimen>
@@ -39,6 +40,6 @@
     <dimen name="fab_size">5dp</dimen>
     <dimen name="fab_margin">10dp</dimen>
     <dimen name="fab_add_margin">1dp</dimen>
-    <dimen name="fab_add_text_size">10sp</dimen>
-    <dimen name="fab_map_text_size">15sp</dimen>
+    <dimen name="fab_add_text_size">12sp</dimen>
+    <dimen name="fab_map_text_size">13sp</dimen>
 </resources>
