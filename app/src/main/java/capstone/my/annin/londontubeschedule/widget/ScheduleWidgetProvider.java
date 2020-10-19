@@ -69,10 +69,11 @@ public class ScheduleWidgetProvider extends AppWidgetProvider
             views.setRemoteAdapter(R.id.appwidget_list, intent);
             views.setEmptyView(R.id.appwidget_list, R.id.empty);
 
-            Intent detailIntent = new Intent(context,StationScheduleActivity.class);
+           //Intent detailIntent = new Intent(context,StationScheduleActivity.class);
             TaskStackBuilder stackBuilder = TaskStackBuilder.create(context) ;
             stackBuilder.addNextIntent(new Intent(context, MainActivity.class));
-            stackBuilder.addNextIntent(detailIntent);
+            //stackBuilder.addNextIntent(detailIntent);
+
 
             PendingIntent pIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
             //PendingIntent pIntent = PendingIntent.getActivity(context, 0, detailIntent, PendingIntent.FLAG_UPDATE_CURRENT);

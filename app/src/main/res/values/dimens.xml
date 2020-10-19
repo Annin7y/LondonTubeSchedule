@@ -49,7 +49,7 @@
     <dimen name="empty_schedule_top">50dp</dimen>
     <dimen name="main_instr_start">32dp</dimen>
     <dimen name="main_instr_top">16dp</dimen>
-    <dimen name="main_instr_text">25sp</dimen>
+    <dimen name="main_instr_text">20sp</dimen>
     <dimen name="main_name_top">18dp</dimen>
     <dimen name="main_recycler_start">16dp</dimen>
     <dimen name="main_recycler_top">30dp</dimen>

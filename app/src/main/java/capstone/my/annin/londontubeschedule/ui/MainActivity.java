@@ -142,8 +142,6 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
             {
                 int position = viewHolder.getAdapterPosition();
                 mLineViewModel.delete(favoritesRoomAdapter.getMovieAt(position));
-
-
             }
 
         }).attachToRecyclerView(mLineRecyclerView);
