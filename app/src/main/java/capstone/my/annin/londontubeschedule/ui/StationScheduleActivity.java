@@ -105,65 +105,58 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
         RecyclerView.LayoutManager mScheduleLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mScheduleRecyclerView.setLayoutManager(mScheduleLayoutManager);
 
-        if (getIntent() != null && getIntent().getExtras() != null)
-        {
-                line = getIntent().getExtras().getParcelable("Line");
-                station = getIntent().getExtras().getParcelable("Station");
-
+        if (getIntent() != null && getIntent().getExtras() != null) {
+            line = getIntent().getExtras().getParcelable("Line");
+            station = getIntent().getExtras().getParcelable("Station");
+            if (line != null) {
                 lineId = line.getLineId();
-               // Log.i("lineId: ", line.getLineId());
+                // Log.i("lineId: ", line.getLineId());
                 Timber.v(line.getLineId(), "lineId: ");
 
-                stationId = station.getStationId();
-              // Log.i("stationId: ", stations.getStationId());
-                Timber.v(station.getStationId(), "stationId: ");
-
-            lineArrayList = getIntent().getParcelableArrayListExtra("lineList");
-            stationArrayList = getIntent().getParcelableArrayListExtra("stationList");
-
-                if (savedInstanceState == null)
-                {
-
-                /*
-                 *  Starting the asyncTask so that schedule loads when the activity opens.
-                 */
-                TubeScheduleAsyncTask myScheduleTask = new TubeScheduleAsyncTask(this);
-                myScheduleTask.execute(lineId, stationId);
-
-            } else
-                {
-                //emptySchedule visibility code based on the answer in this stackoverflow thread:
-                //https://stackoverflow.com/questions/51903851/keeping-textview-visibility-view-invisible-and-button-state-setenabledfalse
-                if (savedInstanceState.getBoolean("visible"))
-                {
-                    emptySchedule.setVisibility(View.VISIBLE);
+                if (station != null) {
+                    stationId = station.getStationId();
+                    // Log.i("stationId: ", stations.getStationId());
+                    Timber.v(station.getStationId(), "stationId: ");
                 }
-                {
-                    scheduleArrayList = savedInstanceState.getParcelableArrayList(KEY_SCHEDULE_LIST);
-                    scheduleAdapter.setScheduleList(scheduleArrayList);
-                }
-            }
-        }
-            if (MapsConnectionCheck.checkPlayServices(this))
-            {
-                 init();
-        }
+                lineArrayList = getIntent().getParcelableArrayListExtra("lineList");
+                stationArrayList = getIntent().getParcelableArrayListExtra("stationList");
 
-        mScheduleRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener()
-        {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                if (dy > 0 && extendedFAB.getVisibility() == View.VISIBLE)
-                {
-                    extendedFAB.hide();
-                } else if (dy < 0 && extendedFAB.getVisibility() != View.VISIBLE)
-                {
-                    extendedFAB.show();
+                if (savedInstanceState == null) {
+
+                    /*
+                     *  Starting the asyncTask so that schedule loads when the activity opens.
+                     */
+                    TubeScheduleAsyncTask myScheduleTask = new TubeScheduleAsyncTask(this);
+                    myScheduleTask.execute(lineId, stationId);
+
+                } else {
+                    //emptySchedule visibility code based on the answer in this stackoverflow thread:
+                    //https://stackoverflow.com/questions/51903851/keeping-textview-visibility-view-invisible-and-button-state-setenabledfalse
+                    if (savedInstanceState.getBoolean("visible")) {
+                        emptySchedule.setVisibility(View.VISIBLE);
+                    }
+                    {
+                        scheduleArrayList = savedInstanceState.getParcelableArrayList(KEY_SCHEDULE_LIST);
+                        scheduleAdapter.setScheduleList(scheduleArrayList);
+                    }
                 }
             }
-        });
+            if (MapsConnectionCheck.checkPlayServices(this)) {
+                init();
+            }
 
+            mScheduleRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+                    if (dy > 0 && extendedFAB.getVisibility() == View.VISIBLE) {
+                        extendedFAB.hide();
+                    } else if (dy < 0 && extendedFAB.getVisibility() != View.VISIBLE) {
+                        extendedFAB.show();
+                    }
+                }
+            });
+        }
     }
 
     @Override

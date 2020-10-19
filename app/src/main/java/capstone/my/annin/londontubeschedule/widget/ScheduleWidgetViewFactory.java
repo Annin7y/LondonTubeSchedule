@@ -116,6 +116,8 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
         intent.putExtra(ScheduleWidgetProvider.EXTRA_ITEM, schedule);
         intent.putExtra("Lines", lines);
         intent.putExtra("Stations", stations);
+        intent.putExtra("Lines", lines.getLineId());
+        intent.putExtra("Stations", stations.getStationId());
         itemView.setOnClickFillInIntent(R.id.schedule_widget_list, intent);
 
         return itemView;

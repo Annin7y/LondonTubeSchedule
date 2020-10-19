@@ -189,16 +189,18 @@ public class StationListActivity extends AppCompatActivity implements StationAda
         {
                 line = getIntent().getExtras().getParcelable("Line");
                 // Extract the line ID from the selected line
+            if(line != null)
+            {
                 lineId = Objects.requireNonNull(line).getLineId();
                 lineId = line.getLineId();
-               // Log.i("lineId: ", lines.getLineId());
+                // Log.i("lineId: ", lines.getLineId());
                 Timber.i(line.getLineId(), "lineId: ");
 
                 lineNameStation.setText(line.getLineName());
                 lineNameToString = lineNameStation.getText().toString();
-               // Log.i("lineName: ", line.getLineName());
-                Timber.i(line.getLineName(),"lineName: ");
-
+                // Log.i("lineName: ", line.getLineName());
+                Timber.i(line.getLineName(), "lineName: ");
+            }
                 lineArrayList = getIntent().getParcelableArrayListExtra("lineList");
 
 
