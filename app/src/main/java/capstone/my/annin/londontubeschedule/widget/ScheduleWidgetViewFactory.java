@@ -42,6 +42,8 @@ import capstone.my.annin.londontubeschedule.pojo.Station;
 public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViewsFactory
 {
     private ArrayList<Schedule> mScheduleList;
+    private ArrayList<Station> mStationList;
+    private ArrayList<Line> mLineList;
     private Context mContext;
     private String stationWidgetArrivalTime;
     private Line lines;
@@ -69,6 +71,18 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
         }.getType();
         String gsonString = sharedPreferences.getString("ScheduleList_Widget", "");
         mScheduleList = gson.fromJson(gsonString, type);
+
+        Type typeLine = new TypeToken<List<Line>>()
+        {
+        }.getType();
+        String gsonStringLine = sharedPreferences.getString("LineList_Widget", "");
+        mLineList = gson.fromJson(gsonStringLine, typeLine);
+
+        Type typeStation = new TypeToken<List<Station>>()
+        {
+        }.getType();
+        String gsonStringStation = sharedPreferences.getString("StationList_Widget", "");
+        mStationList = gson.fromJson(gsonStringStation, typeStation);
 
         //Extract the JSON lines from preferences and assign it to a Lines object.
         String jsonLines = sharedPreferences.getString("Lines", "");
@@ -125,7 +139,7 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
        // SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
       //  String finalDate = newDateFormat.format(date);
         // stationWidgetArrivalTime = finalDate;
-        
+
         RemoteViews itemView = new RemoteViews(mContext.getPackageName(), R.layout.schedule_widget_list_item);
 
         itemView.setTextViewText(R.id.schedule_widget_station_name, schedule.getStationScheduleName());
@@ -134,8 +148,10 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
 
         Intent intent = new Intent();
         intent.putExtra(ScheduleWidgetProvider.EXTRA_ITEM, schedule);
-        intent.putExtra("Lines", lines);
-        intent.putExtra("Stations", stations);
+        intent.putExtra(ScheduleWidgetProvider.EXTRA_ITEM, lines.getLineId());
+        intent.putExtra(ScheduleWidgetProvider.EXTRA_ITEM, stations.getStationId());
+        intent.putParcelableArrayListExtra(ScheduleWidgetProvider.EXTRA_ITEM, mLineList);
+        intent.putParcelableArrayListExtra(ScheduleWidgetProvider.EXTRA_ITEM, mStationList);
         itemView.setOnClickFillInIntent(R.id.schedule_widget_list, intent);
 
         return itemView;

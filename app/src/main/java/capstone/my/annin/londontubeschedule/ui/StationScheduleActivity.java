@@ -108,12 +108,14 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
         if (getIntent() != null && getIntent().getExtras() != null) {
             line = getIntent().getExtras().getParcelable("Line");
             station = getIntent().getExtras().getParcelable("Station");
-            if (line != null) {
+            if (line != null)
+            {
                 lineId = line.getLineId();
                 // Log.i("lineId: ", line.getLineId());
                 Timber.v(line.getLineId(), "lineId: ");
 
-                if (station != null) {
+                if (station != null)
+                {
                     stationId = station.getStationId();
                     // Log.i("stationId: ", stations.getStationId());
                     Timber.v(station.getStationId(), "stationId: ");
@@ -121,7 +123,8 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
                 lineArrayList = getIntent().getParcelableArrayListExtra("lineList");
                 stationArrayList = getIntent().getParcelableArrayListExtra("stationList");
 
-                if (savedInstanceState == null) {
+                if (savedInstanceState == null)
+                {
 
                     /*
                      *  Starting the asyncTask so that schedule loads when the activity opens.
@@ -132,7 +135,8 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
                 } else {
                     //emptySchedule visibility code based on the answer in this stackoverflow thread:
                     //https://stackoverflow.com/questions/51903851/keeping-textview-visibility-view-invisible-and-button-state-setenabledfalse
-                    if (savedInstanceState.getBoolean("visible")) {
+                    if (savedInstanceState.getBoolean("visible"))
+                    {
                         emptySchedule.setVisibility(View.VISIBLE);
                     }
                     {
@@ -141,7 +145,8 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
                     }
                 }
             }
-            if (MapsConnectionCheck.checkPlayServices(this)) {
+            if (MapsConnectionCheck.checkPlayServices(this))
+            {
                 init();
             }
 
@@ -183,6 +188,12 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
             Gson gson = new Gson();
             String json = gson.toJson(scheduleArrayList);
             prefsEditor.putString("ScheduleList_Widget", json);
+
+            String jsonLineList = gson.toJson(lineArrayList);
+            prefsEditor.putString("LineList_Widget", jsonLineList);
+
+            String jsonStationList = gson.toJson(stationArrayList);
+            prefsEditor.putString("StationList_Widget", jsonStationList);
 
             //Save the Line as a JSON string using Preferences.
            String jsonLine = gson.toJson(line);
