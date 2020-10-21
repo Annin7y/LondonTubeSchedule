@@ -71,6 +71,8 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         @BindView(R.id.schedule_arrival)
         public TextView expectedArrival;
 
+        @BindView(R.id.schedule_platform)
+        public TextView platformName;
 
 
         public ScheduleAdapterViewHolder(View view)
@@ -105,6 +107,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         holder.currentLocation.setText(stationView.getCurrentLocation());
         holder.directionTowards.setText(stationView.getDirectionTowards());
         holder.expectedArrival.setText(stationView.getExpectedArrival());
+        holder.platformName.setText(stationView.getPlatformName());
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         //convert time zone to London UK time(GMT)

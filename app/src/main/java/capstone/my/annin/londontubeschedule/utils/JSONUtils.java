@@ -51,6 +51,7 @@ public class JSONUtils
     private static final String KEY_CURRENT_LOCATION = "currentLocation";
     private static final String KEY_DIRECTION_TOWARDS = "towards";
     private static final String KEY_EXPECTED_ARRIVAL = "expectedArrival";
+    private static final String KEY_PLATFORM_NAME = "platformName";
 
     public JSONUtils()
     {
@@ -319,7 +320,13 @@ public class JSONUtils
                     arrivalExpected = currentSchedule.optString(KEY_EXPECTED_ARRIVAL);
                 }
 
-                Schedule schedule = new Schedule(naptanIdStation, scheduleNameStation, nameDestination, locationCurrent, towardsDirection, arrivalExpected);
+                String platformName = "";
+                if (currentSchedule.has("platformName"))
+                {
+                    platformName = currentSchedule.optString(KEY_PLATFORM_NAME);
+                }
+
+                Schedule schedule = new Schedule(naptanIdStation, scheduleNameStation, nameDestination, locationCurrent, towardsDirection, arrivalExpected, platformName);
                 schedules.add(schedule);
             }
         }

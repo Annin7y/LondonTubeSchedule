@@ -33,6 +33,8 @@
     <string name="destination_label">Terminal Station:</string>
     <string name="location_label">Current Location:</string>
     <string name="towards_label">Towards:</string>
+    <string name="platform_label">Platform:</string>
+    <string name="platform_text">Eastbound - Platform 2</string>
     <string name="snackbar_internet">Please check your internet connection</string>
     <string name="snackbar_retry">Retry</string>
     <string name="arrival_text">5:45 p.m. Jan 2, 2018</string>

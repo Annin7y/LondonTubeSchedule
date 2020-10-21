@@ -50,8 +50,12 @@ public class Schedule implements Parcelable
      */
     private String expectedArrival;
 
+    /**
+     * platformName
+     */
+    private String platformName;
 
-    public Schedule(String stationNaptanId, String stationScheduleName, String destinationName, String currentLocation, String directionTowards, String expectedArrival)
+    public Schedule(String stationNaptanId, String stationScheduleName, String destinationName, String currentLocation, String directionTowards, String expectedArrival, String platformName)
     {
         this.stationNaptanId = stationNaptanId;
         this.stationScheduleName = stationScheduleName;
@@ -59,6 +63,7 @@ public class Schedule implements Parcelable
         this.currentLocation = currentLocation;
         this.directionTowards = directionTowards;
         this.expectedArrival = expectedArrival;
+        this.platformName = platformName;
     }
 
     public void setStationNaptanId(String stationNaptanId)
@@ -120,6 +125,18 @@ public class Schedule implements Parcelable
         return expectedArrival;
     }
 
+    public void setPlatformName(String platformName)
+    {
+        this.platformName = platformName;
+    }
+
+    public String getPlatformName()
+    {
+        return platformName;
+    }
+
+
+
     protected Schedule(Parcel in)
     {
         stationNaptanId = in.readString();
@@ -128,6 +145,7 @@ public class Schedule implements Parcelable
         currentLocation = in.readString();
         directionTowards = in.readString();
         expectedArrival = in.readString();
+        platformName = in.readString();
     }
 
     @Override
@@ -145,6 +163,7 @@ public class Schedule implements Parcelable
         dest.writeString(currentLocation);
         dest.writeString(directionTowards);
         dest.writeString(expectedArrival);
+        dest.writeString(platformName);
     }
 
     @SuppressWarnings("unused")
