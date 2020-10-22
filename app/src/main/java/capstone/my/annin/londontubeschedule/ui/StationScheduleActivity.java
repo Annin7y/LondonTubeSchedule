@@ -1,3 +1,4 @@
+
 /* Copyright 2020 Anastasia Annin
 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -105,7 +106,8 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
         RecyclerView.LayoutManager mScheduleLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mScheduleRecyclerView.setLayoutManager(mScheduleLayoutManager);
 
-        if (getIntent() != null && getIntent().getExtras() != null) {
+        if (getIntent() != null && getIntent().getExtras() != null)
+        {
             line = getIntent().getExtras().getParcelable("Line");
             station = getIntent().getExtras().getParcelable("Station");
             if (line != null)
@@ -132,7 +134,9 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
                     TubeScheduleAsyncTask myScheduleTask = new TubeScheduleAsyncTask(this);
                     myScheduleTask.execute(lineId, stationId);
 
-                } else {
+                } else
+
+                    {
                     //emptySchedule visibility code based on the answer in this stackoverflow thread:
                     //https://stackoverflow.com/questions/51903851/keeping-textview-visibility-view-invisible-and-button-state-setenabledfalse
                     if (savedInstanceState.getBoolean("visible"))
@@ -150,13 +154,17 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
                 init();
             }
 
-            mScheduleRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            mScheduleRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener()
+            {
                 @Override
-                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy)
+                {
                     super.onScrolled(recyclerView, dx, dy);
-                    if (dy > 0 && extendedFAB.getVisibility() == View.VISIBLE) {
+                    if (dy > 0 && extendedFAB.getVisibility() == View.VISIBLE)
+                    {
                         extendedFAB.hide();
-                    } else if (dy < 0 && extendedFAB.getVisibility() != View.VISIBLE) {
+                    } else if (dy < 0 && extendedFAB.getVisibility() != View.VISIBLE)
+                    {
                         extendedFAB.show();
                     }
                 }

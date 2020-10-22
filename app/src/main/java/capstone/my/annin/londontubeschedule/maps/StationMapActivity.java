@@ -78,7 +78,8 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_station_map);
 
@@ -92,32 +93,29 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
             mapFragment.getMapAsync(this);
         }
 
-        if (getIntent() != null && getIntent().getExtras() != null)
-        {
+        if (getIntent() != null && getIntent().getExtras() != null) {
             line = getIntent().getExtras().getParcelable("Line");
-            if(line != null)
-            {
+            if (line != null) {
                 lineId = line.getLineId();
                 Timber.v(line.getLineId(), "lineId: ");
-            }
-            // Log.i("lineId: ", line.getLineId());
-            //Timber.v(line.getLineId(), "lineId: ");
-            station = getIntent().getExtras().getParcelable("Station");
-            if(station != null)
-            {
-                stationId = station.getStationId();
-                // Log.i("stationId: ", stations.getStationId());
-                Timber.v(station.getStationId(), "stationId: ");
 
-                latLocation = station.getLatLocation();
-                Timber.v(String.valueOf(station.getLatLocation()));
+                // Log.i("lineId: ", line.getLineId());
+                //Timber.v(line.getLineId(), "lineId: ");
+                station = getIntent().getExtras().getParcelable("Station");
+                if (station != null) {
+                    stationId = station.getStationId();
+                    // Log.i("stationId: ", stations.getStationId());
+                    Timber.v(station.getStationId(), "stationId: ");
 
-                lonLocation = station.getLonLocation();
-                Timber.v(String.valueOf(station.getLonLocation()));
+                    latLocation = station.getLatLocation();
+                    Timber.v(String.valueOf(station.getLatLocation()));
+
+                    lonLocation = station.getLonLocation();
+                    Timber.v(String.valueOf(station.getLonLocation()));
+                }
+                stationArrayList = getIntent().getParcelableArrayListExtra("stationList");
+                lineArrayList = getIntent().getParcelableArrayListExtra("lineList");
             }
-            stationArrayList = getIntent().getParcelableArrayListExtra("stationList");
-            lineArrayList = getIntent().getParcelableArrayListExtra("lineList");
-        }
 //            latLocation = station.getLatLocation();
 //            Timber.v(String.valueOf(station.getLatLocation()));
 //
@@ -125,13 +123,15 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
 //            Timber.v(String.valueOf(station.getLonLocation()));
 
 
-    //        TubeStationSequenceAsyncTask mySequenceTask = new TubeStationSequenceAsyncTask(this);
+
+            //        TubeStationSequenceAsyncTask mySequenceTask = new TubeStationSequenceAsyncTask(this);
 //        mySequenceTask.execute(lineId);
 //        TubeRawJsonAsyncTask myRawJsonTask = new TubeRawJsonAsyncTask(this, getApplicationContext());
 //        myRawJsonTask.execute(lineId);
 //
-    TubeGeoJsonAllLinesAsyncTask myAllTask = new TubeGeoJsonAllLinesAsyncTask(this, getApplicationContext());
-        myAllTask.execute();
+            TubeGeoJsonAllLinesAsyncTask myAllTask = new TubeGeoJsonAllLinesAsyncTask(this, getApplicationContext());
+            myAllTask.execute();
+        }
 }
 
        //Explicitly check the permissions
