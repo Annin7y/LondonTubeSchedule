@@ -21,6 +21,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import capstone.my.annin.londontubeschedule.pojo.Line;
@@ -329,6 +331,18 @@ public class JSONUtils
                 Schedule schedule = new Schedule(naptanIdStation, scheduleNameStation, nameDestination, locationCurrent, towardsDirection, arrivalExpected, platformName);
                 schedules.add(schedule);
             }
+            //Code based on the 1st answer in the following stackoverflow post:
+            //https://stackoverflow.com/questions/17697568/how-to-sort-jsonarray-in-android/17698236
+            Collections.sort(schedules, new Comparator<Schedule>()
+            {
+              @Override
+               public int compare(Schedule o1, Schedule o2)
+               {
+                 String time1 = o1.getExpectedArrival();
+                  String time2 = o2.getExpectedArrival();
+                  return time1.compareTo(time2);
+               }
+           });
         }
         catch (JSONException e)
         {
