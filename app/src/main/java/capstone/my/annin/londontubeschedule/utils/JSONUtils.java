@@ -338,7 +338,7 @@ public class JSONUtils
               @Override
                public int compare(Schedule o1, Schedule o2)
                {
-                 String time1 = o1.getExpectedArrival();
+                  String time1 = o1.getExpectedArrival();
                   String time2 = o2.getExpectedArrival();
                   return time1.compareTo(time2);
                }

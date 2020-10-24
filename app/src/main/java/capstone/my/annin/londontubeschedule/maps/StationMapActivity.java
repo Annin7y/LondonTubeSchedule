@@ -102,7 +102,8 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
                 // Log.i("lineId: ", line.getLineId());
                 //Timber.v(line.getLineId(), "lineId: ");
                 station = getIntent().getExtras().getParcelable("Station");
-                if (station != null) {
+                if (station != null)
+                {
                     stationId = station.getStationId();
                     // Log.i("stationId: ", stations.getStationId());
                     Timber.v(station.getStationId(), "stationId: ");
@@ -115,7 +116,7 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
                 }
                 stationArrayList = getIntent().getParcelableArrayListExtra("stationList");
                 lineArrayList = getIntent().getParcelableArrayListExtra("lineList");
-            }
+
 //            latLocation = station.getLatLocation();
 //            Timber.v(String.valueOf(station.getLatLocation()));
 //
@@ -123,14 +124,14 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
 //            Timber.v(String.valueOf(station.getLonLocation()));
 
 
-
-            //        TubeStationSequenceAsyncTask mySequenceTask = new TubeStationSequenceAsyncTask(this);
+                //        TubeStationSequenceAsyncTask mySequenceTask = new TubeStationSequenceAsyncTask(this);
 //        mySequenceTask.execute(lineId);
 //        TubeRawJsonAsyncTask myRawJsonTask = new TubeRawJsonAsyncTask(this, getApplicationContext());
 //        myRawJsonTask.execute(lineId);
 //
-            TubeGeoJsonAllLinesAsyncTask myAllTask = new TubeGeoJsonAllLinesAsyncTask(this, getApplicationContext());
-            myAllTask.execute();
+                TubeGeoJsonAllLinesAsyncTask myAllTask = new TubeGeoJsonAllLinesAsyncTask(this, getApplicationContext());
+                myAllTask.execute();
+            }
         }
 }
 
@@ -251,35 +252,34 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
     @Override
     public void returnAllLinesJsonData(ArrayList<String> simpleAllGeoJsonString)
     {
-
-        ArrayList<Integer> colors = new ArrayList<>(Arrays.asList(R.color.colorBakerloo, R.color.colorCentral, R.color.colorCircle,
-                R.color.colorDistrict, R.color.colorHammersmithCity, R.color.colorJubilee,R.color.colorMetropolitan, R.color.colorNorthern,
-                R.color.colorPiccadilly, R.color.colorVictoria, R.color.colorWaterloo));
-
-        for (int i = 0; i < simpleAllGeoJsonString.size(); i++)
+        if (simpleAllGeoJsonString.size() > 0)
         {
-            try
-            {
-                layer = new GeoJsonLayer(mMap, new JSONObject(simpleAllGeoJsonString.get(i)));
-                layer.addLayerToMap();
-                setPolygonGreen(layer);
+            ArrayList<Integer> colors = new ArrayList<>(Arrays.asList(R.color.colorBakerloo, R.color.colorCentral, R.color.colorCircle,
+                    R.color.colorDistrict, R.color.colorHammersmithCity, R.color.colorJubilee, R.color.colorMetropolitan, R.color.colorNorthern,
+                    R.color.colorPiccadilly, R.color.colorVictoria, R.color.colorWaterloo));
 
-                for (GeoJsonFeature feature : layer.getFeatures())
-                {
-                    GeoJsonLineStringStyle stringStyle = new GeoJsonLineStringStyle();
-                    stringStyle.setColor(ContextCompat.getColor(StationMapActivity.this, colors.get(i)));
-                    stringStyle.setWidth(4F);
-                    feature.setLineStringStyle(stringStyle);
+            for (int i = 0; i < simpleAllGeoJsonString.size(); i++)
+            {
+                try {
+                    layer = new GeoJsonLayer(mMap, new JSONObject(simpleAllGeoJsonString.get(i)));
+
+                    layer.addLayerToMap();
+                    setPolygonGreen(layer);
+                    for (GeoJsonFeature feature : layer.getFeatures())
+                    {
+                        GeoJsonLineStringStyle stringStyle = new GeoJsonLineStringStyle();
+                        stringStyle.setColor(ContextCompat.getColor(StationMapActivity.this, colors.get(i)));
+                        stringStyle.setWidth(4F);
+                        feature.setLineStringStyle(stringStyle);
+                    }
+
+                } catch (
+                        JSONException e) {
+                    e.printStackTrace();
                 }
-
-            } catch (
-                    JSONException e)
-            {
-                e.printStackTrace();
             }
         }
     }
-
 //    @Override
 //    public void returnStationSequenceData(JSONArray simpleJsonSequenceData)
 //    {

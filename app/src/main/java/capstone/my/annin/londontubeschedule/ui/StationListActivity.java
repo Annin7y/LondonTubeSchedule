@@ -207,7 +207,8 @@ public class StationListActivity extends AppCompatActivity implements StationAda
                 //Code when setting isFavorite in the Repository
                // If the movie is favorite, we show the "Remove from Favorites" text.
                 mLineViewModel.select(lineId);
-                mLineViewModel.isFavorite().observe(this, isFavorite -> {
+                mLineViewModel.isFavorite().observe(this, isFavorite ->
+                {
                     if (isFavorite)
                     {
                         extendedFABAdd.setText(getString(R.string.favorites_button_text_remove));
