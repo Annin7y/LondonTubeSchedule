@@ -23,6 +23,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 import capstone.my.annin.londontubeschedule.pojo.Line;
@@ -189,6 +190,7 @@ public class JSONUtils
             //https://stackoverflow.com/questions/17673057/how-to-parse-this-nested-json-array-in-android
             if (stopPointSequenceArrayList != null)
             {
+                LinkedHashSet<Station> linkedHashSet = new LinkedHashSet<>();
                 for (int i = 0; i < stopPointSequenceArrayList.length(); i++)
                 {
                     JSONObject elem = stopPointSequenceArrayList.getJSONObject(i);
@@ -224,7 +226,12 @@ public class JSONUtils
                                     }
 
                                     Station station = new Station(idStation, nameStation, stationLatLocation, stationLonLocation);
-                                    stations.add(station);
+                                    //stations.add(station);
+                                    //Code based on the following stackoverflow post:
+                                    //https://stackoverflow.com/questions/47550315/remove-duplicated-in-base-unique-jsonobjects-in-jsonarray
+                                    linkedHashSet.add(station);
+                                    stations.clear();
+                                    stations.addAll(linkedHashSet);
                                 }
                             }
                         }

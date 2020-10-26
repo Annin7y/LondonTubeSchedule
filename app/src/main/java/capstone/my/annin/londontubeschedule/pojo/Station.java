@@ -88,6 +88,27 @@ public class Station implements Parcelable
         return lonLocation;
     }
 
+    //Code based on the answer with 27 upvotes in the following stackoverflow post:
+    //https://stackoverflow.com/questions/6680157/how-to-remove-duplicate-objects-in-a-listmyobject-without-equals-hashcode/36806739
+    @Override
+    public boolean equals(Object o)
+    {
+        if(o instanceof Station)
+        {
+            Station temp = (Station) o;
+            return this.stationId.equals(temp.stationId) && this.stationName.equals(temp.stationName) &&
+                    this.latLocation == temp.latLocation && this.lonLocation == temp.lonLocation;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return (this.stationId.hashCode() + this.stationName.hashCode());
+
+    }
+
     protected Station(Parcel in)
     {
         stationId = in.readString();
