@@ -28,7 +28,7 @@
       xmlns:tools="http://schemas.android.com/tools"
       android:id="@+id/coordinatorLayout"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
+      android:layout_height="wrap_content"
       android:focusable="true"
       android:background="@color/colorBackground"
       tools:context="capstone.my.annin.londontubeschedule.ui.MainActivity">
@@ -54,8 +54,8 @@
 
           <androidx.recyclerview.widget.RecyclerView
               android:id="@+id/recyclerview_main"
-              android:layout_width="0dp"
-              android:layout_height="wrap_content"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
               android:layout_marginStart="@dimen/main_recycler_start"
               android:layout_marginTop="@dimen/main_recycler_top"
               android:descendantFocusability="afterDescendants"

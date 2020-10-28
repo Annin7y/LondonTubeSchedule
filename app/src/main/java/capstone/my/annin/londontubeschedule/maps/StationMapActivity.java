@@ -262,19 +262,20 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
 
             for (int i = 0; i < simpleAllGeoJsonString.size(); i++)
             {
-                try {
+                try
+                {
                     layer = new GeoJsonLayer(mMap, new JSONObject(simpleAllGeoJsonString.get(i)));
-
-                    layer.addLayerToMap();
-                    setPolygonGreen(layer);
-                    for (GeoJsonFeature feature : layer.getFeatures())
+                    if(layer != null)
                     {
-                        GeoJsonLineStringStyle stringStyle = new GeoJsonLineStringStyle();
-                        stringStyle.setColor(ContextCompat.getColor(StationMapActivity.this, colors.get(i)));
-                        stringStyle.setWidth(4F);
-                        feature.setLineStringStyle(stringStyle);
+                        layer.addLayerToMap();
+                        setPolygonGreen(layer);
+                        for (GeoJsonFeature feature : layer.getFeatures()) {
+                            GeoJsonLineStringStyle stringStyle = new GeoJsonLineStringStyle();
+                            stringStyle.setColor(ContextCompat.getColor(StationMapActivity.this, colors.get(i)));
+                            stringStyle.setWidth(4F);
+                            feature.setLineStringStyle(stringStyle);
+                        }
                     }
-
                 } catch (
                         JSONException e) {
                     e.printStackTrace();
