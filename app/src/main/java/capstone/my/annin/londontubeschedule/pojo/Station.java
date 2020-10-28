@@ -18,6 +18,8 @@ package capstone.my.annin.londontubeschedule.pojo;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import static java.lang.String.valueOf;
+
 public class Station implements Parcelable
 {
     /**
@@ -105,7 +107,7 @@ public class Station implements Parcelable
     @Override
     public int hashCode()
     {
-        return (this.stationId.hashCode() + this.stationName.hashCode());
+        return (this.stationId.hashCode() + this.stationName.hashCode() + (valueOf(latLocation).hashCode()) + (valueOf(lonLocation).hashCode()));
 
     }
 

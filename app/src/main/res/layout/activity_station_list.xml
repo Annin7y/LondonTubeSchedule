@@ -48,24 +48,11 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/line_name_station"
-        app:layout_constraintBottom_toTopOf="@id/station_duplicate_instructions"
+        app:layout_constraintBottom_toTopOf="@id/station_duplicate_instructions_two"
         android:layout_marginStart="@dimen/station_click_instructions_start"
         android:layout_marginTop="@dimen/station_name_top"
         android:textSize="@dimen/station_instr_text_size"
         android:text="@string/station_list_instructions" />
-
-    <TextView
-        android:id="@+id/station_duplicate_instructions"
-        style="@style/StationInstructionStyle"
-        android:layout_marginStart="@dimen/station_dup_instructions_start"
-        android:layout_marginEnd="@dimen/station_dup_instructions_end"
-        android:layout_marginTop="@dimen/station_dup_instructions_top"
-        android:textSize="@dimen/station_instr_text_size"
-        app:layout_constraintBottom_toTopOf="@id/station_duplicate_instructions_two"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/station_list_instructions"
-        android:text="@string/station_dup_instructions" />
 
     <TextView
         android:id="@+id/station_duplicate_instructions_two"
@@ -80,7 +67,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/station_duplicate_instructions"
+        app:layout_constraintTop_toBottomOf="@id/station_list_instructions"
         android:text="@string/station_dup_instructions_two"
         />
 
@@ -93,7 +80,7 @@
         android:layout_marginStart="@dimen/station_recycler_start"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/station_duplicate_instructions"
+        app:layout_constraintTop_toBottomOf="@id/station_duplicate_instructions_two"
         app:layout_constraintBottom_toBottomOf="parent"
         android:descendantFocusability="afterDescendants"
         />

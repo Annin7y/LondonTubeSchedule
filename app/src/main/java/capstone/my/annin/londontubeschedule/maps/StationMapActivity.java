@@ -93,9 +93,11 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
             mapFragment.getMapAsync(this);
         }
 
-        if (getIntent() != null && getIntent().getExtras() != null) {
+        if (getIntent() != null && getIntent().getExtras() != null)
+        {
             line = getIntent().getExtras().getParcelable("Line");
-            if (line != null) {
+            if (line != null)
+            {
                 lineId = line.getLineId();
                 Timber.v(line.getLineId(), "lineId: ");
 

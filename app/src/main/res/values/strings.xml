@@ -16,7 +16,7 @@
 -->
 
 <resources>
-    <string name="app_name">LondonTubeSchedule</string>
+    <string name="app_name">London Tube Schedule</string>
     <string name="tube_list_instructions">Click on a line to view a list of stations</string>
     <string name="station_list_instructions">Click on a station to view train schedules.</string>
     <string name="line_name">Bakerloo</string>
@@ -54,8 +54,8 @@
     <string name="station_list">Stations</string>
     <string name="station_schedule">Train Schedule</string>
     <string name="station_map">London Tube Map</string>
-    <string name="settings_menu_main">Settings</string>
-    <string name="settings_label_manifest">Settings</string>
+    <string name="settings_menu_main">About</string>
+    <string name="settings_label_manifest">About</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="privacy_policy_label_manifest">Privacy Policy</string>
     <string name="privacy_policy_settings">Privacy Policy</string>
