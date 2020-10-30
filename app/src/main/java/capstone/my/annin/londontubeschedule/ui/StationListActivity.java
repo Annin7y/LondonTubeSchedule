@@ -91,6 +91,9 @@ public class StationListActivity extends AppCompatActivity implements StationAda
     @BindView(R.id.extended_fab_add)
     ExtendedFloatingActionButton extendedFABAdd;
 
+    @BindView(R.id.station_duplicate_instructions_two)
+    TextView branchInstructions;
+
     // Keep track of whether the selected line is Favorite or not
     private boolean isFavorite;
 
@@ -282,7 +285,10 @@ public class StationListActivity extends AppCompatActivity implements StationAda
                 }
             }
         });
-
+        if(lineId.equals("bakerloo"))
+        {
+            branchInstructions.setText("Stations displayed in sequence between Harrow & Wealdstone and Elephane & Castle.");
+        }
 
 
     }

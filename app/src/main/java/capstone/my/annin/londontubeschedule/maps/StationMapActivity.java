@@ -264,12 +264,14 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
             {
                 try
                 {
+
                     layer = new GeoJsonLayer(mMap, new JSONObject(simpleAllGeoJsonString.get(i)));
-                    if(layer != null)
-                    {
-                        layer.addLayerToMap();
+                        if(layer != null)
+                        {
+                    layer.addLayerToMap();
                         setPolygonGreen(layer);
-                        for (GeoJsonFeature feature : layer.getFeatures()) {
+                        for (GeoJsonFeature feature : layer.getFeatures())
+                        {
                             GeoJsonLineStringStyle stringStyle = new GeoJsonLineStringStyle();
                             stringStyle.setColor(ContextCompat.getColor(StationMapActivity.this, colors.get(i)));
                             stringStyle.setWidth(4F);
