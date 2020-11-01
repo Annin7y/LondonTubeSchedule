@@ -1,2 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+
+<!--
+  ~  Copyright 2020 Anastasia Annin
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+-->
+
+<resources>
+
+    <!-- Progress bar width and height specifications in activity_main -->
+    <dimen name="progress_bar">42dp</dimen>
+
+    <!-- Progress bar marginStart & marginEnd in activity_main -->
+    <dimen name="progress_bar_start">260dp</dimen>
+    <dimen name="progress_bar_end">260dp</dimen>
+
+    <!-- Progress bar marginLeft & marginRight in activity_main -->
+    <dimen name="progress_bar_left">260dp</dimen>
+    <dimen name="progress_bar_right">260dp</dimen>
+
+    <!-- Progress bar marginTop in activity_main -->
+    <dimen name="progress_bar_top">295dp</dimen>
+
+    <!--  Widget padding & margins -->
+    <dimen name="widget_prov_pad">9dp</dimen>
+    <dimen name="widget_list_pad">2dp</dimen>
+    <dimen name="sch_widget_top_padding">3dp</dimen>
+
+    <!--  Lists & Activities padding & margins -->
+    <dimen name="line_list_padding">8dp</dimen>
+    <dimen name="line_station_margin_end">40dp</dimen>
+    <dimen name="line_station_margin_start">10dp</dimen>
+    <dimen name="line_station_reason_margin_start">12dp</dimen>
+    <dimen name="line_name_text_size">25sp</dimen>
+    <dimen name="line_status_text_size">20sp</dimen>
+    <dimen name="fav_button_margin_start">50dp</dimen>
+    <dimen name="fav_button_margin_top">5dp</dimen>
+    <dimen name="empty_schedule_top">50dp</dimen>
+    <dimen name="main_instr_start">32dp</dimen>
+    <dimen name="main_instr_top">16dp</dimen>
+    <dimen name="main_instr_text">18sp</dimen>
+    <dimen name="main_name_top">18dp</dimen>
+    <dimen name="main_recycler_start">16dp</dimen>
+    <dimen name="main_recycler_top">30dp</dimen>
+    <dimen name="loading_width">0dp</dimen>
+    <dimen name="loading_height">45dp</dimen>
+    <dimen name="loading_bottom">40dp</dimen>
+    <dimen name="station_dup_instr_start_tablet">10dp</dimen>
+    <dimen name="station_dup_instr_start_tablet_land">2dp</dimen>
+    <dimen name="station_name_list_size">15sp</dimen>
+    <dimen name="station_instr_text_size">25sp</dimen>
+    <dimen name="station_name_start">9dp</dimen>
+    <dimen name="station_name_top">16dp</dimen>
+    <dimen name="station_recycler_start">5dp</dimen>
+    <dimen name="station_recycler_top">35dp</dimen>
+    <dimen name="station_list_text_size">20sp</dimen>
+    <dimen name="station_list_padding">8dp</dimen>
+    <dimen name="station_dup_instructions_start_land">18dp</dimen>
+    <dimen name="station_dup_instructions_start">10dp</dimen>
+    <dimen name="station_click_instructions_start">10dp</dimen>
+    <dimen name="station_dup_instructions_top">20dp</dimen>
+    <dimen name="station_dup_instructions_end">30dp</dimen>
+    <dimen name="fab_elevation">6dp</dimen>
+    <dimen name="fab_size">5dp</dimen>
+    <dimen name="fab_margin">10dp</dimen>
+    <dimen name="fab_add_margin">1dp</dimen>
+    <dimen name="fab_margin_station">20dp</dimen>
+    <dimen name="fab_margin_land_tablet">24dp</dimen>
+    <dimen name="fab_press_translation_z">6dp</dimen>
+    <dimen name="sched_label_text_size">18sp</dimen>
+    <dimen name="sched_name_text_size">24sp</dimen>
+    <dimen name="sch_text_padding">1dp</dimen>
+    <dimen name="recycler_schedule_start">16dp</dimen>
+    <dimen name="recycler_schedule_top">20dp</dimen>
+    <dimen name="schedule_empty_start">16dp</dimen>
+    <dimen name="sch_label_top_padding">5dp</dimen>
+    <dimen name="privacy_pol_set_text">25sp</dimen>
+    <dimen name="privacy_pol_text_start">40dp</dimen>
+    <dimen name="privacy_pol_text_top">20dp</dimen>
+    <dimen name="empty_sched_text_size">20sp</dimen>
+    <dimen name="line_status_reason_padding">10dp</dimen>
+    <dimen name="menu_text_size">20sp</dimen>
+    <dimen name="sched_station_name_top">40dp</dimen>
+    <dimen name="fab_add_text_size">15sp</dimen>
+    <dimen name="fab_map_text_size">15sp</dimen>
+    <dimen name="branch_instr_size">20sp</dimen>
+</resources>

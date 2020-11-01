@@ -71,6 +71,7 @@
     <dimen name="station_click_instructions_start">10dp</dimen>
     <dimen name="station_dup_instructions_top">20dp</dimen>
     <dimen name="station_dup_instructions_end">30dp</dimen>
+    <dimen name="branch_instr_size">15sp</dimen>
     <dimen name="fab_elevation">6dp</dimen>
     <dimen name="fab_size">5dp</dimen>
     <dimen name="fab_margin">10dp</dimen>
@@ -94,5 +95,4 @@
     <dimen name="sched_station_name_top">40dp</dimen>
     <dimen name="fab_add_text_size">15sp</dimen>
     <dimen name="fab_map_text_size">15sp</dimen>
-    <dimen name="branch_instr_size">20sp</dimen>
 </resources>
