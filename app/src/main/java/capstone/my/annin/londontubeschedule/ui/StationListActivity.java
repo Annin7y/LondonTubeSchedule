@@ -293,45 +293,45 @@ public class StationListActivity extends AppCompatActivity implements StationAda
 //            branchInstructions.setText("Stations displayed in sequence between Harrow & Wealdstone and Elephane & Castle.");
 //        }
             case "bakerloo":
-                branchInstructions.setText("Stations displayed in sequence between Harrow & Wealdstone and Elephant & Castle.");
+                branchInstructions.setText(R.string.bakerloo_branch_case);
                 break;
             case "central":
-                branchInstructions.setText("Stations displayed in sequence as follows: Epping to West Ruislip; Hainault Loop branch below West Ruislip from Hainault to Wanstead and Grange Hill to Roding Valley; Ealing Broadway branch below Roding Valley.  ");
+                branchInstructions.setText(R.string.central_branch_case);
                 break;
             case "circle":
-                branchInstructions.setText("Stations displayed in sequence as follows: Edgware Road to Paddington; Hammersmith branch below Paddington between Royal Oak and Hammersmith.");
+                branchInstructions.setText(R.string.circle_branch_case);
                 break;
 
             case "district":
-                branchInstructions.setText("Stations displayed in sequence as follows: Upminster to Ealing Broadway; Richmond branch below Ealing Broadway; Wimbledon branch below Richmond between West Brompton and Wimbledon; Edgware Road below Wimbledon between Edgware and High Street Kensington. Last displayed: Kensington Olympia below High Street Kensington.");
+                branchInstructions.setText(R.string.district_branch_case);
                 break;
 
             case "hammersmith-city":
-                branchInstructions.setText("Stations displayed in sequence between Barking and Hammersmith.");
+                branchInstructions.setText(R.string.hammer_branch_case);
                 break;
 
             case "jubilee":
-                branchInstructions.setText("Stations displayed in sequence between Stratford and Stanmore.");
+                branchInstructions.setText(R.string.jubilee_branch_case);
                 break;
 
             case "metropolitan":
-                branchInstructions.setText("Stations displayed in sequence as follows: Aldgate to and Amersham and Chesham; Uxbridge branch below Chesham between West Harrow and Uxbridge; Watford branch below Uxbridge.");
+                branchInstructions.setText(R.string.metro_branch_case);
                 break;
 
             case "northern":
-                branchInstructions.setText("Stations displayed in sequence as follows: High Barnet to Morden via Bank branch (not incl. Mornington Crescent); Charing Cross branch below Morden between Mornington and Waterloo; Edgware branch below Waterloo between Edgware and Chalk Farm; Mill Hill East below Chalk Farm.");
+                branchInstructions.setText(R.string.northern_branch_case);
                 break;
 
             case "piccadilly":
-                branchInstructions.setText("Stations displayed in sequence as follows: Cockfosters to Uxbridge; Heathrow branch below Uxbridge between South Ealing and Heathrow Terminal 5. ");
+                branchInstructions.setText(R.string.picca_branch_case);
                 break;
 
             case "victoria":
-                branchInstructions.setText("Stations displayed in sequence between Walthamstow and Brixton.");
+                branchInstructions.setText(R.string.victoria_branch_case);
                 break;
 
             case "waterloo-city":
-                branchInstructions.setText("Stations displayed in sequence between Bank and Waterloo.");
+                branchInstructions.setText(R.string.waterloo_branch_case);
                 break;
 
         }
