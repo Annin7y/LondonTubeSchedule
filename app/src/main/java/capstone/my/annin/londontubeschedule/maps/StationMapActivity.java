@@ -148,8 +148,8 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
     public void onMapReady(GoogleMap googleMap)
     {
         mMap = googleMap;
-        if(mMap != null)
-        {
+//        if(mMap != null)
+//        {
             if (station != null)
             {
                 String stationName = station.getStationName();
@@ -225,8 +225,9 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
                 // we draw the line on the map
 //        googleMap.addPolyline(polylineOptions);
             }
-        }
+     //   }
     }
+
 
 //    @Override
 //    public void returnRawJsonData(String simpleGeoJsonString)
@@ -271,6 +272,8 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
                     layer = new GeoJsonLayer(mMap, new JSONObject(simpleAllGeoJsonString.get(i)));
                         if(layer != null)
                         {
+                            if(mMap != null)
+                            {
                     layer.addLayerToMap();
                         setPolygonGreen(layer);
                         for (GeoJsonFeature feature : layer.getFeatures())
@@ -280,7 +283,7 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
                             stringStyle.setWidth(4F);
                             feature.setLineStringStyle(stringStyle);
                         }
-                    }
+                    }}
                 } catch (
                         JSONException e) {
                     e.printStackTrace();
