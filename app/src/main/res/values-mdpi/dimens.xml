@@ -12,7 +12,7 @@
     <dimen name="station_dup_instructions_start">12dp</dimen>
     <dimen name="station_dup_instructions_end">70dp</dimen>
     <dimen name="station_name_list_size">14sp</dimen>
-    <dimen name="station_instr_text_size">18sp</dimen>
+    <dimen name="station_instr_text_size">20sp</dimen>
     <dimen name="station_list_padding">4dp</dimen>
     <dimen name="station_list_text_size">15sp</dimen>
     <dimen name="station_recycler_top">45dp</dimen>
