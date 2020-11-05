@@ -131,8 +131,8 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
 //        TubeRawJsonAsyncTask myRawJsonTask = new TubeRawJsonAsyncTask(this, getApplicationContext());
 //        myRawJsonTask.execute(lineId);
 //
-                TubeGeoJsonAllLinesAsyncTask myAllTask = new TubeGeoJsonAllLinesAsyncTask(this, getApplicationContext());
-                myAllTask.execute();
+              //  TubeGeoJsonAllLinesAsyncTask myAllTask = new TubeGeoJsonAllLinesAsyncTask(this, getApplicationContext());
+              //  myAllTask.execute();
             }
         }
 }
@@ -225,6 +225,9 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
                 // we draw the line on the map
 //        googleMap.addPolyline(polylineOptions);
             }
+            //AsyncTask code from onCreate; AsyncTask now run after initializing the map
+        TubeGeoJsonAllLinesAsyncTask myAllTask = new TubeGeoJsonAllLinesAsyncTask(this, getApplicationContext());
+        myAllTask.execute();
      //   }
     }
 
