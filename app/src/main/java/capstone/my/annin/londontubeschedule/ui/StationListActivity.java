@@ -17,6 +17,7 @@ package capstone.my.annin.londontubeschedule.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -47,6 +48,8 @@ import capstone.my.annin.londontubeschedule.pojo.Line;
 import capstone.my.annin.londontubeschedule.pojo.Station;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.StationAdapter;
 import timber.log.Timber;
+
+import static android.text.Layout.JUSTIFICATION_MODE_INTER_WORD;
 
 //import capstone.my.annin.londontubeschedule.data.TubeLineContract;
 
@@ -124,7 +127,12 @@ public class StationListActivity extends AppCompatActivity implements StationAda
 
         mLineViewModel = ViewModelProviders.of(this).get(LineViewModel.class);
 
-        // Set a click listener for the Favorite button
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+        {
+            branchInstructions.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
+        }
+
+            // Set a click listener for the Favorite button
         extendedFABAdd.setOnClickListener(view ->
         {
             if (extendedFABAdd.getText().equals(getString(R.string.favorites_button_text_remove)))

@@ -87,37 +87,37 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
 
                 .findFragmentById(R.id.map);
-
-        if (mapFragment != null)
+        if (GooglePlayServicesCheck.isGooglePlayServicesAvailable(this))
         {
-            mapFragment.getMapAsync(this);
-        }
-
-        if (getIntent() != null && getIntent().getExtras() != null)
-        {
-            line = getIntent().getExtras().getParcelable("Line");
-            if (line != null)
+            if (mapFragment != null)
             {
-                lineId = line.getLineId();
-                Timber.v(line.getLineId(), "lineId: ");
+                mapFragment.getMapAsync(this);
+            }
 
-                // Log.i("lineId: ", line.getLineId());
-                //Timber.v(line.getLineId(), "lineId: ");
-                station = getIntent().getExtras().getParcelable("Station");
-                if (station != null)
-                {
-                    stationId = station.getStationId();
-                    // Log.i("stationId: ", stations.getStationId());
-                    Timber.v(station.getStationId(), "stationId: ");
+            if (getIntent() != null && getIntent().getExtras() != null)
+            {
+                line = getIntent().getExtras().getParcelable("Line");
+                if (line != null) {
+                    lineId = line.getLineId();
+                    Timber.v(line.getLineId(), "lineId: ");
 
-                    latLocation = station.getLatLocation();
-                    Timber.v(String.valueOf(station.getLatLocation()));
+                    // Log.i("lineId: ", line.getLineId());
+                    //Timber.v(line.getLineId(), "lineId: ");
+                    station = getIntent().getExtras().getParcelable("Station");
+                    if (station != null)
+                    {
+                        stationId = station.getStationId();
+                        // Log.i("stationId: ", stations.getStationId());
+                        Timber.v(station.getStationId(), "stationId: ");
 
-                    lonLocation = station.getLonLocation();
-                    Timber.v(String.valueOf(station.getLonLocation()));
-                }
-                stationArrayList = getIntent().getParcelableArrayListExtra("stationList");
-                lineArrayList = getIntent().getParcelableArrayListExtra("lineList");
+                        latLocation = station.getLatLocation();
+                        Timber.v(String.valueOf(station.getLatLocation()));
+
+                        lonLocation = station.getLonLocation();
+                        Timber.v(String.valueOf(station.getLonLocation()));
+                    }
+                    stationArrayList = getIntent().getParcelableArrayListExtra("stationList");
+                    lineArrayList = getIntent().getParcelableArrayListExtra("lineList");
 
 //            latLocation = station.getLatLocation();
 //            Timber.v(String.valueOf(station.getLatLocation()));
@@ -126,13 +126,14 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
 //            Timber.v(String.valueOf(station.getLonLocation()));
 
 
-                //        TubeStationSequenceAsyncTask mySequenceTask = new TubeStationSequenceAsyncTask(this);
+                    //        TubeStationSequenceAsyncTask mySequenceTask = new TubeStationSequenceAsyncTask(this);
 //        mySequenceTask.execute(lineId);
 //        TubeRawJsonAsyncTask myRawJsonTask = new TubeRawJsonAsyncTask(this, getApplicationContext());
 //        myRawJsonTask.execute(lineId);
 //
-              //  TubeGeoJsonAllLinesAsyncTask myAllTask = new TubeGeoJsonAllLinesAsyncTask(this, getApplicationContext());
-              //  myAllTask.execute();
+                    //  TubeGeoJsonAllLinesAsyncTask myAllTask = new TubeGeoJsonAllLinesAsyncTask(this, getApplicationContext());
+                    //  myAllTask.execute();
+                }
             }
         }
 }
@@ -332,9 +333,7 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
         polyStyle.setFillColor(Color.GREEN);
         polyStyle.setStrokeColor(Color.GREEN);
         polyStyle.setStrokeWidth(4f);
-
     }
-
     }
 
 

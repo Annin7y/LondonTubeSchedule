@@ -96,4 +96,5 @@
     <dimen name="fab_add_text_size">15sp</dimen>
     <dimen name="fab_map_text_size">15sp</dimen>
     <dimen name="branch_instr_size">20sp</dimen>
+    <dimen name="branch_end">10dp</dimen>
 </resources>

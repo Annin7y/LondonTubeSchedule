@@ -71,11 +71,12 @@
         android:text="@string/station_dup_instructions_two"
         />
 
-    <com.codesgood.views.JustifiedTextView
+    <TextView
         android:id="@+id/station_duplicate_instructions_two"
         style="@style/StationInstructionStyle"
         android:layout_marginStart="@dimen/station_click_instructions_start"
         android:layout_marginTop="@dimen/station_dup_instructions_top"
+        android:layout_marginEnd="@dimen/branch_end"
         android:textSize="@dimen/branch_instr_size"
         app:layout_constraintBottom_toTopOf="@id/recyclerview_station"
         app:layout_constraintHorizontal_bias="0.0"
