@@ -18,6 +18,7 @@ package capstone.my.annin.londontubeschedule.maps;
 import android.Manifest;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -45,6 +46,7 @@ import capstone.my.annin.londontubeschedule.asynctask.AllLinesAsyncTaskInterface
 import capstone.my.annin.londontubeschedule.asynctask.TubeGeoJsonAllLinesAsyncTask;
 import capstone.my.annin.londontubeschedule.pojo.Line;
 import capstone.my.annin.londontubeschedule.pojo.Station;
+import capstone.my.annin.londontubeschedule.ui.StationListActivity;
 import timber.log.Timber;
 
 public class StationMapActivity extends AppCompatActivity implements OnMapReadyCallback, AllLinesAsyncTaskInterface {
@@ -135,6 +137,10 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
                     //  myAllTask.execute();
                 }
             }
+        }
+        else
+        {
+            Toast.makeText(StationMapActivity.this, getString(R.string.play_services_unavailable) , Toast.LENGTH_SHORT).show();
         }
 }
 

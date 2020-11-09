@@ -73,4 +73,5 @@
     <string name="picca_branch_case">\Stations displayed in sequence as follows: Cockfosters to Uxbridge; Heathrow branch below Uxbridge between South Ealing and Heathrow Terminal 5. </string>
     <string name="victoria_branch_case">Stations displayed in sequence between Walthamstow Central and Brixton.</string>
     <string name="waterloo_branch_case">Stations displayed in sequence between Bank and Waterloo.</string>
+    <string name="play_services_unavailable">Google Play Services is currently unavailable. Map unable to load</string>
 </resources>
