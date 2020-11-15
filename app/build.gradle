@@ -9,12 +9,12 @@ android {
             storePassword ANDROID_KEYSTORE_PASSWORD
         }
     }
-    compileSdkVersion 29
+    compileSdkVersion 30
     defaultConfig {
         applicationId "capstone.my.annin.londontubeschedule"
         minSdkVersion 21
-        targetSdkVersion 29
-        versionCode 13
+        targetSdkVersion 30
+        versionCode 14
 
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

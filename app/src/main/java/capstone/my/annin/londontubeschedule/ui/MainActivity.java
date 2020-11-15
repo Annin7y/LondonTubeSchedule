@@ -50,7 +50,9 @@ import capstone.my.annin.londontubeschedule.data.LineViewModel;
 import capstone.my.annin.londontubeschedule.pojo.Line;
 //import capstone.my.annin.londontubeschedule.recyclerviewadapters.FavoritesAdapter;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.FavoritesRoomAdapter;
+
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.LineAdapter;
+import capstone.my.annin.londontubeschedule.scrollbehavior.DisableSwipeBehavior;
 import capstone.my.annin.londontubeschedule.settings.SettingsActivity;
 import capstone.my.annin.londontubeschedule.utils.NetworkUtils;
 import timber.log.Timber;
@@ -74,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
     private String selectedSortOrder = "line_list";
     private static final String SORT_BY_FAVORITES = "line_favorites";
     private static final String SORT_BY_LINES = "line_sort";
+    private static final String KEY_LOADING_INDICATOR = "loading_indicator";
     CoordinatorLayout mCoordinatorLayout;
 
     @BindView(R.id.pb_loading_indicator)
@@ -117,11 +120,9 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
         RecyclerView.LayoutManager mLineLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mLineRecyclerView.setLayoutManager(mLineLayoutManager);
 
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT)
-        {
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target)
-            {
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                 return false;
             }
 
@@ -130,11 +131,11 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
             @Override
             public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder)
             {
-               if(!(viewHolder instanceof FavoritesRoomAdapter.FavoritesRoomAdapterViewHolder))
-               {
-                   return 0;
-               }
-               return super.getSwipeDirs(recyclerView, viewHolder);
+                if (!(viewHolder instanceof FavoritesRoomAdapter.FavoritesRoomAdapterViewHolder))
+                {
+                    return 0;
+                }
+                return super.getSwipeDirs(recyclerView, viewHolder);
             }
 
             @Override
@@ -194,6 +195,7 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
                     Snackbar
                             .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
                             .setAction(R.string.snackbar_retry, new MyClickListener())
+                            .setBehavior(new DisableSwipeBehavior())
                             .show();
                         isSnackbarShowing = true;
                         showErrorMessage();
@@ -209,12 +211,14 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
                         Snackbar
                                 .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
                                 .setAction(R.string.snackbar_retry, new MyClickListener())
+                                .setBehavior(new DisableSwipeBehavior())
                                 .show();
                     }
                 if (selectedSortOrder == SORT_BY_FAVORITES)
                 {
                     mLineRecyclerView.setAdapter(favoritesRoomAdapter);
-                    mLineViewModel.loadAllLines().observe(this, new Observer<List<Line>>() {
+                    mLineViewModel.loadAllLines().observe(this, new Observer<List<Line>>()
+                    {
                         @Override
                         public void onChanged(@Nullable List<Line> line)
                         {
@@ -231,7 +235,14 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
                     lineAdapter.setLineList(lineArrayList);
 
                 }
-                mLoadingIndicator.setVisibility(View.INVISIBLE);
+                if (savedInstanceState != null)
+                {
+                    mLoadingIndicator.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    mLoadingIndicator.setVisibility(View.INVISIBLE);
+                }
               //  Log.v(LOG_TAG, "SORTORDER= " + selectedSortOrder);
                 Timber.v(selectedSortOrder, "SORTORDER= ");
                // Log.i("list", linesArrayList.size() + "");
@@ -266,6 +277,7 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
                 Snackbar
                         .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
                         .setAction(R.string.snackbar_retry, new MyClickListener())
+                        .setBehavior(new DisableSwipeBehavior())
                         .show();
                 isSnackbarShowing = true;
                 showErrorMessage();
@@ -311,6 +323,7 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
         Snackbar
                .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
                 .setAction(R.string.snackbar_retry, new MyClickListener())
+                .setBehavior(new DisableSwipeBehavior())
               .show();
        // mLineRecyclerView.setVisibility(View.VISIBLE);
         mLoadingIndicator.setVisibility(View.VISIBLE);
