@@ -24,6 +24,7 @@ import android.content.Intent;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import capstone.my.annin.londontubeschedule.R;
+import capstone.my.annin.londontubeschedule.asynctask.TubeLineAsyncTask;
 import capstone.my.annin.londontubeschedule.asynctask.TubeScheduleAsyncTask;
 import capstone.my.annin.londontubeschedule.asynctask.TubeScheduleAsyncTaskInterface;
 import capstone.my.annin.londontubeschedule.maps.MapsConnectionCheck;
@@ -32,12 +33,17 @@ import capstone.my.annin.londontubeschedule.pojo.Line;
 import capstone.my.annin.londontubeschedule.pojo.Schedule;
 import capstone.my.annin.londontubeschedule.pojo.Station;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.ScheduleAdapter;
+import capstone.my.annin.londontubeschedule.scrollbehavior.DisableSwipeBehavior;
 import capstone.my.annin.londontubeschedule.widget.ScheduleWidgetProvider;
 import timber.log.Timber;
 
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.MenuItemCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -51,12 +57,15 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
+import static capstone.my.annin.londontubeschedule.ui.MainActivity.isNetworkStatusAvailable;
 
 public class StationScheduleActivity extends AppCompatActivity implements TubeScheduleAsyncTaskInterface
 {
@@ -87,6 +96,8 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     private static final String KEY_EMPTY_VALUE = "empty_value";
     @BindView(R.id.extended_fab)
     ExtendedFloatingActionButton extendedFAB;
+    CoordinatorLayout mCoordinatorLayout;
+    private boolean isSnackbarShowing = false;
 
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 
@@ -103,6 +114,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
         scheduleAdapter = new ScheduleAdapter(scheduleArrayList, context);
         mScheduleRecyclerView.setAdapter(scheduleAdapter);
 
+        mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
         RecyclerView.LayoutManager mScheduleLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mScheduleRecyclerView.setLayoutManager(mScheduleLayoutManager);
 
@@ -127,7 +139,8 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
 
                 if (savedInstanceState == null)
                 {
-
+                    if (isNetworkStatusAvailable(this))
+                    {
                     /*
                      *  Starting the asyncTask so that schedule loads when the activity opens.
                      */
@@ -135,8 +148,27 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
                     myScheduleTask.execute(lineId, stationId);
 
                 } else
+                    {
+                        Snackbar
+                                .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+                                .setAction(R.string.snackbar_retry, new StationScheduleActivity.MyClickListener())
+                                .setBehavior(new DisableSwipeBehavior())
+                                .show();
+                        isSnackbarShowing = true;
+                        showErrorMessage();
+                    }}
+
+                    else
 
                     {
+                        if (isSnackbarShowing)
+                        {
+                            Snackbar
+                                    .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+                                    .setAction(R.string.snackbar_retry, new StationScheduleActivity.MyClickListener())
+                                    .setBehavior(new DisableSwipeBehavior())
+                                    .show();
+                        }
                     //emptySchedule visibility code based on the answer in this stackoverflow thread:
                     //https://stackoverflow.com/questions/51903851/keeping-textview-visibility-view-invisible-and-button-state-setenabledfalse
                     if (savedInstanceState.getBoolean("visible"))
@@ -236,6 +268,52 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
         {
             mShareActionProvider.setShareIntent(createShareIntent());
         }
+    }
+
+    public class MyClickListener implements View.OnClickListener
+    {
+        @Override
+        public void onClick(View v)
+        {
+
+            if (isNetworkStatusAvailable(context))
+            {
+                TubeScheduleAsyncTask myScheduleTask = new TubeScheduleAsyncTask(StationScheduleActivity.this);
+                myScheduleTask.execute(lineId, stationId);
+            }
+            else
+            {
+                Snackbar
+                        .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+                        .setAction(R.string.snackbar_retry, new StationScheduleActivity.MyClickListener())
+                        .setBehavior(new DisableSwipeBehavior())
+                        .show();
+                isSnackbarShowing = true;
+                showErrorMessage();
+            }
+        }
+    }
+
+    //Display if there is no internet connection
+    public void showErrorMessage()
+    {
+        Snackbar
+                .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+                .setAction(R.string.snackbar_retry, new StationScheduleActivity.MyClickListener())
+                .setBehavior(new DisableSwipeBehavior())
+                .show();
+        // mLineRecyclerView.setVisibility(View.VISIBLE);
+      //  mLoadingIndicator.setVisibility(View.VISIBLE);
+    }
+
+    public static boolean isNetworkStatusAvailable(Context context)
+    {
+        ConnectivityManager cm =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
     }
 
     @Override

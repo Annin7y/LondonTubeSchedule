@@ -154,8 +154,6 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
 //            }
 
 
-
-
 //
 //            // Called when a user swipes left or right on a ViewHolder
 //            @Override
@@ -183,71 +181,67 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
         /*
          *  Starting the asyncTask so that lines load upon launching the app.
          */
-      if (savedInstanceState == null)
+        if (savedInstanceState == null)
         {
-                if (isNetworkStatusAvailable(this))
-                {
+            if (isNetworkStatusAvailable(this))
+            {
 
-                    TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(this);
-                    myLineTask.execute(NetworkUtils.buildLineStatusUrl());
-                } else
-                    {
-                    Snackbar
-                            .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
-                            .setAction(R.string.snackbar_retry, new MyClickListener())
-                            .setBehavior(new DisableSwipeBehavior())
-                            .show();
-                        isSnackbarShowing = true;
-                        showErrorMessage();
-                }
+                TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(this);
+                myLineTask.execute(NetworkUtils.buildLineStatusUrl());
+            } else
+                {
+                Snackbar
+                        .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+                        .setAction(R.string.snackbar_retry, new MyClickListener())
+                        .setBehavior(new DisableSwipeBehavior())
+                        .show();
+                isSnackbarShowing = true;
+                showErrorMessage();
             }
-
-            else
+        } else
+            {
+            selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "line_list");
+            isSnackbarShowing = savedInstanceState.getBoolean(SNACKBAR_STATE);
+            if (isSnackbarShowing)
+            {
+                Snackbar
+                        .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+                        .setAction(R.string.snackbar_retry, new MyClickListener())
+                        .setBehavior(new DisableSwipeBehavior())
+                        .show();
+            }
+            if (selectedSortOrder == SORT_BY_FAVORITES)
+            {
+                mLineRecyclerView.setAdapter(favoritesRoomAdapter);
+                mLineViewModel.loadAllLines().observe(this, new Observer<List<Line>>()
                 {
-             selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "line_list");
-                    isSnackbarShowing = savedInstanceState.getBoolean(SNACKBAR_STATE);
-                    if (isSnackbarShowing)
+                    @Override
+                    public void onChanged(@Nullable List<Line> line)
                     {
-                        Snackbar
-                                .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
-                                .setAction(R.string.snackbar_retry, new MyClickListener())
-                                .setBehavior(new DisableSwipeBehavior())
-                                .show();
+                        favoritesRoomAdapter.setLine(line);
                     }
-                if (selectedSortOrder == SORT_BY_FAVORITES)
-                {
-                    mLineRecyclerView.setAdapter(favoritesRoomAdapter);
-                    mLineViewModel.loadAllLines().observe(this, new Observer<List<Line>>()
-                    {
-                        @Override
-                        public void onChanged(@Nullable List<Line> line)
-                        {
-                            favoritesRoomAdapter.setLine(line);
-                        }
-                    });
+                });
 
 //                    getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
 //                    mLineRecyclerView.setAdapter(favoritesAdapter);
 
-                } else
-                    {
-                    lineArrayList = savedInstanceState.getParcelableArrayList(KEY_LINES_LIST);
-                    lineAdapter.setLineList(lineArrayList);
+            } else
+                {
+                lineArrayList = savedInstanceState.getParcelableArrayList(KEY_LINES_LIST);
+                lineAdapter.setLineList(lineArrayList);
 
-                }
-                if (savedInstanceState != null)
-                {
-                    mLoadingIndicator.setVisibility(View.VISIBLE);
-                }
-                else
-                {
-                    mLoadingIndicator.setVisibility(View.INVISIBLE);
-                }
-              //  Log.v(LOG_TAG, "SORTORDER= " + selectedSortOrder);
-                Timber.v(selectedSortOrder, "SORTORDER= ");
-               // Log.i("list", linesArrayList.size() + "");
-                Timber.i("list: " + lineArrayList.size());
             }
+            if (savedInstanceState != null)
+            {
+                mLoadingIndicator.setVisibility(View.VISIBLE);
+            } else {
+                mLoadingIndicator.setVisibility(View.INVISIBLE);
+            }
+            //  Log.v(LOG_TAG, "SORTORDER= " + selectedSortOrder);
+            Timber.v(selectedSortOrder, "SORTORDER= ");
+            // Log.i("list", linesArrayList.size() + "");
+            Timber.i("list: " + lineArrayList.size());
+        }
     }
 
     public class MyClickListener implements View.OnClickListener
@@ -268,7 +262,6 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
 
             if (isNetworkStatusAvailable(context))
             {
-
                 TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(MainActivity.this);
                 myLineTask.execute();
             }
