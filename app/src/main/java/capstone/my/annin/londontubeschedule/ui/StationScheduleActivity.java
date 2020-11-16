@@ -98,7 +98,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     ExtendedFloatingActionButton extendedFAB;
     CoordinatorLayout mCoordinatorLayout;
     private boolean isSnackbarShowing = false;
-
+    private static final String SNACKBAR_STATE = "snackbar_state";
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 
     @Override
@@ -159,8 +159,8 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
                     }}
 
                     else
-
                     {
+                        isSnackbarShowing = savedInstanceState.getBoolean(SNACKBAR_STATE);
                         if (isSnackbarShowing)
                         {
                             Snackbar
@@ -372,6 +372,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
         }
 
         outState.putParcelableArrayList(KEY_SCHEDULE_LIST, scheduleArrayList);
+        outState.putBoolean(SNACKBAR_STATE, isSnackbarShowing);
         super.onSaveInstanceState(outState);
     }
 }

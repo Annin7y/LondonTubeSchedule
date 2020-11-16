@@ -319,7 +319,7 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
                 .setBehavior(new DisableSwipeBehavior())
               .show();
        // mLineRecyclerView.setVisibility(View.VISIBLE);
-        mLoadingIndicator.setVisibility(View.VISIBLE);
+     mLoadingIndicator.setVisibility(View.VISIBLE);
     }
 
     public static boolean isNetworkStatusAvailable(Context context)
