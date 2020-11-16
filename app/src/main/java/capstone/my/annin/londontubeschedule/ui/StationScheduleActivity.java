@@ -360,7 +360,6 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
       });
     }
 
-
     @Override
     protected void onSaveInstanceState(Bundle outState)
     {
