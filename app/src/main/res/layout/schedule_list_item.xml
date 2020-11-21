@@ -55,11 +55,15 @@
 
     <TextView
         android:id="@+id/schedule_platform"
-        style="@style/ScheduleNameStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
+        android:fontFamily="serif"
         android:padding="@dimen/sch_text_padding"
         android:textSize="@dimen/sched_name_text_size"
+        android:textStyle="bold|italic"
+        android:background="#E5F1F4"
         tools:text="@string/platform_text" />
 
 

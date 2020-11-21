@@ -16,6 +16,7 @@
 package capstone.my.annin.londontubeschedule.recyclerviewadapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -108,6 +109,8 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         holder.directionTowards.setText(stationView.getDirectionTowards());
         holder.expectedArrival.setText(stationView.getExpectedArrival());
         holder.platformName.setText(stationView.getPlatformName());
+
+
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         //convert time zone to London UK time(GMT)

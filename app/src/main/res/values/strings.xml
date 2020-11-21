@@ -74,4 +74,7 @@
     <string name="victoria_branch_case">Stations displayed in sequence between Walthamstow Central and Brixton.</string>
     <string name="waterloo_branch_case">Stations displayed in sequence between Bank and Waterloo.</string>
     <string name="play_services_unavailable">Google Play Services is currently unavailable. Map unable to load</string>
+    <string name="line_guide_manifest">Line Guide</string>
+    <!-- Strings used for fragments for navigation -->
+
 </resources>

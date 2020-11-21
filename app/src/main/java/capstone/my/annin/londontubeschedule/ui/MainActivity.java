@@ -458,15 +458,13 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
                 selectedSortOrder = SORT_BY_LINES;
                 return true;
 
-            default:
-                return super.onOptionsItemSelected(item);
-
-
             case R.id.settings:
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
                 return true;
 
+            default:
+                return super.onOptionsItemSelected(item);
 
     }}
 
