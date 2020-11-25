@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -211,6 +212,10 @@ public class StationListActivity extends AppCompatActivity implements StationAda
                 lineNameToString = lineNameStation.getText().toString();
                 // Log.i("lineName: ", line.getLineName());
                 Timber.i(line.getLineName(), "lineName: ");
+
+                ActionBar actionBar = getSupportActionBar();
+                actionBar.setTitle(lineNameToString);
+
             }
                 lineArrayList = getIntent().getParcelableArrayListExtra("lineList");
 
