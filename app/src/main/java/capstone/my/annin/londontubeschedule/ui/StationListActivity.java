@@ -76,7 +76,6 @@ public class StationListActivity extends AppCompatActivity implements StationAda
 
     @BindView(R.id.line_name_station)
     TextView lineNameStation;
-
     String lineNameToString;
 
 //    @BindView(R.id.favorites_button)
@@ -208,8 +207,9 @@ public class StationListActivity extends AppCompatActivity implements StationAda
                 // Log.i("lineId: ", lines.getLineId());
                 Timber.i(line.getLineId(), "lineId: ");
 
-                lineNameStation.setText(line.getLineName());
-                lineNameToString = lineNameStation.getText().toString();
+               // lineNameStation.setText(line.getLineName());
+               // lineNameToString = lineNameStation.getText().toString();
+                lineNameToString = line.getLineName();
                 // Log.i("lineName: ", line.getLineName());
                 Timber.i(line.getLineName(), "lineName: ");
 

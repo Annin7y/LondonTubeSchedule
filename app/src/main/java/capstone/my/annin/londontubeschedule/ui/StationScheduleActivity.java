@@ -43,6 +43,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.MenuItemCompat;
 import androidx.appcompat.app.AppCompatActivity;
@@ -93,6 +94,10 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     private String stationShareDirection;
     @BindView(R.id.empty_view_schedule)
     TextView emptySchedule;
+
+    TextView stationNameStation;
+
+    String stationNameToString;
     private static final String KEY_EMPTY_VALUE = "empty_value";
     @BindView(R.id.extended_fab)
     ExtendedFloatingActionButton extendedFAB;
@@ -133,6 +138,12 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
                     stationId = station.getStationId();
                     // Log.i("stationId: ", stations.getStationId());
                     Timber.v(station.getStationId(), "stationId: ");
+
+                   // stationNameStation.setText(station.getStationName());
+                    stationNameToString = station.getStationName();
+
+                   ActionBar actionBar = getSupportActionBar();
+                   actionBar.setTitle(stationNameToString);
                 }
                 lineArrayList = getIntent().getParcelableArrayListExtra("lineList");
                 stationArrayList = getIntent().getParcelableArrayListExtra("stationList");
@@ -333,13 +344,22 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
 
     public Intent createShareIntent()
     {
-        String shareTitle = "Next train at ";
-        String data = shareTitle + "\n" + stationShareStationName + "\n" + stationShareArrivalTime + "\n" + stationShareDirection;
+        if(stationShareStationName != null && stationShareArrivalTime != null && stationShareDirection != null)
+        {
+            String shareTitle = "Next train at ";
+            String data = shareTitle + "\n" + stationShareStationName + "\n" + stationShareArrivalTime + "\n" + stationShareDirection;
 
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, data);
-        return shareIntent;
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_TEXT, data);
+            return shareIntent;
+
+        }
+        String shareTitle2 = "Data Currently Unavailable ";
+        Intent shareIntent2 = new Intent(Intent.ACTION_SEND);
+        shareIntent2.setType("text/plain");
+        shareIntent2.putExtra(Intent.EXTRA_TEXT, shareTitle2);
+        return shareIntent2;
     }
 
     private void init()
