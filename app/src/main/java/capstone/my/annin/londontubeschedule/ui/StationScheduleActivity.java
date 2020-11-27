@@ -65,6 +65,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.TimeZone;
 
 import static capstone.my.annin.londontubeschedule.ui.MainActivity.isNetworkStatusAvailable;
 
@@ -144,6 +145,8 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
 
                    ActionBar actionBar = getSupportActionBar();
                    actionBar.setTitle(stationNameToString);
+
+
                 }
                 lineArrayList = getIntent().getParcelableArrayListExtra("lineList");
                 stationArrayList = getIntent().getParcelableArrayListExtra("stationList");
@@ -256,6 +259,27 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
 
             prefsEditor.apply();
 
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+            //convert time zone to London UK time(GMT)
+            //Code based on the first answer in the following stackoverflow post:
+            // https://stackoverflow.com/questions/22814263/how-to-set-the-timezone-for-string-parsing-in-android
+            simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+            Date date = null;
+            try {
+                //Relative date code based on this example:
+                //https://stackoverflow.com/questions/49441035/dateutils-getrelativetimespanstring-returning-a-formatted-date-string-instead-of
+
+                date = simpleDateFormat.parse(stationShareArrivalTime);
+                SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
+                String finalDate = newDateFormat.format(date);
+
+                stationShareArrivalTime = finalDate;
+            }
+             catch (ParseException e)
+                {
+                    e.printStackTrace();
+                }
+
             //Send to Widget Provider code based on the answer with 9 upvotes in this post:
             //https://stackoverflow.com/questions/3455123/programmatically-update-widget-from-activity-service-receiver
             Context context = getApplicationContext();
@@ -344,8 +368,9 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
 
     public Intent createShareIntent()
     {
-        if(stationShareStationName != null && stationShareArrivalTime != null && stationShareDirection != null)
+        if(stationShareStationName != null && stationShareArrivalTime!= null && stationShareDirection != null)
         {
+
             String shareTitle = "Next train at ";
             String data = shareTitle + "\n" + stationShareStationName + "\n" + stationShareArrivalTime + "\n" + stationShareDirection;
 

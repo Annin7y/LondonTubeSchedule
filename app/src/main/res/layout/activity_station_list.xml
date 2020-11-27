@@ -37,28 +37,12 @@
     android:focusable="true" >
 
     <TextView
-        android:id="@+id/line_name_station"
-        style="@style/LineStationListStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/station_list_instructions"
-        android:layout_marginStart="@dimen/station_name_start"
-        android:layout_marginTop="@dimen/station_name_top"
-        android:textSize="@dimen/station_name_list_size"
-        tools:text="@string/station_name"
-        />
-
-
-
-    <TextView
         android:id="@+id/station_list_instructions"
         style="@style/StationInstructionStyle"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/station_duplicate_instructions_two"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/station_duplicate_instructions"
         android:layout_marginStart="@dimen/station_click_instructions_start"
         android:layout_marginTop="@dimen/station_name_top"
         android:textSize="@dimen/station_instr_text_size"
@@ -71,13 +55,13 @@
         android:layout_marginEnd="@dimen/station_dup_instructions_end"
         android:layout_marginTop="@dimen/station_dup_instructions_top"
         android:textSize="@dimen/station_instr_text_size"
-        app:layout_constraintBottom_toTopOf="@id/station_duplicate_instructions_two"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/station_list_instructions"
+        app:layout_constraintBottom_toTopOf="@id/station_duplicate_instructions_two"
         android:text="@string/station_dup_instructions_two"
         />
 

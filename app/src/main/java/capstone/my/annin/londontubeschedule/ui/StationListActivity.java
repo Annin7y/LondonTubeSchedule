@@ -74,8 +74,8 @@ public class StationListActivity extends AppCompatActivity implements StationAda
     private Context context;
     private FirebaseAnalytics mFirebaseAnalytics;
 
-    @BindView(R.id.line_name_station)
-    TextView lineNameStation;
+   // @BindView(R.id.line_name_station)
+    //TextView lineNameStation;
     String lineNameToString;
 
 //    @BindView(R.id.favorites_button)
@@ -281,7 +281,7 @@ public class StationListActivity extends AppCompatActivity implements StationAda
                 stationAdapter.setStationList(stationArrayList);
                 line = savedInstanceState.getParcelable(KEY_LINE_LIST);
                 lineNameToString = savedInstanceState.getString(KEY_LINE_NAME);
-                lineNameStation.setText(lineNameToString);
+               // lineNameStation.setText(lineNameToString);
             }
         }
         mStationRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener()
