@@ -62,8 +62,7 @@
         android:fontFamily="serif"
         android:padding="@dimen/sch_text_padding"
         android:textSize="@dimen/sched_name_text_size"
-        android:textStyle="bold|italic"
-        android:background="#E5F1F4"
+        android:textColor="#09C"
         tools:text="@string/platform_text" />
 
 
