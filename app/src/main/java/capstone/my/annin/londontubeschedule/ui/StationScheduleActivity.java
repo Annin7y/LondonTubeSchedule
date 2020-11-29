@@ -271,12 +271,12 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
 
                 date = simpleDateFormat.parse(stationShareArrivalTime);
                 SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
-                String finalDate = newDateFormat.format(date);
-
-                stationShareArrivalTime = finalDate;
+                newDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+                stationShareArrivalTime = newDateFormat.format(date);
             }
              catch (ParseException e)
                 {
+
                     e.printStackTrace();
                 }
 
