@@ -233,9 +233,9 @@ public class MainActivity extends AppCompatActivity implements LineAdapter.LineA
             }
             if (savedInstanceState != null)
             {
-                mLoadingIndicator.setVisibility(View.VISIBLE);
-            } else {
                 mLoadingIndicator.setVisibility(View.INVISIBLE);
+            } else {
+                mLoadingIndicator.setVisibility(View.VISIBLE);
             }
             //  Log.v(LOG_TAG, "SORTORDER= " + selectedSortOrder);
             Timber.v(selectedSortOrder, "SORTORDER= ");
