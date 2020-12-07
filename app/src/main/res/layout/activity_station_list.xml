@@ -17,7 +17,8 @@
 -->
 
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,18 +26,15 @@
         android:background="@color/colorBackground"
         tools:context="capstone.my.annin.londontubeschedule.ui.StationListActivity">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:focusable="true"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/line_list">
 
     <TextView
         android:id="@+id/station_list_instructions"
         style="@style/StationInstructionStyle"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginStart="@dimen/station_click_instructions_start"
         android:layout_marginTop="@dimen/station_name_top"
         android:textSize="@dimen/station_instr_text_size"
@@ -49,12 +47,6 @@
         android:layout_marginEnd="@dimen/station_dup_instructions_end"
         android:layout_marginTop="@dimen/station_dup_instructions_top"
         android:textSize="@dimen/station_instr_text_size"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/station_list_instructions"
         android:text="@string/station_dup_instructions_two"
         />
 
@@ -65,10 +57,6 @@
         android:layout_marginTop="@dimen/station_dup_instructions_top"
         android:layout_marginEnd="@dimen/branch_end"
         android:textSize="@dimen/branch_instr_size"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/station_duplicate_instructions"
         android:text="@string/station_dup_instr_branch"
         />
 
@@ -79,45 +67,37 @@
         android:scrollbars="vertical"
         android:layout_marginTop="@dimen/station_recycler_top"
         android:layout_marginStart="@dimen/station_recycler_start"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/station_duplicate_instructions_two"
         android:descendantFocusability="afterDescendants"
         />
 
     <TextView
         android:id="@+id/empty_view_stations"
         style="@style/ScheduleNameStyle"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="@dimen/schedule_empty_start"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="@dimen/empty_schedule_top"
         android:visibility="gone"
         android:text = "@string/empty_view_text"/>
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/extended_fab_add"
-        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_add_margin"
-        android:background="@drawable/add_fab_background"
-        android:clickable="true"
-        android:contentDescription="@string/favorites_button_text_add"
-        android:elevation="@dimen/fab_elevation"
-        android:focusable="true"
-        android:text="@string/favorites_button_text_add"
-        android:textSize="@dimen/fab_add_text_size"
-        android:translationZ="@dimen/fab_press_translation_z"
-        app:layout_anchorGravity="bottom|right|end"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/extended_fab_add"
+            style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_add_margin"
+            android:background="@drawable/add_fab_background"
+            android:clickable="true"
+            android:contentDescription="@string/favorites_button_text_add"
+            android:elevation="@dimen/fab_elevation"
+            android:focusable="true"
+            android:text="@string/favorites_button_text_add"
+            android:textSize="@dimen/fab_add_text_size"
+            android:translationZ="@dimen/fab_press_translation_z" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </LinearLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
 
