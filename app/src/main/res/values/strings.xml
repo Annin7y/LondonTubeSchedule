@@ -43,6 +43,7 @@
     <string name="towards_text">High Barnet via CX</string>
     <string name="station_dup_instructions">Duplicate station names indicate different line branches.</string>
     <string name="station_dup_instructions_two">Terminus station displayed on the next page.</string>
+    <string name="station_dup_instr_branch">Ealing Broadway branch stations displayed at the bottom.</string>
     <string name="add_to_favourites">Add to the Most Frequented Lines</string>
     <string name="line_status_text">Good Service</string>
     <string name="line_reason_text">Drivers temporarily unavailable</string>
@@ -61,7 +62,6 @@
     <string name="privacy_policy_settings">Privacy Policy</string>
     <string name="open_source_licenses_settings">Open Source Licenses</string>
     <string name="open_source_licenses">Open Source Licenses</string>
-    <string name="station_dup_instr_branch">Ealing Broadway branch stations displayed at the bottom.</string>
     <string name="bakerloo_branch_case"><![CDATA[Stations displayed in sequence between Harrow & Wealdstone and Elephant & Castle.]]></string>
     <string name="central_branch_case">\Stations displayed in sequence as follows: Epping to West Ruislip; Hainault Loop branch below West Ruislip from Hainault to Wanstead and Grange Hill to Roding Valley; Ealing Broadway branch below Roding Valley. </string>
     <string name="circle_branch_case">Stations displayed in sequence as follows: Edgware Road to Paddington; Hammersmith branch below Paddington between Royal Oak and Hammersmith.</string>

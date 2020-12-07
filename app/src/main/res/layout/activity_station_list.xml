@@ -37,7 +37,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/station_duplicate_instructions"
         android:layout_marginStart="@dimen/station_click_instructions_start"
         android:layout_marginTop="@dimen/station_name_top"
         android:textSize="@dimen/station_instr_text_size"
@@ -56,7 +55,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/station_list_instructions"
-        app:layout_constraintBottom_toTopOf="@id/station_duplicate_instructions_two"
         android:text="@string/station_dup_instructions_two"
         />
 
@@ -67,18 +65,17 @@
         android:layout_marginTop="@dimen/station_dup_instructions_top"
         android:layout_marginEnd="@dimen/branch_end"
         android:textSize="@dimen/branch_instr_size"
-        app:layout_constraintBottom_toTopOf="@id/recyclerview_station"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/station_list_instructions"
+        app:layout_constraintTop_toBottomOf="@id/station_duplicate_instructions"
         android:text="@string/station_dup_instr_branch"
         />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_station"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:scrollbars="vertical"
         android:layout_marginTop="@dimen/station_recycler_top"
         android:layout_marginStart="@dimen/station_recycler_start"

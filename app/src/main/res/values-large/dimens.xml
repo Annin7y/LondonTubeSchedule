@@ -64,13 +64,13 @@
     <dimen name="station_name_start">9dp</dimen>
     <dimen name="station_name_top">16dp</dimen>
     <dimen name="station_recycler_start">5dp</dimen>
-    <dimen name="station_recycler_top">20dp</dimen>
+    <dimen name="station_recycler_top">5dp</dimen>
     <dimen name="station_list_text_size">20sp</dimen>
     <dimen name="station_list_padding">8dp</dimen>
     <dimen name="station_dup_instructions_start_land">18dp</dimen>
     <dimen name="station_dup_instructions_start">10dp</dimen>
     <dimen name="station_click_instructions_start">10dp</dimen>
-    <dimen name="station_dup_instructions_top">20dp</dimen>
+    <dimen name="station_dup_instructions_top">10dp</dimen>
     <dimen name="station_dup_instructions_end">30dp</dimen>
     <dimen name="fab_elevation">6dp</dimen>
     <dimen name="fab_size">5dp</dimen>
