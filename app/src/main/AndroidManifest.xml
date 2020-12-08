@@ -78,7 +78,7 @@
                 android:value="capstone.my.annin.londontubeschedule.settings.SettingsActivity" />
         </activity>
         <activity
-            android:name=".maps.LineGuideActivity"
+            android:name=".maps.LineColorGuideActivity"
             android:label="@string/line_guide_manifest"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

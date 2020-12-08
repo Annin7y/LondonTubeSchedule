@@ -50,8 +50,6 @@ import capstone.my.annin.londontubeschedule.asynctask.AllLinesAsyncTaskInterface
 import capstone.my.annin.londontubeschedule.asynctask.TubeGeoJsonAllLinesAsyncTask;
 import capstone.my.annin.londontubeschedule.pojo.Line;
 import capstone.my.annin.londontubeschedule.pojo.Station;
-import capstone.my.annin.londontubeschedule.settings.SettingsActivity;
-import capstone.my.annin.londontubeschedule.ui.StationListActivity;
 import timber.log.Timber;
 
 public class StationMapActivity extends AppCompatActivity implements OnMapReadyCallback, AllLinesAsyncTaskInterface {
@@ -357,7 +355,7 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
     {
         switch (item.getItemId()) {
             case R.id.lineColorGuide:
-                Intent intent = new Intent(this, LineGuideActivity.class);
+                Intent intent = new Intent(this, LineColorGuideActivity.class);
                 startActivity(intent);
                 return true;
 
