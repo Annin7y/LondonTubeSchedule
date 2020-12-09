@@ -15,27 +15,23 @@
   ~ limitations under the License.
   ~
 -->
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical"
+    android:id="@+id/line_color_list">
 
     <TextView
         android:id="@+id/line_color_guide"
-        style="@style/MainInstructionStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/main_instr_start"
         android:layout_marginTop="@dimen/main_instr_top"
         android:textSize="@dimen/main_instr_text"
-        android:text="Line Names displayed in their respective colors."
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="@string/line_color_instr"
+       />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_line_guide"
@@ -45,10 +41,7 @@
         android:layout_marginTop="@dimen/main_recycler_top"
         android:descendantFocusability="afterDescendants"
         android:scrollbars="vertical"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/line_color_guide" />
+      />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</LinearLayout>

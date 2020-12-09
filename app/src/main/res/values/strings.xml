@@ -75,6 +75,7 @@
     <string name="waterloo_branch_case">Stations displayed in sequence between Bank and Waterloo.</string>
     <string name="play_services_unavailable">Google Play Services is currently unavailable. Map unable to load</string>
     <string name="line_guide_manifest">Line Guide</string>
+    <string name="line_color_instr">Line Names displayed in their respective colors.</string>
     <!-- Strings used for fragments for navigation -->
 
 </resources>
