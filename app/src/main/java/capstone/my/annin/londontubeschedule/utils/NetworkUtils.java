@@ -136,7 +136,7 @@ public class NetworkUtils
                     .appendPath(lineId)
                     .appendPath("Arrivals")
                     .appendPath(stationId)
-                    .appendQueryParameter("direction", "inbound")
+                   // .appendQueryParameter("direction", "outbound")
                     .build();
            urlSchedule = new URL(scheduleQueryUri.toString());
         }

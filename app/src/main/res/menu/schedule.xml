@@ -27,6 +27,5 @@
         app:showAsAction="ifRoom"
         android:title="@string/action_share"
         android:icon="@drawable/ic_share_black"
-        app:actionProviderClass=
-            "androidx.appcompat.widget.ShareActionProvider" />
+       />
 </menu>

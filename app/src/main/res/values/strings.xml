@@ -68,7 +68,7 @@
     <string name="district_branch_case">Stations displayed in sequence as follows: Upminster to Ealing Broadway; Richmond branch below Ealing Broadway; Wimbledon branch below Richmond between West Brompton and Wimbledon; Edgware Road below Wimbledon between Edgware and High Street Kensington. Last displayed: Kensington Olympia below High Street Kensington.</string>
     <string name="hammer_branch_case">Stations displayed in sequence between Barking and Hammersmith.</string>
     <string name="jubilee_branch_case">Stations displayed in sequence between Stratford and Stanmore.</string>
-    <string name="metro_branch_case">Stations displayed in sequence as follows: Aldgate to and Amersham and Chesham; Uxbridge branch below Chesham between West Harrow and Uxbridge; Watford branch below Uxbridge.</string>
+    <string name="metro_branch_case">Stations displayed in sequence as follows: Aldgate to Amersham and Chesham; Uxbridge branch below Chesham between West Harrow and Uxbridge; Watford branch below Uxbridge.</string>
     <string name="northern_branch_case">Stations displayed in sequence as follows: High Barnet to Morden via Bank branch (not incl. Mornington Crescent); Charing Cross branch below Morden between Mornington and Waterloo; Edgware branch below Waterloo between Edgware and Chalk Farm; Mill Hill East below Chalk Farm.</string>
     <string name="picca_branch_case">\Stations displayed in sequence as follows: Cockfosters to Uxbridge; Heathrow branch below Uxbridge between South Ealing and Heathrow Terminal 5. </string>
     <string name="victoria_branch_case">Stations displayed in sequence between Walthamstow Central and Brixton.</string>

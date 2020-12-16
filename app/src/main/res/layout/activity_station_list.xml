@@ -16,89 +16,80 @@
   ~
 -->
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/coordinatorLayout"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:focusable="true"
+    tools:context="capstone.my.annin.londontubeschedule.ui.StationListActivity">
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:focusable="true"
-        android:background="@color/colorBackground"
-        tools:context="capstone.my.annin.londontubeschedule.ui.StationListActivity">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/line_list">
-
-    <TextView
-        android:id="@+id/station_list_instructions"
-        style="@style/StationInstructionStyle"
-        android:layout_marginStart="@dimen/station_click_instructions_start"
-        android:layout_marginTop="@dimen/station_name_top"
-        android:textSize="@dimen/station_instr_text_size"
-        android:text="@string/station_list_instructions" />
-
-    <TextView
-        android:id="@+id/station_duplicate_instructions"
-        style="@style/StationInstructionStyle"
-        android:layout_marginStart="@dimen/station_click_instructions_start"
-        android:layout_marginEnd="@dimen/station_dup_instructions_end"
-        android:layout_marginTop="@dimen/station_dup_instructions_top"
-        android:textSize="@dimen/station_instr_text_size"
-        android:text="@string/station_dup_instructions_two"
-        />
-
-    <TextView
-        android:id="@+id/station_duplicate_instructions_two"
-        style="@style/StationInstructionStyle"
-        android:layout_marginStart="@dimen/station_click_instructions_start"
-        android:layout_marginTop="@dimen/station_dup_instructions_top"
-        android:layout_marginEnd="@dimen/branch_end"
-        android:textSize="@dimen/branch_instr_size"
-        android:text="@string/station_dup_instr_branch"
-        />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_station"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="vertical"
-        android:layout_marginTop="@dimen/station_recycler_top"
-        android:layout_marginStart="@dimen/station_recycler_start"
-        android:descendantFocusability="afterDescendants"
-        />
-
-    <TextView
-        android:id="@+id/empty_view_stations"
-        style="@style/ScheduleNameStyle"
-        android:layout_marginStart="@dimen/schedule_empty_start"
-        android:layout_marginTop="@dimen/empty_schedule_top"
-        android:visibility="gone"
-        android:text = "@string/empty_view_text"/>
-
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/extended_fab_add"
-            style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
-            android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/line_list"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/fab_add_margin"
-            android:background="@drawable/add_fab_background"
-            android:clickable="true"
-            android:contentDescription="@string/favorites_button_text_add"
-            android:elevation="@dimen/fab_elevation"
-            android:focusable="true"
-            android:text="@string/favorites_button_text_add"
-            android:textSize="@dimen/fab_add_text_size"
-            android:translationZ="@dimen/fab_press_translation_z" />
-
-    </LinearLayout>
-
-
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/station_list_instructions"
+                style="@style/StationInstructionStyle"
+                android:layout_marginStart="@dimen/station_click_instructions_start"
+                android:layout_marginTop="@dimen/station_name_top"
+                android:text="@string/station_list_instructions"
+                android:textSize="@dimen/station_instr_text_size" />
+            <TextView
+                android:id="@+id/station_duplicate_instructions"
+                style="@style/StationInstructionStyle"
+                android:layout_marginStart="@dimen/station_click_instructions_start"
+                android:layout_marginTop="@dimen/station_dup_instructions_top"
+                android:layout_marginEnd="@dimen/station_dup_instructions_end"
+                android:text="@string/station_dup_instructions_two"
+                android:textSize="@dimen/station_instr_text_size" />
+            <TextView
+                android:id="@+id/station_duplicate_instructions_two"
+                style="@style/StationInstructionStyle"
+                android:layout_marginStart="@dimen/station_click_instructions_start"
+                android:layout_marginTop="@dimen/station_dup_instructions_top"
+                android:layout_marginEnd="@dimen/branch_end"
+                android:text="@string/station_dup_instr_branch"
+                android:textSize="@dimen/branch_instr_size" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_station"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/station_recycler_start"
+                android:layout_marginTop="@dimen/station_recycler_top"
+                android:descendantFocusability="afterDescendants"
+                android:scrollbars="vertical" />
+            <TextView
+                android:id="@+id/empty_view_stations"
+                style="@style/ScheduleNameStyle"
+                android:layout_marginStart="@dimen/schedule_empty_start"
+                android:layout_marginTop="@dimen/empty_schedule_top"
+                android:text="@string/empty_view_text"
+                android:visibility="gone" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/extended_fab_add"
+        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_add_margin"
+        android:background="@drawable/add_fab_background"
+        android:clickable="true"
+        android:contentDescription="@string/favorites_button_text_add"
+        android:elevation="@dimen/fab_elevation"
+        android:focusable="true"
+        android:text="@string/favorites_button_text_add"
+        android:textSize="@dimen/fab_add_text_size"
+        android:translationZ="@dimen/fab_press_translation_z" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
 
 
 
