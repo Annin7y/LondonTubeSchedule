@@ -32,8 +32,10 @@ import capstone.my.annin.londontubeschedule.maps.StationMapActivity;
 import capstone.my.annin.londontubeschedule.pojo.Line;
 import capstone.my.annin.londontubeschedule.pojo.Schedule;
 import capstone.my.annin.londontubeschedule.pojo.Station;
+import capstone.my.annin.londontubeschedule.recyclerviewadapters.FavoritesRoomAdapter;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.ScheduleAdapter;
 import capstone.my.annin.londontubeschedule.scrollbehavior.DisableSwipeBehavior;
+import capstone.my.annin.londontubeschedule.settings.SettingsActivity;
 import capstone.my.annin.londontubeschedule.widget.ScheduleWidgetProvider;
 import timber.log.Timber;
 
@@ -43,10 +45,12 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.MenuItemCompat;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.ShareActionProvider;
@@ -65,6 +69,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
 import static capstone.my.annin.londontubeschedule.ui.MainActivity.isNetworkStatusAvailable;
@@ -106,6 +111,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     private boolean isSnackbarShowing = false;
     private static final String SNACKBAR_STATE = "snackbar_state";
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    private MenuItem refreshItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -366,6 +372,28 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+
+        switch (item.getItemId())
+        {
+            case R.id.menu_item_share:
+              createShareIntent();
+                return true;
+
+            case R.id.menu_item_refresh:
+               refreshItem = item;
+
+               refresh();
+
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }}
+
     public Intent createShareIntent()
     {
         if(stationShareStationName != null && stationShareArrivalTime!= null && stationShareDirection != null)
@@ -389,6 +417,19 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
         startActivity(Intent.createChooser(shareIntent2, "Choose an app"));
       return shareIntent2;
     }
+
+    public void refresh()
+    {
+        //Code based on the following stackoverflow post:
+        //https://stackoverflow.com/questions/36270993/reload-activity-from-same-activity
+        Intent intent = getIntent();
+        overridePendingTransition(0, 0);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(intent);
+    }
+
 
     private void init()
     {

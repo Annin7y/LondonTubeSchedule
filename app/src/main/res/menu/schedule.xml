@@ -22,6 +22,13 @@
         tools:context="capstone.my.annin.londontubeschedule.ui.StationScheduleActivity">
 
     <item
+        android:id="@+id/menu_item_refresh"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_refresh_circle_black_18dp"
+        android:title="Refresh Schedule"/>
+
+    <item
         android:id="@+id/menu_item_share"
         android:orderInCategory="100"
         app:showAsAction="ifRoom"
