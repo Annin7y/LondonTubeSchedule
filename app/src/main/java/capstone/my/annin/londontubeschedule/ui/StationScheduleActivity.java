@@ -54,6 +54,7 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.ShareActionProvider;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -100,9 +101,6 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     private String stationShareDirection;
     @BindView(R.id.empty_view_schedule)
     TextView emptySchedule;
-
-    TextView stationNameStation;
-
     String stationNameToString;
     private static final String KEY_EMPTY_VALUE = "empty_value";
     @BindView(R.id.extended_fab)
@@ -111,7 +109,8 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     private boolean isSnackbarShowing = false;
     private static final String SNACKBAR_STATE = "snackbar_state";
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
-    private MenuItem refreshItem;
+    @BindView(R.id.swipeRefreshLayout)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -383,10 +382,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
                 return true;
 
             case R.id.menu_item_refresh:
-               refreshItem = item;
-
-               refresh();
-
+                refresh();
                 return true;
 
             default:
@@ -422,12 +418,15 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     {
         //Code based on the following stackoverflow post:
         //https://stackoverflow.com/questions/36270993/reload-activity-from-same-activity
-        Intent intent = getIntent();
-        overridePendingTransition(0, 0);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        finish();
-        overridePendingTransition(0, 0);
-        startActivity(intent);
+//        Intent intent = getIntent();
+//        overridePendingTransition(0, 0);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+//        finish();
+//        overridePendingTransition(0, 0);
+//        startActivity(intent);
+        TubeScheduleAsyncTask myScheduleTask = new TubeScheduleAsyncTask(this);
+        myScheduleTask.execute(lineId, stationId);
+
     }
 
 
