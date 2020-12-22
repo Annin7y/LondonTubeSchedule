@@ -129,6 +129,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
         RecyclerView.LayoutManager mScheduleLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mScheduleRecyclerView.setLayoutManager(mScheduleLayoutManager);
 
+
         if (getIntent() != null && getIntent().getExtras() != null)
         {
             line = getIntent().getExtras().getParcelable("Line");
@@ -220,7 +221,17 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
                     }
                 }
             });
+            swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
+            {
+                @Override
+                public void onRefresh()
+                {
+                   refresh();
+                }
+            });
+
         }
+
     }
 
     @Override
@@ -239,7 +250,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
             stationShareArrivalTime = stationArrival.getExpectedArrival();
             stationShareDirection = stationArrival.getDirectionTowards();
 
-
+            swipeRefreshLayout.setRefreshing(false);
             //Store Schedule Info in SharedPreferences
             SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
