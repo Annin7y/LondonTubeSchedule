@@ -54,6 +54,14 @@
                 android:value="capstone.my.annin.londontubeschedule.ui.StationScheduleActivity" />
         </activity>
         <activity
+            android:name=".maps.LineColorGuideActivity"
+            android:label="@string/line_guide_activity"
+            android:parentActivityName=".maps.StationMapActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="capstone.my.annin.londontubeschedule.maps.StationMapActivity" />
+        </activity>
+        <activity
             android:name=".settings.SettingsActivity"
             android:label="@string/settings_label_manifest"
             android:parentActivityName=".ui.MainActivity">
@@ -77,15 +85,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="capstone.my.annin.londontubeschedule.settings.SettingsActivity" />
         </activity>
-        <activity
-            android:name=".maps.LineColorGuideActivity"
-            android:label="@string/line_guide_manifest"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="capstone.my.annin.londontubeschedule.maps.StationMapActivity" />
-        </activity>
-
 
         <receiver android:name=".widget.ScheduleWidgetProvider">
             <intent-filter>

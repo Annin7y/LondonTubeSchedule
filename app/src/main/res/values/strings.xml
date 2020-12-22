@@ -77,6 +77,7 @@
     <string name="line_guide_manifest">Line Guide</string>
     <string name="line_color_instr">Line Names displayed in their respective colors.</string>
     <string name="refresh_schedule">Refresh Schedule</string>
+    <string name="line_guide_activity">Line Guide</string>
     <!-- Strings used for fragments for navigation -->
 
 </resources>
