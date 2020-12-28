@@ -20,6 +20,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.yydcdut.markdown.MarkdownProcessor;
+import com.yydcdut.markdown.MarkdownTextView;
+import com.yydcdut.markdown.syntax.text.TextFactory;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import capstone.my.annin.londontubeschedule.R;
@@ -31,6 +35,7 @@ public class PrivacyPolicyActivity extends AppCompatActivity implements PrivacyP
     private Context context;
     @BindView(R.id.privacy_policy_txt_file)
     TextView privacyPolicyText;
+    MarkdownTextView markdownTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -43,6 +48,8 @@ public class PrivacyPolicyActivity extends AppCompatActivity implements PrivacyP
         ButterKnife.bind(this);
       //  privacyPolicyText.setText(readAssetsFile());
 
+        markdownTextView = (MarkdownTextView) findViewById(R.id.privacy_policy_txt_file);
+
         PrivacyPolicyAsyncTask myAllTask = new PrivacyPolicyAsyncTask(this, getApplicationContext());
         myAllTask.execute();
 
@@ -51,7 +58,10 @@ public class PrivacyPolicyActivity extends AppCompatActivity implements PrivacyP
     @Override
     public void returnPrivacyPolicyFileData(String simplePolicyFileString)
     {
-        privacyPolicyText.setText(simplePolicyFileString);
+        //privacyPolicyText.setText(simplePolicyFileString);
+        MarkdownProcessor processor = new MarkdownProcessor(this);
+        processor.factory(TextFactory.create());
+        markdownTextView.setText(processor.parse(simplePolicyFileString));
     }
 
 //    private String readAssetsFile ()

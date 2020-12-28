@@ -20,6 +20,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.yydcdut.markdown.MarkdownProcessor;
+import com.yydcdut.markdown.MarkdownTextView;
+import com.yydcdut.markdown.syntax.text.TextFactory;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import capstone.my.annin.londontubeschedule.R;
@@ -31,6 +35,7 @@ public class OpenSourceLicensesActivity extends AppCompatActivity implements Ope
     private Context context;
     @BindView(R.id.open_licenses_txt_file)
     TextView openLicensePolicyText;
+    MarkdownTextView markdownTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -43,6 +48,8 @@ public class OpenSourceLicensesActivity extends AppCompatActivity implements Ope
         ButterKnife.bind(this);
         //openLicensePolicyText.setText(readAssetsFile());
 
+        markdownTextView = (MarkdownTextView) findViewById(R.id.open_licenses_txt_file);
+
         OpenSoLicAsyncTask myAllTask = new OpenSoLicAsyncTask(this, getApplicationContext());
         myAllTask.execute();
     }
@@ -50,7 +57,10 @@ public class OpenSourceLicensesActivity extends AppCompatActivity implements Ope
     @Override
     public void returnOpenSoLicFileData(String simpleOpenSoLicFileString)
     {
-        openLicensePolicyText.setText(simpleOpenSoLicFileString );
+       // openLicensePolicyText.setText(simpleOpenSoLicFileString );
+        MarkdownProcessor processor = new MarkdownProcessor(this);
+        processor.factory(TextFactory.create());
+        markdownTextView.setText(processor.parse(simpleOpenSoLicFileString));
     }
 
 
