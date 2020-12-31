@@ -39,6 +39,7 @@
         android:layout_marginEnd="@dimen/station_dup_instructions_end"
         android:layout_marginTop="@dimen/main_recycler_top"
         android:textSize="@dimen/station_instr_text_size"
+        android:textStyle="normal"
         android:text="@string/open_source_licenses"
         />
 
