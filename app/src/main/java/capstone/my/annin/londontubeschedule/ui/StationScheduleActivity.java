@@ -20,47 +20,25 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import capstone.my.annin.londontubeschedule.R;
-import capstone.my.annin.londontubeschedule.asynctask.TubeLineAsyncTask;
-import capstone.my.annin.londontubeschedule.asynctask.TubeScheduleAsyncTask;
-import capstone.my.annin.londontubeschedule.asynctask.TubeScheduleAsyncTaskInterface;
-import capstone.my.annin.londontubeschedule.maps.MapsConnectionCheck;
-import capstone.my.annin.londontubeschedule.maps.StationMapActivity;
-import capstone.my.annin.londontubeschedule.pojo.Line;
-import capstone.my.annin.londontubeschedule.pojo.Schedule;
-import capstone.my.annin.londontubeschedule.pojo.Station;
-import capstone.my.annin.londontubeschedule.recyclerviewadapters.FavoritesRoomAdapter;
-import capstone.my.annin.londontubeschedule.recyclerviewadapters.ScheduleAdapter;
-import capstone.my.annin.londontubeschedule.scrollbehavior.DisableSwipeBehavior;
-import capstone.my.annin.londontubeschedule.settings.SettingsActivity;
-import capstone.my.annin.londontubeschedule.widget.ScheduleWidgetProvider;
-import timber.log.Timber;
-
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.core.view.MenuItemCompat;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.ShareActionProvider;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.ShareActionProvider;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.view.MenuItemCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -70,10 +48,22 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.TimeZone;
 
-import static capstone.my.annin.londontubeschedule.ui.MainActivity.isNetworkStatusAvailable;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import capstone.my.annin.londontubeschedule.R;
+import capstone.my.annin.londontubeschedule.asynctask.TubeScheduleAsyncTask;
+import capstone.my.annin.londontubeschedule.asynctask.TubeScheduleAsyncTaskInterface;
+import capstone.my.annin.londontubeschedule.maps.MapsConnectionCheck;
+import capstone.my.annin.londontubeschedule.maps.StationMapActivity;
+import capstone.my.annin.londontubeschedule.pojo.Line;
+import capstone.my.annin.londontubeschedule.pojo.Schedule;
+import capstone.my.annin.londontubeschedule.pojo.Station;
+import capstone.my.annin.londontubeschedule.recyclerviewadapters.ScheduleAdapter;
+import capstone.my.annin.londontubeschedule.scrollbehavior.DisableSwipeBehavior;
+import capstone.my.annin.londontubeschedule.widget.ScheduleWidgetProvider;
+import timber.log.Timber;
 
 public class StationScheduleActivity extends AppCompatActivity implements TubeScheduleAsyncTaskInterface
 {

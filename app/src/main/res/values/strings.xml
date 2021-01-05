@@ -78,6 +78,16 @@
     <string name="line_color_instr">Line Names displayed in their respective colors.</string>
     <string name="refresh_schedule">Refresh Schedule</string>
     <string name="line_guide_activity">Line Guide</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- Strings used for fragments for navigation -->
+    <!-- Category name for tube lines [CHAR LIMIT=20] -->
+    <string name="category_tube_line">Tube lines</string>
+
+    <!-- Category name for the London overground [CHAR LIMIT=20] -->
+    <string name="category_overground">London Overground</string>
+    <string name="london_overground">London Overground</string>
+    <string name="overground_list">Overground List</string>
+
 
 </resources>

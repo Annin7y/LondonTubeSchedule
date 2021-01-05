@@ -15,23 +15,22 @@
   ~ limitations under the License.
   ~
 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="capstone.my.annin.londontubeschedule.ui.MainActivity">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabs"
-        style="@style/CategoryTab"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <item
+        android:id="@+id/overground_list"
+        android:orderInCategory="1"
+        android:title="@string/overground_list"
+        app:showAsAction="never" />
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <item
+        android:id="@+id/settings"
+        android:orderInCategory="1"
+        android:title="@string/settings_menu_main"
+        app:showAsAction="never" />
 
-</LinearLayout>
-
+</menu>

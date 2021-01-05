@@ -52,6 +52,8 @@ public class NetworkUtils
 
     private static final String BASE_URL_SCHEDULE = "https://api.tfl.gov.uk/Line/";
 
+    private static final String BASE_URL_OVERGROUND_STATUS_LIST = "https://api.tfl.gov.uk/line/mode/overground/status";
+
     public NetworkUtils()
     {
     }
@@ -147,6 +149,25 @@ public class NetworkUtils
         Log.v(TAG, "Built URISchedule " + urlSchedule);
         return urlSchedule;
     }
+
+    public static URL buildOvergroundStatusUrl()
+    {
+        URL urlOvergroundStatusList = null;
+        try
+        {
+            Uri overgroundStatusListQueryUri = Uri.parse(BASE_URL_OVERGROUND_STATUS_LIST).buildUpon()
+                    .build();
+            urlOvergroundStatusList = new URL(overgroundStatusListQueryUri.toString());
+        }
+        catch (MalformedURLException e)
+        {
+            e.printStackTrace();
+        }
+        //  Log.v(TAG, "Built URIline " + urlLineList);
+        Timber.v( "Built Overgroundline " + urlOvergroundStatusList);
+        return urlOvergroundStatusList;
+    }
+
 
     /**
      * Make an HTTP request to the given URL and return a String as the response.
@@ -320,6 +341,66 @@ public class NetworkUtils
         }
         return jsonScheduleResponse;
     }
+
+    /**
+     * Make an HTTP request to the given URL and return a String as the response.
+     */
+    public static String makeHttpOvergroundRequest(URL url) throws IOException
+    {
+        String jsonLineResponse = "";
+        // Log.i("URL: ", url.toString());
+        Timber.i(url.toString(),"URL: " );
+
+        // If the URL is null, then return early.
+        if (url == null)
+        {
+            return jsonLineResponse;
+        }
+
+        HttpURLConnection urlConnection = null;
+        InputStream inputStream = null;
+        try
+        {
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setReadTimeout(10000 /* milliseconds */);
+            urlConnection.setConnectTimeout(15000 /* milliseconds */);
+            urlConnection.setRequestMethod("GET");
+            urlConnection.connect();
+
+            // If the request was successful (response code 200),
+            // then read the input stream and parse the response.
+            if (urlConnection.getResponseCode() == 200)
+            {
+                inputStream = urlConnection.getInputStream();
+                jsonLineResponse = readFromStream(inputStream);
+            } else
+            {
+                Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
+            }
+        }
+        catch (IOException e)
+        {
+            //Log.e(LOG_TAG, "Problem retrieving line list JSON results.", e);
+            Timber.e(e,"Problem retrieving overground JSON results." );
+        }
+        finally
+        {
+            if (urlConnection != null)
+            {
+                urlConnection.disconnect();
+            }
+            if (inputStream != null)
+            {
+                // Closing the input stream could throw an IOException, which is why
+                // the makeHttpRequest(URL url) method signature specifies than an IOException
+                // could be thrown.
+                inputStream.close();
+            }
+        }
+        return jsonLineResponse;
+    }
+
+
 
     /**
      * Convert the {@link InputStream} into a String which contains the

@@ -27,6 +27,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 
 import capstone.my.annin.londontubeschedule.pojo.Line;
+import capstone.my.annin.londontubeschedule.pojo.Overground;
 import capstone.my.annin.londontubeschedule.pojo.Schedule;
 import capstone.my.annin.londontubeschedule.pojo.Station;
 import timber.log.Timber;
@@ -55,6 +56,10 @@ public class JSONUtils
     private static final String KEY_DIRECTION_TOWARDS = "towards";
     private static final String KEY_EXPECTED_ARRIVAL = "expectedArrival";
     private static final String KEY_PLATFORM_NAME = "platformName";
+    private static final String KEY_OVERGROUND_ID ="id";
+    private static final String KEY_OVERGROUND_NAME = "name";
+    private static final String KEY_OVERGROUND_STATUS_DESC = "statusSeverityDescription";
+    private static final String KEY_OVERGROUND_STATUS_REASON = "reason";
 
     public JSONUtils()
     {
@@ -253,23 +258,23 @@ public class JSONUtils
 
 
 
-    public static JSONArray extractRouteSequenceFromJson(String lineStatusJSON)
-    {
-        if (TextUtils.isEmpty(lineStatusJSON))
-        {
-            return null;
-        }
-        try
-        {
-            JSONObject jsonObject = new JSONObject(lineStatusJSON);
-            return jsonObject.getJSONArray("lineStrings");
-
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-            return null;
-        }
-    }
+//    public static JSONArray extractRouteSequenceFromJson(String lineStatusJSON)
+//    {
+//        if (TextUtils.isEmpty(lineStatusJSON))
+//        {
+//            return null;
+//        }
+//        try
+//        {
+//            JSONObject jsonObject = new JSONObject(lineStatusJSON);
+//            return jsonObject.getJSONArray("lineStrings");
+//
+//        } catch (Exception e)
+//        {
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
 
     public static ArrayList<Schedule> extractFeatureFromScheduleJson(String scheduleJSON)
     {
@@ -364,4 +369,70 @@ public class JSONUtils
         //Return the schedule list
         return schedules;
     }
+
+    public static ArrayList<Overground> extractFeatureFromOvergroundStatusJson(String overgroundStatusJSON)
+    {
+        // If the JSON string is empty or null, then return early.
+        if (TextUtils.isEmpty(overgroundStatusJSON))
+        {
+            return null;
+        }
+
+        ArrayList<Overground> overgroundLines = new ArrayList<>();
+        try
+        {
+            // Create a JSONObject from the JSON response string
+            JSONArray overgroundArray = new JSONArray(overgroundStatusJSON);
+
+            // For each line in the recipeArray, create an {@link Lines} object
+            for (int i = 0; i < overgroundArray.length(); i++)
+            {
+                // Get a single line description at position i within the list of lines
+                JSONObject currentOverground = overgroundArray.getJSONObject(i);
+
+                String id = "";
+                if (currentOverground.has("id"))
+                {
+                    id = currentOverground.optString(KEY_OVERGROUND_ID);
+                }
+
+                String name = "";
+                if (currentOverground.has("name"))
+                {
+                    name = currentOverground.optString(KEY_OVERGROUND_NAME);
+                }
+
+                JSONArray overgroundStatusArrayList = currentOverground.getJSONArray("lineStatuses");
+
+                if (overgroundStatusArrayList != null)
+                {
+                    JSONObject innerElem = overgroundStatusArrayList.getJSONObject(0);
+                    if (innerElem != null) {
+                        String modeStatusDesc = "";
+                        if (innerElem.has("statusSeverityDescription")) {
+                            modeStatusDesc = innerElem.optString(KEY_OVERGROUND_STATUS_DESC);
+                        }
+                        String modeStatusReason = "";
+                        if (innerElem.has("reason")) {
+                            modeStatusReason = innerElem.optString(KEY_OVERGROUND_STATUS_REASON);
+                        }
+
+                        Overground overground = new Overground(id, name, modeStatusDesc, modeStatusReason);
+                        overgroundLines.add(overground);
+                    }}}}
+        catch (JSONException e)
+        {
+            // If an error is thrown when executing any of the above statements in the "try" block,
+            // catch the exception here, so the app doesn't crash. Print a log message
+            // with the message from the exception.
+            //Log.e("QueryUtils", "Problem parsing lines JSON results", e);
+            Timber.e("Problem parsing overground lines JSON results" );
+
+        }
+        // Return the list of lines
+        return overgroundLines;
+    }
+
+
+
 }
