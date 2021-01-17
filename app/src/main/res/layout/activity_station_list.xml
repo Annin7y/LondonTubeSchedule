@@ -64,6 +64,7 @@
                 android:layout_marginStart="@dimen/station_recycler_start"
                 android:layout_marginTop="@dimen/station_recycler_top"
                 android:descendantFocusability="afterDescendants"
+                android:padding="@dimen/station_list_pad_recview"
                 android:scrollbars="vertical" />
             <TextView
                 android:id="@+id/empty_view_stations"
