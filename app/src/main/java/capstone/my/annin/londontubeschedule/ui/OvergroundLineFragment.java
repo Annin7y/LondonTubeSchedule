@@ -137,34 +137,34 @@ public class OvergroundLineFragment extends Fragment implements OvergroundAdapte
              */
             if (savedInstanceState == null)
             {
-                if (isNetworkStatusAvailable(getContext()))
-                {
+//                if (isNetworkStatusAvailable(getContext()))
+//                {
 
                     OvergroundAsyncTask myOvergroundTask = new OvergroundAsyncTask(this);
                     myOvergroundTask.execute(NetworkUtils.buildOvergroundStatusUrl());
-                } else
-                {
-                    Snackbar
-                            .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
-                            .setAction(R.string.snackbar_retry, new OvergroundLineFragment.MyClickListener())
-                            .setBehavior(new DisableSwipeBehavior())
-                            .show();
-                    isSnackbarShowing = true;
-                    showErrorMessage();
-                }
+//                } else
+//                {
+//                    Snackbar
+//                            .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+//                            .setAction(R.string.snackbar_retry, new OvergroundLineFragment.MyClickListener())
+//                            .setBehavior(new DisableSwipeBehavior())
+//                            .show();
+//                    isSnackbarShowing = true;
+//                    showErrorMessage();
+//                }
             } else
             {
                 selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "overground_list");
-                isSnackbarShowing = savedInstanceState.getBoolean(SNACKBAR_STATE);
-                if (isSnackbarShowing)
-                {
-                    Snackbar
-                            .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
-                            .setAction(R.string.snackbar_retry, new OvergroundLineFragment.MyClickListener())
-                            .setBehavior(new DisableSwipeBehavior())
-                            .show();
-                }
-                else {
+//                isSnackbarShowing = savedInstanceState.getBoolean(SNACKBAR_STATE);
+//                if (isSnackbarShowing)
+//                {
+//                    Snackbar
+//                            .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+//                            .setAction(R.string.snackbar_retry, new OvergroundLineFragment.MyClickListener())
+//                            .setBehavior(new DisableSwipeBehavior())
+//                            .show();
+//                }
+            //    else {
                     overgroundArrayList = savedInstanceState.getParcelableArrayList(KEY_OVERGROUND_LIST);
                     overgroundAdapter.setOvergroundList(overgroundArrayList);
 
@@ -176,43 +176,43 @@ public class OvergroundLineFragment extends Fragment implements OvergroundAdapte
                     mLoadingIndicator.setVisibility(View.VISIBLE);
                 }
 
-            }
+         //   }
 
             return view;
         }
-        public class MyClickListener implements View.OnClickListener
-        {
-            @Override
-            public void onClick(View v)
-            {
-                //CP Provider Code Commented out
-                // Run the AsyncTask in response to the click
-                // if (selectedSortOrder == SORT_BY_FAVORITES)
-                //          {
-
-
-//              getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
-//               mLineRecyclerView.setAdapter(favoritesAdapter);
-                //   } else
-                //   {
-
-                if (isNetworkStatusAvailable(context))
-                {
-                    OvergroundAsyncTask myOvergroundTask = new OvergroundAsyncTask(OvergroundLineFragment.this::returnOvergroundData);
-                    myOvergroundTask.execute();
-                }
-                else
-                {
-                    Snackbar
-                            .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
-                            .setAction(R.string.snackbar_retry, new OvergroundLineFragment.MyClickListener())
-                            .setBehavior(new DisableSwipeBehavior())
-                            .show();
-                    isSnackbarShowing = true;
-                    showErrorMessage();
-                }
-            }
-        }
+//        public class MyClickListener implements View.OnClickListener
+//        {
+//            @Override
+//            public void onClick(View v)
+//            {
+//                //CP Provider Code Commented out
+//                // Run the AsyncTask in response to the click
+//                // if (selectedSortOrder == SORT_BY_FAVORITES)
+//                //          {
+//
+//
+////              getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
+////               mLineRecyclerView.setAdapter(favoritesAdapter);
+//                //   } else
+//                //   {
+//
+//                if (isNetworkStatusAvailable(context))
+//                {
+//                    OvergroundAsyncTask myOvergroundTask = new OvergroundAsyncTask(OvergroundLineFragment.this::returnOvergroundData);
+//                    myOvergroundTask.execute();
+//                }
+//                else
+//                {
+//                    Snackbar
+//                            .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+//                            .setAction(R.string.snackbar_retry, new OvergroundLineFragment.MyClickListener())
+//                            .setBehavior(new DisableSwipeBehavior())
+//                            .show();
+//                    isSnackbarShowing = true;
+//                    showErrorMessage();
+//                }
+//            }
+//        }
 
         @Override
         public void returnOvergroundData(ArrayList<Overground> simpleJsonOvergroundData)
@@ -226,7 +226,7 @@ public class OvergroundLineFragment extends Fragment implements OvergroundAdapte
                 overgroundAdapter.setOvergroundList(overgroundArrayList);
             } else
             {
-                showErrorMessage();
+             //   showErrorMessage();
                 Timber.e("Problem parsing lines JSON results" );
             }
         }
@@ -241,27 +241,27 @@ public class OvergroundLineFragment extends Fragment implements OvergroundAdapte
 
         }
 
-        //Display if there is no internet connection
-        public void showErrorMessage()
-        {
-            Snackbar
-                    .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
-                    .setAction(R.string.snackbar_retry, new OvergroundLineFragment.MyClickListener())
-                    .setBehavior(new DisableSwipeBehavior())
-                    .show();
-            // mLineRecyclerView.setVisibility(View.VISIBLE);
-            mLoadingIndicator.setVisibility(View.VISIBLE);
-        }
-
-        public static boolean isNetworkStatusAvailable(Context context)
-        {
-            ConnectivityManager cm =
-                    (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-            return activeNetwork != null &&
-                    activeNetwork.isConnectedOrConnecting();
-        }
+//        //Display if there is no internet connection
+//        public void showErrorMessage()
+//        {
+//            Snackbar
+//                    .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+//                    .setAction(R.string.snackbar_retry, new OvergroundLineFragment.MyClickListener())
+//                    .setBehavior(new DisableSwipeBehavior())
+//                    .show();
+//            // mLineRecyclerView.setVisibility(View.VISIBLE);
+//            mLoadingIndicator.setVisibility(View.VISIBLE);
+//        }
+//
+//        public static boolean isNetworkStatusAvailable(Context context)
+//        {
+//            ConnectivityManager cm =
+//                    (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+//
+//            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+//            return activeNetwork != null &&
+//                    activeNetwork.isConnectedOrConnecting();
+//        }
 
         @Override
         public void onCreate(Bundle savedInstanceState)

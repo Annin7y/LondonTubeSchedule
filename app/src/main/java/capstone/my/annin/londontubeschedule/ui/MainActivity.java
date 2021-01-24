@@ -60,21 +60,31 @@ import capstone.my.annin.londontubeschedule.settings.SettingsActivity;
 import capstone.my.annin.londontubeschedule.utils.NetworkUtils;
 import timber.log.Timber;
 
+import static capstone.my.annin.londontubeschedule.ui.StationScheduleActivity.isNetworkStatusAvailable;
+
 public class MainActivity extends AppCompatActivity
 {
         private TubeLineFragment fragmentTubeLine;
         private OvergroundLineFragment fragmentOverground;
         private final String TUBE_LINE_FRAGMENT = "tube_line_fragment";
         private final String TUBE_OVERGROUND_FRAGMENT = "overground_fragment";
+        private boolean isSnackbarShowing = false;
+        private static final String SNACKBAR_STATE = "snackbar_state";
+        CoordinatorLayout mCoordinatorLayout;
+        @BindView(R.id.pb_loading_indicator)
+        ProgressBar mLoadingIndicator;
+        private Context context;
 
         @Override
-        protected void onCreate(Bundle savedInstanceState)
-        {
+        protected void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
 
                 // Set the content of the activity to use the activity_main.xml layout file
                 setContentView(R.layout.activity_main);
 
+                mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
+
+                context = getApplicationContext();
                 // Find the view pager that will allow the user to swipe between fragments
                 ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
 
@@ -94,14 +104,93 @@ public class MainActivity extends AppCompatActivity
                 //      by calling onPageTitle()
                 tabLayout.setupWithViewPager(viewPager);
 
-                if (savedInstanceState != null)
+                if (savedInstanceState == null)
                 {
-                       fragmentTubeLine = (TubeLineFragment)
-                                getSupportFragmentManager().findFragmentByTag(TUBE_LINE_FRAGMENT);
-                        fragmentOverground = (OvergroundLineFragment)
-                                getSupportFragmentManager().findFragmentByTag(TUBE_OVERGROUND_FRAGMENT);
+                        if (isNetworkStatusAvailable(getApplicationContext()))
+                        {
+                                fragmentTubeLine = (TubeLineFragment)
+                                        getSupportFragmentManager().findFragmentByTag(TUBE_LINE_FRAGMENT);
+                                fragmentOverground = (OvergroundLineFragment)
+                                        getSupportFragmentManager().findFragmentByTag(TUBE_OVERGROUND_FRAGMENT);
+                        } else
+                                {
+                                Snackbar
+                                        .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+                                        .setAction(R.string.snackbar_retry, new MainActivity.MyClickListener())
+                                        .setBehavior(new DisableSwipeBehavior())
+                                        .show();
+                                isSnackbarShowing = true;
+                                showErrorMessage();
+
+                        }
+                } else {
+                        isSnackbarShowing = savedInstanceState.getBoolean(SNACKBAR_STATE);
+                        if (isSnackbarShowing)
+                        {
+                                Snackbar
+                                        .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+                                        .setAction(R.string.snackbar_retry, new MainActivity.MyClickListener())
+                                        .setBehavior(new DisableSwipeBehavior())
+                                        .show();
                 }
+                        }
+
+        }
+        public class MyClickListener implements View.OnClickListener
+        {
+                @Override
+                public void onClick(View v)
+                {
+                        if (isNetworkStatusAvailable(context))
+                        {
+                                fragmentTubeLine = (TubeLineFragment)
+                                        getSupportFragmentManager().findFragmentByTag(TUBE_LINE_FRAGMENT);
+                                fragmentOverground = (OvergroundLineFragment)
+                                        getSupportFragmentManager().findFragmentByTag(TUBE_OVERGROUND_FRAGMENT);
+                        }
+                        else
+                        {
+                                Snackbar
+                                        .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+                                        .setAction(R.string.snackbar_retry, new MainActivity.MyClickListener())
+                                        .setBehavior(new DisableSwipeBehavior())
+                                        .show();
+                                isSnackbarShowing = true;
+                                showErrorMessage();
+                        }
                 }
+        }
+
+
+        //Display if there is no internet connection
+        //Display if there is no internet connection
+        public void showErrorMessage()
+        {
+                Snackbar
+                        .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+                        .setAction(R.string.snackbar_retry, new MainActivity.MyClickListener())
+                        .setBehavior(new DisableSwipeBehavior())
+                        .show();
+                // mLineRecyclerView.setVisibility(View.VISIBLE);
+               // mLoadingIndicator.setVisibility(View.VISIBLE);
+        }
+
+        public static boolean isNetworkStatusAvailable(Context context)
+        {
+                ConnectivityManager cm =
+                        (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+                NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                return activeNetwork != null &&
+                        activeNetwork.isConnectedOrConnecting();
+        }
+
+        @Override
+   protected void onSaveInstanceState(Bundle outState)
+   {
+       outState.putBoolean(SNACKBAR_STATE, isSnackbarShowing);
+       super.onSaveInstanceState(outState);
+   }
         }
 
 

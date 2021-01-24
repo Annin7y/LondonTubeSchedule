@@ -15,23 +15,32 @@
   ~ limitations under the License.
   ~
 -->
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:background="@color/colorBackground"
+    tools:context="capstone.my.annin.londontubeschedule.ui.MainActivity">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="capstone.my.annin.londontubeschedule.ui.MainActivity">
+    android:orientation="vertical" >
+
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
         style="@style/CategoryTab"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
-
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -43,6 +43,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -187,33 +188,34 @@ public class TubeLineFragment extends Fragment implements LineAdapter.LineAdapte
          */
         if (savedInstanceState == null)
         {
-            if (isNetworkStatusAvailable(getContext()))
-            {
+//            if (isNetworkStatusAvailable(requireContext()))
+        //  {
 
                 TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(this);
                 myLineTask.execute(NetworkUtils.buildLineStatusUrl());
-            } else
-                {
-                Snackbar
-                        .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
-                        .setAction(R.string.snackbar_retry, new TubeLineFragment.MyClickListener())
-                        .setBehavior(new DisableSwipeBehavior())
-                        .show();
-                isSnackbarShowing = true;
-                showErrorMessage();
-            }
+          //  }
+//            else
+//                {
+//                Snackbar
+//                        .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+//                        .setAction(R.string.snackbar_retry, new TubeLineFragment.MyClickListener())
+//                        .setBehavior(new DisableSwipeBehavior())
+//                        .show();
+//                isSnackbarShowing = true;
+//                showErrorMessage();
+   //         }
         } else
             {
             selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "line_list");
-            isSnackbarShowing = savedInstanceState.getBoolean(SNACKBAR_STATE);
-            if (isSnackbarShowing)
-            {
-                Snackbar
-                        .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
-                        .setAction(R.string.snackbar_retry, new TubeLineFragment.MyClickListener())
-                        .setBehavior(new DisableSwipeBehavior())
-                        .show();
-            }
+//            isSnackbarShowing = savedInstanceState.getBoolean(SNACKBAR_STATE);
+//            if (isSnackbarShowing)
+//            {
+//                Snackbar
+//                        .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+//                        .setAction(R.string.snackbar_retry, new TubeLineFragment.MyClickListener())
+//                        .setBehavior(new DisableSwipeBehavior())
+//                        .show();
+//            }
             if (selectedSortOrder == SORT_BY_FAVORITES)
             {
                 mLineRecyclerView.setAdapter(favoritesRoomAdapter);
@@ -234,7 +236,8 @@ public class TubeLineFragment extends Fragment implements LineAdapter.LineAdapte
                 lineAdapter.setLineList(lineArrayList);
 
             }
-            if (savedInstanceState != null) {
+            if (savedInstanceState != null)
+            {
                 mLoadingIndicator.setVisibility(View.INVISIBLE);
             } else {
                 mLoadingIndicator.setVisibility(View.VISIBLE);
@@ -247,11 +250,11 @@ public class TubeLineFragment extends Fragment implements LineAdapter.LineAdapte
 
         return view;
     }
-    public class MyClickListener implements View.OnClickListener
-    {
-        @Override
-        public void onClick(View v)
-        {
+//    public class MyClickListener implements View.OnClickListener
+//    {
+//        @Override
+//        public void onClick(View v)
+//        {
             //CP Provider Code Commented out
             // Run the AsyncTask in response to the click
             // if (selectedSortOrder == SORT_BY_FAVORITES)
@@ -263,23 +266,23 @@ public class TubeLineFragment extends Fragment implements LineAdapter.LineAdapte
             //   } else
             //   {
 
-            if (isNetworkStatusAvailable(context))
-            {
-                TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(TubeLineFragment.this::returnLineData);
-                myLineTask.execute();
-            }
-            else
-            {
-                Snackbar
-                        .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
-                        .setAction(R.string.snackbar_retry, new TubeLineFragment.MyClickListener())
-                        .setBehavior(new DisableSwipeBehavior())
-                        .show();
-                isSnackbarShowing = true;
-                showErrorMessage();
-            }
-        }
-    }
+//            if (isNetworkStatusAvailable(context))
+//            {
+//                TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(TubeLineFragment.this);
+//                myLineTask.execute();
+//            }
+//            else
+//            {
+//                Snackbar
+//                        .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+//                        .setAction(R.string.snackbar_retry, new TubeLineFragment.MyClickListener())
+//                        .setBehavior(new DisableSwipeBehavior())
+//                        .show();
+//                isSnackbarShowing = true;
+//                showErrorMessage();
+//            }
+//        }
+//    }
 
     @Override
     public void returnLineData(ArrayList<Line> simpleJsonLineData)
@@ -293,7 +296,7 @@ public class TubeLineFragment extends Fragment implements LineAdapter.LineAdapte
             lineAdapter.setLineList(lineArrayList);
         } else
         {
-            showErrorMessage();
+           // showErrorMessage();
             Timber.e("Problem parsing lines JSON results" );
         }
     }
@@ -314,26 +317,26 @@ public class TubeLineFragment extends Fragment implements LineAdapter.LineAdapte
     }
 
     //Display if there is no internet connection
-    public void showErrorMessage()
-    {
-        Snackbar
-                .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
-                .setAction(R.string.snackbar_retry, new TubeLineFragment.MyClickListener())
-                .setBehavior(new DisableSwipeBehavior())
-                .show();
-        // mLineRecyclerView.setVisibility(View.VISIBLE);
-        mLoadingIndicator.setVisibility(View.VISIBLE);
-    }
+//    public void showErrorMessage()
+//    {
+//        Snackbar
+//                .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+//                .setAction(R.string.snackbar_retry, new TubeLineFragment.MyClickListener())
+//                .setBehavior(new DisableSwipeBehavior())
+//                .show();
+//        // mLineRecyclerView.setVisibility(View.VISIBLE);
+//        mLoadingIndicator.setVisibility(View.VISIBLE);
+//    }
 
-    public static boolean isNetworkStatusAvailable(Context context)
-    {
-        ConnectivityManager cm =
-                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        return activeNetwork != null &&
-                activeNetwork.isConnectedOrConnecting();
-    }
+//    public static boolean isNetworkStatusAvailable(Context context)
+//    {
+//        ConnectivityManager cm =
+//                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+//
+//        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+//        return activeNetwork != null &&
+//                activeNetwork.isConnectedOrConnecting();
+//    }
 
 //    @Override
 //    public Loader<Cursor> onCreateLoader(int id, final Bundle loaderArgs)
