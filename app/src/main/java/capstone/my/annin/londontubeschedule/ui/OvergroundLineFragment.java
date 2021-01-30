@@ -18,8 +18,6 @@ package capstone.my.annin.londontubeschedule.ui;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,12 +27,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
@@ -46,12 +44,11 @@ import capstone.my.annin.londontubeschedule.asynctask.OvergroundAsyncTask;
 import capstone.my.annin.londontubeschedule.asynctask.OvergroundAsyncTaskInterface;
 import capstone.my.annin.londontubeschedule.pojo.Overground;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.OvergroundAdapter;
-import capstone.my.annin.londontubeschedule.scrollbehavior.DisableSwipeBehavior;
 import capstone.my.annin.londontubeschedule.settings.SettingsActivity;
 import capstone.my.annin.londontubeschedule.utils.NetworkUtils;
 import timber.log.Timber;
 
-public class OvergroundLineFragment extends Fragment implements OvergroundAdapter.OvergroundAdapterOnClickHandler, OvergroundAsyncTaskInterface
+public class OvergroundLineFragment extends Fragment implements OvergroundAdapter.OvergroundAdapterOnClickHandler, OvergroundAsyncTaskInterface, ShowSnackbar
     {
     public OvergroundLineFragment()
         {
@@ -139,9 +136,9 @@ public class OvergroundLineFragment extends Fragment implements OvergroundAdapte
             {
 //                if (isNetworkStatusAvailable(getContext()))
 //                {
+                showSnackbar();
+//
 
-                    OvergroundAsyncTask myOvergroundTask = new OvergroundAsyncTask(this);
-                    myOvergroundTask.execute(NetworkUtils.buildOvergroundStatusUrl());
 //                } else
 //                {
 //                    Snackbar
@@ -240,6 +237,26 @@ public class OvergroundLineFragment extends Fragment implements OvergroundAdapte
             mFirebaseAnalytics.logEvent("overground_select",params);
 
         }
+
+        public void showSnackbar()
+        {
+            OvergroundAsyncTask myOvergroundTask = new OvergroundAsyncTask(this);
+            myOvergroundTask.execute(NetworkUtils.buildOvergroundStatusUrl());
+
+        }
+
+//        @Override
+//        public void onAttach(@NonNull Context context)
+//        {
+//            super.onAttach(context);
+//            try
+//            {
+//                ((MainActivity) getActivity()).setOnDataListener(this);
+//            } catch (Exception ex) {
+//                ex.printStackTrace();
+//            }
+//        }
+
 
 //        //Display if there is no internet connection
 //        public void showErrorMessage()

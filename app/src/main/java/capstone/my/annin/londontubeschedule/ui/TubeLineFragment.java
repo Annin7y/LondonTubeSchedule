@@ -17,10 +17,9 @@ package capstone.my.annin.londontubeschedule.ui;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
@@ -38,12 +37,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,7 +51,6 @@ import capstone.my.annin.londontubeschedule.data.LineViewModel;
 import capstone.my.annin.londontubeschedule.pojo.Line;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.FavoritesRoomAdapter;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.LineAdapter;
-import capstone.my.annin.londontubeschedule.scrollbehavior.DisableSwipeBehavior;
 import capstone.my.annin.londontubeschedule.settings.SettingsActivity;
 import capstone.my.annin.londontubeschedule.utils.NetworkUtils;
 import timber.log.Timber;
@@ -64,7 +60,7 @@ import timber.log.Timber;
 // * Use the {@link TubeLineFragment#newInstance} factory method to
 // * create an instance of this fragment.
 // */
-public class TubeLineFragment extends Fragment implements LineAdapter.LineAdapterOnClickHandler, TubeLineAsyncTaskInterface
+public class TubeLineFragment extends Fragment implements LineAdapter.LineAdapterOnClickHandler, TubeLineAsyncTaskInterface, ShowSnackbar
 {
     public TubeLineFragment()
     {
@@ -191,8 +187,9 @@ public class TubeLineFragment extends Fragment implements LineAdapter.LineAdapte
 //            if (isNetworkStatusAvailable(requireContext()))
         //  {
 
-                TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(this);
-                myLineTask.execute(NetworkUtils.buildLineStatusUrl());
+//               TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(this);
+//              myLineTask.execute(NetworkUtils.buildLineStatusUrl());
+            showSnackbar();
           //  }
 //            else
 //                {
@@ -314,6 +311,24 @@ public class TubeLineFragment extends Fragment implements LineAdapter.LineAdapte
         params.putParcelable("line_select", line);
         mFirebaseAnalytics.logEvent("line_select",params);
 
+    }
+
+    public void showSnackbar()
+    {
+        TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(this);
+        myLineTask.execute(NetworkUtils.buildLineStatusUrl());
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context)
+    {
+        super.onAttach(context);
+        try
+        {
+            ((MainActivity) getActivity()).setOnDataListener(this);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     //Display if there is no internet connection

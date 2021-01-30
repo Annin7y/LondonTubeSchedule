@@ -46,6 +46,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import capstone.my.annin.londontubeschedule.R;
+import capstone.my.annin.londontubeschedule.asynctask.OvergroundAsyncTask;
 import capstone.my.annin.londontubeschedule.asynctask.TubeLineAsyncTask;
 import capstone.my.annin.londontubeschedule.asynctask.TubeLineAsyncTaskInterface;
 //import capstone.my.annin.londontubeschedule.data.TubeLineContract;
@@ -64,8 +65,8 @@ import static capstone.my.annin.londontubeschedule.ui.StationScheduleActivity.is
 
 public class MainActivity extends AppCompatActivity
 {
-        private TubeLineFragment fragmentTubeLine;
-        private OvergroundLineFragment fragmentOverground;
+        public TubeLineFragment fragmentTubeLine;
+        public OvergroundLineFragment fragmentOverground;
         private final String TUBE_LINE_FRAGMENT = "tube_line_fragment";
         private final String TUBE_OVERGROUND_FRAGMENT = "overground_fragment";
         private boolean isSnackbarShowing = false;
@@ -74,9 +75,11 @@ public class MainActivity extends AppCompatActivity
         @BindView(R.id.pb_loading_indicator)
         ProgressBar mLoadingIndicator;
         private Context context;
+        public ShowSnackbar showSnackbar;
 
         @Override
-        protected void onCreate(Bundle savedInstanceState) {
+        protected void onCreate(Bundle savedInstanceState)
+        {
                 super.onCreate(savedInstanceState);
 
                 // Set the content of the activity to use the activity_main.xml layout file
@@ -142,11 +145,14 @@ public class MainActivity extends AppCompatActivity
                 public void onClick(View v)
                 {
                         if (isNetworkStatusAvailable(context))
-                        {
-                                fragmentTubeLine = (TubeLineFragment)
-                                        getSupportFragmentManager().findFragmentByTag(TUBE_LINE_FRAGMENT);
-                                fragmentOverground = (OvergroundLineFragment)
-                                        getSupportFragmentManager().findFragmentByTag(TUBE_OVERGROUND_FRAGMENT);
+                      {
+//                           fragmentTubeLine = (TubeLineFragment)
+//                                     getSupportFragmentManager().findFragmentByTag(TUBE_LINE_FRAGMENT);
+//                              fragmentOverground = (OvergroundLineFragment)
+//                                    getSupportFragmentManager().findFragmentByTag(TUBE_OVERGROUND_FRAGMENT);
+
+                            fragmentTubeLine.showSnackbar();
+
                         }
                         else
                         {
@@ -175,6 +181,14 @@ public class MainActivity extends AppCompatActivity
                // mLoadingIndicator.setVisibility(View.VISIBLE);
         }
 
+        public void setOnDataListener(TubeLineFragment fragmentTubeLine)
+        {
+                this.fragmentTubeLine = fragmentTubeLine;
+
+        }
+
+
+
         public static boolean isNetworkStatusAvailable(Context context)
         {
                 ConnectivityManager cm =
@@ -184,6 +198,8 @@ public class MainActivity extends AppCompatActivity
                 return activeNetwork != null &&
                         activeNetwork.isConnectedOrConnecting();
         }
+
+
 
         @Override
    protected void onSaveInstanceState(Bundle outState)
