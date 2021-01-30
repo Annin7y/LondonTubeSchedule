@@ -152,6 +152,8 @@ public class MainActivity extends AppCompatActivity
 //                                    getSupportFragmentManager().findFragmentByTag(TUBE_OVERGROUND_FRAGMENT);
 
                             fragmentTubeLine.showSnackbar();
+                            fragmentOverground.showSnackbarOverground();
+                              isSnackbarShowing = false;
 
                         }
                         else
@@ -184,10 +186,12 @@ public class MainActivity extends AppCompatActivity
         public void setOnDataListener(TubeLineFragment fragmentTubeLine)
         {
                 this.fragmentTubeLine = fragmentTubeLine;
-
         }
 
-
+        public void setOnDataOvergroundListener(OvergroundLineFragment fragmentOverground)
+        {
+                this.fragmentOverground= fragmentOverground;
+        }
 
         public static boolean isNetworkStatusAvailable(Context context)
         {
