@@ -60,7 +60,7 @@ import timber.log.Timber;
 // * Use the {@link TubeLineFragment#newInstance} factory method to
 // * create an instance of this fragment.
 // */
-public class TubeLineFragment extends Fragment implements LineAdapter.LineAdapterOnClickHandler, TubeLineAsyncTaskInterface, ShowSnackbar
+public class TubeLineFragment extends BaseFragment implements LineAdapter.LineAdapterOnClickHandler, TubeLineAsyncTaskInterface
 {
     public TubeLineFragment()
     {

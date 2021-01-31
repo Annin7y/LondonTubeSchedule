@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity
 //                                    getSupportFragmentManager().findFragmentByTag(TUBE_OVERGROUND_FRAGMENT);
 
                             fragmentTubeLine.showSnackbar();
-                            fragmentOverground.showSnackbarOverground();
+                            fragmentOverground.showSnackbar();
                               isSnackbarShowing = false;
 
                         }

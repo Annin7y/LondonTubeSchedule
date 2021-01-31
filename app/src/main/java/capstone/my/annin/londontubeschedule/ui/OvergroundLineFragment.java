@@ -48,7 +48,7 @@ import capstone.my.annin.londontubeschedule.settings.SettingsActivity;
 import capstone.my.annin.londontubeschedule.utils.NetworkUtils;
 import timber.log.Timber;
 
-public class OvergroundLineFragment extends Fragment implements OvergroundAdapter.OvergroundAdapterOnClickHandler, OvergroundAsyncTaskInterface, ShowSnackbarOverground
+public class OvergroundLineFragment extends BaseFragment implements OvergroundAdapter.OvergroundAdapterOnClickHandler, OvergroundAsyncTaskInterface
     {
     public OvergroundLineFragment()
         {
@@ -136,7 +136,7 @@ public class OvergroundLineFragment extends Fragment implements OvergroundAdapte
             {
 //                if (isNetworkStatusAvailable(getContext()))
 //                {
-                showSnackbarOverground();
+                showSnackbar();
 //
 
 //                } else
@@ -238,7 +238,7 @@ public class OvergroundLineFragment extends Fragment implements OvergroundAdapte
 
         }
 
-        public void showSnackbarOverground()
+        public void showSnackbar()
         {
             OvergroundAsyncTask myOvergroundTask = new OvergroundAsyncTask(this);
             myOvergroundTask.execute(NetworkUtils.buildOvergroundStatusUrl());
