@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity
         @BindView(R.id.pb_loading_indicator)
         ProgressBar mLoadingIndicator;
         private Context context;
-        public ShowSnackbar showSnackbar;
+        ShowSnackbar showSnackbar;
 
         @Override
         protected void onCreate(Bundle savedInstanceState)
@@ -151,8 +151,9 @@ public class MainActivity extends AppCompatActivity
 //                              fragmentOverground = (OvergroundLineFragment)
 //                                    getSupportFragmentManager().findFragmentByTag(TUBE_OVERGROUND_FRAGMENT);
 
-                            fragmentTubeLine.showSnackbar();
-                            fragmentOverground.showSnackbar();
+                  showSnackbar.showSnackbar();
+//                            fragmentOverground.showSnackbar();
+//                              fragmentTubeLine.showSnackbar();
                               isSnackbarShowing = false;
 
                         }
@@ -183,15 +184,20 @@ public class MainActivity extends AppCompatActivity
                // mLoadingIndicator.setVisibility(View.VISIBLE);
         }
 
-        public void setOnDataListener(TubeLineFragment fragmentTubeLine)
+//        public void setOnDataListener(TubeLineFragment fragmentTubeLine)
+//        {
+//                this.fragmentTubeLine = fragmentTubeLine;
+//        }
+
+        public void updateShowSnackbar(ShowSnackbar listener)
         {
-                this.fragmentTubeLine = fragmentTubeLine;
+                showSnackbar = listener;
         }
 
-        public void setOnDataOvergroundListener(OvergroundLineFragment fragmentOverground)
-        {
-                this.fragmentOverground= fragmentOverground;
-        }
+//        public void setOnDataOvergroundListener(OvergroundLineFragment fragmentOverground)
+//        {
+//                this.fragmentOverground= fragmentOverground;
+//        }
 
         public static boolean isNetworkStatusAvailable(Context context)
         {

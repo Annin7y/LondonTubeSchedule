@@ -251,7 +251,8 @@ public class OvergroundLineFragment extends BaseFragment implements OvergroundAd
             super.onAttach(context);
             try
             {
-                ((MainActivity) getActivity()).setOnDataOvergroundListener(this);
+                ((MainActivity) getActivity()).updateShowSnackbar(this);
+               //  ((MainActivity) getActivity()).setOnDataListener(this);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

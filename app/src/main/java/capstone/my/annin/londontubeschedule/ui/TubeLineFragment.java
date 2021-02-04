@@ -93,7 +93,7 @@ public class TubeLineFragment extends BaseFragment implements LineAdapter.LineAd
     private LineViewModel mLineViewModel;
     private static final String SNACKBAR_STATE = "snackbar_state";
     private boolean isSnackbarShowing = false;
-
+    ShowSnackbar showSnackbar;
 
 //    /**
 //     * Use this factory method to create a new instance of
@@ -325,7 +325,8 @@ public class TubeLineFragment extends BaseFragment implements LineAdapter.LineAd
         super.onAttach(context);
         try
         {
-            ((MainActivity) getActivity()).setOnDataListener(this);
+            ((MainActivity) getActivity()).updateShowSnackbar(this);
+            //((MainActivity) getActivity()).setOnDataListener(this);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
