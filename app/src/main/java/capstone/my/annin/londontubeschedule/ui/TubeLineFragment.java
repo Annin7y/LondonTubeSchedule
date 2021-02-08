@@ -18,17 +18,6 @@ package capstone.my.annin.londontubeschedule.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -36,6 +25,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -93,7 +91,6 @@ public class TubeLineFragment extends BaseFragment implements LineAdapter.LineAd
     private LineViewModel mLineViewModel;
     private static final String SNACKBAR_STATE = "snackbar_state";
     private boolean isSnackbarShowing = false;
-    ShowSnackbar showSnackbar;
 
 //    /**
 //     * Use this factory method to create a new instance of
@@ -319,18 +316,18 @@ public class TubeLineFragment extends BaseFragment implements LineAdapter.LineAd
         myLineTask.execute(NetworkUtils.buildLineStatusUrl());
     }
 
-    @Override
-    public void onAttach(@NonNull Context context)
-    {
-        super.onAttach(context);
-        try
-        {
-            ((MainActivity) getActivity()).updateShowSnackbar(this);
-            //((MainActivity) getActivity()).setOnDataListener(this);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
+//    @Override
+//    public void onAttach(@NonNull Context context)
+//    {
+//        super.onAttach(context);
+//        try
+//        {
+//            ((MainActivity) getActivity()).updateShowSnackbar(this);
+//        } catch (Exception ex)
+//        {
+//            ex.printStackTrace();
+//        }
+//    }
 
     //Display if there is no internet connection
 //    public void showErrorMessage()

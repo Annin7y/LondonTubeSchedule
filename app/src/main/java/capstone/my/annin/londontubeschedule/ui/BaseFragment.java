@@ -1,6 +1,5 @@
 package capstone.my.annin.londontubeschedule.ui;
 
-import android.app.Activity;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -12,5 +11,17 @@ public class BaseFragment extends Fragment implements ShowSnackbar
     {
     }
 
+    @Override
+    public void onAttach(@NonNull Context context)
+    {
+        super.onAttach(context);
+        try
+        {
+            ((MainActivity) getActivity()).updateShowSnackbar(this);
+        } catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
 
 }
