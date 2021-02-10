@@ -29,6 +29,7 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -184,9 +185,9 @@ public class TubeLineFragment extends BaseFragment implements LineAdapter.LineAd
 //            if (isNetworkStatusAvailable(requireContext()))
         //  {
 
-//               TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(this);
-//              myLineTask.execute(NetworkUtils.buildLineStatusUrl());
-            showSnackbar();
+              TubeLineAsyncTask myLineTask = new TubeLineAsyncTask(this);
+             myLineTask.execute(NetworkUtils.buildLineStatusUrl());
+        //    showSnackbar();
           //  }
 //            else
 //                {
@@ -316,18 +317,18 @@ public class TubeLineFragment extends BaseFragment implements LineAdapter.LineAd
         myLineTask.execute(NetworkUtils.buildLineStatusUrl());
     }
 
-//    @Override
-//    public void onAttach(@NonNull Context context)
-//    {
-//        super.onAttach(context);
-//        try
-//        {
-//            ((MainActivity) getActivity()).updateShowSnackbar(this);
-//        } catch (Exception ex)
-//        {
-//            ex.printStackTrace();
-//        }
-//    }
+    @Override
+    public void onAttach(@NonNull Context context)
+    {
+        super.onAttach(context);
+        try
+        {
+            ((MainActivity) getActivity()).setOnDataListener(this);
+        } catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
 
     //Display if there is no internet connection
 //    public void showErrorMessage()

@@ -29,6 +29,7 @@ import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -135,7 +136,9 @@ public class OvergroundLineFragment extends BaseFragment implements OvergroundAd
             {
 //                if (isNetworkStatusAvailable(getContext()))
 //                {
-                showSnackbar();
+              //  showSnackbar();
+                OvergroundAsyncTask myOvergroundTask = new OvergroundAsyncTask(this);
+                myOvergroundTask.execute(NetworkUtils.buildOvergroundStatusUrl());
 //
 
 //                } else
@@ -243,18 +246,18 @@ public class OvergroundLineFragment extends BaseFragment implements OvergroundAd
             myOvergroundTask.execute(NetworkUtils.buildOvergroundStatusUrl());
         }
 
-//        @Override
-//        public void onAttach(@NonNull Context context)
-//        {
-//            super.onAttach(context);
-//            try
-//            {
-//                ((MainActivity) getActivity()).updateShowSnackbar(this);
-//            } catch (Exception ex)
-//            {
-//                ex.printStackTrace();
-//            }
-//        }
+        @Override
+        public void onAttach(@NonNull Context context)
+        {
+            super.onAttach(context);
+            try
+            {
+                ((MainActivity) getActivity()).setOnDataOvergroundListener(this);
+            } catch (Exception ex)
+            {
+                ex.printStackTrace();
+            }
+        }
 
 //        //Display if there is no internet connection
 //        public void showErrorMessage()

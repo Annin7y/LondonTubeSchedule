@@ -32,11 +32,10 @@ public class CategoryAdapter extends FragmentPagerAdapter
 
     /**
      * Create a new {@link CategoryAdapter} object.
-     *
+     *  @param context
      * @param fm is the fragment manager that will keep each fragment's state in the adapter
-     *           across swipes.
      */
-    public CategoryAdapter(Context context, FragmentManager fm)
+    public CategoryAdapter(MainActivity context, FragmentManager fm)
     {
         super(fm);
         mContext = context;

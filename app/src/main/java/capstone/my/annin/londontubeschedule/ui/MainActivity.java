@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity
         ProgressBar mLoadingIndicator;
         private Context context;
         ShowSnackbar showSnackbar;
+        ViewPager viewPager;
 
         @Override
         protected void onCreate(Bundle savedInstanceState)
@@ -89,13 +90,15 @@ public class MainActivity extends AppCompatActivity
 
                 context = getApplicationContext();
                 // Find the view pager that will allow the user to swipe between fragments
-                ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+                viewPager = (ViewPager) findViewById(R.id.viewpager);
 
                 // Create an adapter that knows which fragment should be shown on each page
-                CategoryAdapter adapter = new CategoryAdapter(this, getSupportFragmentManager());
+             //   CategoryAdapter adapter = new CategoryAdapter(this, getSupportFragmentManager());
 
                 // Set the adapter onto the view pager
-                viewPager.setAdapter(adapter);
+               // viewPager.setAdapter(adapter);
+
+                viewPager.setAdapter(new CategoryAdapter(this, getSupportFragmentManager()));
 
                 // Find the tab layout that shows the tabs
                 TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -115,6 +118,7 @@ public class MainActivity extends AppCompatActivity
                                         getSupportFragmentManager().findFragmentByTag(TUBE_LINE_FRAGMENT);
                                 fragmentOverground = (OvergroundLineFragment)
                                         getSupportFragmentManager().findFragmentByTag(TUBE_OVERGROUND_FRAGMENT);
+
                         } else
                                 {
                                 Snackbar
@@ -150,10 +154,11 @@ public class MainActivity extends AppCompatActivity
 //                                     getSupportFragmentManager().findFragmentByTag(TUBE_LINE_FRAGMENT);
 //                              fragmentOverground = (OvergroundLineFragment)
 //                                    getSupportFragmentManager().findFragmentByTag(TUBE_OVERGROUND_FRAGMENT);
+                              viewPager.setAdapter(new CategoryAdapter(MainActivity.this, getSupportFragmentManager()));
 
-                  showSnackbar.showSnackbar();
-//                            fragmentOverground.showSnackbar();
-//                              fragmentTubeLine.showSnackbar();
+             //     showSnackbar.showSnackbar();
+                            fragmentOverground.showSnackbar();
+                              fragmentTubeLine.showSnackbar();
                               isSnackbarShowing = false;
 
                         }
@@ -184,20 +189,20 @@ public class MainActivity extends AppCompatActivity
                // mLoadingIndicator.setVisibility(View.VISIBLE);
         }
 
-//        public void setOnDataListener(TubeLineFragment fragmentTubeLine)
-//        {
-//                this.fragmentTubeLine = fragmentTubeLine;
-//        }
-
-        public void updateShowSnackbar(ShowSnackbar listener)
+        public void setOnDataListener(TubeLineFragment fragmentTubeLine)
         {
-                showSnackbar = listener;
+                this.fragmentTubeLine = fragmentTubeLine;
         }
 
-//        public void setOnDataOvergroundListener(OvergroundLineFragment fragmentOverground)
-//        {
-//                this.fragmentOverground= fragmentOverground;
-//        }
+     //   public void updateShowSnackbar(ShowSnackbar listener)
+     //   {
+           //     showSnackbar = listener;
+     //   }
+
+        public void setOnDataOvergroundListener(OvergroundLineFragment fragmentOverground)
+        {
+                this.fragmentOverground= fragmentOverground;
+        }
 
         public static boolean isNetworkStatusAvailable(Context context)
         {
