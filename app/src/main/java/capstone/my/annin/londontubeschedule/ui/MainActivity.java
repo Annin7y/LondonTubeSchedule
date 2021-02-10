@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity
 //                                     getSupportFragmentManager().findFragmentByTag(TUBE_LINE_FRAGMENT);
 //                              fragmentOverground = (OvergroundLineFragment)
 //                                    getSupportFragmentManager().findFragmentByTag(TUBE_OVERGROUND_FRAGMENT);
-                              viewPager.setAdapter(new CategoryAdapter(MainActivity.this, getSupportFragmentManager()));
+ //                             viewPager.setAdapter(new CategoryAdapter(MainActivity.this, getSupportFragmentManager()));
 
              //     showSnackbar.showSnackbar();
                             fragmentOverground.showSnackbar();
