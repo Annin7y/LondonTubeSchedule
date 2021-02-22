@@ -66,6 +66,7 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
     private final int FILL_GREEN = 0x66aad2a5;
     private final int STROKE_GREEN = 0x387e40;
 
+
     /**
      * An ArrayList of Station objects.
      * For each station we will place a marker on the map,
@@ -158,13 +159,19 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
     public void onMapReady(GoogleMap googleMap)
     {
         mMap = googleMap;
+        double lat = 51.509865;
+        double lng = -0.118092 ;
+        LatLng cityCoordinates = new LatLng(lat, lng);
+        float zoomLevel = 9.0f;
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(cityCoordinates, zoomLevel));
 //        if(mMap != null)
 //        {
+
         if (station != null)
         {
             String stationName = station.getStationName();
             // Create a LatLng with the coordinates of each station
-            LatLng stationCoordinates = new LatLng(latLocation, lonLocation);
+           LatLng stationCoordinates = new  LatLng(latLocation, lonLocation);
 
             /*
               Now we are going to draw a marker, also for each station.
@@ -304,7 +311,7 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
         }
     }
 //    @Override
-//    public void returnStationSequenceData(JSONArray simpleJsonSequenceData)
+//    public void returnStationSequenceData(JSONArray simpleJsonSequenceData) b
 //    {
 //        try
 //        {
