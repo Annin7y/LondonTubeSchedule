@@ -52,7 +52,7 @@
     <dimen name="main_instr_text">18sp</dimen>
     <dimen name="main_name_top">18dp</dimen>
     <dimen name="main_recycler_start">16dp</dimen>
-    <dimen name="main_recycler_top">70dp</dimen>
+    <dimen name="main_recycler_top">90dp</dimen>
     <dimen name="loading_width">0dp</dimen>
     <dimen name="loading_height">45dp</dimen>
     <dimen name="loading_bottom">40dp</dimen>

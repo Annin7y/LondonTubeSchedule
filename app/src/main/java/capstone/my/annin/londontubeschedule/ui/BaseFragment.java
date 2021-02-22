@@ -7,10 +7,7 @@ import androidx.fragment.app.Fragment;
 
 public class BaseFragment extends Fragment implements ShowSnackbar
 {
-    public void showSnackbar()
-    {
-    }
-
-
-
+//    public void showSnackbar()
+//    {
+//    }
 }

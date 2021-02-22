@@ -52,7 +52,8 @@ import capstone.my.annin.londontubeschedule.pojo.Line;
 import capstone.my.annin.londontubeschedule.pojo.Station;
 import timber.log.Timber;
 
-public class StationMapActivity extends AppCompatActivity implements OnMapReadyCallback, AllLinesAsyncTaskInterface {
+public class StationMapActivity extends AppCompatActivity implements OnMapReadyCallback, AllLinesAsyncTaskInterface
+{
     private static final String TAG = "StationMapActivity";
     Station station;
     public String stationId;
@@ -93,7 +94,8 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
                 .findFragmentById(R.id.map);
         if (GooglePlayServicesCheck.isGooglePlayServicesAvailable(this))
         {
-            if (mapFragment != null) {
+            if (mapFragment != null)
+            {
                 mapFragment.getMapAsync(this);
             }
 
