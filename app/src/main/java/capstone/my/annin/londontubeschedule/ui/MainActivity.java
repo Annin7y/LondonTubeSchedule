@@ -154,12 +154,12 @@ public class MainActivity extends AppCompatActivity
 //                                     getSupportFragmentManager().findFragmentByTag(TUBE_LINE_FRAGMENT);
 //                              fragmentOverground = (OvergroundLineFragment)
 //                                    getSupportFragmentManager().findFragmentByTag(TUBE_OVERGROUND_FRAGMENT);
- //                             viewPager.setAdapter(new CategoryAdapter(MainActivity.this, getSupportFragmentManager()));
+                            viewPager.setAdapter(new CategoryAdapter(MainActivity.this, getSupportFragmentManager()));
 
              //     showSnackbar.showSnackbar();
-                            fragmentOverground.showSnackbar();
-                              fragmentTubeLine.showSnackbar();
-                              isSnackbarShowing = false;
+//                            fragmentOverground.showSnackbar();
+//                              fragmentTubeLine.showSnackbar();
+//                              isSnackbarShowing = false;
 
                         }
                         else
@@ -189,20 +189,20 @@ public class MainActivity extends AppCompatActivity
                // mLoadingIndicator.setVisibility(View.VISIBLE);
         }
 
-        public void setOnDataListener(TubeLineFragment fragmentTubeLine)
-        {
-                this.fragmentTubeLine = fragmentTubeLine;
-        }
+//        public void setOnDataListener(TubeLineFragment fragmentTubeLine)
+//        {
+//                this.fragmentTubeLine = fragmentTubeLine;
+//        }
 
      //   public void updateShowSnackbar(ShowSnackbar listener)
      //   {
            //     showSnackbar = listener;
      //   }
 
-        public void setOnDataOvergroundListener(OvergroundLineFragment fragmentOverground)
-        {
-                this.fragmentOverground= fragmentOverground;
-        }
+//        public void setOnDataOvergroundListener(OvergroundLineFragment fragmentOverground)
+//        {
+//                this.fragmentOverground= fragmentOverground;
+//        }
 
         public static boolean isNetworkStatusAvailable(Context context)
         {

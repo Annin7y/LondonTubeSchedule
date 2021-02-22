@@ -246,18 +246,18 @@ public class OvergroundLineFragment extends BaseFragment implements OvergroundAd
             myOvergroundTask.execute(NetworkUtils.buildOvergroundStatusUrl());
         }
 
-        @Override
-        public void onAttach(@NonNull Context context)
-        {
-            super.onAttach(context);
-            try
-            {
-                ((MainActivity) getActivity()).setOnDataOvergroundListener(this);
-            } catch (Exception ex)
-            {
-                ex.printStackTrace();
-            }
-        }
+//        @Override
+//        public void onAttach(@NonNull Context context)
+//        {
+//            super.onAttach(context);
+//            try
+//            {
+//                ((MainActivity) getActivity()).setOnDataOvergroundListener(this);
+//            } catch (Exception ex)
+//            {
+//                ex.printStackTrace();
+//            }
+//        }
 
 //        //Display if there is no internet connection
 //        public void showErrorMessage()

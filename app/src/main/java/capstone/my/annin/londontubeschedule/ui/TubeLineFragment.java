@@ -317,18 +317,18 @@ public class TubeLineFragment extends BaseFragment implements LineAdapter.LineAd
         myLineTask.execute(NetworkUtils.buildLineStatusUrl());
     }
 
-    @Override
-    public void onAttach(@NonNull Context context)
-    {
-        super.onAttach(context);
-        try
-        {
-            ((MainActivity) getActivity()).setOnDataListener(this);
-        } catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
-    }
+//    @Override
+//    public void onAttach(@NonNull Context context)
+//    {
+//        super.onAttach(context);
+//        try
+//        {
+//            ((MainActivity) getActivity()).setOnDataListener(this);
+//        } catch (Exception ex)
+//        {
+//            ex.printStackTrace();
+//        }
+//    }
 
     //Display if there is no internet connection
 //    public void showErrorMessage()
