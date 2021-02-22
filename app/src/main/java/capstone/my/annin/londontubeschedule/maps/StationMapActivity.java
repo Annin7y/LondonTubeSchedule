@@ -164,6 +164,7 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
         LatLng cityCoordinates = new LatLng(lat, lng);
         float zoomLevel = 9.0f;
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(cityCoordinates, zoomLevel));
+
 //        if(mMap != null)
 //        {
 
