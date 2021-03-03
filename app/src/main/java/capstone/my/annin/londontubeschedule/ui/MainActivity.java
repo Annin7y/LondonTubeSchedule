@@ -81,8 +81,6 @@ public class MainActivity extends AppCompatActivity
         private Context context;
         ShowSnackbar showSnackbar;
         ViewPager viewPager;
-        @BindView(R.id.toolbar)
-        Toolbar toolbar;
 
         @Override
         protected void onCreate(Bundle savedInstanceState)
