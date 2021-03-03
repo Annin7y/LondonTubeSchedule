@@ -95,11 +95,6 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
                 .findFragmentById(R.id.map);
         if (GooglePlayServicesCheck.isGooglePlayServicesAvailable(this))
         {
-            if (mapFragment != null)
-            {
-                mapFragment.getMapAsync(this);
-            }
-
             if (getIntent() != null && getIntent().getExtras() != null)
             {
                 line = getIntent().getExtras().getParcelable("Line");
@@ -142,6 +137,12 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
                     //  myAllTask.execute();
                 }
             }
+            if (mapFragment != null)
+            {
+                mapFragment.getMapAsync(this);
+            }
+
+
         } else
             {
             Toast.makeText(StationMapActivity.this, getString(R.string.play_services_unavailable), Toast.LENGTH_SHORT).show();
@@ -158,6 +159,8 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
     @Override
     public void onMapReady(GoogleMap googleMap)
     {
+        //map zoom code based on the code below:
+        //https://stackoverflow.com/questions/29868121/how-do-i-zoom-in-automatically-to-the-current-location-in-google-maps-api-for-an
         mMap = googleMap;
         double lat = 51.509865;
         double lng = -0.118092 ;

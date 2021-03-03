@@ -22,6 +22,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -38,6 +39,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -51,6 +53,8 @@ import capstone.my.annin.londontubeschedule.asynctask.TubeLineAsyncTask;
 import capstone.my.annin.londontubeschedule.asynctask.TubeLineAsyncTaskInterface;
 //import capstone.my.annin.londontubeschedule.data.TubeLineContract;
 import capstone.my.annin.londontubeschedule.data.LineViewModel;
+import capstone.my.annin.londontubeschedule.maps.LineColorGuideActivity;
+import capstone.my.annin.londontubeschedule.maps.StationMapActivity;
 import capstone.my.annin.londontubeschedule.pojo.Line;
 //import capstone.my.annin.londontubeschedule.recyclerviewadapters.FavoritesAdapter;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.FavoritesRoomAdapter;
@@ -77,6 +81,8 @@ public class MainActivity extends AppCompatActivity
         private Context context;
         ShowSnackbar showSnackbar;
         ViewPager viewPager;
+        @BindView(R.id.toolbar)
+        Toolbar toolbar;
 
         @Override
         protected void onCreate(Bundle savedInstanceState)
@@ -91,6 +97,8 @@ public class MainActivity extends AppCompatActivity
                 context = getApplicationContext();
                 // Find the view pager that will allow the user to swipe between fragments
                 viewPager = (ViewPager) findViewById(R.id.viewpager);
+
+                //setSupportActionBar(toolbar);
 
                 // Create an adapter that knows which fragment should be shown on each page
              //   CategoryAdapter adapter = new CategoryAdapter(this, getSupportFragmentManager());
@@ -143,7 +151,9 @@ public class MainActivity extends AppCompatActivity
                         }
 
         }
-        public class MyClickListener implements View.OnClickListener
+
+
+    public class MyClickListener implements View.OnClickListener
         {
                 @Override
                 public void onClick(View v)
@@ -213,6 +223,33 @@ public class MainActivity extends AppCompatActivity
                 return activeNetwork != null &&
                         activeNetwork.isConnectedOrConnecting();
         }
+
+        @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        /* Use AppCompatActivity's method getMenuInflater to get a handle on the menu inflater */
+        MenuInflater inflater = getMenuInflater();
+        /* Use the inflater's inflate method to inflate our menu layout to this menu */
+        inflater.inflate(R.menu.main, menu);
+        /* Return true so that the menu is displayed in the Toolbar */
+        return true;
+    }
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item)
+        {
+           //Code based on the following stackoverflow post:
+           // https://stackoverflow.com/questions/63982922/what-is-this-r-id-home
+            int id = item.getItemId();
+
+                    if (id == R.id.map_bar_imageview)
+                    {
+                        Intent intent = new Intent(this, StationMapActivity.class);
+                        startActivity(intent);
+                        return true;
+                    }
+                                return super.onOptionsItemSelected(item);
+                }
 
 
 

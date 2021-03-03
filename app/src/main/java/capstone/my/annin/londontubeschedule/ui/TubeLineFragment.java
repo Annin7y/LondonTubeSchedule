@@ -27,10 +27,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -94,8 +92,7 @@ public class TubeLineFragment extends BaseFragment implements LineAdapter.LineAd
     private LineViewModel mLineViewModel;
     private static final String SNACKBAR_STATE = "snackbar_state";
     private boolean isSnackbarShowing = false;
-    @BindView(R.id.map_button)
-    Button mapButton;
+
 
 //    /**
 //     * Use this factory method to create a new instance of
@@ -152,15 +149,6 @@ public class TubeLineFragment extends BaseFragment implements LineAdapter.LineAd
         RecyclerView.LayoutManager mLineLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         mLineRecyclerView.setLayoutManager(mLineLayoutManager);
 
-        mapButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                Intent intent = new Intent(getActivity(), StationMapActivity.class);
-                startActivity(intent);
-            }
-        });
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT)
         {
@@ -461,7 +449,7 @@ public class TubeLineFragment extends BaseFragment implements LineAdapter.LineAd
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
     {
-        inflater.inflate(R.menu.main, menu);
+        inflater.inflate(R.menu.tube, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
