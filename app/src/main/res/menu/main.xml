@@ -23,7 +23,7 @@
 
     <item
         android:id="@+id/map_bar_imageview"
-        android:icon="@drawable/baseline_place_black_18dp"
+        android:icon="@drawable/ic_map_marker_black_24dp"
         android:title="Map"
         app:showAsAction="always"
 

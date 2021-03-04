@@ -72,7 +72,7 @@
         android:textSize="@dimen/fab_map_text_size"
         android:elevation="@dimen/fab_elevation"
         android:focusable="true"
-        app:icon="@drawable/baseline_place_black_18dp"
+        app:icon="@drawable/ic_map_marker_black_24dp"
         android:translationZ="@dimen/fab_press_translation_z"
         app:layout_anchorGravity="bottom|right|end"
         app:layout_constraintBottom_toBottomOf="parent"
