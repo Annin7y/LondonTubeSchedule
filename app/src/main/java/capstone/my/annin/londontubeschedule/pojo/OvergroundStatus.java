@@ -18,11 +18,7 @@ package capstone.my.annin.londontubeschedule.pojo;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
-import androidx.room.PrimaryKey;
-
-public class Overground implements Parcelable
+public class OvergroundStatus implements Parcelable
 {
     /**
      * Mode id
@@ -49,7 +45,7 @@ public class Overground implements Parcelable
     /**
      * List of overground lines
      */
-    public Overground(String modeId, String modeName, String modeStatusDesc, String modeStatusReason)
+    public OvergroundStatus(String modeId, String modeName, String modeStatusDesc, String modeStatusReason)
     {
         this.modeId = modeId;
         this.modeName = modeName;
@@ -96,7 +92,7 @@ public class Overground implements Parcelable
         return modeStatusReason;
     }
 
-    protected Overground(Parcel in)
+    protected OvergroundStatus(Parcel in)
     {
         modeId = in.readString();
         modeName = in.readString();
@@ -120,18 +116,18 @@ public class Overground implements Parcelable
     }
 
     @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Overground> CREATOR = new Parcelable.Creator<Overground>()
+    public static final Parcelable.Creator<OvergroundStatus> CREATOR = new Parcelable.Creator<OvergroundStatus>()
     {
         @Override
-        public Overground createFromParcel(Parcel in)
+        public OvergroundStatus createFromParcel(Parcel in)
         {
-            return new Overground(in);
+            return new OvergroundStatus(in);
         }
 
         @Override
-        public Overground[] newArray(int size)
+        public OvergroundStatus[] newArray(int size)
         {
-            return new Overground[size];
+            return new OvergroundStatus[size];
         }
     };
 }

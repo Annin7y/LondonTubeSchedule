@@ -17,10 +17,10 @@ package capstone.my.annin.londontubeschedule.asynctask;
 
 import java.util.ArrayList;
 
-import capstone.my.annin.londontubeschedule.pojo.Overground;
+import capstone.my.annin.londontubeschedule.pojo.OvergroundStatus;
 
-public interface OvergroundAsyncTaskInterface
+public interface OvergroundStatusAsyncTaskInterface
 {
-    void returnOvergroundData( ArrayList<Overground> simpleJsonOvergroundData);
+    void returnOvergroundData( ArrayList<OvergroundStatus> simpleJsonOvergroundData);
 }
 

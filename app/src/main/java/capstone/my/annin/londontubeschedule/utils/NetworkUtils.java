@@ -42,8 +42,6 @@ public class NetworkUtils
     private static final String APP_KEY = "app_key";
     private static final String APP_ID = "app_id";
 
-    //
-    //
     // private static final String BASE_URL_LINES_LIST = "https://api.tfl.gov.uk/Line/Mode/tube";
 
     private static final String BASE_URL_LINES_STATUS_LIST = "https://api.tfl.gov.uk/line/mode/tube/status";
@@ -53,6 +51,8 @@ public class NetworkUtils
     private static final String BASE_URL_SCHEDULE = "https://api.tfl.gov.uk/Line/";
 
     private static final String BASE_URL_OVERGROUND_STATUS_LIST = "https://api.tfl.gov.uk/line/mode/overground/status";
+
+    private static final String BASE_URL_OVERGROUND_STATION_LIST = "https://api.tfl.gov.uk/line/london-overground/arrivals ";
 
     public NetworkUtils()
     {
@@ -164,9 +164,28 @@ public class NetworkUtils
             e.printStackTrace();
         }
         //  Log.v(TAG, "Built URIline " + urlLineList);
-        Timber.v( "Built Overgroundline " + urlOvergroundStatusList);
+        Timber.v( "Built OvergroundStatus " + urlOvergroundStatusList);
         return urlOvergroundStatusList;
     }
+
+    public static URL buildOvergroundStationUrl()
+    {
+        URL urlOvergroundStationList = null;
+        try
+        {
+            Uri overgroundStationListQueryUri = Uri.parse(BASE_URL_OVERGROUND_STATION_LIST).buildUpon()
+                    .build();
+            urlOvergroundStationList = new URL(overgroundStationListQueryUri.toString());
+        }
+        catch (MalformedURLException e)
+        {
+            e.printStackTrace();
+        }
+        //  Log.v(TAG, "Built URIline " + urlLineList);
+        Timber.v( "Built OvergroundStation " + urlOvergroundStationList);
+        return urlOvergroundStationList;
+    }
+
 
 
     /**
@@ -345,16 +364,16 @@ public class NetworkUtils
     /**
      * Make an HTTP request to the given URL and return a String as the response.
      */
-    public static String makeHttpOvergroundRequest(URL url) throws IOException
+    public static String makeHttpOvergroundStatusRequest(URL url) throws IOException
     {
-        String jsonLineResponse = "";
+        String jsonOverStatusResponse = "";
         // Log.i("URL: ", url.toString());
         Timber.i(url.toString(),"URL: " );
 
         // If the URL is null, then return early.
         if (url == null)
         {
-            return jsonLineResponse;
+            return jsonOverStatusResponse;
         }
 
         HttpURLConnection urlConnection = null;
@@ -372,7 +391,7 @@ public class NetworkUtils
             if (urlConnection.getResponseCode() == 200)
             {
                 inputStream = urlConnection.getInputStream();
-                jsonLineResponse = readFromStream(inputStream);
+                jsonOverStatusResponse = readFromStream(inputStream);
             } else
             {
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
@@ -381,7 +400,7 @@ public class NetworkUtils
         catch (IOException e)
         {
             //Log.e(LOG_TAG, "Problem retrieving line list JSON results.", e);
-            Timber.e(e,"Problem retrieving overground JSON results." );
+            Timber.e(e,"Problem retrieving overground status JSON results." );
         }
         finally
         {
@@ -397,10 +416,8 @@ public class NetworkUtils
                 inputStream.close();
             }
         }
-        return jsonLineResponse;
+        return jsonOverStatusResponse;
     }
-
-
 
     /**
      * Convert the {@link InputStream} into a String which contains the

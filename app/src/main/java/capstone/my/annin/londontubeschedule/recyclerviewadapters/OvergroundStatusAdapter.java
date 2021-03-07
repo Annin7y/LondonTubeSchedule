@@ -25,45 +25,43 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import capstone.my.annin.londontubeschedule.R;
-import capstone.my.annin.londontubeschedule.pojo.Line;
-import capstone.my.annin.londontubeschedule.pojo.Overground;
+import capstone.my.annin.londontubeschedule.pojo.OvergroundStatus;
 
-public class OvergroundAdapter extends RecyclerView.Adapter<OvergroundAdapter.OvergroundAdapterViewHolder>
+public class OvergroundStatusAdapter extends RecyclerView.Adapter<OvergroundStatusAdapter.OvergroundStatusAdapterViewHolder>
 {
-    private static final String TAG = OvergroundAdapter.class.getSimpleName();
+    private static final String TAG = OvergroundStatusAdapter.class.getSimpleName();
 
-    private ArrayList<Overground> overgroundList = new ArrayList<Overground>();
+    private ArrayList<OvergroundStatus> overgroundStatusList = new ArrayList<OvergroundStatus>();
     private Context context;
-    private OvergroundAdapter.OvergroundAdapterOnClickHandler mOvergroundClickHandler;
+    private OvergroundStatusAdapter.OvergroundStatusAdapterOnClickHandler mOvergroundStatusClickHandler;
 
     /**
      * The interface that receives onClick messages.
      */
-    public interface OvergroundAdapterOnClickHandler
+    public interface OvergroundStatusAdapterOnClickHandler
     {
-        void onClick(Overground textOvergroundClick);
+        void onClick(OvergroundStatus textOvergroundStatusClick);
     }
     /**
      * Creates an Overground Adapter.
      *
-     * @param overgroundClickHandler The on-click handler for this adapter. This single handler is called
+     * @param overgroundStatusClickHandler The on-click handler for this adapter. This single handler is called
      *                         *                     when an item is clicked.
      */
-    public OvergroundAdapter(OvergroundAdapter.OvergroundAdapterOnClickHandler overgroundClickHandler, ArrayList<Overground> overgroundList, Context context)
+    public OvergroundStatusAdapter(OvergroundStatusAdapter.OvergroundStatusAdapterOnClickHandler overgroundStatusClickHandler, ArrayList<OvergroundStatus> overgroundStatusList, Context context)
     {
-        mOvergroundClickHandler = overgroundClickHandler;
-        this.overgroundList = overgroundList;
+        mOvergroundStatusClickHandler = overgroundStatusClickHandler;
+        this.overgroundStatusList = overgroundStatusList;
         this.context = context;
     }
 
     /**
      * Cache of the children views for an overground list item.
      */
-    public class OvergroundAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class OvergroundStatusAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.overground_name)
         public TextView overgroundName;
 
@@ -73,7 +71,7 @@ public class OvergroundAdapter extends RecyclerView.Adapter<OvergroundAdapter.Ov
         @BindView(R.id.overground_status_reason)
         public TextView overgroundStatusReason;
 
-        public OvergroundAdapterViewHolder(View view) {
+        public OvergroundStatusAdapterViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
             view.setOnClickListener(this);
@@ -87,41 +85,41 @@ public class OvergroundAdapter extends RecyclerView.Adapter<OvergroundAdapter.Ov
         @Override
         public void onClick(View v) {
             int adapterPosition = getAdapterPosition();
-            Overground textOvergroundClick = overgroundList.get(adapterPosition);
-            mOvergroundClickHandler.onClick(textOvergroundClick);
+            OvergroundStatus textOvergroundStatusClick = overgroundStatusList.get(adapterPosition);
+            mOvergroundStatusClickHandler.onClick(textOvergroundStatusClick);
         }
     }
         @Override
-        public OvergroundAdapter.OvergroundAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType)
+        public OvergroundStatusAdapter.OvergroundStatusAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType)
         {
             Context context = viewGroup.getContext();
             int layoutIdForListItem = R.layout.overground_list_item;
             LayoutInflater inflater = LayoutInflater.from(context);
             boolean shouldAttachToParentImmediately = false;
             View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
-            return new OvergroundAdapter.OvergroundAdapterViewHolder(view);
+            return new OvergroundStatusAdapter.OvergroundStatusAdapterViewHolder(view);
         }
 
     @Override
-    public void onBindViewHolder(OvergroundAdapter.OvergroundAdapterViewHolder holder, int position)
+    public void onBindViewHolder(OvergroundStatusAdapter.OvergroundStatusAdapterViewHolder holder, int position)
     {
         //Binding data
-        final Overground overgroundView = overgroundList.get(position);
+        final OvergroundStatus overgroundStatusView = overgroundStatusList.get(position);
 
-        holder.overgroundName.setText(overgroundView.getModeName());
-        holder.overgroundStatusDesc.setText(overgroundView.getModeStatusDesc());
-        holder.overgroundStatusReason.setText(overgroundView.getModeStatusReason());
+        holder.overgroundName.setText(overgroundStatusView.getModeName());
+        holder.overgroundStatusDesc.setText(overgroundStatusView.getModeStatusDesc());
+        holder.overgroundStatusReason.setText(overgroundStatusView.getModeStatusReason());
     }
 
     @Override
     public int getItemCount()
     {
-        return overgroundList.size();
+        return overgroundStatusList.size();
     }
 
-    public void setOvergroundList(ArrayList<Overground> mOvergroundList)
+    public void setOvergroundList(ArrayList<OvergroundStatus> mOvergroundStatusList)
     {
-        this.overgroundList = mOvergroundList;
+        this.overgroundStatusList = mOvergroundStatusList;
         notifyDataSetChanged();
     }
 

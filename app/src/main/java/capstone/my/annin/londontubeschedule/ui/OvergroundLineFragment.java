@@ -27,9 +27,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,15 +38,15 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import capstone.my.annin.londontubeschedule.R;
-import capstone.my.annin.londontubeschedule.asynctask.OvergroundAsyncTask;
-import capstone.my.annin.londontubeschedule.asynctask.OvergroundAsyncTaskInterface;
-import capstone.my.annin.londontubeschedule.pojo.Overground;
-import capstone.my.annin.londontubeschedule.recyclerviewadapters.OvergroundAdapter;
+import capstone.my.annin.londontubeschedule.asynctask.OvergroundStatusAsyncTask;
+import capstone.my.annin.londontubeschedule.asynctask.OvergroundStatusAsyncTaskInterface;
+import capstone.my.annin.londontubeschedule.pojo.OvergroundStatus;
+import capstone.my.annin.londontubeschedule.recyclerviewadapters.OvergroundStatusAdapter;
 import capstone.my.annin.londontubeschedule.settings.SettingsActivity;
 import capstone.my.annin.londontubeschedule.utils.NetworkUtils;
 import timber.log.Timber;
 
-public class OvergroundLineFragment extends BaseFragment implements OvergroundAdapter.OvergroundAdapterOnClickHandler, OvergroundAsyncTaskInterface
+public class OvergroundLineFragment extends BaseFragment implements OvergroundStatusAdapter.OvergroundStatusAdapterOnClickHandler, OvergroundStatusAsyncTaskInterface
     {
     public OvergroundLineFragment()
         {
@@ -56,9 +54,9 @@ public class OvergroundLineFragment extends BaseFragment implements OvergroundAd
         }
 
         @BindView(R.id.recyclerview_overground)
-        RecyclerView mOvergroundRecyclerView;
-        private OvergroundAdapter overgroundAdapter;
-        private ArrayList<Overground> overgroundArrayList = new ArrayList<>();
+        RecyclerView mOvergroundStatusRecyclerView;
+        private OvergroundStatusAdapter overgroundStatusAdapter;
+        private ArrayList<OvergroundStatus> overgroundStatusArrayList = new ArrayList<>();
         private Context context;
         private static final String KEY_OVERGROUND_LIST = "overground_list";
         private static final String KEY_SORT_ORDER = "sort_order";
@@ -121,12 +119,12 @@ public class OvergroundLineFragment extends BaseFragment implements OvergroundAd
 
             mCoordinatorLayout = view.findViewById(R.id.coordinatorLayout);
 
-            overgroundAdapter = new OvergroundAdapter(this, overgroundArrayList, context);
+            overgroundStatusAdapter = new OvergroundStatusAdapter(this, overgroundStatusArrayList, context);
 
-            mOvergroundRecyclerView.setAdapter(overgroundAdapter);
+            mOvergroundStatusRecyclerView.setAdapter(overgroundStatusAdapter);
 
             RecyclerView.LayoutManager mLineLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-            mOvergroundRecyclerView.setLayoutManager(mLineLayoutManager);
+            mOvergroundStatusRecyclerView.setLayoutManager(mLineLayoutManager);
 
 
             /*
@@ -137,7 +135,7 @@ public class OvergroundLineFragment extends BaseFragment implements OvergroundAd
 //                if (isNetworkStatusAvailable(getContext()))
 //                {
               //  showSnackbar();
-                OvergroundAsyncTask myOvergroundTask = new OvergroundAsyncTask(this);
+                OvergroundStatusAsyncTask myOvergroundTask = new OvergroundStatusAsyncTask(this);
                 myOvergroundTask.execute(NetworkUtils.buildOvergroundStatusUrl());
 //
 
@@ -164,8 +162,8 @@ public class OvergroundLineFragment extends BaseFragment implements OvergroundAd
 //                            .show();
 //                }
             //    else {
-                    overgroundArrayList = savedInstanceState.getParcelableArrayList(KEY_OVERGROUND_LIST);
-                    overgroundAdapter.setOvergroundList(overgroundArrayList);
+                    overgroundStatusArrayList = savedInstanceState.getParcelableArrayList(KEY_OVERGROUND_LIST);
+                    overgroundStatusAdapter.setOvergroundList(overgroundStatusArrayList);
 
                 }
                 if (savedInstanceState != null)
@@ -214,15 +212,15 @@ public class OvergroundLineFragment extends BaseFragment implements OvergroundAd
 //        }
 
         @Override
-        public void returnOvergroundData(ArrayList<Overground> simpleJsonOvergroundData)
+        public void returnOvergroundData(ArrayList<OvergroundStatus> simpleJsonOvergroundData)
         {
             mLoadingIndicator.setVisibility(View.INVISIBLE);
             if (null != simpleJsonOvergroundData)
             {
-                overgroundAdapter = new OvergroundAdapter(this, simpleJsonOvergroundData, getContext());
-                overgroundArrayList = simpleJsonOvergroundData;
-                mOvergroundRecyclerView.setAdapter(overgroundAdapter);
-                overgroundAdapter.setOvergroundList(overgroundArrayList);
+                overgroundStatusAdapter = new OvergroundStatusAdapter(this, simpleJsonOvergroundData, getContext());
+                overgroundStatusArrayList = simpleJsonOvergroundData;
+                mOvergroundStatusRecyclerView.setAdapter(overgroundStatusAdapter);
+                overgroundStatusAdapter.setOvergroundList(overgroundStatusArrayList);
             } else
             {
              //   showErrorMessage();
@@ -231,7 +229,7 @@ public class OvergroundLineFragment extends BaseFragment implements OvergroundAd
         }
 
         @Override
-        public void onClick(Overground overground)
+        public void onClick(OvergroundStatus overground)
         {
             //log event when the user selects a line
             Bundle params = new Bundle();
@@ -242,7 +240,7 @@ public class OvergroundLineFragment extends BaseFragment implements OvergroundAd
 
         public void showSnackbar()
         {
-            OvergroundAsyncTask myOvergroundTask = new OvergroundAsyncTask(this);
+            OvergroundStatusAsyncTask myOvergroundTask = new OvergroundStatusAsyncTask(this);
             myOvergroundTask.execute(NetworkUtils.buildOvergroundStatusUrl());
         }
 
@@ -298,7 +296,7 @@ public class OvergroundLineFragment extends BaseFragment implements OvergroundAd
         @Override
         public boolean onOptionsItemSelected(MenuItem item)
         {
-            OvergroundAsyncTask myOvergroundTask = new OvergroundAsyncTask(this);
+            OvergroundStatusAsyncTask myOvergroundTask = new OvergroundStatusAsyncTask(this);
 
             switch (item.getItemId())
             {
@@ -322,7 +320,7 @@ public class OvergroundLineFragment extends BaseFragment implements OvergroundAd
         public void onSaveInstanceState(Bundle outState)
         {
             outState.putString(KEY_SORT_ORDER, selectedSortOrder);
-            outState.putParcelableArrayList(KEY_OVERGROUND_LIST, overgroundArrayList);
+            outState.putParcelableArrayList(KEY_OVERGROUND_LIST, overgroundStatusArrayList);
             outState.putBoolean(SNACKBAR_STATE, isSnackbarShowing);
             super.onSaveInstanceState(outState);
         }

@@ -21,17 +21,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import com.google.android.material.snackbar.Snackbar;
 
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.Menu;
@@ -39,33 +32,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
-import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.analytics.FirebaseAnalytics;
-import java.util.ArrayList;
-import java.util.List;
+
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import capstone.my.annin.londontubeschedule.R;
-import capstone.my.annin.londontubeschedule.asynctask.OvergroundAsyncTask;
-import capstone.my.annin.londontubeschedule.asynctask.TubeLineAsyncTask;
-import capstone.my.annin.londontubeschedule.asynctask.TubeLineAsyncTaskInterface;
 //import capstone.my.annin.londontubeschedule.data.TubeLineContract;
-import capstone.my.annin.londontubeschedule.data.LineViewModel;
-import capstone.my.annin.londontubeschedule.maps.LineColorGuideActivity;
 import capstone.my.annin.londontubeschedule.maps.StationMapActivity;
-import capstone.my.annin.londontubeschedule.pojo.Line;
 //import capstone.my.annin.londontubeschedule.recyclerviewadapters.FavoritesAdapter;
-import capstone.my.annin.londontubeschedule.recyclerviewadapters.FavoritesRoomAdapter;
 
-import capstone.my.annin.londontubeschedule.recyclerviewadapters.LineAdapter;
 import capstone.my.annin.londontubeschedule.scrollbehavior.DisableSwipeBehavior;
-import capstone.my.annin.londontubeschedule.settings.SettingsActivity;
-import capstone.my.annin.londontubeschedule.utils.NetworkUtils;
-import timber.log.Timber;
-
-import static capstone.my.annin.londontubeschedule.ui.StationScheduleActivity.isNetworkStatusAvailable;
 
 public class MainActivity extends AppCompatActivity
 {

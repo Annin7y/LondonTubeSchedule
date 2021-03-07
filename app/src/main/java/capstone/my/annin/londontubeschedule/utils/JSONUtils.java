@@ -24,10 +24,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashSet;
-import java.util.List;
 
 import capstone.my.annin.londontubeschedule.pojo.Line;
-import capstone.my.annin.londontubeschedule.pojo.Overground;
+import capstone.my.annin.londontubeschedule.pojo.OvergroundStatus;
 import capstone.my.annin.londontubeschedule.pojo.Schedule;
 import capstone.my.annin.londontubeschedule.pojo.Station;
 import timber.log.Timber;
@@ -370,7 +369,7 @@ public class JSONUtils
         return schedules;
     }
 
-    public static ArrayList<Overground> extractFeatureFromOvergroundStatusJson(String overgroundStatusJSON)
+    public static ArrayList<OvergroundStatus> extractFeatureFromOvergroundStatusJson(String overgroundStatusJSON)
     {
         // If the JSON string is empty or null, then return early.
         if (TextUtils.isEmpty(overgroundStatusJSON))
@@ -378,7 +377,7 @@ public class JSONUtils
             return null;
         }
 
-        ArrayList<Overground> overgroundLines = new ArrayList<>();
+        ArrayList<OvergroundStatus> overgroundLines = new ArrayList<>();
         try
         {
             // Create a JSONObject from the JSON response string
@@ -417,7 +416,7 @@ public class JSONUtils
                             modeStatusReason = innerElem.optString(KEY_OVERGROUND_STATUS_REASON);
                         }
 
-                        Overground overground = new Overground(id, name, modeStatusDesc, modeStatusReason);
+                        OvergroundStatus overground = new OvergroundStatus(id, name, modeStatusDesc, modeStatusReason);
                         overgroundLines.add(overground);
                     }}}}
         catch (JSONException e)

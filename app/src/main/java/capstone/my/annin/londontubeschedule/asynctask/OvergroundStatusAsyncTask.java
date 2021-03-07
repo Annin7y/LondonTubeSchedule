@@ -20,18 +20,17 @@ import android.os.AsyncTask;
 import java.net.URL;
 import java.util.ArrayList;
 
-import capstone.my.annin.londontubeschedule.pojo.Line;
-import capstone.my.annin.londontubeschedule.pojo.Overground;
+import capstone.my.annin.londontubeschedule.pojo.OvergroundStatus;
 import capstone.my.annin.londontubeschedule.utils.JSONUtils;
 import capstone.my.annin.londontubeschedule.utils.NetworkUtils;
 
-public class OvergroundAsyncTask extends AsyncTask<URL, Void, ArrayList<Overground>>
+public class OvergroundStatusAsyncTask extends AsyncTask<URL, Void, ArrayList<OvergroundStatus>>
 {
-    private static final String TAG = OvergroundAsyncTask.class.getSimpleName();
+    private static final String TAG = OvergroundStatusAsyncTask.class.getSimpleName();
 
-    private OvergroundAsyncTaskInterface listener;
+    private OvergroundStatusAsyncTaskInterface listener;
 
-    public OvergroundAsyncTask(OvergroundAsyncTaskInterface listener)
+    public OvergroundStatusAsyncTask(OvergroundStatusAsyncTaskInterface listener)
     {
         this.listener = listener;
     }
@@ -43,14 +42,14 @@ public class OvergroundAsyncTask extends AsyncTask<URL, Void, ArrayList<Overgrou
     }
 
     @Override
-    protected ArrayList<Overground> doInBackground(URL... params)
+    protected ArrayList<OvergroundStatus> doInBackground(URL... params)
     {
         URL overgroundRequestUrl = NetworkUtils.buildOvergroundStatusUrl();
 
         try
         {
             String jsonLineResponse = NetworkUtils
-                    .makeHttpOvergroundRequest(overgroundRequestUrl);
+                    .makeHttpOvergroundStatusRequest(overgroundRequestUrl);
 
             return JSONUtils.extractFeatureFromOvergroundStatusJson(jsonLineResponse);
         }
@@ -62,7 +61,7 @@ public class OvergroundAsyncTask extends AsyncTask<URL, Void, ArrayList<Overgrou
     }
 
     @Override
-    protected void onPostExecute(ArrayList<Overground> mOvergroundList)
+    protected void onPostExecute(ArrayList<OvergroundStatus> mOvergroundList)
     {
         super.onPostExecute(mOvergroundList);
          /*the if method is commented out because the error message will be displayed if there is no internet connection
