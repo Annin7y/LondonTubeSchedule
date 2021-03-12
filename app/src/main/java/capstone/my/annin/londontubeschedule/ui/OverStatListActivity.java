@@ -1,0 +1,131 @@
+package capstone.my.annin.londontubeschedule.ui;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.analytics.FirebaseAnalytics;
+
+import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.Objects;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import capstone.my.annin.londontubeschedule.R;
+import capstone.my.annin.londontubeschedule.asynctask.OvergroundStationAsyncTask;
+import capstone.my.annin.londontubeschedule.asynctask.OvergroundStationAsyncTaskInterface;
+import capstone.my.annin.londontubeschedule.pojo.OvergroundStation;
+import capstone.my.annin.londontubeschedule.pojo.OvergroundStatus;
+import capstone.my.annin.londontubeschedule.recyclerviewadapters.OvergroundStationAdapter;
+import capstone.my.annin.londontubeschedule.utils.NetworkUtils;
+import timber.log.Timber;
+
+public class OverStatListActivity extends AppCompatActivity implements OvergroundStationAdapter.OvergroundStationAdapterOnClickHandler, OvergroundStationAsyncTaskInterface
+{
+    //Tag for the log messages
+    private static final String TAG = OverStatListActivity.class.getSimpleName();
+
+    @BindView(R.id.recyclerview_over_station)
+    RecyclerView mStationRecyclerView;
+
+    private OvergroundStationAdapter overStatAdapter;
+    private ArrayList<OvergroundStation> overStatArrayList = new ArrayList<>();
+    private ArrayList<OvergroundStatus> overgroundStatusArrayList = new ArrayList<>();
+    private static final String KEY_STAT_OVER_LIST = "stat_over_list";
+    private Context context;
+    private FirebaseAnalytics mFirebaseAnalytics;
+    @BindView(R.id.empty_view_over_stat)
+    TextView emptyStations;
+    OvergroundStatus overground;
+    public String overLineId;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_over_stat_list);
+        context = getApplicationContext();
+
+        // Bind the views
+        ButterKnife.bind(this);
+
+        overStatAdapter = new OvergroundStationAdapter(this, overStatArrayList, context);
+        mStationRecyclerView.setAdapter(overStatAdapter);
+
+        RecyclerView.LayoutManager mStationLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        mStationRecyclerView.setLayoutManager(mStationLayoutManager);
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+        if (getIntent() != null && getIntent().getExtras() != null)
+        {
+            overground = getIntent().getExtras().getParcelable("OvergroundStatus");
+            if(overground != null)
+            {
+                overLineId = Objects.requireNonNull(overground).getModeId();
+                overLineId= overground.getModeId();
+            /*
+             *  Starting the asyncTask so that stations load when the activity opens.
+             *
+               */
+                Timber.i(overground.getModeId(), "lineId: ");
+            }
+            if (savedInstanceState == null)
+            {
+                OvergroundStationAsyncTask myOverStatTask = new OvergroundStationAsyncTask(this);
+                myOverStatTask.execute(overLineId);
+
+            } else
+                {
+                overStatArrayList = savedInstanceState.getParcelableArrayList(KEY_STAT_OVER_LIST);
+                overStatAdapter.setStationList(overStatArrayList);
+            }
+        }
+
+    }
+
+    @Override
+    public void returnOverStationData(ArrayList<OvergroundStation> simpleJsonOverStatData)
+    {
+        if (null != simpleJsonOverStatData)
+        {
+            overStatAdapter = new OvergroundStationAdapter(this, simpleJsonOverStatData, OverStatListActivity.this);
+            overStatArrayList = simpleJsonOverStatData;
+            mStationRecyclerView.setAdapter(overStatAdapter);
+            overStatAdapter.setStationList(overStatArrayList);
+        }
+        else
+        {
+            Timber.e("Problem parsing overground stations JSON results" );
+            emptyStations.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onClick(OvergroundStation overgroundStation)
+    {
+
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState)
+    {
+        if (emptyStations.getVisibility() == View.VISIBLE)
+        {
+            outState.putBoolean("visible", true);
+        } else {
+            outState.putBoolean("visible", false);
+        }
+
+        outState.putParcelableArrayList(KEY_STAT_OVER_LIST, overStatArrayList);
+        super.onSaveInstanceState(outState);
+    }
+
+
+}

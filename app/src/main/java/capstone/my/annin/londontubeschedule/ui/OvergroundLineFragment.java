@@ -231,6 +231,12 @@ public class OvergroundLineFragment extends BaseFragment implements OvergroundSt
         @Override
         public void onClick(OvergroundStatus overground)
         {
+            Intent intent = new Intent(getActivity(), OverStatListActivity.class);
+            intent.putExtra("OvergroundStatus", overground);
+            intent.putParcelableArrayListExtra("overLineList", overgroundStatusArrayList);
+            startActivity(intent);
+
+            startActivity(intent);
             //log event when the user selects a line
             Bundle params = new Bundle();
             params.putParcelable("overground_select", overground);

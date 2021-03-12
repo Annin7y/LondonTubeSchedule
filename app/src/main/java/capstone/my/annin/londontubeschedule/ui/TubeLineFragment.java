@@ -228,7 +228,8 @@ public class TubeLineFragment extends BaseFragment implements LineAdapter.LineAd
 //                    getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
 //                    mLineRecyclerView.setAdapter(favoritesAdapter);
 
-            } else {
+            } else
+                {
                 lineArrayList = savedInstanceState.getParcelableArrayList(KEY_LINES_LIST);
                 lineAdapter.setLineList(lineArrayList);
 
@@ -236,7 +237,8 @@ public class TubeLineFragment extends BaseFragment implements LineAdapter.LineAd
             if (savedInstanceState != null)
             {
                 mLoadingIndicator.setVisibility(View.INVISIBLE);
-            } else {
+            } else
+                {
                 mLoadingIndicator.setVisibility(View.VISIBLE);
             }
             //  Log.v(LOG_TAG, "SORTORDER= " + selectedSortOrder);

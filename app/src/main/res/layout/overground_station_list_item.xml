@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <!--
+      ~  Copyright 2020 Anastasia Annin
+      ~
+      ~ Licensed under the Apache License, Version 2.0 (the "License");
+      ~ you may not use this file except in compliance with the License.
+      ~ You may obtain a copy of the License at
+      ~
+      ~ http://www.apache.org/licenses/LICENSE-2.0
+      ~
+      ~ Unless required by applicable law or agreed to in writing, software
+      ~ distributed under the License is distributed on an "AS IS" BASIS,
+      ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+      ~ See the License for the specific language governing permissions and
+      ~ limitations under the License.
+      ~
+    -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:id="@+id/overground_station_list">
+
+    <com.github.vipulasri.timelineview.TimelineView
+        android:id="@+id/timeline_over_stat"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:markerSize="20dp"
+        app:lineWidth="3dp"
+        app:startLineColor="@color/colorAccent"
+        app:endLineColor="@color/colorAccent"
+        app:lineStyle="dash"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_gravity="center_vertical"
+        app:cardBackgroundColor="@color/colorName"
+        app:contentPadding="15dp">
+
+        <TextView
+            android:id="@+id/stat_over_name"
+            style="@style/LineNameStationListStyle"
+            android:layout_marginStart="@dimen/line_station_margin_start"
+            android:layout_marginEnd="@dimen/line_station_margin_end"
+            android:textSize="@dimen/station_list_text_size"
+            tools:text="@string/station_name" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

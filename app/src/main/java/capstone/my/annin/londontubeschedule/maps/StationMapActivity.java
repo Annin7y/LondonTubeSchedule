@@ -294,8 +294,10 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
                 {
 
                     layer = new GeoJsonLayer(mMap, new JSONObject(simpleAllGeoJsonString.get(i)));
-                    if (layer != null) {
-                        if (mMap != null) {
+                    if (layer != null)
+                    {
+                        if (mMap != null)
+                        {
                             layer.addLayerToMap();
                             setPolygonGreen(layer);
                             for (GeoJsonFeature feature : layer.getFeatures())
@@ -307,8 +309,8 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
                             }
                         }
                     }
-                } catch (
-                        JSONException e) {
+                } catch (JSONException e)
+                {
                     e.printStackTrace();
                 }
             }
@@ -346,7 +348,8 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
 //            }
 //        }
 
-    public void setPolygonGreen(GeoJsonLayer layer) {
+    public void setPolygonGreen(GeoJsonLayer layer)
+    {
         GeoJsonPolygonStyle polyStyle = layer.getDefaultPolygonStyle();
         polyStyle.setFillColor(Color.GREEN);
         polyStyle.setStrokeColor(Color.GREEN);
@@ -367,7 +370,8 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        switch (item.getItemId()) {
+        switch (item.getItemId())
+        {
             case R.id.lineColorGuide:
                 Intent intent = new Intent(this, LineColorGuideActivity.class);
                 startActivity(intent);

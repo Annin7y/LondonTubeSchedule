@@ -1,5 +1,4 @@
 package capstone.my.annin.londontubeschedule.ui;
 
-public class OvergroundStationListActivity
-{
+public class OverScheduleActivity {
 }

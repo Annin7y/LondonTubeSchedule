@@ -89,6 +89,7 @@
     <string name="overground_list">Overground List</string>
     <string name="map_icon_main">Map icon</string>
     <string name="frag_over_instr">Click on text to view a list of stations</string>
+    <string name="over_stat_activity">Overground Stations</string>
 
 
 </resources>

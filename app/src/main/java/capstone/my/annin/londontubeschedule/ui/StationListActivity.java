@@ -141,7 +141,8 @@ public class StationListActivity extends AppCompatActivity implements StationAda
                 Toast.makeText(StationListActivity.this, getString(R.string.favorites_removed), Toast.LENGTH_SHORT).show();
                 extendedFABAdd.setText(R.string.favorites_button_text_add);
             }
-            else {
+            else
+                {
 //             // If the line is not favorite, we add it to the DB
                 mLineViewModel.insert(line);
                 Toast.makeText(StationListActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
@@ -229,7 +230,8 @@ public class StationListActivity extends AppCompatActivity implements StationAda
                     {
                         extendedFABAdd.setText(getString(R.string.favorites_button_text_remove));
 
-                    } else {
+                    } else
+                        {
                         extendedFABAdd.setText(getString(R.string.favorites_button_text_add));
                     }
                 });
@@ -273,7 +275,7 @@ public class StationListActivity extends AppCompatActivity implements StationAda
             if (savedInstanceState == null)
            {
 
-                TubeStationAsyncTask myStationTask = new TubeStationAsyncTask(this);
+               TubeStationAsyncTask myStationTask = new TubeStationAsyncTask(this);
                 myStationTask.execute(lineId);
             } else
                 {

@@ -45,6 +45,17 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="capstone.my.annin.londontubeschedule.ui.StationListActivity" />
         </activity>
+
+        <activity
+            android:name=".ui.OverStatListActivity"
+            android:label="@string/over_stat_activity"
+            android:parentActivityName=".ui.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="capstone.my.annin.londontubeschedule.ui.OverStatListActivity" />
+        </activity>
+
+
         <activity
             android:name=".maps.StationMapActivity"
             android:label="@string/station_map"
@@ -61,6 +72,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="capstone.my.annin.londontubeschedule.maps.StationMapActivity" />
         </activity>
+
         <activity
             android:name=".settings.SettingsActivity"
             android:label="@string/settings_label_manifest"
