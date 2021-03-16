@@ -407,19 +407,23 @@ public class JSONUtils
                 if (overgroundStatusArrayList != null)
                 {
                     JSONObject innerElem = overgroundStatusArrayList.getJSONObject(0);
-                    if (innerElem != null) {
+                    if (innerElem != null)
+                    {
                         String modeStatusDesc = "";
-                        if (innerElem.has("statusSeverityDescription")) {
+                        if (innerElem.has("statusSeverityDescription"))
+                        {
                             modeStatusDesc = innerElem.optString(KEY_OVERGROUND_STATUS_DESC);
                         }
                         String modeStatusReason = "";
-                        if (innerElem.has("reason")) {
+                        if (innerElem.has("reason"))
+                        {
                             modeStatusReason = innerElem.optString(KEY_OVERGROUND_STATUS_REASON);
                         }
 
                         OvergroundStatus overground = new OvergroundStatus(id, name, modeStatusDesc, modeStatusReason);
                         overgroundLines.add(overground);
-                    }}}}
+                    }}}
+        }
         catch (JSONException e)
         {
             // If an error is thrown when executing any of the above statements in the "try" block,
@@ -498,6 +502,16 @@ public class JSONUtils
                     }
                 }
             }
+            Collections.sort(stationsOver, new Comparator<OvergroundStation>()
+            {
+                @Override
+                public int compare(OvergroundStation o1, OvergroundStation o2)
+                {
+                    String station1 = o1.getStationName();
+                    String station2 = o2.getStationName();
+                    return station1.compareTo(station2);
+                }
+            });
         }
         catch (JSONException e)
         {

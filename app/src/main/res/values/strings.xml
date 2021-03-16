@@ -53,7 +53,7 @@
     <string name="button_map_text">View on Google Maps</string>
     <string name="button_map_fab_text">View on Google Maps</string>
     <string name="station_list">Stations</string>
-    <string name="station_schedule">Train Schedule</string>
+    <string name="station_schedule">Tube Train Schedule</string>
     <string name="station_map">London Tube Map</string>
     <string name="settings_menu_main">About</string>
     <string name="settings_label_manifest">About</string>
@@ -90,6 +90,7 @@
     <string name="map_icon_main">Map icon</string>
     <string name="frag_over_instr">Click on text to view a list of stations</string>
     <string name="over_stat_activity">Overground Stations</string>
+    <string name="over_stat_schedule">Overground Train Schedule</string>
 
 
 </resources>

@@ -198,7 +198,27 @@ public class NetworkUtils
             return urlOvergroundStationList;
         }
 
+    public static URL buildOverSchUrl(String overLineId, String statOverId)
+    {
+        URL urlOverSch = null;
+        try
+        {
 
+            Uri scheduleQueryUri = Uri.parse(BASE_URL_SCHEDULE).buildUpon()
+                    .appendPath(overLineId)
+                    .appendPath("Arrivals")
+                    .appendPath(statOverId)
+                    // .appendQueryParameter("direction", "outbound")
+                    .build();
+            urlOverSch = new URL(scheduleQueryUri.toString());
+        }
+        catch (MalformedURLException e)
+        {
+            e.printStackTrace();
+        }
+        Log.v(TAG, "Built URISchedule " + urlOverSch);
+        return urlOverSch;
+    }
 
     /**
      * Make an HTTP request to the given URL and return a String as the response.
@@ -438,7 +458,7 @@ public class NetworkUtils
     {
         String jsonOverStationResponse = "";
         // Log.i("URL: ", url.toString());
-        Timber.i(url.toString(),"URL: " );
+        Timber.i(url.toString());
 
         // If the URL is null, then return early.
         if (url == null)
@@ -489,6 +509,63 @@ public class NetworkUtils
         return jsonOverStationResponse;
     }
 
+    /**
+     * Make an HTTP request to the given URL and return a String as the response.
+     */
+    public static String makeHttpOvergroundScheduleRequest(URL url) throws IOException
+    {
+        String jsonOverStationResponse = "";
+        // Log.i("URL: ", url.toString());
+        Timber.i(url.toString());
+
+        // If the URL is null, then return early.
+        if (url == null)
+        {
+            return jsonOverStationResponse;
+        }
+
+        HttpURLConnection urlConnection = null;
+        InputStream inputStream = null;
+        try
+        {
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setReadTimeout(10000 /* milliseconds */);
+            urlConnection.setConnectTimeout(15000 /* milliseconds */);
+            urlConnection.setRequestMethod("GET");
+            urlConnection.connect();
+
+            // If the request was successful (response code 200),
+            // then read the input stream and parse the response.
+            if (urlConnection.getResponseCode() == 200)
+            {
+                inputStream = urlConnection.getInputStream();
+                jsonOverStationResponse = readFromStream(inputStream);
+            } else
+            {
+                Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
+            }
+        }
+        catch (IOException e)
+        {
+            //Log.e(LOG_TAG, "Problem retrieving line list JSON results.", e);
+            Timber.e(e,"Problem retrieving overground schedule JSON results." );
+        }
+        finally
+        {
+            if (urlConnection != null)
+            {
+                urlConnection.disconnect();
+            }
+            if (inputStream != null)
+            {
+                // Closing the input stream could throw an IOException, which is why
+                // the makeHttpRequest(URL url) method signature specifies than an IOException
+                // could be thrown.
+                inputStream.close();
+            }
+        }
+        return jsonOverStationResponse;
+    }
 
 
     /**
