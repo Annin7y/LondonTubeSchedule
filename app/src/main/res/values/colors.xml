@@ -34,4 +34,5 @@
     <color name="colorPiccadilly">#1D5587</color>
     <color name="colorVictoria">#5766FA</color>
     <color name="colorWaterloo">#87C1F3</color>
+    <color name="colorOverground">#C6EF880B</color>
 </resources>

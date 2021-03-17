@@ -16,6 +16,7 @@
 package capstone.my.annin.londontubeschedule.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -91,6 +92,9 @@ public class OverStatListActivity extends AppCompatActivity implements Overgroun
                */
                 Timber.i(overground.getModeId(), "lineId: ");
             }
+            overgroundStatusArrayList = getIntent().getParcelableArrayListExtra("overgroundStatusList");
+
+
             if (savedInstanceState == null)
             {
                 OvergroundStationAsyncTask myOverStatTask = new OvergroundStationAsyncTask(this);
@@ -125,6 +129,17 @@ public class OverStatListActivity extends AppCompatActivity implements Overgroun
     @Override
     public void onClick(OvergroundStation overgroundStation)
     {
+        Intent intent = new Intent(OverStatListActivity.this, OverScheduleActivity.class);
+        intent.putExtra("OvergroundStatus", overground);
+        intent.putExtra("OvergroundStation", overgroundStation);
+        intent.putParcelableArrayListExtra("overgroundStatusList", overgroundStatusArrayList);
+        intent.putParcelableArrayListExtra("stationList", overStatArrayList);
+        startActivity(intent);
+
+        //log event when the user selects a station
+        Bundle params = new Bundle();
+        params.putParcelable("station_select", overgroundStation);
+        mFirebaseAnalytics.logEvent("station_select",params);
 
     }
 

@@ -49,6 +49,8 @@ import capstone.my.annin.londontubeschedule.R;
 import capstone.my.annin.londontubeschedule.asynctask.AllLinesAsyncTaskInterface;
 import capstone.my.annin.londontubeschedule.asynctask.TubeGeoJsonAllLinesAsyncTask;
 import capstone.my.annin.londontubeschedule.pojo.Line;
+import capstone.my.annin.londontubeschedule.pojo.OvergroundStation;
+import capstone.my.annin.londontubeschedule.pojo.OvergroundStatus;
 import capstone.my.annin.londontubeschedule.pojo.Station;
 import timber.log.Timber;
 
@@ -61,6 +63,10 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
     public String lineId;
     public double latLocation;
     public double lonLocation;
+    OvergroundStatus overground;
+    OvergroundStation overgroundStation;
+    public String overLineId;
+    public String statOverId;
     private GoogleMap mMap;
     public GeoJsonLayer layer;
     private final int FILL_GREEN = 0x66aad2a5;
@@ -75,7 +81,8 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
     private ArrayList<Station> stationArrayList = new ArrayList<>();
     private ArrayList<Station> lineArrayList = new ArrayList<>();
     private ArrayList<ArrayList<Station>> stationSubArrayList = new ArrayList<>();
-
+    private ArrayList<OvergroundStatus> overgroundStatusArrayList = new ArrayList<>();
+    private ArrayList<OvergroundStation> overgroundStatArrayList = new ArrayList<>();
     /**
      * Specify the zoom level (from 2.0 to 21.0)
      * Values below this range are set to 2.0, and values above it are set to 21.0.
@@ -135,6 +142,28 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
 //
                     //  TubeGeoJsonAllLinesAsyncTask myAllTask = new TubeGeoJsonAllLinesAsyncTask(this, getApplicationContext());
                     //  myAllTask.execute();
+                }
+                overground = getIntent().getExtras().getParcelable("OvergroundStatus");
+                if(overground != null)
+                {
+                    overLineId = overground.getModeId();
+                    Timber.v(overground.getModeId(), "modeId: ");
+
+                    overgroundStation = getIntent().getExtras().getParcelable("OvergroundStation");
+                    if (overgroundStation != null)
+                    {
+                        statOverId = overgroundStation.getStationId();
+                        // Log.i("stationId: ", stations.getStationId());
+                        Timber.v(overgroundStation.getStationId(), "statOverId: ");
+
+                        latLocation = overgroundStation.getLatLocation();
+                        Timber.v(String.valueOf(overgroundStation.getLatLocation()));
+
+                        lonLocation = overgroundStation.getLonLocation();
+                        Timber.v(String.valueOf(overgroundStation.getLonLocation()));
+                    }
+                    overgroundStatArrayList = getIntent().getParcelableArrayListExtra("stationList");
+                    overgroundStatusArrayList = getIntent().getParcelableArrayListExtra("overgroundStatusList");
                 }
             }
             if (mapFragment != null)
@@ -246,6 +275,22 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
             // we draw the line on the map
 //        googleMap.addPolyline(polylineOptions);
         }
+        if (overgroundStation != null)
+        {
+            String statOverName = overgroundStation.getStationName();
+            // Create a LatLng with the coordinates of each station
+            LatLng stationCoordinates = new  LatLng(latLocation, lonLocation);
+            MarkerOptions markerOptions = new MarkerOptions()
+
+                    // .icon(BitmapDescriptorFactory.fromResource(R.drawable.baseline_place_black_18dp))
+                    .icon(BitmapDescriptorFactory
+                            .defaultMarker(BitmapDescriptorFactory.HUE_CYAN))
+                    .title(statOverName)
+                    .position(stationCoordinates);
+            googleMap.addMarker(markerOptions);
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(stationCoordinates, ZOOM));
+        }
+
         //AsyncTask code from onCreate; AsyncTask now run after initializing the map
         TubeGeoJsonAllLinesAsyncTask myAllTask = new TubeGeoJsonAllLinesAsyncTask(this, getApplicationContext());
         myAllTask.execute();
@@ -286,7 +331,10 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
         {
             ArrayList<Integer> colors = new ArrayList<>(Arrays.asList(R.color.colorBakerloo, R.color.colorCentral, R.color.colorCircle,
                     R.color.colorDistrict, R.color.colorHammersmithCity, R.color.colorJubilee, R.color.colorMetropolitan, R.color.colorNorthern,
-                    R.color.colorPiccadilly, R.color.colorVictoria, R.color.colorWaterloo));
+                    R.color.colorPiccadilly, R.color.colorVictoria, R.color.colorWaterloo, R.color.colorOverground, R.color.colorOverground,
+                    R.color.colorOverground, R.color.colorOverground, R.color.colorOverground, R.color.colorOverground, R.color.colorOverground,
+                    R.color.colorOverground, R.color.colorOverground, R.color.colorOverground, R.color.colorOverground, R.color.colorOverground,
+                    R.color.colorOverground));
 
             for (int i = 0; i < simpleAllGeoJsonString.size(); i++)
             {

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~  Copyright 2020 Anastasia Annin
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/over_schedule_list">
+
+    <TextView
+        android:id="@+id/schedule_name_label"
+        style="@style/ScheduleLabelStyle"
+        android:layout_marginStart="@dimen/line_station_margin_start"
+        android:layout_marginEnd="@dimen/line_station_margin_end"
+        android:textSize="@dimen/sched_label_text_size"
+        android:layout_marginTop="@dimen/sched_station_name_top"
+        android:text="@string/name_label"
+        />
+
+    <TextView
+        android:id="@+id/schedule_station_name"
+        style="@style/ScheduleNameStyle"
+        android:layout_marginStart="@dimen/line_station_margin_start"
+        android:layout_marginEnd="@dimen/line_station_margin_end"
+        android:padding="@dimen/sch_text_padding"
+        android:textSize="@dimen/sched_name_text_size"
+        tools:text="@string/station_name"
+        />
+
+    <TextView
+        android:id="@+id/schedule_platform_label"
+        style="@style/ScheduleLabelStyle"
+        android:layout_marginStart="@dimen/line_station_margin_start"
+        android:layout_marginEnd="@dimen/line_station_margin_end"
+        android:layout_marginTop="@dimen/sch_label_top_padding"
+        android:textSize="@dimen/sched_label_text_size"
+        android:text="@string/platform_label"/>
+
+    <TextView
+        android:id="@+id/schedule_platform"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/line_station_margin_start"
+        android:layout_marginEnd="@dimen/line_station_margin_end"
+        android:fontFamily="serif"
+        android:padding="@dimen/sch_text_padding"
+        android:textSize="@dimen/sched_name_text_size"
+        android:textColor="#09C"
+        tools:text="@string/platform_text" />
+
+
+    <TextView
+        android:id="@+id/schedule_arrival_label"
+        style="@style/ScheduleLabelStyle"
+        android:layout_marginStart="@dimen/line_station_margin_start"
+        android:layout_marginEnd="@dimen/line_station_margin_end"
+        android:layout_marginTop="@dimen/sch_label_top_padding"
+        android:textSize="@dimen/sched_label_text_size"
+        android:text="@string/arrival_label"/>
+
+    <TextView
+        android:id="@+id/schedule_arrival"
+        style="@style/ScheduleNameStyle"
+        android:layout_marginStart="@dimen/line_station_margin_start"
+        android:layout_marginEnd="@dimen/line_station_margin_end"
+        android:padding="@dimen/sch_text_padding"
+        android:textSize="@dimen/sched_name_text_size"
+        tools:text="@string/arrival_text" />
+
+    <TextView
+        android:id="@+id/schedule_destination_label"
+        style="@style/ScheduleLabelStyle"
+        android:layout_marginStart="@dimen/line_station_margin_start"
+        android:layout_marginEnd="@dimen/line_station_margin_end"
+        android:layout_marginTop="@dimen/sch_label_top_padding"
+        android:textSize="@dimen/sched_label_text_size"
+        android:text="@string/destination_label"
+        />
+
+    <TextView
+        android:id="@+id/schedule_destination_name"
+        style="@style/ScheduleNameStyle"
+        android:layout_marginStart="@dimen/line_station_margin_start"
+        android:layout_marginEnd="@dimen/line_station_margin_end"
+        android:padding="@dimen/sch_text_padding"
+        android:textSize="@dimen/sched_name_text_size"
+        tools:text="@string/destination_text"
+        />
+
+    <TextView
+        android:id="@+id/empty_towards"
+        style="@style/ScheduleNameStyle"
+        android:layout_marginStart="@dimen/line_station_margin_start"
+        android:layout_marginEnd="@dimen/line_station_margin_end"
+        android:padding="@dimen/sch_text_padding"
+        android:visibility="gone"
+        android:text = "@string/empty_view_text" />
+
+</LinearLayout>

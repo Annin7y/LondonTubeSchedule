@@ -514,14 +514,14 @@ public class NetworkUtils
      */
     public static String makeHttpOvergroundScheduleRequest(URL url) throws IOException
     {
-        String jsonOverStationResponse = "";
+        String jsonOverSchResponse = "";
         // Log.i("URL: ", url.toString());
         Timber.i(url.toString());
 
         // If the URL is null, then return early.
         if (url == null)
         {
-            return jsonOverStationResponse;
+            return jsonOverSchResponse;
         }
 
         HttpURLConnection urlConnection = null;
@@ -539,7 +539,7 @@ public class NetworkUtils
             if (urlConnection.getResponseCode() == 200)
             {
                 inputStream = urlConnection.getInputStream();
-                jsonOverStationResponse = readFromStream(inputStream);
+                jsonOverSchResponse = readFromStream(inputStream);
             } else
             {
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
@@ -564,9 +564,8 @@ public class NetworkUtils
                 inputStream.close();
             }
         }
-        return jsonOverStationResponse;
+        return jsonOverSchResponse;
     }
-
 
     /**
      * Convert the {@link InputStream} into a String which contains the

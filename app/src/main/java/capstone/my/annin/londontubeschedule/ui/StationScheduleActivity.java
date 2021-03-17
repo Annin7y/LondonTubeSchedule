@@ -77,7 +77,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     private static final String KEY_SCHEDULE_LIST = "schedule_list";
     Station station;
     private ArrayList<Station> stationArrayList = new ArrayList<>();
-    private ArrayList<Station> lineArrayList = new ArrayList<>();
+    private ArrayList<Line> lineArrayList = new ArrayList<>();
     private static final String KEY_STATION_LIST = "station_list";
     private static final String KEY_LINE_LIST = "line_list";
     public String stationId;

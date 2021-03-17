@@ -15,6 +15,69 @@
 
 package capstone.my.annin.londontubeschedule.asynctask;
 
-public class OvergroundScheduleAsyncTask
+import android.os.AsyncTask;
+
+import java.net.URL;
+import java.util.ArrayList;
+
+import capstone.my.annin.londontubeschedule.pojo.OvergroundSchedule;
+import capstone.my.annin.londontubeschedule.pojo.Schedule;
+import capstone.my.annin.londontubeschedule.utils.JSONUtils;
+import capstone.my.annin.londontubeschedule.utils.NetworkUtils;
+
+public class OvergroundScheduleAsyncTask extends AsyncTask<String, Void, ArrayList<OvergroundSchedule>>
 {
+    private static final String TAG = OvergroundScheduleAsyncTask.class.getSimpleName();
+
+    private OvergroundScheduleAsyncTaskInterface listener;
+
+    public OvergroundScheduleAsyncTask(OvergroundScheduleAsyncTaskInterface listener)
+    {
+        this.listener = listener;
+    }
+
+    @Override
+    protected void onPreExecute()
+    {
+        super.onPreExecute();
+    }
+
+    @Override
+    protected ArrayList<OvergroundSchedule> doInBackground(String... params)
+    {
+        if (params.length == 0)
+        {
+            return null;
+        }
+        String overlineId = params[0];
+        String statOverId = params[1];
+
+        URL scheduleRequestUrl = NetworkUtils.buildOverSchUrl(overlineId, statOverId);
+
+        try
+        {
+            String jsonScheduleResponse = NetworkUtils
+                    .makeHttpOvergroundScheduleRequest(scheduleRequestUrl);
+
+            return JSONUtils.extractFeatureFromOverSchJson(jsonScheduleResponse);
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    protected void onPostExecute(ArrayList<OvergroundSchedule> mOverScheduleList)
+    {
+        super.onPostExecute(mOverScheduleList);
+        /*the if method is commented out because the error message will be displayed in the Main Activity if there is no internet connection
+        the if statement is included in the returnData method in the Main Activity
+        */
+        //   if (mOverScheduleList != null) {}
+        listener.returnOverScheduleData(mOverScheduleList);
+    }
+
 }

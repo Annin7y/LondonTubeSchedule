@@ -46,12 +46,12 @@ public class Schedule implements Parcelable
     private String directionTowards;
 
     /**
-     * expectedArrival
+     * Expected Arrival
      */
     private String expectedArrival;
 
     /**
-     * platformName
+     * Platform Name
      */
     private String platformName;
 
@@ -134,8 +134,6 @@ public class Schedule implements Parcelable
     {
         return platformName;
     }
-
-
 
     protected Schedule(Parcel in)
     {

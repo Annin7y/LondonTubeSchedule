@@ -26,6 +26,7 @@ import java.util.Comparator;
 import java.util.LinkedHashSet;
 
 import capstone.my.annin.londontubeschedule.pojo.Line;
+import capstone.my.annin.londontubeschedule.pojo.OvergroundSchedule;
 import capstone.my.annin.londontubeschedule.pojo.OvergroundStation;
 import capstone.my.annin.londontubeschedule.pojo.OvergroundStatus;
 import capstone.my.annin.londontubeschedule.pojo.Schedule;
@@ -525,5 +526,83 @@ public class JSONUtils
         return stationsOver;
     }
 
+    public static ArrayList<OvergroundSchedule> extractFeatureFromOverSchJson(String overScheduleJSON)
+    {
+        // If the JSON string is empty or null, then return early.
+        if (TextUtils.isEmpty(overScheduleJSON))
+        {
+            return null;
+        }
 
+        ArrayList<OvergroundSchedule> overSchedules = new ArrayList<>();
+
+        try
+        {
+            // Create a JSONObject from the JSON response string
+            JSONArray overScheduleArray = new JSONArray(overScheduleJSON);
+
+            // For each schedule item in the overScheduleArray, create an {@link OvergroundSchedule} object
+            for (int i = 0; i < overScheduleArray.length(); i++)
+            {
+                // Get a single schedule description at position i within the schedule list
+                JSONObject currentSchedule = overScheduleArray.getJSONObject(i);
+
+                //Extract values for the following keys
+                String naptanIdStation = "";
+                if (currentSchedule.has("naptanId"))
+                {
+                    naptanIdStation = currentSchedule.optString(KEY_STATION_NAPTAN_ID);
+                }
+
+                String scheduleNameStation = "";
+                if (currentSchedule.has("stationName"))
+                {
+                    scheduleNameStation = currentSchedule.optString(KEY_STATION_SCHEDULE_NAME);
+                }
+
+                String nameDestination = "";
+                if (currentSchedule.has("destinationName"))
+                {
+                    nameDestination = currentSchedule.optString(KEY_DESTINATION_NAME);
+                }
+
+                String arrivalExpected = "";
+                if (currentSchedule.has("expectedArrival"))
+                {
+                    arrivalExpected = currentSchedule.optString(KEY_EXPECTED_ARRIVAL);
+                }
+
+                String platformName = "";
+                if (currentSchedule.has("platformName"))
+                {
+                    platformName = currentSchedule.optString(KEY_PLATFORM_NAME);
+                }
+
+                OvergroundSchedule schedule = new OvergroundSchedule(naptanIdStation, scheduleNameStation, nameDestination, arrivalExpected, platformName);
+                overSchedules.add(schedule);
+            }
+            //Code based on the 1st answer in the following stackoverflow post:
+            //https://stackoverflow.com/questions/17697568/how-to-sort-jsonarray-in-android/17698236
+            Collections.sort(overSchedules, new Comparator<OvergroundSchedule>()
+            {
+                @Override
+                public int compare(OvergroundSchedule o1, OvergroundSchedule o2)
+                {
+                    String time1 = o1.getOverExpArrival();
+                    String time2 = o2.getOverExpArrival();
+                    return time1.compareTo(time2);
+                }
+            });
+        }
+        catch (JSONException e)
+        {
+            // If an error is thrown when executing any of the above statements in the "try" block,
+            // catch the exception here, so the app doesn't crash. Print a log message
+            // with the message from the exception.
+            Timber.e(e,"Problem parsing overground schedule JSON results" );
+
+        }
+        //Return the overground schedule list
+        return overSchedules;
+    }
 }
