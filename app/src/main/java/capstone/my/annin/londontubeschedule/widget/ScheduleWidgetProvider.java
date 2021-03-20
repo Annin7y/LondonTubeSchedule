@@ -28,6 +28,7 @@ import android.widget.RemoteViews;
 import capstone.my.annin.londontubeschedule.R;
 import capstone.my.annin.londontubeschedule.maps.StationMapActivity;
 import capstone.my.annin.londontubeschedule.ui.MainActivity;
+import capstone.my.annin.londontubeschedule.ui.OverScheduleActivity;
 import capstone.my.annin.londontubeschedule.ui.StationListActivity;
 import capstone.my.annin.londontubeschedule.ui.StationScheduleActivity;
 import timber.log.Timber;
@@ -44,6 +45,7 @@ public class ScheduleWidgetProvider extends AppWidgetProvider
 
     public static final String EXTRA_ITEM =
             "annin.my.android.ScheduleWidgetProvider.EXTRA_ITEM";
+
 
     public void setPendingIntentTemplate(int viewId, PendingIntent pendingIntentTemplate)
     {
@@ -75,6 +77,8 @@ public class ScheduleWidgetProvider extends AppWidgetProvider
             Intent detailIntent = new Intent(context, StationScheduleActivity.class);
             stackBuilder.addNextIntent(detailIntent);
 
+//            Intent detailIntent2 = new Intent(context, OverScheduleActivity.class);
+//            stackBuilder.addNextIntent(detailIntent2);
 
             PendingIntent pIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
             //PendingIntent pIntent = PendingIntent.getActivity(context, 0, detailIntent, PendingIntent.FLAG_UPDATE_CURRENT);

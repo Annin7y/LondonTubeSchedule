@@ -88,8 +88,8 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
     private Context context;
     private ShareActionProvider mShareActionProvider;
     OvergroundSchedule stationArrival;
-    private String stationShareStationName;
-    public String stationShareArrivalTime;
+    private String stationShareOverStationName;
+    public String stationShareOverArrivalTime;
 
     private String stationShareDirection;
     @BindView(R.id.empty_view_schedule)
@@ -239,62 +239,62 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
 
             stationArrival = overSchArrayList.get(0);
 
-            stationShareStationName = stationArrival.getOverStatSchName();
-            stationShareArrivalTime = stationArrival.getOverExpArrival();
+            stationShareOverStationName = stationArrival.getOverStatSchName();
+            stationShareOverArrivalTime = stationArrival.getOverExpArrival();
 
             swipeRefreshLayout.setRefreshing(false);
             //Store Schedule Info in SharedPreferences
-//            SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-//            SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
-//
-//            Gson gson = new Gson();
-//            String json = gson.toJson(overSchArrayList);
-//            prefsEditor.putString("ScheduleList_Widget", json);
-//
-//            String jsonOverStatusList = gson.toJson(overgroundStatusArrayList);
-//            prefsEditor.putString("OverStatusList_Widget", jsonOverStatusList);
-//
-//            String jsonStationList = gson.toJson(overStatArrayList);
-//            prefsEditor.putString("StationList_Widget", jsonStationList);
-//
-//            //Save the overgroundStatus as a JSON string using Preferences.
-//            String jsonStatus = gson.toJson(overground);
-//            prefsEditor.putString("OverStatus", jsonStatus);
-//
-//            //Save the Stations as a JSON string using Preferences.
-//            String jsonStation = gson.toJson(overgroundStation);
-//            prefsEditor.putString("Stations", jsonStation);
-//
-//            prefsEditor.apply();
-//
-//            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-//            //convert time zone to London UK time(GMT)
-//            //Code based on the first answer in the following stackoverflow post:
-//            // https://stackoverflow.com/questions/22814263/how-to-set-the-timezone-for-string-parsing-in-android
-//            simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-//            Date date = null;
-//            try {
-//                //Relative date code based on this example:
-//                //https://stackoverflow.com/questions/49441035/dateutils-getrelativetimespanstring-returning-a-formatted-date-string-instead-of
-//
-//                date = simpleDateFormat.parse(stationShareArrivalTime);
-//                SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
-//                newDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-//                stationShareArrivalTime = newDateFormat.format(date);
-//            }
-//            catch (ParseException e)
-//            {
-//
-//                e.printStackTrace();
-//            }
-//
-//            //Send to Widget Provider code based on the answer with 9 upvotes in this post:
-//            //https://stackoverflow.com/questions/3455123/programmatically-update-widget-from-activity-service-receiver
-//            Context context = getApplicationContext();
-//            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-//            ComponentName thisWidget = new ComponentName(context, ScheduleWidgetProvider.class);
-//            int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
-//            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.appwidget_list);
+           SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+           SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
+
+           Gson gson = new Gson();
+           String jsonOver = gson.toJson(overSchArrayList);
+           prefsEditor.putString("OverScheduleList_Widget", jsonOver);
+
+           String jsonOverStatusList = gson.toJson(overgroundStatusArrayList);
+           prefsEditor.putString("OverStatusList_Widget", jsonOverStatusList);
+
+           String jsonStationOverList = gson.toJson(overStatArrayList);
+           prefsEditor.putString("OverStationList_Widget", jsonStationOverList);
+
+           //Save the overgroundStatus as a JSON string using Preferences.
+            String jsonStatus = gson.toJson(overground);
+            prefsEditor.putString("OverStatus", jsonStatus);
+
+           //Save the Overground Stations as a JSON string using Preferences.
+            String jsonOverStation = gson.toJson(overgroundStation);
+            prefsEditor.putString("OverStations", jsonOverStation);
+
+            prefsEditor.apply();
+
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+            //convert time zone to London UK time(GMT)
+            //Code based on the first answer in the following stackoverflow post:
+            // https://stackoverflow.com/questions/22814263/how-to-set-the-timezone-for-string-parsing-in-android
+            simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+            Date date = null;
+            try {
+                //Relative date code based on this example:
+                //https://stackoverflow.com/questions/49441035/dateutils-getrelativetimespanstring-returning-a-formatted-date-string-instead-of
+
+                date = simpleDateFormat.parse(stationShareOverArrivalTime);
+                SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
+                newDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+                stationShareOverArrivalTime = newDateFormat.format(date);
+            }
+            catch (ParseException e)
+            {
+
+                e.printStackTrace();
+            }
+
+            //Send to Widget Provider code based on the answer with 9 upvotes in this post:
+            //https://stackoverflow.com/questions/3455123/programmatically-update-widget-from-activity-service-receiver
+            Context context = getApplicationContext();
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+            ComponentName thisWidget = new ComponentName(context, ScheduleWidgetProvider.class);
+            int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.appwidget_list);
 
 
         } else
@@ -395,11 +395,11 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
 
     public Intent createShareIntent()
     {
-        if(stationShareStationName != null && stationShareArrivalTime!= null && stationShareDirection != null)
+        if(stationShareOverStationName != null && stationShareOverArrivalTime!= null && stationShareDirection != null)
         {
 
             String shareTitle = "Next train at ";
-            String data = shareTitle + "\n" + stationShareStationName + "\n" + stationShareArrivalTime + "\n" + stationShareDirection;
+            String data = shareTitle + "\n" + stationShareOverStationName + "\n" + stationShareOverArrivalTime + "\n" + stationShareDirection;
 
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/plain");

@@ -16,7 +16,7 @@
 -->
 
 <resources>
-    <string name="app_name">London Tube Schedule</string>
+    <string name="app_name">London Tube and Overground Schedule</string>
     <string name="tube_list_instructions">Click on a line to view a list of stations</string>
     <string name="station_list_instructions">Click on a station to view train schedules.</string>
     <string name="line_name">Bakerloo</string>

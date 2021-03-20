@@ -69,7 +69,7 @@
             android:parentActivityName=".ui.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="capstone.my.annin.londontubeschedule.ui.OverStatListActivity" />
+                android:value="capstone.my.annin.londontubeschedule.ui.MainActivity" />
         </activity>
 
         <activity

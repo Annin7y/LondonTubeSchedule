@@ -36,6 +36,9 @@ import java.util.TimeZone;
 
 import capstone.my.annin.londontubeschedule.R;
 import capstone.my.annin.londontubeschedule.pojo.Line;
+import capstone.my.annin.londontubeschedule.pojo.OvergroundSchedule;
+import capstone.my.annin.londontubeschedule.pojo.OvergroundStation;
+import capstone.my.annin.londontubeschedule.pojo.OvergroundStatus;
 import capstone.my.annin.londontubeschedule.pojo.Schedule;
 import capstone.my.annin.londontubeschedule.pojo.Station;
 
@@ -48,6 +51,12 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
     private String stationWidgetArrivalTime;
     private Line lines;
     private Station stations;
+    private ArrayList<OvergroundSchedule> mOverScheduleList;
+    private ArrayList<OvergroundStation> mOverStationList;
+    private ArrayList<OvergroundStatus> mOverStatusList;
+    private String overStatWidgetArrivalTime;
+    private OvergroundStatus overgroundStatus;
+    private OvergroundStation overgroundStation;
 
     public ScheduleWidgetViewFactory(Context context) {
         mContext = context;
@@ -92,69 +101,150 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
         String jsonStations = sharedPreferences.getString("Stations", "");
         stations = gson.fromJson(jsonStations, Station.class);
 
+        Type typeOverSch = new TypeToken<List<OvergroundSchedule>>()
+        {
+        }.getType();
+        String gsonOverSchString = sharedPreferences.getString("OverScheduleList_Widget", "");
+        mOverScheduleList = gson.fromJson(gsonOverSchString, typeOverSch);
+
+        Type typeOverStatus = new TypeToken<List<Line>>()
+        {
+        }.getType();
+        String gsonOverStatString = sharedPreferences.getString("OverStatusList_Widget", "");
+        mOverStatusList = gson.fromJson(gsonOverStatString, typeOverStatus);
+
+        Type typeOverStation = new TypeToken<List<OvergroundStation>>()
+        {
+        }.getType();
+        String gsonOverStringStation = sharedPreferences.getString("OverStationList_Widget", "");
+        mOverStationList = gson.fromJson(gsonOverStringStation, typeOverStation);
+
+        //Extract the JSON lines from preferences and assign it to an OverStatus object.
+        String jsonOverStatus = sharedPreferences.getString("Overstatus", "");
+        overgroundStatus = gson.fromJson(jsonOverStatus, OvergroundStatus.class);
+
+        //Extract the JSON stations from preferences and assign it to an Overground Stations object.
+        String jsonOverStations = sharedPreferences.getString("OverStations", "");
+        overgroundStation = gson.fromJson(jsonOverStations, OvergroundStation.class);
+
     }
 
     @Override
     public int getCount()
     {
-        return mScheduleList.size();
+        return mScheduleList.size() + mOverScheduleList.size();
     }
 
     @Override
     public RemoteViews getViewAt(int position)
     {
-        Schedule schedule = mScheduleList.get(position);
-
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-        Date date = null;
-
-        try
-        {
-            date = simpleDateFormat.parse(schedule.getExpectedArrival());
-            //  date.toString();
-            if (date != null)
-            {
-                long timeInMilliseconds = date.getTime();
-
-                //Convert the date to a relative future date("in 4 minutes"); code based on this example:
-                //https://stackoverflow.com/questions/49441035/dateutils-getrelativetimespanstring-returning-a-formatted-date-string-instead-of
-                CharSequence relativeDate = DateUtils.getRelativeTimeSpanString(timeInMilliseconds,
-                        System.currentTimeMillis(),
-                        DateUtils.MINUTE_IN_MILLIS,
-                        DateUtils.FORMAT_ABBREV_RELATIVE);
-
-                //convert CharSequence to String; Based on the following StackOverflow post:
-                // https://stackoverflow.com/questions/35305236/converting-from-charsequence-to-string-in-java
-                String futureDate = String.valueOf(relativeDate);
-               // futureDate.toString();
-                stationWidgetArrivalTime = futureDate;
-            }
-
-        } catch (ParseException e)
-        {
-            e.printStackTrace();
-        }
-        //Code commented out; relative date implemented
-       // SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
-      //  String finalDate = newDateFormat.format(date);
-        // stationWidgetArrivalTime = finalDate;
-
         RemoteViews itemView = new RemoteViews(mContext.getPackageName(), R.layout.schedule_widget_list_item);
+        if(position < mScheduleList.size())
+        {
+            Schedule schedule = mScheduleList.get(position);
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+            simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+            Date date = null;
 
-        itemView.setTextViewText(R.id.schedule_widget_station_name, schedule.getStationScheduleName());
-        itemView.setTextViewText(R.id.schedule_widget_arrival, stationWidgetArrivalTime);
-        itemView.setTextViewText(R.id.schedule_widget_towards, schedule.getDirectionTowards());
+            try
+            {
+                date = simpleDateFormat.parse(schedule.getExpectedArrival());
+                //  date.toString();
+                if (date != null)
+                {
+                    long timeInMilliseconds = date.getTime();
 
-        Intent intent = new Intent();
-        intent.putExtra(ScheduleWidgetProvider.EXTRA_ITEM, schedule);
-        intent.putExtra("Line", lines);
-        intent.putExtra("Station", stations);
-        intent.putParcelableArrayListExtra("lineList", mLineList);
-        intent.putParcelableArrayListExtra("stationList", mStationList);
-        itemView.setOnClickFillInIntent(R.id.schedule_widget_list, intent);
+                    //Convert the date to a relative future date("in 4 minutes"); code based on this example:
+                    //https://stackoverflow.com/questions/49441035/dateutils-getrelativetimespanstring-returning-a-formatted-date-string-instead-of
+                    CharSequence relativeDate = DateUtils.getRelativeTimeSpanString(timeInMilliseconds,
+                            System.currentTimeMillis(),
+                            DateUtils.MINUTE_IN_MILLIS,
+                            DateUtils.FORMAT_ABBREV_RELATIVE);
 
-        return itemView;
+                    //convert CharSequence to String; Based on the following StackOverflow post:
+                    // https://stackoverflow.com/questions/35305236/converting-from-charsequence-to-string-in-java
+                    String futureDate = String.valueOf(relativeDate);
+                    // futureDate.toString();
+                    stationWidgetArrivalTime = futureDate;
+                }
+
+            } catch (ParseException e)
+            {
+                e.printStackTrace();
+            }
+            //Code commented out; relative date implemented
+            // SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
+            //  String finalDate = newDateFormat.format(date);
+            // stationWidgetArrivalTime = finalDate;
+
+            // RemoteViews itemView = new RemoteViews(mContext.getPackageName(), R.layout.schedule_widget_list_item);
+
+            itemView.setTextViewText(R.id.schedule_widget_station_name, schedule.getStationScheduleName());
+            itemView.setTextViewText(R.id.schedule_widget_arrival, stationWidgetArrivalTime);
+            itemView.setTextViewText(R.id.schedule_widget_towards, schedule.getDirectionTowards());
+
+            Intent intent = new Intent();
+            intent.putExtra(ScheduleWidgetProvider.EXTRA_ITEM, schedule);
+            intent.putExtra("Line", lines);
+            intent.putExtra("Station", stations);
+            intent.putParcelableArrayListExtra("lineList", mLineList);
+            intent.putParcelableArrayListExtra("stationList", mStationList);
+            itemView.setOnClickFillInIntent(R.id.schedule_widget_list, intent);
+        }
+        else if(position < mOverScheduleList.size() - mScheduleList.size())
+        {
+            OvergroundSchedule overgroundSchedule = mOverScheduleList.get(position);
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+            simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+            Date date = null;
+
+            try {
+                date = simpleDateFormat.parse(overgroundSchedule.getOverExpArrival());
+                //  date.toString();
+                if (date != null)
+                {
+                    long timeInMilliseconds = date.getTime();
+
+                    //Convert the date to a relative future date("in 4 minutes"); code based on this example:
+                    //https://stackoverflow.com/questions/49441035/dateutils-getrelativetimespanstring-returning-a-formatted-date-string-instead-of
+                    CharSequence relativeDate = DateUtils.getRelativeTimeSpanString(timeInMilliseconds,
+                            System.currentTimeMillis(),
+                            DateUtils.MINUTE_IN_MILLIS,
+                            DateUtils.FORMAT_ABBREV_RELATIVE);
+
+                    //convert CharSequence to String; Based on the following StackOverflow post:
+                    // https://stackoverflow.com/questions/35305236/converting-from-charsequence-to-string-in-java
+                    String futureDate = String.valueOf(relativeDate);
+                    // futureDate.toString();
+                    overStatWidgetArrivalTime = futureDate;
+                }
+
+            } catch (ParseException e)
+            {
+                e.printStackTrace();
+            }
+            //Code commented out; relative date implemented
+            // SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
+            //  String finalDate = newDateFormat.format(date);
+            // stationWidgetArrivalTime = finalDate;
+
+            // RemoteViews itemView = new RemoteViews(mContext.getPackageName(), R.layout.schedule_widget_list_item);
+
+            itemView.setTextViewText(R.id.schedule_widget_station_name, overgroundSchedule.getOverStatSchName());
+            itemView.setTextViewText(R.id.schedule_widget_arrival, stationWidgetArrivalTime);
+            itemView.setTextViewText(R.id.schedule_widget_towards, overgroundSchedule.getOverDestName());
+
+            Intent intent = new Intent();
+            intent.putExtra(ScheduleWidgetProvider.EXTRA_ITEM, overgroundSchedule);
+            intent.putExtra("OverStatus", overgroundStatus);
+            intent.putExtra("OverStations", overgroundStation);
+            intent.putParcelableArrayListExtra("overStatusList", mOverStatusList);
+            intent.putParcelableArrayListExtra("overStationList", mOverStationList);
+            itemView.setOnClickFillInIntent(R.id.schedule_widget_list, intent);
+
+        }
+
+            return itemView;
     }
 
 
