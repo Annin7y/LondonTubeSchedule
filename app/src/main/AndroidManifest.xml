@@ -76,19 +76,23 @@
             android:name=".ui.OverScheduleActivity"
             android:label="@string/over_stat_schedule"
             android:launchMode="singleTop"
-            android:parentActivityName=".ui.OverStatListActivity">
+            android:parentActivityName=".ui.StationScheduleActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="capstone.my.annin.londontubeschedule.ui.OverStatListActivity" />
+                android:value="capstone.my.annin.londontubeschedule.ui.StationScheduleActivity" />
         </activity>
 
         <activity
             android:name=".maps.StationMapActivity"
             android:label="@string/station_map"
-            android:parentActivityName=".ui.StationScheduleActivity">
+            android:launchMode="singleTop"
+            android:parentActivityName=".ui.OverStatListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="capstone.my.annin.londontubeschedule.ui.StationScheduleActivity" />
+                android:value="capstone.my.annin.londontubeschedule.ui.OverStatListActivity" />
+            >
+
+
         </activity>
         <activity
             android:name=".maps.LineColorGuideActivity"

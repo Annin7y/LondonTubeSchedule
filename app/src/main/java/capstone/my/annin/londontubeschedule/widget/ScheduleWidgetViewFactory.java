@@ -57,6 +57,7 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
     private String overStatWidgetArrivalTime;
     private OvergroundStatus overgroundStatus;
     private OvergroundStation overgroundStation;
+    OvergroundSchedule overgroundSchedule;
 
     public ScheduleWidgetViewFactory(Context context) {
         mContext = context;
@@ -191,9 +192,9 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
             intent.putParcelableArrayListExtra("stationList", mStationList);
             itemView.setOnClickFillInIntent(R.id.schedule_widget_list, intent);
         }
-        else if(position < mOverScheduleList.size() - mScheduleList.size())
+        else  //if(position < mOverScheduleList.size() - mScheduleList.size())
         {
-            OvergroundSchedule overgroundSchedule = mOverScheduleList.get(position);
+            OvergroundSchedule overgroundSchedule = mOverScheduleList.get(position - mScheduleList.size());
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
             simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
             Date date = null;

@@ -426,6 +426,10 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
                 startActivity(intent);
                 return true;
 
+            case android.R.id.home:
+            finish();
+            return true;
+
 
             default:
                 return super.onOptionsItemSelected(item);
