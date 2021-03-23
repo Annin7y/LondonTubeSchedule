@@ -100,6 +100,9 @@ public class LineColorGuideActivity extends AppCompatActivity
         lineColor = new LineColor(10, "Waterloo & City");
         lineColorArrayList.add(lineColor);
 
+        lineColor = new LineColor(10, "Overground");
+        lineColorArrayList.add(lineColor);
+
         lineColorGuideAdapter.notifyDataSetChanged();
     }
 }

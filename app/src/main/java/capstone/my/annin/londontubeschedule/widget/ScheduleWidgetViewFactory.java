@@ -192,7 +192,7 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
             intent.putParcelableArrayListExtra("stationList", mStationList);
             itemView.setOnClickFillInIntent(R.id.schedule_widget_list, intent);
         }
-        else  //if(position < mOverScheduleList.size() - mScheduleList.size())
+        else
         {
             OvergroundSchedule overgroundSchedule = mOverScheduleList.get(position - mScheduleList.size());
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");

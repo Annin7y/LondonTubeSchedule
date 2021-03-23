@@ -113,6 +113,10 @@ public class LineColorGuideAdapter extends RecyclerView.Adapter<LineColorGuideAd
             case 10:
                 holder.lineName.setTextColor(ContextCompat.getColor(context, R.color.colorWaterloo));
                 break;
+
+            case 11:
+                holder.lineName.setTextColor(ContextCompat.getColor(context, R.color.colorOverground));
+                break;
         }
     }
 

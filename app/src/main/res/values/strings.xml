@@ -54,7 +54,7 @@
     <string name="button_map_fab_text">View on Google Maps</string>
     <string name="station_list">Stations</string>
     <string name="station_schedule">Tube Train Schedule</string>
-    <string name="station_map">London Tube Map</string>
+    <string name="station_map">London Tube and Overground Map</string>
     <string name="settings_menu_main">About</string>
     <string name="settings_label_manifest">About</string>
     <string name="privacy_policy">Privacy Policy</string>
