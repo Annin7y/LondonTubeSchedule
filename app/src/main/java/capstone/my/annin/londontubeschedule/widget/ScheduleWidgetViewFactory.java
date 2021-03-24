@@ -15,6 +15,7 @@
 
 package capstone.my.annin.londontubeschedule.widget;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,6 +24,7 @@ import android.text.format.DateUtils;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
+import com.google.firebase.components.Component;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -41,6 +43,8 @@ import capstone.my.annin.londontubeschedule.pojo.OvergroundStation;
 import capstone.my.annin.londontubeschedule.pojo.OvergroundStatus;
 import capstone.my.annin.londontubeschedule.pojo.Schedule;
 import capstone.my.annin.londontubeschedule.pojo.Station;
+import capstone.my.annin.londontubeschedule.ui.OverScheduleActivity;
+import capstone.my.annin.londontubeschedule.ui.StationScheduleActivity;
 
 public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViewsFactory
 {
@@ -58,6 +62,8 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
     private OvergroundStatus overgroundStatus;
     private OvergroundStation overgroundStation;
     OvergroundSchedule overgroundSchedule;
+    String packageName = "package capstone.my.annin.londontubeschedule.ui";
+    private Object StationScheduleActivity;
 
     public ScheduleWidgetViewFactory(Context context) {
         mContext = context;
@@ -190,10 +196,14 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
             intent.putExtra("Station", stations);
             intent.putParcelableArrayListExtra("lineList", mLineList);
             intent.putParcelableArrayListExtra("stationList", mStationList);
+            intent.setComponent(new ComponentName(packageName, String.valueOf(StationScheduleActivity.class)));
             itemView.setOnClickFillInIntent(R.id.schedule_widget_list, intent);
+
         }
         else
         {
+            //Code based on the answer with 2 upvotes in the following stackoverflow post:
+            //https://stackoverflow.com/questions/29788684/android-listview-adapter-with-two-arraylists
             OvergroundSchedule overgroundSchedule = mOverScheduleList.get(position - mScheduleList.size());
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
             simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
@@ -241,11 +251,11 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
             intent.putExtra("OverStations", overgroundStation);
             intent.putParcelableArrayListExtra("overStatusList", mOverStatusList);
             intent.putParcelableArrayListExtra("overStationList", mOverStationList);
+            intent.setComponent(new ComponentName(packageName, String.valueOf(OverScheduleActivity.class)));
             itemView.setOnClickFillInIntent(R.id.schedule_widget_list, intent);
 
         }
-
-            return itemView;
+        return itemView;
     }
 
 

@@ -15,6 +15,7 @@
 
 package capstone.my.annin.londontubeschedule.widget;
 
+import android.app.Activity;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.appwidget.AppWidgetManager;
@@ -72,13 +73,15 @@ public class ScheduleWidgetProvider extends AppWidgetProvider
             views.setRemoteAdapter(R.id.appwidget_list, intent);
             views.setEmptyView(R.id.appwidget_list, R.id.empty);
 
-            TaskStackBuilder stackBuilder = TaskStackBuilder.create(context) ;
-            stackBuilder.addNextIntent(new Intent(context, MainActivity.class));
-            Intent detailIntent = new Intent(context, StationScheduleActivity.class);
-            stackBuilder.addNextIntent(detailIntent);
-
-            PendingIntent pIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+//            TaskStackBuilder stackBuilder = TaskStackBuilder.create(context) ;
+//            stackBuilder.addNextIntent(new Intent(context, MainActivity.class));
+//            Intent detailIntent = new Intent(context, StationScheduleActivity.class);
+//            stackBuilder.addNextIntent(detailIntent);
+//
+//            PendingIntent pIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
             //PendingIntent pIntent = PendingIntent.getActivity(context, 0, detailIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+            PendingIntent pIntent = PendingIntent.getBroadcast(context, 0,intent, PendingIntent.FLAG_UPDATE_CURRENT);
             views.setPendingIntentTemplate(R.id.appwidget_list, pIntent);
 
             appWidgetManager.updateAppWidget(widgetId, views);
@@ -91,8 +94,8 @@ public class ScheduleWidgetProvider extends AppWidgetProvider
 //    @Override
 //    public void onReceive(Context context, Intent intent)
 //    {
-//        //Code structure based on the code in this blog:
-//        //http://android-er.blogspot.com/2010/10/update-widget-in-onreceive-method.html
+////        //Code structure based on the code in this blog:
+////        //http://android-er.blogspot.com/2010/10/update-widget-in-onreceive-method.html
 //        super.onReceive(context, intent);
 //
 //        if (ACTION_VIEW_DETAILS.equals(intent.getAction()))
