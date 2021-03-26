@@ -82,7 +82,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
     private ArrayList<OvergroundStatus> overgroundStatusArrayList = new ArrayList<>();
     private static final String KEY_STATION_LIST = "station_list";
     private static final String KEY_STATUS_LIST = "status_list";
-    public String stationId;
+    public String stationOverId;
     OvergroundStatus overground;
     public String overLineId;
     private Context context;
@@ -135,7 +135,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
 
             if (overgroundStation != null)
             {
-                stationId = overgroundStation.getStationId();
+                stationOverId = overgroundStation.getStationId();
                 // Log.i("stationId: ", stations.getStationId());
                 Timber.v(overgroundStation.getStationId(), "stationId: ");
 
@@ -158,7 +158,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
                      *  Starting the asyncTask so that schedule loads when the activity opens.
                      */
                     OvergroundScheduleAsyncTask myScheduleTask = new OvergroundScheduleAsyncTask(this);
-                    myScheduleTask.execute(overLineId, stationId);
+                    myScheduleTask.execute(overLineId, stationOverId);
 
                 } else
                 {
@@ -322,7 +322,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
             if (isNetworkStatusAvailable(context))
             {
                 OvergroundScheduleAsyncTask myScheduleTask = new OvergroundScheduleAsyncTask(OverScheduleActivity.this);
-                myScheduleTask.execute(overLineId, stationId);
+                myScheduleTask.execute(overLineId, stationOverId);
             }
             else
             {
@@ -428,7 +428,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
 //        overridePendingTransition(0, 0);
 //        startActivity(intent);
         OvergroundScheduleAsyncTask myScheduleTask = new OvergroundScheduleAsyncTask(this);
-        myScheduleTask.execute(overLineId, stationId);
+        myScheduleTask.execute(overLineId, stationOverId);
 
     }
 

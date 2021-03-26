@@ -41,6 +41,10 @@ import capstone.my.annin.londontubeschedule.R;
 import capstone.my.annin.londontubeschedule.maps.StationMapActivity;
 //import capstone.my.annin.londontubeschedule.recyclerviewadapters.FavoritesAdapter;
 
+import capstone.my.annin.londontubeschedule.pojo.Line;
+import capstone.my.annin.londontubeschedule.pojo.OvergroundStation;
+import capstone.my.annin.londontubeschedule.pojo.OvergroundStatus;
+import capstone.my.annin.londontubeschedule.pojo.Station;
 import capstone.my.annin.londontubeschedule.scrollbehavior.DisableSwipeBehavior;
 
 public class MainActivity extends AppCompatActivity
@@ -57,6 +61,13 @@ public class MainActivity extends AppCompatActivity
         private Context context;
         ShowSnackbar showSnackbar;
         ViewPager viewPager;
+        Line line;
+        Station station;
+        public String lineId;
+        public String stationId;
+        OvergroundStatus overground;
+        OvergroundStation overgroundStation;
+        public String overLineId;
 
         @Override
         protected void onCreate(Bundle savedInstanceState)
@@ -92,38 +103,67 @@ public class MainActivity extends AppCompatActivity
                 //      by calling onPageTitle()
                 tabLayout.setupWithViewPager(viewPager);
 
+
+
+            if (getIntent() != null && getIntent().getExtras() != null)
+            {
+                line = getIntent().getExtras().getParcelable("Line");
+                station = getIntent().getExtras().getParcelable("Station");
+                if (line != null)
+                {
+                    lineId = line.getLineId();
+                    if (station != null)
+                    {
+                        stationId = station.getStationId();
+                    }
+                    Intent intent = new Intent(this, StationScheduleActivity.class);
+                    startActivity(intent);
+                }
+
+
+                overground = getIntent().getExtras().getParcelable("OverStatus");
+                overgroundStation = getIntent().getExtras().getParcelable("OverStation");
+                if(overground != null)
+                {
+                    overground = getIntent().getExtras().getParcelable("OverStatus");
+                    overgroundStation = getIntent().getExtras().getParcelable("OverStation");
+                    overLineId= overground.getModeId();
+                    Intent intent2 = new Intent(this, OverScheduleActivity.class);
+                    startActivity(intent2);
+
+                }
                 if (savedInstanceState == null)
                 {
-                        if (isNetworkStatusAvailable(getApplicationContext()))
+                    if (isNetworkStatusAvailable(getApplicationContext()))
+                    {
+                        fragmentTubeLine = (TubeLineFragment)
+                                getSupportFragmentManager().findFragmentByTag(TUBE_LINE_FRAGMENT);
+                        fragmentOverground = (OvergroundLineFragment)
+                                getSupportFragmentManager().findFragmentByTag(TUBE_OVERGROUND_FRAGMENT);
+
+                    } else
                         {
-                                fragmentTubeLine = (TubeLineFragment)
-                                        getSupportFragmentManager().findFragmentByTag(TUBE_LINE_FRAGMENT);
-                                fragmentOverground = (OvergroundLineFragment)
-                                        getSupportFragmentManager().findFragmentByTag(TUBE_OVERGROUND_FRAGMENT);
+                        Snackbar
+                                .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+                                .setAction(R.string.snackbar_retry, new MainActivity.MyClickListener())
+                                .setBehavior(new DisableSwipeBehavior())
+                                .show();
+                        isSnackbarShowing = true;
+                        showErrorMessage();
 
-                        } else
-                                {
-                                Snackbar
-                                        .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
-                                        .setAction(R.string.snackbar_retry, new MainActivity.MyClickListener())
-                                        .setBehavior(new DisableSwipeBehavior())
-                                        .show();
-                                isSnackbarShowing = true;
-                                showErrorMessage();
-
-                        }
+                    }
                 } else {
-                        isSnackbarShowing = savedInstanceState.getBoolean(SNACKBAR_STATE);
-                        if (isSnackbarShowing)
-                        {
-                                Snackbar
-                                        .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
-                                        .setAction(R.string.snackbar_retry, new MainActivity.MyClickListener())
-                                        .setBehavior(new DisableSwipeBehavior())
-                                        .show();
+                    isSnackbarShowing = savedInstanceState.getBoolean(SNACKBAR_STATE);
+                    if (isSnackbarShowing)
+                    {
+                        Snackbar
+                                .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+                                .setAction(R.string.snackbar_retry, new MainActivity.MyClickListener())
+                                .setBehavior(new DisableSwipeBehavior())
+                                .show();
+                    }
                 }
-                        }
-
+            }
         }
 
 

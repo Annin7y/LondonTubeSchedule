@@ -80,8 +80,8 @@ public class ScheduleWidgetProvider extends AppWidgetProvider
 //
 //            PendingIntent pIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
             //PendingIntent pIntent = PendingIntent.getActivity(context, 0, detailIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-            PendingIntent pIntent = PendingIntent.getBroadcast(context, 0,intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            intent = (new Intent(context, MainActivity.class));
+            PendingIntent pIntent = PendingIntent.getActivity(context, 0,intent, PendingIntent.FLAG_UPDATE_CURRENT);
             views.setPendingIntentTemplate(R.id.appwidget_list, pIntent);
 
             appWidgetManager.updateAppWidget(widgetId, views);
