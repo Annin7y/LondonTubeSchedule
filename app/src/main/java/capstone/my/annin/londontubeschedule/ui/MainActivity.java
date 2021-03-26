@@ -120,7 +120,6 @@ public class MainActivity extends AppCompatActivity
                     startActivity(intent);
                 }
 
-
                 overground = getIntent().getExtras().getParcelable("OverStatus");
                 overgroundStation = getIntent().getExtras().getParcelable("OverStation");
                 if(overground != null)
