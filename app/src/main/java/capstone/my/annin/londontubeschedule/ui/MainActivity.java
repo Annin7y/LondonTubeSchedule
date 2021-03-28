@@ -71,10 +71,12 @@ public class MainActivity extends AppCompatActivity
         OvergroundStatus overground;
         OvergroundStation overgroundStation;
         public String overLineId;
+        public String stationOverId;
         private ArrayList<Station> stationArrayList = new ArrayList<>();
         private ArrayList<Line> lineArrayList = new ArrayList<>();
         private ArrayList<Schedule> scheduleArrayList = new ArrayList<>();
-
+        private ArrayList<OvergroundStation> overStatArrayList = new ArrayList<>();
+        private ArrayList<OvergroundStatus> overgroundStatusArrayList = new ArrayList<>();
         @Override
         protected void onCreate(Bundle savedInstanceState)
         {
@@ -115,6 +117,8 @@ public class MainActivity extends AppCompatActivity
             {
                 line = getIntent().getExtras().getParcelable("Line");
                 station = getIntent().getExtras().getParcelable("Station");
+                overground = getIntent().getExtras().getParcelable("OverStatus");
+                overgroundStation = getIntent().getExtras().getParcelable("OverStation");
                 if (line != null)
                 {
                     lineId = line.getLineId();
@@ -125,19 +129,28 @@ public class MainActivity extends AppCompatActivity
 
                     lineArrayList = getIntent().getParcelableArrayListExtra("mLineList");
                     stationArrayList = getIntent().getParcelableArrayListExtra("mStationList");
-                    scheduleArrayList = getIntent().getParcelableArrayListExtra("mScheduleList");
                     Intent intent = new Intent(this, StationScheduleActivity.class);
+                    intent.putExtra("Line", line);
+                    intent.putExtra("Station", station);
+                    intent.putParcelableArrayListExtra("mLineList", lineArrayList);
+                    intent.putParcelableArrayListExtra("mStationList", stationArrayList);
                     startActivity(intent);
                 }
-
-                overground = getIntent().getExtras().getParcelable("OverStatus");
-                overgroundStation = getIntent().getExtras().getParcelable("OverStation");
-                if(overground != null)
+                //if(overground != null)
+                else if (overground != null)
                 {
-                    overground = getIntent().getExtras().getParcelable("OverStatus");
-                    overgroundStation = getIntent().getExtras().getParcelable("OverStation");
                     overLineId= overground.getModeId();
+                    if (overgroundStation != null)
+                    {
+                        stationOverId = overgroundStation.getStationId();
+                    }
+                    overgroundStatusArrayList = getIntent().getParcelableArrayListExtra("mLineList");
+                    overStatArrayList = getIntent().getParcelableArrayListExtra("mStationList");
                     Intent intent2 = new Intent(this, OverScheduleActivity.class);
+                    intent2.putExtra("OverStatus", line);
+                    intent2.putExtra("OverStation", station);
+                    intent2.putParcelableArrayListExtra("overStatusList", overgroundStatusArrayList);
+                    intent2.putParcelableArrayListExtra("overStationList", stationArrayList);
                     startActivity(intent2);
 
                 }

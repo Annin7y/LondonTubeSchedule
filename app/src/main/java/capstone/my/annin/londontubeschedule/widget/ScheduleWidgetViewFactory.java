@@ -197,8 +197,6 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
             intent.putExtra("Station", stations);
             intent.putParcelableArrayListExtra("stationList", mStationList);
             intent.putParcelableArrayListExtra("lineList", mLineList);
-            intent.putParcelableArrayListExtra("scheduleList", mScheduleList);
-            intent.setComponent(new ComponentName(packageName, String.valueOf(StationScheduleActivity.class)));
             itemView.setOnClickFillInIntent(R.id.schedule_widget_list, intent);
 
         }
@@ -253,7 +251,6 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
             intent.putExtra("OverStations", overgroundStation);
             intent.putParcelableArrayListExtra("overStatusList", mOverStatusList);
             intent.putParcelableArrayListExtra("overStationList", mOverStationList);
-            intent.putParcelableArrayListExtra("overScheduleList", mOverScheduleList);
             intent.setComponent(new ComponentName(packageName, String.valueOf(OverScheduleActivity.class)));
             itemView.setOnClickFillInIntent(R.id.schedule_widget_list, intent);
         }
