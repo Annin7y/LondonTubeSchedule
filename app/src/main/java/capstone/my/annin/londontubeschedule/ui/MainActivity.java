@@ -35,6 +35,8 @@ import android.widget.ProgressBar;
 
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import capstone.my.annin.londontubeschedule.R;
 //import capstone.my.annin.londontubeschedule.data.TubeLineContract;
@@ -44,6 +46,7 @@ import capstone.my.annin.londontubeschedule.maps.StationMapActivity;
 import capstone.my.annin.londontubeschedule.pojo.Line;
 import capstone.my.annin.londontubeschedule.pojo.OvergroundStation;
 import capstone.my.annin.londontubeschedule.pojo.OvergroundStatus;
+import capstone.my.annin.londontubeschedule.pojo.Schedule;
 import capstone.my.annin.londontubeschedule.pojo.Station;
 import capstone.my.annin.londontubeschedule.scrollbehavior.DisableSwipeBehavior;
 
@@ -68,6 +71,9 @@ public class MainActivity extends AppCompatActivity
         OvergroundStatus overground;
         OvergroundStation overgroundStation;
         public String overLineId;
+        private ArrayList<Station> stationArrayList = new ArrayList<>();
+        private ArrayList<Line> lineArrayList = new ArrayList<>();
+        private ArrayList<Schedule> scheduleArrayList = new ArrayList<>();
 
         @Override
         protected void onCreate(Bundle savedInstanceState)
@@ -116,6 +122,10 @@ public class MainActivity extends AppCompatActivity
                     {
                         stationId = station.getStationId();
                     }
+
+                    lineArrayList = getIntent().getParcelableArrayListExtra("mLineList");
+                    stationArrayList = getIntent().getParcelableArrayListExtra("mStationList");
+                    scheduleArrayList = getIntent().getParcelableArrayListExtra("mScheduleList");
                     Intent intent = new Intent(this, StationScheduleActivity.class);
                     startActivity(intent);
                 }
