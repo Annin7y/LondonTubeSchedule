@@ -128,7 +128,7 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
         mOverStationList = gson.fromJson(gsonOverStringStation, typeOverStation);
 
         //Extract the JSON lines from preferences and assign it to an OverStatus object.
-        String jsonOverStatus = sharedPreferences.getString("Overstatus", "");
+        String jsonOverStatus = sharedPreferences.getString("OverStatus", "");
         overgroundStatus = gson.fromJson(jsonOverStatus, OvergroundStatus.class);
 
         //Extract the JSON stations from preferences and assign it to an Overground Stations object.
@@ -247,8 +247,8 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
 
             Intent intent = new Intent();
             intent.putExtra(ScheduleWidgetProvider.EXTRA_ITEM, overgroundSchedule);
-            intent.putExtra("OverStatus", overgroundStatus);
-            intent.putExtra("OverStations", overgroundStation);
+            intent.putExtra("OvergroundStatus", overgroundStatus);
+            intent.putExtra("OvergroundStation", overgroundStation);
             intent.putParcelableArrayListExtra("overStatusList", mOverStatusList);
             intent.putParcelableArrayListExtra("overStationList", mOverStationList);
             itemView.setOnClickFillInIntent(R.id.schedule_widget_list, intent);

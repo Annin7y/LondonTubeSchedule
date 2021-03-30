@@ -117,8 +117,8 @@ public class MainActivity extends AppCompatActivity
             {
                 line = getIntent().getExtras().getParcelable("Line");
                 station = getIntent().getExtras().getParcelable("Station");
-                overground = getIntent().getExtras().getParcelable("OverStatus");
-                overgroundStation = getIntent().getExtras().getParcelable("OverStations");
+                overground = getIntent().getExtras().getParcelable("OvergroundStatus");
+                overgroundStation = getIntent().getExtras().getParcelable("OvergroundStation");
                 if (line != null)
                 {
                     lineId = line.getLineId();
@@ -147,8 +147,8 @@ public class MainActivity extends AppCompatActivity
                     overgroundStatusArrayList = getIntent().getParcelableArrayListExtra("overStatusList");
                     overStatArrayList = getIntent().getParcelableArrayListExtra("overStationList");
                     Intent intent2 = new Intent(this, OverScheduleActivity.class);
-                    intent2.putExtra("OverStatus", overground);
-                    intent2.putExtra("OverStations", overgroundStation);
+                    intent2.putExtra("OvergroundStatus", overground);
+                    intent2.putExtra("OvergroundStation", overgroundStation);
                     intent2.putParcelableArrayListExtra("overStatusList", overgroundStatusArrayList);
                     intent2.putParcelableArrayListExtra("overStationList", overStatArrayList);
                     startActivity(intent2);
