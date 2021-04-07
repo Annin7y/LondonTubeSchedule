@@ -79,100 +79,59 @@ public class MainActivity extends AppCompatActivity
         private ArrayList<OvergroundStation> overStatArrayList = new ArrayList<>();
         private ArrayList<OvergroundStatus> overgroundStatusArrayList = new ArrayList<>();
         @Override
-        protected void onCreate(Bundle savedInstanceState)
-        {
-                super.onCreate(savedInstanceState);
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
 
-                // Set the content of the activity to use the activity_main.xml layout file
-                setContentView(R.layout.activity_main);
+            // Set the content of the activity to use the activity_main.xml layout file
+            setContentView(R.layout.activity_main);
 
-                mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
+            mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
 
-                context = getApplicationContext();
-                // Find the view pager that will allow the user to swipe between fragments
-                viewPager = (ViewPager) findViewById(R.id.viewpager);
+            context = getApplicationContext();
+            // Find the view pager that will allow the user to swipe between fragments
+            viewPager = (ViewPager) findViewById(R.id.viewpager);
 
-                //setSupportActionBar(toolbar);
+            //setSupportActionBar(toolbar);
 
-                // Create an adapter that knows which fragment should be shown on each page
-             //   CategoryAdapter adapter = new CategoryAdapter(this, getSupportFragmentManager());
+            // Create an adapter that knows which fragment should be shown on each page
+            //   CategoryAdapter adapter = new CategoryAdapter(this, getSupportFragmentManager());
 
-                // Set the adapter onto the view pager
-               // viewPager.setAdapter(adapter);
+            // Set the adapter onto the view pager
+            // viewPager.setAdapter(adapter);
 
-                viewPager.setAdapter(new CategoryAdapter(this, getSupportFragmentManager()));
+            viewPager.setAdapter(new CategoryAdapter(this, getSupportFragmentManager()));
 
-                // Find the tab layout that shows the tabs
-                TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+            // Find the tab layout that shows the tabs
+            TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 
-                // Connect the tab layout with the view pager. This will
-                //   1. Update the tab layout when the view pager is swiped
-                //   2. Update the view pager when a tab is selected
-                //   3. Set the tab layout's tab names with the view pager's adapter's titles
-                //      by calling onPageTitle()
-                tabLayout.setupWithViewPager(viewPager);
+            // Connect the tab layout with the view pager. This will
+            //   1. Update the tab layout when the view pager is swiped
+            //   2. Update the view pager when a tab is selected
+            //   3. Set the tab layout's tab names with the view pager's adapter's titles
+            //      by calling onPageTitle()
+            tabLayout.setupWithViewPager(viewPager);
 
-
-                if (savedInstanceState == null)
+            if (savedInstanceState == null)
+            {
+                if (isNetworkStatusAvailable(getApplicationContext()))
                 {
-                    if (isNetworkStatusAvailable(getApplicationContext()))
-                    {
-                        fragmentTubeLine = (TubeLineFragment)
-                                getSupportFragmentManager().findFragmentByTag(TUBE_LINE_FRAGMENT);
-                        fragmentOverground = (OvergroundLineFragment)
-                                getSupportFragmentManager().findFragmentByTag(TUBE_OVERGROUND_FRAGMENT);
-
-                    } else
-                        {
-                        Snackbar
-                                .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
-                                .setAction(R.string.snackbar_retry, new MainActivity.MyClickListener())
-                                .setBehavior(new DisableSwipeBehavior())
-                                .show();
-                        isSnackbarShowing = true;
-                        showErrorMessage();
-
-                    }
-                    if (getIntent() != null && getIntent().getExtras() != null)
-                    {
-                        line = getIntent().getExtras().getParcelable("Line");
-                        station = getIntent().getExtras().getParcelable("Station");
-                        overground = getIntent().getExtras().getParcelable("OvergroundStatus");
-                        overgroundStation = getIntent().getExtras().getParcelable("OvergroundStation");
-                        if (line != null)
-                        {
-                            lineId = line.getLineId();
-                            if (station != null) {
-                                stationId = station.getStationId();
-                            }
-
-                            lineArrayList = getIntent().getParcelableArrayListExtra("lineList");
-                            stationArrayList = getIntent().getParcelableArrayListExtra("stationList");
-                            Intent intent = new Intent(this, StationScheduleActivity.class);
-                            intent.putExtra("Line", line);
-                            intent.putExtra("Station", station);
-                            intent.putParcelableArrayListExtra("lineList", lineArrayList);
-                            intent.putParcelableArrayListExtra("stationList", stationArrayList);
-                            startActivity(intent);
-                        } else if (overground != null)
-                        {
-                            overLineId = overground.getModeId();
-                            if (overgroundStation != null)
-                            {
-                                stationOverId = overgroundStation.getStationId();
-                            }
-                            overgroundStatusArrayList = getIntent().getParcelableArrayListExtra("overStatusList");
-                            overStatArrayList = getIntent().getParcelableArrayListExtra("overStationList");
-                            Intent intent2 = new Intent(this, OverScheduleActivity.class);
-                            intent2.putExtra("OvergroundStatus", overground);
-                            intent2.putExtra("OvergroundStation", overgroundStation);
-                            intent2.putParcelableArrayListExtra("overStatusList", overgroundStatusArrayList);
-                            intent2.putParcelableArrayListExtra("overStationList", overStatArrayList);
-                            startActivity(intent2);
-
-                        }
-                    }
+                    fragmentTubeLine = (TubeLineFragment)
+                            getSupportFragmentManager().findFragmentByTag(TUBE_LINE_FRAGMENT);
+                    fragmentOverground = (OvergroundLineFragment)
+                            getSupportFragmentManager().findFragmentByTag(TUBE_OVERGROUND_FRAGMENT);
                 } else
+                    {
+                    Snackbar
+                            .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.snackbar_retry, new MainActivity.MyClickListener())
+                            .setBehavior(new DisableSwipeBehavior())
+                            .show();
+                    isSnackbarShowing = true;
+                    showErrorMessage();
+                }
+
+            }
+                else
                     {
                     isSnackbarShowing = savedInstanceState.getBoolean(SNACKBAR_STATE);
                     if (isSnackbarShowing)
@@ -184,7 +143,42 @@ public class MainActivity extends AppCompatActivity
                                 .show();
                     }
                 }
-           // }
+            if (getIntent() != null && getIntent().getExtras() != null) {
+                line = getIntent().getExtras().getParcelable("Line");
+                station = getIntent().getExtras().getParcelable("Station");
+                overground = getIntent().getExtras().getParcelable("OvergroundStatus");
+                overgroundStation = getIntent().getExtras().getParcelable("OvergroundStation");
+                if (line != null) {
+                    lineId = line.getLineId();
+                    if (station != null) {
+                        stationId = station.getStationId();
+                    }
+
+                    lineArrayList = getIntent().getParcelableArrayListExtra("lineList");
+                    stationArrayList = getIntent().getParcelableArrayListExtra("stationList");
+                    Intent intent = new Intent(this, StationScheduleActivity.class);
+                    intent.putExtra("Line", line);
+                    intent.putExtra("Station", station);
+                    intent.putParcelableArrayListExtra("lineList", lineArrayList);
+                    intent.putParcelableArrayListExtra("stationList", stationArrayList);
+                    startActivity(intent);
+                } else if (overground != null) {
+                    overLineId = overground.getModeId();
+                    if (overgroundStation != null) {
+                        stationOverId = overgroundStation.getStationId();
+                    }
+                    overgroundStatusArrayList = getIntent().getParcelableArrayListExtra("overStatusList");
+                    overStatArrayList = getIntent().getParcelableArrayListExtra("overStationList");
+                    Intent intent2 = new Intent(this, OverScheduleActivity.class);
+                    intent2.putExtra("OvergroundStatus", overground);
+                    intent2.putExtra("OvergroundStation", overgroundStation);
+                    intent2.putParcelableArrayListExtra("overStatusList", overgroundStatusArrayList);
+                    intent2.putParcelableArrayListExtra("overStationList", overStatArrayList);
+                    startActivity(intent2);
+
+                }
+            }
+
         }
 
 
