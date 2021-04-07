@@ -148,7 +148,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
 
             }
             overgroundStatusArrayList = getIntent().getParcelableArrayListExtra("overgroundStatusList");
-            overStatArrayList = getIntent().getParcelableArrayListExtra("stationList");
+            overStatArrayList = getIntent().getParcelableArrayListExtra("overgroundStationList");
 
             if (savedInstanceState == null)
             {
@@ -444,7 +444,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
                 intent.putExtra("OvergroundStatus", overground);
                 intent.putExtra("OvergroundStation", overgroundStation);
                 intent.putParcelableArrayListExtra("overgroundStatusList", overgroundStatusArrayList);
-                intent.putParcelableArrayListExtra("stationList", overStatArrayList);
+                intent.putParcelableArrayListExtra("overgroundStationList", overStatArrayList);
                 startActivity(intent);
 
             }

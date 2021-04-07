@@ -133,7 +133,7 @@ public class OverStatListActivity extends AppCompatActivity implements Overgroun
         intent.putExtra("OvergroundStatus", overground);
         intent.putExtra("OvergroundStation", overgroundStation);
         intent.putParcelableArrayListExtra("overgroundStatusList", overgroundStatusArrayList);
-        intent.putParcelableArrayListExtra("stationList", overStatArrayList);
+        intent.putParcelableArrayListExtra("overgroundStationList", overStatArrayList);
         startActivity(intent);
 
         //log event when the user selects a station

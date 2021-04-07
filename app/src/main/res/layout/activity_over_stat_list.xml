@@ -40,7 +40,7 @@
                 android:layout_marginStart="@dimen/station_click_instructions_start"
                 android:layout_marginTop="@dimen/station_name_top"
                 android:text="@string/station_list_instructions"
-                android:textSize="@dimen/station_instr_text_size" />
+                android:textSize="@dimen/over_stat_instr_text_size" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview_over_station"

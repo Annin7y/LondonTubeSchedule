@@ -41,6 +41,8 @@
     <dimen name="line_station_margin_end">40dp</dimen>
     <dimen name="line_station_margin_start">10dp</dimen>
     <dimen name="line_station_reason_margin_start">12dp</dimen>
+    <dimen name="line_reason_det_margin_start">15dp</dimen>
+    <dimen name="over_status_reason_margin_start">12dp</dimen>
     <dimen name="line_name_text_size">25sp</dimen>
     <dimen name="line_status_text_size">20sp</dimen>
     <dimen name="fav_button_margin_start">50dp</dimen>
@@ -48,11 +50,17 @@
     <dimen name="empty_schedule_top">50dp</dimen>
     <dimen name="main_instr_start">32dp</dimen>
     <dimen name="main_instr_top">16dp</dimen>
-    <dimen name="main_instr_text">18sp</dimen>
+    <dimen name="main_instr_text">20sp</dimen>
+    <dimen name="main_over_instr_start">25dp</dimen>
+    <dimen name="main_over_instr_text">19sp</dimen>
     <dimen name="main_name_top">18dp</dimen>
     <dimen name="main_recycler_start">16dp</dimen>
     <dimen name="main_recycler_top">90dp</dimen>
     <dimen name="over_stat_rec_top">20dp</dimen>
+    <dimen name="over_stat_rec_start">9dp</dimen>
+    <dimen name="over_name_margin_start">15dp</dimen>
+    <dimen name="over_status_margin_start">15dp</dimen>
+    <dimen name="over_reason_margin_start">12dp</dimen>
     <dimen name="loading_width">0dp</dimen>
     <dimen name="loading_height">45dp</dimen>
     <dimen name="loading_bottom">40dp</dimen>
@@ -60,6 +68,7 @@
     <dimen name="station_dup_instr_start_tablet_land">2dp</dimen>
     <dimen name="station_name_list_size">15sp</dimen>
     <dimen name="station_instr_text_size">25sp</dimen>
+    <dimen name="over_stat_instr_text_size">27sp</dimen>
     <dimen name="station_name_start">9dp</dimen>
     <dimen name="station_name_top">16dp</dimen>
     <dimen name="station_recycler_start">5dp</dimen>
@@ -94,7 +103,10 @@
     <dimen name="sched_station_name_top">40dp</dimen>
     <dimen name="fab_add_text_size">15sp</dimen>
     <dimen name="fab_map_text_size">15sp</dimen>
-    <dimen name="branch_instr_size">20sp</dimen>
+    <dimen name="branch_instr_size">22sp</dimen>
     <dimen name="branch_end">10dp</dimen>
     <dimen name="station_list_pad_recview">15dp</dimen>
+    <dimen name="guide_recycler_start">16dp</dimen>
+    <dimen name="guide_recycler_top">70dp</dimen>
+
 </resources>

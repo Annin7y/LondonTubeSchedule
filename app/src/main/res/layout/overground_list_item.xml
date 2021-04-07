@@ -27,29 +27,29 @@
     <TextView
         android:id="@+id/overground_name"
         style="@style/LineStationListStyle"
-        android:layout_marginStart="@dimen/line_station_margin_start"
+        android:layout_marginStart="@dimen/over_name_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:layout_marginTop="@dimen/main_name_top"
         android:padding="@dimen/line_list_padding"
         android:textSize="@dimen/line_name_text_size"
-        tools:text="@string/line_name" />
+        tools:text="@string/line_over_name" />
 
     <TextView
         android:id="@+id/overground_status_name"
         style="@style/LineStationStatusStyle"
-        android:layout_marginStart="@dimen/line_station_reason_margin_start"
+        android:layout_marginStart="@dimen/over_status_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:padding="@dimen/line_list_padding"
         android:textSize="@dimen/line_status_text_size"
-        tools:text="@string/line_status_text" />
+        tools:text="@string/over_status_text" />
 
     <TextView
         android:id="@+id/overground_status_reason"
         style="@style/LineStationStatusReasonStyle"
-        android:layout_marginStart="@dimen/line_station_reason_margin_start"
+        android:layout_marginStart="@dimen/over_reason_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:padding="@dimen/line_status_reason_padding"
         android:textSize="@dimen/line_status_text_size"
-        tools:text="@string/line_reason_text" />
+        tools:text="@string/over_reason_text" />
 
 </LinearLayout>

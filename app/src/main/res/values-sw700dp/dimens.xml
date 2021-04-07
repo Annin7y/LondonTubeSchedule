@@ -34,7 +34,7 @@
     <dimen name="line_status_text_size">25sp</dimen>
     <dimen name="line_status_reason_padding">8dp</dimen>
     <dimen name="fav_button_margin_start">50dp</dimen>
-    <dimen name="line_station_reason_margin_start">18dp</dimen>
+    <dimen name="line_station_reason_margin_start">20dp</dimen>
     <dimen name="line_list_padding">14dp</dimen>
     <dimen name="sched_label_text_size">27sp</dimen>
     <dimen name="sched_name_text_size">35sp</dimen>

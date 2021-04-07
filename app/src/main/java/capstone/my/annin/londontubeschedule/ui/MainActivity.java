@@ -50,6 +50,7 @@ import capstone.my.annin.londontubeschedule.pojo.Schedule;
 import capstone.my.annin.londontubeschedule.pojo.Station;
 import capstone.my.annin.londontubeschedule.scrollbehavior.DisableSwipeBehavior;
 
+
 public class MainActivity extends AppCompatActivity
 {
         public TubeLineFragment fragmentTubeLine;
@@ -112,48 +113,6 @@ public class MainActivity extends AppCompatActivity
                 tabLayout.setupWithViewPager(viewPager);
 
 
-
-            if (getIntent() != null && getIntent().getExtras() != null)
-            {
-                line = getIntent().getExtras().getParcelable("Line");
-                station = getIntent().getExtras().getParcelable("Station");
-                overground = getIntent().getExtras().getParcelable("OvergroundStatus");
-                overgroundStation = getIntent().getExtras().getParcelable("OvergroundStation");
-                if (line != null)
-                {
-                    lineId = line.getLineId();
-                    if (station != null)
-                    {
-                        stationId = station.getStationId();
-                    }
-
-                    lineArrayList = getIntent().getParcelableArrayListExtra("lineList");
-                    stationArrayList = getIntent().getParcelableArrayListExtra("stationList");
-                    Intent intent = new Intent(this, StationScheduleActivity.class);
-                    intent.putExtra("Line", line);
-                    intent.putExtra("Station", station);
-                    intent.putParcelableArrayListExtra("lineList", lineArrayList);
-                    intent.putParcelableArrayListExtra("stationList", stationArrayList);
-                    startActivity(intent);
-                }
-
-              else if (overground != null)
-                {
-                    overLineId= overground.getModeId();
-                    if (overgroundStation != null)
-                    {
-                        stationOverId = overgroundStation.getStationId();
-                    }
-                    overgroundStatusArrayList = getIntent().getParcelableArrayListExtra("overStatusList");
-                    overStatArrayList = getIntent().getParcelableArrayListExtra("overStationList");
-                    Intent intent2 = new Intent(this, OverScheduleActivity.class);
-                    intent2.putExtra("OvergroundStatus", overground);
-                    intent2.putExtra("OvergroundStation", overgroundStation);
-                    intent2.putParcelableArrayListExtra("overStatusList", overgroundStatusArrayList);
-                    intent2.putParcelableArrayListExtra("overStationList", overStatArrayList);
-                    startActivity(intent2);
-
-                }
                 if (savedInstanceState == null)
                 {
                     if (isNetworkStatusAvailable(getApplicationContext()))
@@ -174,6 +133,41 @@ public class MainActivity extends AppCompatActivity
                         showErrorMessage();
 
                     }
+                    if (getIntent() != null && getIntent().getExtras() != null) {
+                        line = getIntent().getExtras().getParcelable("Line");
+                        station = getIntent().getExtras().getParcelable("Station");
+                        overground = getIntent().getExtras().getParcelable("OvergroundStatus");
+                        overgroundStation = getIntent().getExtras().getParcelable("OvergroundStation");
+                        if (line != null) {
+                            lineId = line.getLineId();
+                            if (station != null) {
+                                stationId = station.getStationId();
+                            }
+
+                            lineArrayList = getIntent().getParcelableArrayListExtra("lineList");
+                            stationArrayList = getIntent().getParcelableArrayListExtra("stationList");
+                            Intent intent = new Intent(this, StationScheduleActivity.class);
+                            intent.putExtra("Line", line);
+                            intent.putExtra("Station", station);
+                            intent.putParcelableArrayListExtra("lineList", lineArrayList);
+                            intent.putParcelableArrayListExtra("stationList", stationArrayList);
+                            startActivity(intent);
+                        } else if (overground != null) {
+                            overLineId = overground.getModeId();
+                            if (overgroundStation != null) {
+                                stationOverId = overgroundStation.getStationId();
+                            }
+                            overgroundStatusArrayList = getIntent().getParcelableArrayListExtra("overStatusList");
+                            overStatArrayList = getIntent().getParcelableArrayListExtra("overStationList");
+                            Intent intent2 = new Intent(this, OverScheduleActivity.class);
+                            intent2.putExtra("OvergroundStatus", overground);
+                            intent2.putExtra("OvergroundStation", overgroundStation);
+                            intent2.putParcelableArrayListExtra("overStatusList", overgroundStatusArrayList);
+                            intent2.putParcelableArrayListExtra("overStationList", overStatArrayList);
+                            startActivity(intent2);
+
+                        }
+                    }
                 } else {
                     isSnackbarShowing = savedInstanceState.getBoolean(SNACKBAR_STATE);
                     if (isSnackbarShowing)
@@ -185,7 +179,7 @@ public class MainActivity extends AppCompatActivity
                                 .show();
                     }
                 }
-            }
+           // }
         }
 
 

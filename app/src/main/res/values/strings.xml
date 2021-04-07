@@ -17,7 +17,7 @@
 
 <resources>
     <string name="app_name">London Tube and Overground Schedule</string>
-    <string name="tube_list_instructions">Click on a line to view a list of stations</string>
+    <string name="tube_list_instructions">Click on a line to view a list of stations.</string>
     <string name="station_list_instructions">Click on a station to view train schedules.</string>
     <string name="line_name">Bakerloo</string>
     <string name="station_name">Canary Wharf</string>
@@ -75,7 +75,7 @@
     <string name="waterloo_branch_case">Stations displayed in sequence between Bank and Waterloo.</string>
     <string name="play_services_unavailable">Google Play Services is currently unavailable. Map unable to load</string>
     <string name="line_guide_manifest">Line Guide</string>
-    <string name="line_color_instr">Line Names displayed in their respective colors.</string>
+    <string name="line_color_instr">Line names displayed in their respective colors.</string>
     <string name="refresh_schedule">Refresh Schedule</string>
     <string name="line_guide_activity">Line Guide</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -86,11 +86,14 @@
 
     <!-- Category name for the London overground [CHAR LIMIT=20] -->
     <string name="category_overground">London Overground</string>
-    <string name="overground_list">Overground List</string>
+    <string name="overground_list">Overground Status</string>
     <string name="map_icon_main">Map icon</string>
-    <string name="frag_over_instr">Click on text to view a list of stations</string>
+    <string name="frag_over_instr">Click on text to view a list of stations.</string>
     <string name="over_stat_activity">Overground Stations</string>
     <string name="over_stat_schedule">Overground Train Schedule</string>
+    <string name="line_over_name">London Overground</string>
+    <string name="over_status_text">Reduced Service</string>
+    <string name="over_reason_text">LONDON OVERGROUND: Until</string>
 
 
 </resources>

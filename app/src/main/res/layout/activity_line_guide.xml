@@ -37,8 +37,8 @@
         android:id="@+id/recyclerview_line_guide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/main_recycler_start"
-        android:layout_marginTop="@dimen/main_recycler_top"
+        android:layout_marginStart="@dimen/guide_recycler_start"
+        android:layout_marginTop="@dimen/guide_recycler_top"
         android:descendantFocusability="afterDescendants"
         android:scrollbars="vertical"
       />
