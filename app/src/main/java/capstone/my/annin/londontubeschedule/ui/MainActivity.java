@@ -133,12 +133,14 @@ public class MainActivity extends AppCompatActivity
                         showErrorMessage();
 
                     }
-                    if (getIntent() != null && getIntent().getExtras() != null) {
+                    if (getIntent() != null && getIntent().getExtras() != null)
+                    {
                         line = getIntent().getExtras().getParcelable("Line");
                         station = getIntent().getExtras().getParcelable("Station");
                         overground = getIntent().getExtras().getParcelable("OvergroundStatus");
                         overgroundStation = getIntent().getExtras().getParcelable("OvergroundStation");
-                        if (line != null) {
+                        if (line != null)
+                        {
                             lineId = line.getLineId();
                             if (station != null) {
                                 stationId = station.getStationId();
@@ -152,9 +154,11 @@ public class MainActivity extends AppCompatActivity
                             intent.putParcelableArrayListExtra("lineList", lineArrayList);
                             intent.putParcelableArrayListExtra("stationList", stationArrayList);
                             startActivity(intent);
-                        } else if (overground != null) {
+                        } else if (overground != null)
+                        {
                             overLineId = overground.getModeId();
-                            if (overgroundStation != null) {
+                            if (overgroundStation != null)
+                            {
                                 stationOverId = overgroundStation.getStationId();
                             }
                             overgroundStatusArrayList = getIntent().getParcelableArrayListExtra("overStatusList");
@@ -168,7 +172,8 @@ public class MainActivity extends AppCompatActivity
 
                         }
                     }
-                } else {
+                } else
+                    {
                     isSnackbarShowing = savedInstanceState.getBoolean(SNACKBAR_STATE);
                     if (isSnackbarShowing)
                     {
