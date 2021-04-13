@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~  Copyright 2020 Anastasia Annin
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+-->
+
+<resources>
+    <string-array name="stations_alph_list">
+        <item>Baker Street Underground Station - Bakerloo</item>
+        <item>Charing Cross Underground Station - Bakerloo</item>
+        <item>Edgware Road(Bakerloo) Underground Station - Bakerloo</item>
+        <item>Elephant and Castle Underground Station - Bakerloo</item>
+        <item>Embankment Underground Station - Bakerloo</item>
+        <item>Harlesden Underground Station - Bakerloo</item>
+        <item>Harrow and Wealdstone Underground Station - Bakerloo</item>
+        <item>Kensal Green Underground Station - Bakerloo</item>
+        <item>Kenton Underground Station - Bakerloo</item>
+        <item>Kilburn Park Underground Station - Bakerloo</item>
+        <item>Lambeth North Underground Station - Bakerloo</item>
+        <item>Maida Vale Underground Station - Bakerloo</item>
+        <item>Marylebone Underground Station - Bakerloo</item>
+        <item>North Wembley Underground Station - Bakerloo</item>
+        <item>Oxford Circus Underground Station - Bakerloo</item>
+        <item>Paddington Underground Station - Bakerloo</item>
+        <item>Piccadilly Circus Underground Station - Bakerloo</item>
+        <item>Regent's Park Underground Station - Bakerloo</item>
+        <item>Queen's Park Underground Station - Bakerloo</item>
+        <item>South Kenton Underground Station - Bakerloo</item>
+        <item>Stonebridge Park Underground Station - Bakerloo</item>
+        <item>Warwick Avenue Underground Station - Bakerloo</item>
+        <item>Wateloo Underground Station - Bakerloo</item>
+        <item>Wembley Central Underground Station - Bakerloo</item>
+        <item>Willesden Junction Underground Station - Bakerloo</item>
+
+
+    </string-array>
+</resources>
