@@ -19,7 +19,7 @@
 <resources>
     <string-array name="stations_alph_list">
         <item>Baker Street Underground Station - Bakerloo</item>
-        <item>Charing Cross Underground Station - Bakerloo</item>
+        <item>Charing Cross Underground Station </item>
         <item>Edgware Road(Bakerloo) Underground Station - Bakerloo</item>
         <item>Elephant and Castle Underground Station - Bakerloo</item>
         <item>Embankment Underground Station - Bakerloo</item>
@@ -35,8 +35,8 @@
         <item>Oxford Circus Underground Station - Bakerloo</item>
         <item>Paddington Underground Station - Bakerloo</item>
         <item>Piccadilly Circus Underground Station - Bakerloo</item>
-        <item>Regent's Park Underground Station - Bakerloo</item>
-        <item>Queen's Park Underground Station - Bakerloo</item>
+        <item>Regent\'s Park Underground Station - Bakerloo</item>
+        <item>Queen\'s Park Underground Station - Bakerloo</item>
         <item>South Kenton Underground Station - Bakerloo</item>
         <item>Stonebridge Park Underground Station - Bakerloo</item>
         <item>Warwick Avenue Underground Station - Bakerloo</item>

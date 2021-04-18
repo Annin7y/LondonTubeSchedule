@@ -94,6 +94,7 @@
     <string name="line_over_name">London Overground</string>
     <string name="over_status_text">Reduced Service</string>
     <string name="over_reason_text">LONDON OVERGROUND: Until</string>
+    <string name="over_stat_alph_order">Stations listed in alphabetical order.</string>
 
 
 </resources>

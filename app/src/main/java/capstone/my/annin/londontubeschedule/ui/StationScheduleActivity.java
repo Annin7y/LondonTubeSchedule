@@ -119,9 +119,17 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
         RecyclerView.LayoutManager mScheduleLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mScheduleRecyclerView.setLayoutManager(mScheduleLayoutManager);
 
+        Bundle bundle = getIntent().getExtras();
+       
+        if (bundle != null)
+        {
+        String value = bundle.getString("Station");
+        stationNameToString = value;
 
+    }
         if (getIntent() != null && getIntent().getExtras() != null)
         {
+
             line = getIntent().getExtras().getParcelable("Line");
             station = getIntent().getExtras().getParcelable("Station");
             if (line != null)
@@ -135,6 +143,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
                     stationId = station.getStationId();
                     // Log.i("stationId: ", stations.getStationId());
                     Timber.v(station.getStationId(), "stationId: ");
+
 
                    // stationNameStation.setText(station.getStationName());
                     stationNameToString = station.getStationName();

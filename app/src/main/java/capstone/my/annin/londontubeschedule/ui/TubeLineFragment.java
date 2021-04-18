@@ -24,6 +24,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
@@ -48,6 +51,7 @@ import capstone.my.annin.londontubeschedule.asynctask.TubeLineAsyncTaskInterface
 import capstone.my.annin.londontubeschedule.data.LineViewModel;
 import capstone.my.annin.londontubeschedule.maps.StationMapActivity;
 import capstone.my.annin.londontubeschedule.pojo.Line;
+import capstone.my.annin.londontubeschedule.pojo.Station;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.FavoritesRoomAdapter;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.LineAdapter;
 import capstone.my.annin.londontubeschedule.settings.SettingsActivity;
@@ -92,7 +96,7 @@ public class TubeLineFragment extends BaseFragment implements LineAdapter.LineAd
     private LineViewModel mLineViewModel;
     private static final String SNACKBAR_STATE = "snackbar_state";
     private boolean isSnackbarShowing = false;
-
+    Station station;
 
 //    /**
 //     * Use this factory method to create a new instance of
@@ -148,6 +152,31 @@ public class TubeLineFragment extends BaseFragment implements LineAdapter.LineAd
 
         RecyclerView.LayoutManager mLineLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         mLineRecyclerView.setLayoutManager(mLineLayoutManager);
+
+
+        String[] stationsArrayList = getResources().getStringArray(R.array.stations_alph_list);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, stationsArrayList);
+        AutoCompleteTextView autoComplete = (AutoCompleteTextView) view.findViewById(R.id.autoCompleteTextView1);
+        String stationName = autoComplete.getText().toString();
+
+        autoComplete.setThreshold(2);
+        autoComplete.setAdapter(adapter);
+
+        autoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                {
+                    Intent intent = new Intent(getActivity(), StationScheduleActivity.class);
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("station", stationName);
+                  //  intent.putExtra("Station", station);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            }
+            });
 
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT)
