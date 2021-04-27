@@ -19,7 +19,7 @@
 <resources>
     <string-array name="stations_alph_list">
         <item>Baker Street Underground Station - Bakerloo</item>
-        <item>Charing Cross Underground Station </item>
+        <item>Charing Cross Underground Station - Bakerloo</item>
         <item>Edgware Road(Bakerloo) Underground Station - Bakerloo</item>
         <item>Elephant and Castle Underground Station - Bakerloo</item>
         <item>Embankment Underground Station - Bakerloo</item>
