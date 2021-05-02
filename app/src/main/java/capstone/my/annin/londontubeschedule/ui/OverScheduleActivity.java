@@ -54,6 +54,7 @@ import butterknife.ButterKnife;
 import capstone.my.annin.londontubeschedule.R;
 import capstone.my.annin.londontubeschedule.asynctask.OvergroundScheduleAsyncTask;
 import capstone.my.annin.londontubeschedule.asynctask.OvergroundScheduleAsyncTaskInterface;
+import capstone.my.annin.londontubeschedule.asynctask.OvergroundStationAsyncTaskInterface;
 import capstone.my.annin.londontubeschedule.asynctask.TubeScheduleAsyncTask;
 import capstone.my.annin.londontubeschedule.maps.MapsConnectionCheck;
 import capstone.my.annin.londontubeschedule.maps.StationMapActivity;
@@ -61,13 +62,14 @@ import capstone.my.annin.londontubeschedule.pojo.OvergroundSchedule;
 import capstone.my.annin.londontubeschedule.pojo.OvergroundStation;
 import capstone.my.annin.londontubeschedule.pojo.OvergroundStatus;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.OvergroundScheduleAdapter;
+import capstone.my.annin.londontubeschedule.recyclerviewadapters.OvergroundStationAdapter;
 import capstone.my.annin.londontubeschedule.scrollbehavior.DisableSwipeBehavior;
 import capstone.my.annin.londontubeschedule.widget.ScheduleWidgetProvider;
 import timber.log.Timber;
 
 import static capstone.my.annin.londontubeschedule.ui.StationScheduleActivity.isNetworkStatusAvailable;
 
-public class OverScheduleActivity extends AppCompatActivity implements OvergroundScheduleAsyncTaskInterface
+public class OverScheduleActivity extends AppCompatActivity implements OvergroundScheduleAsyncTaskInterface,OvergroundStationAdapter.OvergroundStationAdapterOnClickHandler, OvergroundStationAsyncTaskInterface
 {
     private static final String TAG = OverScheduleActivity.class.getSimpleName();
 
@@ -104,7 +106,9 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
-
+    private OvergroundStationAdapter overStatAdapter;
+    @BindView(R.id.recyclerview_over_station)
+    RecyclerView mStationRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -122,6 +126,13 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
         mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
         RecyclerView.LayoutManager mScheduleLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mScheduleRecyclerView.setLayoutManager(mScheduleLayoutManager);
+
+        overStatAdapter = new OvergroundStationAdapter(this, overStatArrayList, context);
+        mStationRecyclerView.setAdapter(overStatAdapter);
+
+        RecyclerView.LayoutManager mStationLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        mStationRecyclerView.setLayoutManager(mStationLayoutManager);
+
 
      if (getIntent() != null && getIntent().getExtras() != null)
     {
@@ -186,6 +197,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
                 //https://stackoverflow.com/questions/51903851/keeping-textview-visibility-view-invisible-and-button-state-setenabledfalse
                 if (savedInstanceState.getBoolean("visible"))
                 {
+
                     emptySchedule.setVisibility(View.VISIBLE);
                 }
                 {
@@ -313,6 +325,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
         }
     }
 
+
     public class MyClickListener implements View.OnClickListener
     {
         @Override
@@ -336,6 +349,30 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
             }
         }
     }
+
+    @Override
+    public void returnOverStationData(ArrayList<OvergroundStation> simpleJsonOverStatData)
+    {
+        if (null != simpleJsonOverStatData)
+        {
+            overStatAdapter = new OvergroundStationAdapter(this, simpleJsonOverStatData, OverScheduleActivity.this);
+            overStatArrayList = simpleJsonOverStatData;
+            mStationRecyclerView.setAdapter(overStatAdapter);
+            overStatAdapter.setStationList(overStatArrayList);
+        }
+        else
+        {
+            Timber.e("Problem parsing overground stations JSON results" );
+            // emptyStations.setVisibility(View.VISIBLE);
+        }
+    }
+    @Override
+    public void onClick(OvergroundStation overgroundStation)
+    {
+
+
+    }
+
 
     //Display if there is no internet connection
     public void showErrorMessage()
