@@ -92,6 +92,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     @BindView(R.id.empty_view_schedule)
     TextView emptySchedule;
     String stationNameToString;
+    String autoCompleteText;
     private static final String KEY_EMPTY_VALUE = "empty_value";
     @BindView(R.id.extended_fab)
     ExtendedFloatingActionButton extendedFAB;
@@ -119,16 +120,17 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
         RecyclerView.LayoutManager mScheduleLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mScheduleRecyclerView.setLayoutManager(mScheduleLayoutManager);
 
-        Bundle bundle = getIntent().getExtras();
+       // Bundle bundle = getIntent().getExtras();
        
-        if (bundle != null)
-        {
-        String value = bundle.getString("Station");
-        stationNameToString = value;
+//        if (bundle != null)
+//        {
+           // autoCompleteText = bundle.getString("station");
 
-    }
+//    }
         if (getIntent() != null && getIntent().getExtras() != null)
         {
+
+            autoCompleteText = getIntent().getExtras().getString("station");
 
             line = getIntent().getExtras().getParcelable("Line");
             station = getIntent().getExtras().getParcelable("Station");

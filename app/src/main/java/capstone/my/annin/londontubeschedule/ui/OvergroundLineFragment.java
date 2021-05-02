@@ -146,10 +146,10 @@ public class OvergroundLineFragment extends BaseFragment implements OvergroundSt
                     {
                         Intent intent = new Intent(getActivity(), OverScheduleActivity.class);
 
-                        Bundle bundle = new Bundle();
-                        bundle.putString("overStation", overStationName);
+                       // Bundle bundle = new Bundle();
+                        intent.putExtra("overStation", overStationName);
                         //  intent.putExtra("Station", station);
-                        intent.putExtras(bundle);
+                      //  intent.putExtras(bundle);
                         startActivity(intent);
                     }
                 }

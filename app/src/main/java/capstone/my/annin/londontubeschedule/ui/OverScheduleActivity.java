@@ -97,6 +97,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
     @BindView(R.id.empty_view_schedule)
     TextView emptySchedule;
     String stationNameToString;
+    String autoCompleteText;
     private static final String KEY_EMPTY_VALUE = "empty_value";
     @BindView(R.id.extended_fab)
     ExtendedFloatingActionButton extendedFAB;
@@ -107,8 +108,6 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
     private OvergroundStationAdapter overStatAdapter;
-    @BindView(R.id.recyclerview_over_station)
-    RecyclerView mStationRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -127,15 +126,11 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
         RecyclerView.LayoutManager mScheduleLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mScheduleRecyclerView.setLayoutManager(mScheduleLayoutManager);
 
-        overStatAdapter = new OvergroundStationAdapter(this, overStatArrayList, context);
-        mStationRecyclerView.setAdapter(overStatAdapter);
-
-        RecyclerView.LayoutManager mStationLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        mStationRecyclerView.setLayoutManager(mStationLayoutManager);
-
 
      if (getIntent() != null && getIntent().getExtras() != null)
     {
+        autoCompleteText = getIntent().getExtras().getString("overStation");
+
         overground = getIntent().getExtras().getParcelable("OvergroundStatus");
         overgroundStation = getIntent().getExtras().getParcelable("OvergroundStation");
         if (overground != null)
@@ -357,7 +352,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
         {
             overStatAdapter = new OvergroundStationAdapter(this, simpleJsonOverStatData, OverScheduleActivity.this);
             overStatArrayList = simpleJsonOverStatData;
-            mStationRecyclerView.setAdapter(overStatAdapter);
+            //mStationRecyclerView.setAdapter(overStatAdapter);
             overStatAdapter.setStationList(overStatArrayList);
         }
         else

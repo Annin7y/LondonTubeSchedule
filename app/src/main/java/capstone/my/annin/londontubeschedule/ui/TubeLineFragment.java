@@ -168,10 +168,10 @@ public class TubeLineFragment extends BaseFragment implements LineAdapter.LineAd
                 {
                     Intent intent = new Intent(getActivity(), StationScheduleActivity.class);
 
-                    Bundle bundle = new Bundle();
-                    bundle.putString("station", stationName);
+                   // Bundle bundle = new Bundle();
+                    intent.putExtra("station", stationName);
                   //  intent.putExtra("Station", station);
-                    intent.putExtras(bundle);
+                   // intent.putExtras(bundle);
                     startActivity(intent);
                 }
             }
