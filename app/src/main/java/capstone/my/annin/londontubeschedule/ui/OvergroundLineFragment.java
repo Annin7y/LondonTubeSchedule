@@ -25,6 +25,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ProgressBar;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -127,6 +130,31 @@ public class OvergroundLineFragment extends BaseFragment implements OvergroundSt
 
             RecyclerView.LayoutManager mLineLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
             mOvergroundStatusRecyclerView.setLayoutManager(mLineLayoutManager);
+
+            String[] overStationsArrayList = getResources().getStringArray(R.array.stations_over_over_list);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, overStationsArrayList);
+            AutoCompleteTextView autoComplete = (AutoCompleteTextView) view.findViewById(R.id.autoCompleteTextView2);
+            String overStationName = autoComplete.getText().toString();
+
+            autoComplete.setThreshold(2);
+            autoComplete.setAdapter(adapter);
+
+            autoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener()
+            {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    {
+                        Intent intent = new Intent(getActivity(), OverScheduleActivity.class);
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString("overStation", overStationName);
+                        //  intent.putExtra("Station", station);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+                }
+            });
+
 
 
             /*

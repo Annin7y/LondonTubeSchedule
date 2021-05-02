@@ -45,4 +45,27 @@
         <item>Willesden Junction Underground Station - Bakerloo</item>
 
     </string-array>
+    <string-array name="stations_over_over_list">
+        <item>Acton Central Rail Station - Overground</item>
+        <item>Anerley Rail Station - Overground</item>
+        <item>Barking Rail Station - Overground</item>
+        <item>Bethnal Green Rail Station - Overground</item>
+        <item>Blackhorse Road Rail Station - Overground</item>
+        <item>Brockley Rail Station - Overground</item>
+        <item>Brondesbury Park Rail Station - Overground</item>
+        <item>Brondesbury Rail Station - Overground</item>
+        <item>Bruce Grove Rail Station - Overground</item>
+        <item>Bush Hill Park Rail Station - Overground</item>
+        <item>Bushey Rail Station - Overground</item>
+        <item>Caledonian Road and Barnsbury Rail Station - Overground</item>
+        <item>Cheshunt Rail Station - Overground</item>
+        <item>Chingford Rail Station - Overground</item>
+        <item>Kensal Green Rail Station - Overground</item>
+        <item>Shepherds Bush Rail Station - Overground</item>
+        <item>Wandsworth Road Rail Station - Overground</item>
+        <item>Wanstead Park Rail Station - Overground</item>
+
+
+    </string-array>
+
 </resources>

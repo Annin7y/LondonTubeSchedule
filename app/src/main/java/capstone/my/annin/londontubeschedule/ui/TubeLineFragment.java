@@ -96,7 +96,6 @@ public class TubeLineFragment extends BaseFragment implements LineAdapter.LineAd
     private LineViewModel mLineViewModel;
     private static final String SNACKBAR_STATE = "snackbar_state";
     private boolean isSnackbarShowing = false;
-    Station station;
 
 //    /**
 //     * Use this factory method to create a new instance of
