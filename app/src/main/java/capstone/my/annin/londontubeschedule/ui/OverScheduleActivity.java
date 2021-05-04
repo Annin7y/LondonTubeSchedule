@@ -54,6 +54,7 @@ import butterknife.ButterKnife;
 import capstone.my.annin.londontubeschedule.R;
 import capstone.my.annin.londontubeschedule.asynctask.OvergroundScheduleAsyncTask;
 import capstone.my.annin.londontubeschedule.asynctask.OvergroundScheduleAsyncTaskInterface;
+import capstone.my.annin.londontubeschedule.asynctask.OvergroundStationAsyncTask;
 import capstone.my.annin.londontubeschedule.asynctask.OvergroundStationAsyncTaskInterface;
 import capstone.my.annin.londontubeschedule.asynctask.TubeScheduleAsyncTask;
 import capstone.my.annin.londontubeschedule.maps.MapsConnectionCheck;
@@ -130,6 +131,13 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
      if (getIntent() != null && getIntent().getExtras() != null)
     {
         autoCompleteText = getIntent().getExtras().getString("overStation");
+
+        if(autoCompleteText != null)
+        {
+            OvergroundStationAsyncTask myOverStatTask = new OvergroundStationAsyncTask(this);
+            myOverStatTask.execute(overLineId);
+
+        }
 
         overground = getIntent().getExtras().getParcelable("OvergroundStatus");
         overgroundStation = getIntent().getExtras().getParcelable("OvergroundStation");
