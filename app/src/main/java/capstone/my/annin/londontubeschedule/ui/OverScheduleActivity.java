@@ -110,6 +110,11 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
     SwipeRefreshLayout swipeRefreshLayout;
     private OvergroundStationAdapter overStatAdapter;
 
+    RecyclerView mStationRecyclerView;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -126,6 +131,9 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
         mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
         RecyclerView.LayoutManager mScheduleLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mScheduleRecyclerView.setLayoutManager(mScheduleLayoutManager);
+
+        overStatAdapter = new OvergroundStationAdapter(this, overStatArrayList, context);
+        mStationRecyclerView.setAdapter(overStatAdapter);
 
 
      if (getIntent() != null && getIntent().getExtras() != null)
