@@ -108,11 +108,6 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
-    private OvergroundStationAdapter overStatAdapter;
-
-    RecyclerView mStationRecyclerView;
-
-
 
 
     @Override
@@ -132,9 +127,6 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
         RecyclerView.LayoutManager mScheduleLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mScheduleRecyclerView.setLayoutManager(mScheduleLayoutManager);
 
-        overStatAdapter = new OvergroundStationAdapter(this, overStatArrayList, context);
-        mStationRecyclerView.setAdapter(overStatAdapter);
-
 
      if (getIntent() != null && getIntent().getExtras() != null)
     {
@@ -144,6 +136,8 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
         {
             OvergroundStationAsyncTask myOverStatTask = new OvergroundStationAsyncTask(this);
             myOverStatTask.execute(overLineId);
+
+
 
         }
 
@@ -366,10 +360,10 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
     {
         if (null != simpleJsonOverStatData)
         {
-            overStatAdapter = new OvergroundStationAdapter(this, simpleJsonOverStatData, OverScheduleActivity.this);
+           // overStatAdapter = new OvergroundStationAdapter(this, simpleJsonOverStatData, OverScheduleActivity.this);
             overStatArrayList = simpleJsonOverStatData;
             //mStationRecyclerView.setAdapter(overStatAdapter);
-            overStatAdapter.setStationList(overStatArrayList);
+            //overStatAdapter.setStationList(overStatArrayList);
         }
         else
         {

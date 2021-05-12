@@ -49,13 +49,13 @@
     <dimen name="fav_button_margin_top">5dp</dimen>
     <dimen name="empty_schedule_top">50dp</dimen>
     <dimen name="main_instr_start">32dp</dimen>
-    <dimen name="main_instr_top">16dp</dimen>
+    <dimen name="main_instr_top">25dp</dimen>
     <dimen name="main_instr_text">20sp</dimen>
     <dimen name="main_over_instr_start">25dp</dimen>
     <dimen name="main_over_instr_text">19sp</dimen>
     <dimen name="main_name_top">18dp</dimen>
     <dimen name="main_recycler_start">16dp</dimen>
-    <dimen name="main_recycler_top">90dp</dimen>
+    <dimen name="main_recycler_top">150dp</dimen>
     <dimen name="over_stat_rec_top">20dp</dimen>
     <dimen name="over_stat_rec_start">9dp</dimen>
     <dimen name="over_name_margin_start">15dp</dimen>

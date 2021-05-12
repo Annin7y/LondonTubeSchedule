@@ -18,54 +18,380 @@
 
 <resources>
     <string-array name="stations_alph_list">
+        <item>Acton Town Underground Station - District</item>
+        <item>Acton Town Underground Station - Piccadilly</item>
+        <item>Aldgate Underground Station - Circle</item>
+        <item>Aldgate Underground Station - Metropolitan</item>
+        <item>Aldgate East Underground Station - District</item>
+        <item>Aldgate East Underground Station - Hammersmith and City</item>
+        <item>Alperton Underground Station - Piccadilly</item>
+        <item>Amersham Underground Station - Metropolitan</item>
+        <item>Angel Underground Station - Northern</item>
+        <item>Archway Underground Station - Northern</item>
+        <item>Arnos Grove Underground Station - Piccadilly</item>
+        <item>Arsenal Underground Station - Piccadilly</item>
         <item>Baker Street Underground Station - Bakerloo</item>
+        <item>Baker Street Underground Station - Circle</item>
+        <item>Baker Street Underground Station - Hammersmith and City</item>
+        <item>Baker Street Underground Station - Jubilee</item>
+        <item>Baker Street Underground Station - Metropolitan</item>
+        <item>Balham Underground Station - Northern</item>
+        <item>Bank Underground Station - Central</item>
+        <item>Bank Underground Station - Northern</item>
+        <item>Bank Underground Station - Waterloo and City</item>
+        <item>Barbican Underground Station - Circle</item>
+        <item>Barbican Underground Station - Hammersmith and City</item>
+        <item>Barbican Underground Station - Metropolitan</item>
+        <item>Barking Underground Station - District</item>
+        <item>Barking Underground Station - Hammersmith and City</item>
+        <item>Barking Underground Station - Metropolitan</item>
+        <item>Barkingside Underground Station - Central</item>
+        <item>Barons Court Underground Station - District</item>
+        <item>Barons Court Underground Station - Piccadilly</item>
+        <item>Bayswater Underground Station - Circle</item>
+        <item>Bayswater Underground Station - District</item>
+        <item>Becontree Underground Station - District</item>
+        <item>Belsize Park Underground Station - Northern</item>
+        <item>Bermondsey Underground Station - Jubilee</item>
+        <item>Bethnal Green Underground Station - Central</item>
+        <item>Blackfriars Underground Station - Circle</item>
+        <item>Blackfriars Underground Station - District</item>
+        <item>Blackhorse Road Underground Station - Victoria</item>
+        <item>Bond Street Underground Station - Central</item>
+        <item>Bond Street Underground Station - Jubilee</item>
+        <item>Borough Underground Station - Northern</item>
+        <item>Boston Manor Underground Station - Piccadilly</item>
+        <item>Bounds Green Underground Station - Piccadilly</item>
+        <item>Bow Road Underground Station - District</item>
+        <item>Bow Road Underground Station - Hammersmith and City</item>
+        <item>Brent Cross Underground Station - Northern</item>
+        <item>Brixton Underground Station - Victoria</item>
+        <item>Bromley-by-Bow Underground Station - District</item>
+        <item>Bromley-by-Bow Underground Station - Hammersmith and City</item>
+        <item>Buckhurst Hill Underground Station - Central</item>
+        <item>Burnt Oak Underground Station - Northern</item>
+        <item>Caledonian Road Underground Station - Piccadilly</item>
+        <item>Camden Town Underground Station - Northern</item>
+        <item>Canada Water Underground Station - Jubilee</item>
+        <item>Canary Wharf Underground Station - Jubilee</item>
+        <item>Canning Town Underground Station - Jubilee</item>
+        <item>Cannon Street Underground Station - Circle</item>
+        <item>Cannon Street Underground Station - District</item>
+        <item>Canons Park Underground Station - Jubilee</item>
+        <item>Chalk Farm Underground Station - Northern</item>
+        <item>Chancery Lane Underground Station - Central</item>
+        <item>Chalfont and Latimer Underground Station - Metropolitan</item>
         <item>Charing Cross Underground Station - Bakerloo</item>
+        <item>Charing Cross Underground Station - Northern</item>
+        <item>Chesham Underground Station - Metropolitan</item>
+        <item>Chigwell Underground Station - Central</item>
+        <item>Chiswick Park Underground Station - District</item>
+        <item>Chorleywood Underground Station - Metropolitan</item>
+        <item>Clapham Common Underground Station - Northern</item>
+        <item>Clapham North Underground Station - Northern</item>
+        <item>Clapham South Underground Station - Northern</item>
+        <item>Cockfosters Underground Station - Piccadilly</item>
+        <item>Colindale Underground Station - Northern</item>
+        <item>Colliers Wood Underground Station - Northern</item>
+        <item>Covent Garden Underground Station - Piccadilly</item>
+        <item>Croxley Underground Station - Metropolitan</item>
+        <item>Dagenham East Underground Station - District</item>
+        <item>Dagenham Heathway Underground Station - District</item>
+        <item>Debden Underground Station - Central</item>
+        <item>Dollis Hill Underground Station - Jubilee</item>
+        <item>Ealing Broadway Underground Station - Central</item>
+        <item>Ealing Broadway Underground Station - District</item>
+        <item>Ealing Common Underground Station - District</item>
+        <item>Ealing Common Underground Station - Piccadilly</item>
+        <item>Earl\'s Court Underground Station - District</item>
+        <item>Earl\'s Court Underground Station - Piccadilly</item>
+        <item>East Acton Underground Station - Central</item>
+        <item>East Finchley Underground Station - Northern</item>
+        <item>East Ham Underground Station - District</item>
+        <item>East Ham Underground Station - Hammersmith and City</item>
+        <item>East Putney Underground Station - District</item>
+        <item>Eastcote Underground Station - Metropolitan</item>
+        <item>Eastcote Underground Station - Piccadilly</item>
+        <item>Edgware Underground Station - Northern</item>
         <item>Edgware Road(Bakerloo) Underground Station - Bakerloo</item>
+        <item>Edgware Road (Circle Line) Underground Station - Circle</item>
+        <item>Edgware Road (Circle Line) Underground Station - District</item>
+        <item>Edgware Road (Circle Line) Underground Station - Hammersmith and City</item>
         <item>Elephant and Castle Underground Station - Bakerloo</item>
+        <item>Elephant and Castle Underground Station - Northern</item>
+        <item>Elm Park Underground Station - District</item>
         <item>Embankment Underground Station - Bakerloo</item>
+        <item>Embankment Underground Station - Circle</item>
+        <item>Embankment Underground Station - District</item>
+        <item>Embankment Underground Station - Northern</item>
+        <item>Epping Underground Station - Central</item>
+        <item>Euston Underground Station - Northern</item>
+        <item>Euston Underground Station - Victoria</item>
+        <item>Euston Square Underground Station - Hammersmith and City</item>
+        <item>Euston Square Underground Station - Metropolitan</item>
+        <item>Farringdon Underground Station - Circle</item>
+        <item>Farringdon Underground Station - Hammersmith and City</item>
+        <item>Farringdon Underground Station - Metropolitan</item>
+        <item>Fairlop Underground Station - Central</item>
+        <item>Finchley Central Underground Station - Northern</item>
+        <item>Finchley Road Underground Station - Jubilee</item>
+        <item>Finchley Road Underground Station - Metropolitan</item>
+        <item>Finsbury Park Underground Station - Piccadilly</item>
+        <item>Finsbury Park Underground Station - Victoria</item>
+        <item>Fulham Broadway Underground Station - District</item>
+        <item>Gants Hill Underground Station - Central</item>
+        <item>Gloucester Road Underground Station - Circle</item>
+        <item>Gloucester Road Underground Station - District</item>
+        <item>Gloucester Road Underground Station - Piccadilly</item>
+        <item>Golders Green Underground Station - Northern</item>
+        <item>Goldhawk Road Underground Station - Circle</item>
+        <item>Goldhawk Road Underground Station - Hammersmith and City</item>
+        <item>Goodge Street Underground Station - Northern</item>
+        <item>Grange Hill Underground Station - Central</item>
+        <item>Great Portland Street Underground Station - Circle</item>
+        <item>Great Portland Street Underground Station - Hammersmith and City</item>
+        <item>Great Portland Street Underground Station - Metropolitan</item>
+        <item>Greenford Underground Station - Central</item>
+        <item>Green Park Underground Station - Jubilee</item>
+        <item>Green Park Underground Station - Piccadilly</item>
+        <item>Green Park Underground Station - Victoria</item>
+        <item>Gunnersbury Underground Station - District</item>
+        <item>Hainault Underground Station - Central</item>
+        <item>Hammersmith (Dist and Picc Line) Underground Station - District</item>
+        <item>Hammersmith (Dist and Picc Line) Underground Station - Piccadilly</item>
+        <item>Hammersmith (H and C Line) Underground Station - Circle</item>
+        <item>Hammersmith (H and C Line) Underground Station - Hammersmith and City</item>
+        <item>Hampstead Underground Station - Northern</item>
+        <item>Hanger Lane Underground Station - Central</item>
         <item>Harlesden Underground Station - Bakerloo</item>
         <item>Harrow and Wealdstone Underground Station - Bakerloo</item>
+        <item>Harrow-on-the-Hill Street Underground Station - Metropolitan</item>
+        <item>Hatton Cross Underground Station - Piccadilly</item>
+        <item>Heathrow Terminals 2 and 3 Underground Station - Piccadilly</item>
+        <item>Heathrow Terminal 5 Underground Station - Piccadilly</item>
+        <item>Hendon Central Underground Station - Northern</item>
+        <item>Highbury and Islington Underground Station - Victoria</item>
+        <item>High Barnet Underground Station - Northern</item>
+        <item>High Street Kensington Underground Station - Circle</item>
+        <item>High Street Kensington Underground Station - District</item>
+        <item>Highbury and Islington Underground Station - Victoria</item>
+        <item>Highgate Underground Station - Northern</item>
+        <item>Hillingdon Underground Station - Metropolitan</item>
+        <item>Hillingdon Underground Station - Piccadilly</item>
+        <item>Holborn Underground Station - Central</item>
+        <item>Holborn Underground Station - Piccadilly</item>
+        <item>Holland Park Underground Station - Central</item>
+        <item>Holloway Road Underground Station - Piccadilly</item>
+        <item>Hornchurch Underground Station - District</item>
+        <item>Hounslow Central Underground Station - Piccadilly</item>
+        <item>Hounslow East Underground Station - Piccadilly</item>
+        <item>Hounslow West Underground Station - Piccadilly</item>
+        <item>Hyde Park Corner Underground Station - Piccadilly</item>
+        <item>Ickenham Underground Station - Piccadilly</item>
+        <item>Kennington Underground Station - Northern</item>
         <item>Kensal Green Underground Station - Bakerloo</item>
+        <item>Kensington (Olympia) Underground Station - District</item>
+        <item>Kentish Town Underground Station - Northern</item>
         <item>Kenton Underground Station - Bakerloo</item>
+        <item>Kew Gardens Underground Station - District</item>
+        <item>Kilburn Underground Station - Jubilee</item>
         <item>Kilburn Park Underground Station - Bakerloo</item>
+        <item>King\'s Cross St. Pancras Underground Station - Circle</item>
+        <item>King\'s Cross St. Pancras Underground Station - Hammersmith and City</item>
+        <item>King\'s Cross St. Pancras Underground Station - Metropolitan</item>
+        <item>King\'s Cross St. Pancras Underground Station - Northern</item>
+        <item>King\'s Cross St. Pancras Underground Station - Piccadilly</item>
+        <item>King\'s Cross St. Pancras Underground Station - Victoria</item>
+        <item>Kingsbury Underground Station - Jubilee</item>
+        <item>Knightsbridge Underground Station - Piccadilly</item>
+        <item>Ladbroke Grove Underground Station - Hammersmith and City</item>
         <item>Lambeth North Underground Station - Bakerloo</item>
+        <item>Lancaster Gate Underground Station - Central</item>
+        <item>Latimer Road Underground Station - Hammersmith and City</item>
+        <item>Leicester Square Underground Station - Northern</item>
+        <item>Leicester Square Underground Station - Piccadilly</item>
+        <item>Leyton Underground Station - Central</item>
+        <item>Leytonstone Underground Station - Central</item>
+        <item>Liverpool Street Underground Station - Central</item>
+        <item>Liverpool Street Underground Station - Circle</item>
+        <item>Liverpool Street Underground Station - Hammersmith and City</item>
+        <item>Liverpool Street Underground Station - Metropolitan</item>
+        <item>London Bridge Underground Station - Jubilee</item>
+        <item>London Bridge Underground Station - Northern</item>
+        <item>Loughton Underground Station - Central</item>
         <item>Maida Vale Underground Station - Bakerloo</item>
+        <item>Manor House Underground Station - Piccadilly</item>
+        <item>Mansion House Underground Station - Circle</item>
+        <item>Mansion House Underground Station - District</item>
+        <item>Marble Arch Underground Station - Central</item>
         <item>Marylebone Underground Station - Bakerloo</item>
+        <item>Mile End Underground Station - Central</item>
+        <item>Mile End Underground Station - District</item>
+        <item>Mile End Underground Station - Hammersmith and City</item>
+        <item>Mill Hill East Underground Station - Northern</item>
+        <item>Monument Underground Station - Circle</item>
+        <item>Monument Underground Station - District</item>
+        <item>Moor Park Underground Station - Metropolitan</item>
+        <item>Moorgate Underground Station - Circle</item>
+        <item>Moorgate Underground Station - Hammersmith and City</item>
+        <item>Moorgate Underground Station - Metropolitan</item>
+        <item>Moorgate Underground Station - Northern</item>
+        <item>Morden Underground Station - Northern</item>
+        <item>Mornington Crescent Underground Station - Northern</item>
+        <item>Neasden Underground Station - Jubilee</item>
+        <item>Newbury Park Underground Station - Central</item>
+        <item>North Acton Underground Station - Central</item>
+        <item>North Ealing Underground Station - Piccadilly</item>
+        <item>North Greenwich Underground Station - Jubilee</item>
+        <item>North Harrow Underground Station - Metropolitan</item>
         <item>North Wembley Underground Station - Bakerloo</item>
+        <item>Northfields Underground Station - Piccadilly</item>
+        <item>Northolt Underground Station - Central</item>
+        <item>Northwick Park Underground Station - Metropolitan</item>
+        <item>Northwood Underground Station - Metropolitan</item>
+        <item>Northwood Hills Underground Station - Metropolitan</item>
+        <item>Notting Hill Gate Underground Station - Central</item>
+        <item>Notting Hill Gate Underground Station - Circle</item>
+        <item>Notting Hill Gate Underground Station - District</item>
+        <item>Oakwood Underground Station - Piccadilly</item>
+        <item>Old Street Underground Station - Northern</item>
+        <item>Osterley Underground Station - Piccadilly</item>
+        <item>Oval Underground Station - Northern</item>
         <item>Oxford Circus Underground Station - Bakerloo</item>
+        <item>Oxford Circus Underground Station - Central</item>
+        <item>Oxford Circus Underground Station - Victoria</item>
         <item>Paddington Underground Station - Bakerloo</item>
+        <item>Paddington Underground Station - Circle</item>
+        <item>Paddington Underground Station - District</item>
+        <item>Paddington (H and C Line)-Underground - Hammersmith and City</item>
+        <item>Park Royal Underground Station - Piccadilly</item>
+        <item>Parsons Green Underground Station - District</item>
+        <item>Perivale Underground Station - Central</item>
         <item>Piccadilly Circus Underground Station - Bakerloo</item>
-        <item>Regent\'s Park Underground Station - Bakerloo</item>
+        <item>Piccadilly Circus Underground Station - Piccadilly</item>
+        <item>Pimlico Underground Station - Victoria</item>
+        <item>Pinner Underground Station - Metropolitan</item>
+        <item>Plaistow Underground Station - District</item>
+        <item>Plaistow Underground Station - Hammersmith and City</item>
+        <item>Preston Road Underground Station - Metropolitan</item>
+        <item>Putney Bridge Underground Station - District</item>
         <item>Queen\'s Park Underground Station - Bakerloo</item>
+        <item>Queensbury Underground Station - Jubilee</item>
+        <item>Queensway Underground Station - Central</item>
+        <item>Ravenscourt Park Underground Station - District</item>
+        <item>Rayners Lane Underground Station - Metropolitan</item>
+        <item>Rayners Lane Underground Station - Piccadilly</item>
+        <item>Redbridge Underground Station - Central</item>
+        <item>Regent\'s Park Underground Station - Bakerloo</item>
+        <item>Rickmansworth Underground Station - Metropolitan</item>
+        <item>Roding Valley Underground Station - Central</item>
+        <item>Royal Oak Underground Station - Circle</item>
+        <item>Royal Oak Underground Station - Hammersmith and City</item>
+        <item>Ruislip Gardens Underground Station - Central</item>
+        <item>Ruislip Underground Station - Metropolitan</item>
+        <item>Ruislip Manor Underground Station - Metropolitan</item>
+        <item>Ruislip Manor Underground Station - Piccadilly</item>
+        <item>Russell Square Underground Station - Piccadilly</item>
+        <item>St. James\'s Park Underground Station - Circle</item>
+        <item>St. James\'s Park Underground Station - District</item>
+        <item>St. John\'s Wood Underground Station - Jubilee</item>
+        <item>St. Paul\'s Underground Station - Central</item>
+        <item>Seven Sisters Underground Station - Victoria</item>
+        <item>Shepherd\'s Bush (Central) Underground Station - Central</item>
+        <item>Shepherd\'s Bush Market Underground Station - Hammersmith and City</item>
+        <item>Sloane Square Underground Station - Circle</item>
+        <item>Sloane Square Underground Station - District</item>
+        <item>Snaresbrook Underground Station - Central</item>
+        <item>South Ealing Underground Station - Piccadilly</item>
+        <item>South Harrow Underground Station - Piccadilly</item>
+        <item>South Kensington Underground Station - Circle</item>
+        <item>South Kensington Underground Station - District</item>
+        <item>South Kensington Underground Station - Piccadilly</item>
         <item>South Kenton Underground Station - Bakerloo</item>
+        <item>South Ruislip Underground Station - Central</item>
+        <item>South Wimbledon Underground Station - Northern</item>
+        <item>South Woodford Underground Station - Central</item>
+        <item>Southfields Underground Station - District</item>
+        <item>Southgate Underground Station - Piccadilly</item>
+        <item>Southwark Underground Station - Jubilee</item>
+        <item>Stamford Brook Underground Station - District</item>
+        <item>Stanmore Underground Station - Jubilee</item>
+        <item>Stepney Green Underground Station - District</item>
+        <item>Stepney Green Underground Station - Hammersmith and City</item>
+        <item>Stockwell Underground Station - Northern</item>
+        <item>Stockwell Underground Station - Victoria</item>
         <item>Stonebridge Park Underground Station - Bakerloo</item>
+        <item>Stratford Underground Station - Central</item>
+        <item>Stratford Underground Station - Jubilee</item>
+        <item>Sudbury Hill Underground Station - Piccadilly</item>
+        <item>Sudbury Town Underground Station - Piccadilly</item>
+        <item>Swiss Cottage Underground Station - Jubilee</item>
+        <item>Temple Underground Station - Circle</item>
+        <item>Temple Underground Station - District</item>
+        <item>Theydon Bois Underground Station - Central</item>
+        <item>Tooting Bec Underground Station - Northern</item>
+        <item>Tooting Broadway Underground Station - Northern</item>
+        <item>Tottenham Court Road Underground Station - Central</item>
+        <item>Tottenham Court Road Underground Station - Northern</item>
+        <item>Tottenham Hale Underground Station - Victoria</item>
+        <item>Totteridge and Whetstone Underground Station - Northern</item>
+        <item>Tower Hill Underground Station - Circle</item>
+        <item>Tower Hill Underground Station - District</item>
+        <item>Tufnell Park Underground Station - Northern</item>
+        <item>Turnham Green Underground Station - District</item>
+        <item>Turnham Green Underground Station - Piccadilly</item>
+        <item>Turnpike Lane Underground Station - Piccadilly</item>
+        <item>Upminster Underground Station - District</item>
+        <item>Upminster Bridge Underground Station - District</item>
+        <item>Upney Underground Station - District</item>
+        <item>Upton Park Underground Station - District</item>
+        <item>Upton Park Underground Station - Hammersmith and City</item>
+        <item>Uxbridge Underground Station - Metropolitan</item>
+        <item>Uxbridge Underground Station - Piccadilly</item>
+        <item>Vauxhall Underground Station - Victoria</item>
+        <item>Victoria Underground Station - Circle</item>
+        <item>Victoria Underground Station - District</item>
+        <item>Victoria Underground Station - Victoria</item>
+        <item>Walthamstow Central Underground Station - Victoria</item>
+        <item>Wanstead Underground Station - Central</item>
+        <item>Warren Street Underground Station - Northern</item>
+        <item>Warren Street Underground Station - Victoria</item>
         <item>Warwick Avenue Underground Station - Bakerloo</item>
-        <item>Wateloo Underground Station - Bakerloo</item>
+        <item>Waterloo Underground Station - Bakerloo</item>
+        <item>Waterloo Underground Station - Jubilee</item>
+        <item>Waterloo Underground Station - Northern</item>
+        <item>Waterloo Underground Station - Wakerloo and City </item>
+        <item>Watford Underground Station - Metropolitan</item>
         <item>Wembley Central Underground Station - Bakerloo</item>
+        <item>Wembley Park Underground Station - Jubilee</item>
+        <item>Wembley Park Underground Station - Metropolitan</item>
+        <item>West Acton Underground Station - Central</item>
+        <item>West Brompton Underground Station - District</item>
+        <item>West Finchley Underground Station - Northern</item>
+        <item>West Ham Underground Station - District</item>
+        <item>West Ham Underground Station - Hammersmith and City</item>
+        <item>West Ham Underground Station - Jubilee</item>
+        <item>West Hampstead Underground Station - Jubilee</item>
+        <item>West Harrow Underground Station - Metropolitan</item>
+        <item>West Kensington Underground Station - District</item>
+        <item>West Ruislip Underground Station - Central</item>
+        <item>Westbourne Park Underground Station - Circle</item>
+        <item>Westbourne Park Underground Station - Hammersmith and City</item>
+        <item>Westminster Underground Station - Circle</item>
+        <item>Westminster Underground Station - District</item>
+        <item>Westminster Underground Station - Jubilee</item>
+        <item>White City Underground Station - Central</item>
+        <item>Whitechapel Underground Station - District</item>
+        <item>Whitechapel Underground Station - Hammersmith and City</item>
+        <item>Willesden Green Underground Station - Jubilee</item>
         <item>Willesden Junction Underground Station - Bakerloo</item>
+        <item>Wimbledon Park Underground Station - District</item>
+        <item>Wood Green Underground Station - Piccadilly</item>
+        <item>Wood Lane Underground Station - Hammersmith and City</item>
+        <item>Woodford Underground Station - Central</item>
+        <item>Woodside Park Underground Station - Northern</item>
 
     </string-array>
-    <string-array name="stations_over_over_list">
-        <item>Acton Central Rail Station - Overground</item>
-        <item>Anerley Rail Station - Overground</item>
-        <item>Barking Rail Station - Overground</item>
-        <item>Bethnal Green Rail Station - Overground</item>
-        <item>Blackhorse Road Rail Station - Overground</item>
-        <item>Brockley Rail Station - Overground</item>
-        <item>Brondesbury Park Rail Station - Overground</item>
-        <item>Brondesbury Rail Station - Overground</item>
-        <item>Bruce Grove Rail Station - Overground</item>
-        <item>Bush Hill Park Rail Station - Overground</item>
-        <item>Bushey Rail Station - Overground</item>
-        <item>Caledonian Road and Barnsbury Rail Station - Overground</item>
-        <item>Cheshunt Rail Station - Overground</item>
-        <item>Chingford Rail Station - Overground</item>
-        <item>Kensal Green Rail Station - Overground</item>
-        <item>Shepherds Bush Rail Station - Overground</item>
-        <item>Wandsworth Road Rail Station - Overground</item>
-        <item>Wanstead Park Rail Station - Overground</item>
 
-
-    </string-array>
 
 </resources>
