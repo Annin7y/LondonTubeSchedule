@@ -27,7 +27,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -39,7 +38,6 @@ import capstone.my.annin.londontubeschedule.asynctask.OvergroundStationAsyncTask
 import capstone.my.annin.londontubeschedule.pojo.OvergroundStation;
 import capstone.my.annin.londontubeschedule.pojo.OvergroundStatus;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.OvergroundStationAdapter;
-import capstone.my.annin.londontubeschedule.utils.NetworkUtils;
 import timber.log.Timber;
 
 public class OverStatListActivity extends AppCompatActivity implements OvergroundStationAdapter.OvergroundStationAdapterOnClickHandler, OvergroundStationAsyncTaskInterface
@@ -110,7 +108,7 @@ public class OverStatListActivity extends AppCompatActivity implements Overgroun
     }
 
     @Override
-    public void returnOverStationData(ArrayList<OvergroundStation> simpleJsonOverStatData)
+    public OvergroundStation returnOverStationData(ArrayList<OvergroundStation> simpleJsonOverStatData)
     {
         if (null != simpleJsonOverStatData)
         {
@@ -124,6 +122,7 @@ public class OverStatListActivity extends AppCompatActivity implements Overgroun
             Timber.e("Problem parsing overground stations JSON results" );
             emptyStations.setVisibility(View.VISIBLE);
         }
+        return null;
     }
 
     @Override

@@ -131,7 +131,7 @@ public class OvergroundLineFragment extends BaseFragment implements OvergroundSt
             RecyclerView.LayoutManager mLineLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
             mOvergroundStatusRecyclerView.setLayoutManager(mLineLayoutManager);
 
-            String[] overStationsArrayList = getResources().getStringArray(R.array.stations_over_over_list);
+            String[] overStationsArrayList = getResources().getStringArray(R.array.stations_alph_over_list);
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, overStationsArrayList);
             AutoCompleteTextView autoComplete = (AutoCompleteTextView) view.findViewById(R.id.autoCompleteTextView2);
             String overStationName = autoComplete.getText().toString();

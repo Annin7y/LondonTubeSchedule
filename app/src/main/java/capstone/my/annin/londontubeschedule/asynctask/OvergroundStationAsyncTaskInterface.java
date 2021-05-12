@@ -21,5 +21,5 @@ import capstone.my.annin.londontubeschedule.pojo.OvergroundStation;
 
 public interface OvergroundStationAsyncTaskInterface
 {
-    void returnOverStationData( ArrayList<OvergroundStation> simpleJsonOverStatData);
+    OvergroundStation returnOverStationData(ArrayList<OvergroundStation> simpleJsonOverStatData);
 }

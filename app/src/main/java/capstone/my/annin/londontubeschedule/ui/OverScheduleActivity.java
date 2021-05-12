@@ -47,6 +47,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
 import butterknife.BindView;
@@ -56,7 +57,6 @@ import capstone.my.annin.londontubeschedule.asynctask.OvergroundScheduleAsyncTas
 import capstone.my.annin.londontubeschedule.asynctask.OvergroundScheduleAsyncTaskInterface;
 import capstone.my.annin.londontubeschedule.asynctask.OvergroundStationAsyncTask;
 import capstone.my.annin.londontubeschedule.asynctask.OvergroundStationAsyncTaskInterface;
-import capstone.my.annin.londontubeschedule.asynctask.TubeScheduleAsyncTask;
 import capstone.my.annin.londontubeschedule.maps.MapsConnectionCheck;
 import capstone.my.annin.londontubeschedule.maps.StationMapActivity;
 import capstone.my.annin.londontubeschedule.pojo.OvergroundSchedule;
@@ -67,8 +67,6 @@ import capstone.my.annin.londontubeschedule.recyclerviewadapters.OvergroundStati
 import capstone.my.annin.londontubeschedule.scrollbehavior.DisableSwipeBehavior;
 import capstone.my.annin.londontubeschedule.widget.ScheduleWidgetProvider;
 import timber.log.Timber;
-
-import static capstone.my.annin.londontubeschedule.ui.StationScheduleActivity.isNetworkStatusAvailable;
 
 public class OverScheduleActivity extends AppCompatActivity implements OvergroundScheduleAsyncTaskInterface,OvergroundStationAdapter.OvergroundStationAdapterOnClickHandler, OvergroundStationAsyncTaskInterface
 {
@@ -356,20 +354,28 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
     }
 
     @Override
-    public void returnOverStationData(ArrayList<OvergroundStation> simpleJsonOverStatData)
+    public OvergroundStation returnOverStationData(ArrayList<OvergroundStation> simpleJsonOverStatData)
     {
         if (null != simpleJsonOverStatData)
         {
            // overStatAdapter = new OvergroundStationAdapter(this, simpleJsonOverStatData, OverScheduleActivity.this);
-            overStatArrayList = simpleJsonOverStatData;
             //mStationRecyclerView.setAdapter(overStatAdapter);
             //overStatAdapter.setStationList(overStatArrayList);
+            overStatArrayList = simpleJsonOverStatData;
+            List<OvergroundStation> filteredList = new ArrayList<OvergroundStation>();
+            for(OvergroundStation overstation : overStatArrayList)
+            {
+                if(overstation.getStationName().equals(autoCompleteText))
+                   return overstation;
+            }
+
         }
         else
         {
             Timber.e("Problem parsing overground stations JSON results" );
             // emptyStations.setVisibility(View.VISIBLE);
         }
+        return null;
     }
     @Override
     public void onClick(OvergroundStation overgroundStation)
