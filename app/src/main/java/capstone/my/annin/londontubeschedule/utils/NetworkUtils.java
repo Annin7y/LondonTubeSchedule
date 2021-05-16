@@ -52,7 +52,9 @@ public class NetworkUtils
 
     private static final String BASE_URL_OVERGROUND_STATUS_LIST = "https://api.tfl.gov.uk/line/mode/overground/status";
 
-   // private static final String BASE_URL_OVERGROUND_STATION_LIST = "https://api.tfl.gov.uk/Line/london-overground/StopPoints";
+    private static final String BASE_URL_OVERGROUND_ARRIVALS_LIST = "https://api.tfl.gov.uk/Line/london-overground/arrivals";
+
+     private static final String BASE_URL_OVERGROUND_STATION_LIST = "https://api.tfl.gov.uk/Line/london-overground/StopPoints";
 
     public NetworkUtils()
     {
@@ -219,6 +221,45 @@ public class NetworkUtils
         Log.v(TAG, "Built URISchedule " + urlOverSch);
         return urlOverSch;
     }
+
+    public static URL buildOverSchArrivalUrl()
+    {
+        URL urlOverSchAllList = null;
+        try
+        {
+            Uri overSchAllListQueryUri = Uri.parse(BASE_URL_OVERGROUND_ARRIVALS_LIST).buildUpon()
+                    .build();
+            urlOverSchAllList = new URL(overSchAllListQueryUri.toString());
+        }
+        catch (MalformedURLException e)
+        {
+            e.printStackTrace();
+        }
+        //  Log.v(TAG, "Built URIline " + urlLineList);
+        Timber.v( "Built URIOverSchArr " + urlOverSchAllList );
+        return urlOverSchAllList;
+    }
+
+    public static URL buildOverStationAllUrl()
+    {
+        URL urlOverStatAllList = null;
+        try
+        {
+            Uri overStatAllListQueryUri = Uri.parse(BASE_URL_OVERGROUND_STATION_LIST).buildUpon()
+                    .build();
+            urlOverStatAllList = new URL(overStatAllListQueryUri.toString());
+        }
+        catch (MalformedURLException e)
+        {
+            e.printStackTrace();
+        }
+        //  Log.v(TAG, "Built URIline " + urlLineList);
+        Timber.v( "Built URIOverSttArr " + urlOverStatAllList );
+        return urlOverStatAllList;
+    }
+
+
+
 
     /**
      * Make an HTTP request to the given URL and return a String as the response.
@@ -566,6 +607,124 @@ public class NetworkUtils
         }
         return jsonOverSchResponse;
     }
+
+    /**
+     * Make an HTTP request to the given URL and return a String as the response.
+     */
+    public static String makeHttpOvergroundAllScheduleRequest(URL url) throws IOException
+    {
+        String jsonOverSchAllResponse = "";
+        // Log.i("URL: ", url.toString());
+        Timber.i(url.toString());
+
+        // If the URL is null, then return early.
+        if (url == null)
+        {
+            return jsonOverSchAllResponse;
+        }
+
+        HttpURLConnection urlConnection = null;
+        InputStream inputStream = null;
+        try
+        {
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setReadTimeout(10000 /* milliseconds */);
+            urlConnection.setConnectTimeout(15000 /* milliseconds */);
+            urlConnection.setRequestMethod("GET");
+            urlConnection.connect();
+
+            // If the request was successful (response code 200),
+            // then read the input stream and parse the response.
+            if (urlConnection.getResponseCode() == 200)
+            {
+                inputStream = urlConnection.getInputStream();
+                jsonOverSchAllResponse = readFromStream(inputStream);
+            } else
+            {
+                Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
+            }
+        }
+        catch (IOException e)
+        {
+            //Log.e(LOG_TAG, "Problem retrieving line list JSON results.", e);
+            Timber.e(e,"Problem retrieving overground schedule JSON results." );
+        }
+        finally
+        {
+            if (urlConnection != null)
+            {
+                urlConnection.disconnect();
+            }
+            if (inputStream != null)
+            {
+                // Closing the input stream could throw an IOException, which is why
+                // the makeHttpRequest(URL url) method signature specifies than an IOException
+                // could be thrown.
+                inputStream.close();
+            }
+        }
+        return jsonOverSchAllResponse;
+    }
+
+    /**
+     * Make an HTTP request to the given URL and return a String as the response.
+     */
+    public static String makeHttpOvergroundAllStationRequest(URL url) throws IOException
+    {
+        String jsonOverStatAllResponse = "";
+        // Log.i("URL: ", url.toString());
+        Timber.i(url.toString());
+
+        // If the URL is null, then return early.
+        if (url == null)
+        {
+            return jsonOverStatAllResponse;
+        }
+
+        HttpURLConnection urlConnection = null;
+        InputStream inputStream = null;
+        try
+        {
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setReadTimeout(10000 /* milliseconds */);
+            urlConnection.setConnectTimeout(15000 /* milliseconds */);
+            urlConnection.setRequestMethod("GET");
+            urlConnection.connect();
+
+            // If the request was successful (response code 200),
+            // then read the input stream and parse the response.
+            if (urlConnection.getResponseCode() == 200)
+            {
+                inputStream = urlConnection.getInputStream();
+                jsonOverStatAllResponse = readFromStream(inputStream);
+            } else
+            {
+                Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
+            }
+        }
+        catch (IOException e)
+        {
+            //Log.e(LOG_TAG, "Problem retrieving line list JSON results.", e);
+            Timber.e(e,"Problem retrieving overground all stations JSON results." );
+        }
+        finally
+        {
+            if (urlConnection != null)
+            {
+                urlConnection.disconnect();
+            }
+            if (inputStream != null)
+            {
+                // Closing the input stream could throw an IOException, which is why
+                // the makeHttpRequest(URL url) method signature specifies than an IOException
+                // could be thrown.
+                inputStream.close();
+            }
+        }
+        return jsonOverStatAllResponse;
+    }
+
+
 
     /**
      * Convert the {@link InputStream} into a String which contains the

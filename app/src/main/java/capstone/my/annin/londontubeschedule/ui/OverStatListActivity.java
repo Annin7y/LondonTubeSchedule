@@ -108,7 +108,7 @@ public class OverStatListActivity extends AppCompatActivity implements Overgroun
     }
 
     @Override
-    public OvergroundStation returnOverStationData(ArrayList<OvergroundStation> simpleJsonOverStatData)
+    public void returnOverStationData(ArrayList<OvergroundStation> simpleJsonOverStatData)
     {
         if (null != simpleJsonOverStatData)
         {
@@ -122,7 +122,6 @@ public class OverStatListActivity extends AppCompatActivity implements Overgroun
             Timber.e("Problem parsing overground stations JSON results" );
             emptyStations.setVisibility(View.VISIBLE);
         }
-        return null;
     }
 
     @Override

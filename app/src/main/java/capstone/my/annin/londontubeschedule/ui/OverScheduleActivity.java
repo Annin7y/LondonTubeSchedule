@@ -24,6 +24,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -53,10 +54,15 @@ import java.util.TimeZone;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import capstone.my.annin.londontubeschedule.R;
+import capstone.my.annin.londontubeschedule.asynctask.OvergroundSchAllAsyncTask;
+import capstone.my.annin.londontubeschedule.asynctask.OvergroundSchAllAsyncTaskInterface;
 import capstone.my.annin.londontubeschedule.asynctask.OvergroundScheduleAsyncTask;
 import capstone.my.annin.londontubeschedule.asynctask.OvergroundScheduleAsyncTaskInterface;
+import capstone.my.annin.londontubeschedule.asynctask.OvergroundStatAllAsyncTask;
+import capstone.my.annin.londontubeschedule.asynctask.OvergroundStatAllAsyncTaskInterface;
 import capstone.my.annin.londontubeschedule.asynctask.OvergroundStationAsyncTask;
 import capstone.my.annin.londontubeschedule.asynctask.OvergroundStationAsyncTaskInterface;
+import capstone.my.annin.londontubeschedule.asynctask.OvergroundStatusAsyncTask;
 import capstone.my.annin.londontubeschedule.maps.MapsConnectionCheck;
 import capstone.my.annin.londontubeschedule.maps.StationMapActivity;
 import capstone.my.annin.londontubeschedule.pojo.OvergroundSchedule;
@@ -65,10 +71,11 @@ import capstone.my.annin.londontubeschedule.pojo.OvergroundStatus;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.OvergroundScheduleAdapter;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.OvergroundStationAdapter;
 import capstone.my.annin.londontubeschedule.scrollbehavior.DisableSwipeBehavior;
+import capstone.my.annin.londontubeschedule.utils.NetworkUtils;
 import capstone.my.annin.londontubeschedule.widget.ScheduleWidgetProvider;
 import timber.log.Timber;
 
-public class OverScheduleActivity extends AppCompatActivity implements OvergroundScheduleAsyncTaskInterface,OvergroundStationAdapter.OvergroundStationAdapterOnClickHandler, OvergroundStationAsyncTaskInterface
+public class OverScheduleActivity extends AppCompatActivity implements OvergroundScheduleAsyncTaskInterface,OvergroundStationAdapter.OvergroundStationAdapterOnClickHandler, OvergroundStatAllAsyncTaskInterface, OvergroundSchAllAsyncTaskInterface
 {
     private static final String TAG = OverScheduleActivity.class.getSimpleName();
 
@@ -97,6 +104,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
     TextView emptySchedule;
     String stationNameToString;
     String autoCompleteText;
+    public String globalAutoCompleteText;
     private static final String KEY_EMPTY_VALUE = "empty_value";
     @BindView(R.id.extended_fab)
     ExtendedFloatingActionButton extendedFAB;
@@ -132,10 +140,8 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
 
         if(autoCompleteText != null)
         {
-            OvergroundStationAsyncTask myOverStatTask = new OvergroundStationAsyncTask(this);
-            myOverStatTask.execute(overLineId);
-
-
+            OvergroundStatAllAsyncTask myOverStatTask = new OvergroundStatAllAsyncTask(this);
+            myOverStatTask.execute();
 
         }
 
@@ -146,6 +152,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
             overLineId= overground.getModeId();
             // Log.i("lineId: ", line.getLineId());
             Timber.v(overground.getModeId(), "overLineId: ");
+
 
             if (overgroundStation != null)
             {
@@ -164,6 +171,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
             overgroundStatusArrayList = getIntent().getParcelableArrayListExtra("overgroundStatusList");
             overStatArrayList = getIntent().getParcelableArrayListExtra("overgroundStationList");
 
+
             if (savedInstanceState == null)
             {
                 if (isNetworkStatusAvailable(this))
@@ -173,6 +181,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
                      */
                     OvergroundScheduleAsyncTask myScheduleTask = new OvergroundScheduleAsyncTask(this);
                     myScheduleTask.execute(overLineId, stationOverId);
+
 
                 } else
                 {
@@ -354,29 +363,58 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
     }
 
     @Override
-    public OvergroundStation returnOverStationData(ArrayList<OvergroundStation> simpleJsonOverStatData)
+    public void returnOverScheduleAllData(ArrayList<OvergroundSchedule> simpleJsonOverSchAllData)
     {
-        if (null != simpleJsonOverStatData)
+        if (null != simpleJsonOverSchAllData)
         {
-           // overStatAdapter = new OvergroundStationAdapter(this, simpleJsonOverStatData, OverScheduleActivity.this);
-            //mStationRecyclerView.setAdapter(overStatAdapter);
-            //overStatAdapter.setStationList(overStatArrayList);
-            overStatArrayList = simpleJsonOverStatData;
-            List<OvergroundStation> filteredList = new ArrayList<OvergroundStation>();
-            for(OvergroundStation overstation : overStatArrayList)
-            {
-                if(overstation.getStationName().equals(autoCompleteText))
-                   return overstation;
-            }
+            overSchAdapter = new OvergroundScheduleAdapter(simpleJsonOverSchAllData, OverScheduleActivity.this);
+            overSchArrayList = simpleJsonOverSchAllData;
+            mScheduleRecyclerView.setAdapter(overSchAdapter);
+            overSchAdapter.setOverSchList(overSchArrayList);
+
+            stationArrival = overSchArrayList.get(0);
+
+            stationShareOverStationName = stationArrival.getOverStatSchName();
+
 
         }
         else
         {
-            Timber.e("Problem parsing overground stations JSON results" );
+            Timber.e("Problem parsing all overground schedule JSON results" );
             // emptyStations.setVisibility(View.VISIBLE);
         }
-        return null;
     }
+
+
+    @Override
+    public void returnOverStationAllData(ArrayList<OvergroundStation> simpleJsonOverStatData) {
+        if (null != simpleJsonOverStatData) {
+           //  overStatAdapter = new OvergroundStationAdapter(this, simpleJsonOverStatData, OverScheduleActivity.this);
+          //  mStationRecyclerView.setAdapter(overStatAdapter);
+           // overStatAdapter.setStationList(overStatArrayList);
+            overStatArrayList = simpleJsonOverStatData;
+            //List<OvergroundStation> filteredList = new ArrayList<OvergroundStation>();
+            for (OvergroundStation overstation : overStatArrayList) {
+                if (overstation.getStationName().equals(autoCompleteText)) {
+                    globalAutoCompleteText = autoCompleteText;
+                    break;
+                }
+            }
+                    OvergroundSchAllAsyncTask myOverSchAllTask = new OvergroundSchAllAsyncTask(this);
+            myOverSchAllTask.execute();
+            for (OvergroundSchedule overAllScheduleName : overSchArrayList) {
+                if (overAllScheduleName.getOverStatSchName().equals(autoCompleteText)) {
+                }
+
+            }
+        }
+        else
+            {
+                Timber.e("Problem parsing overground stations JSON results");
+                // emptyStations.setVisibility(View.VISIBLE);
+            }
+    }
+
     @Override
     public void onClick(OvergroundStation overgroundStation)
     {
