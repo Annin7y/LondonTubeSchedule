@@ -29,6 +29,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -134,7 +135,7 @@ public class OvergroundLineFragment extends BaseFragment implements OvergroundSt
             String[] overStationsArrayList = getResources().getStringArray(R.array.stations_alph_over_list);
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, overStationsArrayList);
             AutoCompleteTextView autoComplete = (AutoCompleteTextView) view.findViewById(R.id.autoCompleteTextView2);
-            String overStationName = autoComplete.getText().toString();
+           // TextView overStationName;
 
             autoComplete.setThreshold(2);
             autoComplete.setAdapter(adapter);
@@ -145,10 +146,10 @@ public class OvergroundLineFragment extends BaseFragment implements OvergroundSt
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     {
                         Intent intent = new Intent(getActivity(), OverScheduleActivity.class);
-
+                        String selection = (String)parent.getItemAtPosition(position).toString();
                        // Bundle bundle = new Bundle();
-                        intent.putExtra("overStation", overStationName);
-                        //  intent.putExtra("Station", station);
+                      //  overStationName.setText(selection);
+                        intent.putExtra("overStation", selection);
                       //  intent.putExtras(bundle);
                         startActivity(intent);
                     }

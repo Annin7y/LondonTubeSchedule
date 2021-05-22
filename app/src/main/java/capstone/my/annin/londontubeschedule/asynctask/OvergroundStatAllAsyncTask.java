@@ -44,11 +44,6 @@ public class OvergroundStatAllAsyncTask extends AsyncTask<String, Void, ArrayLis
     @Override
     protected ArrayList<OvergroundStation> doInBackground(String... params)
     {
-        if (params.length == 0)
-        {
-            return null;
-        }
-
         URL stationRequestUrl = NetworkUtils.buildOverStationAllUrl();
 
         try
