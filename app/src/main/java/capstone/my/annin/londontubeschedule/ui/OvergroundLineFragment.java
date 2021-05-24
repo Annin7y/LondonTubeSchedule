@@ -146,7 +146,7 @@ public class OvergroundLineFragment extends BaseFragment implements OvergroundSt
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     {
                         Intent intent = new Intent(getActivity(), OverScheduleActivity.class);
-                        String selection = (String)parent.getItemAtPosition(position).toString();
+                        String selection = (String)parent.getItemAtPosition(position);
                        // Bundle bundle = new Bundle();
                       //  overStationName.setText(selection);
                         intent.putExtra("overStation", selection);

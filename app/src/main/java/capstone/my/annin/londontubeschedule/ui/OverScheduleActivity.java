@@ -1,3 +1,4 @@
+
 /* Copyright 2020 Anastasia Annin
 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -365,8 +366,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
     @Override
     public void returnOverScheduleAllData(ArrayList<OvergroundSchedule> simpleJsonOverSchAllData)
     {
-        if (null != simpleJsonOverSchAllData)
-        {
+        if (null != simpleJsonOverSchAllData) {
             overSchAdapter = new OvergroundScheduleAdapter(simpleJsonOverSchAllData, OverScheduleActivity.this);
             overSchArrayList = simpleJsonOverSchAllData;
             mScheduleRecyclerView.setAdapter(overSchAdapter);
@@ -374,9 +374,21 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
 
             stationArrival = overSchArrayList.get(0);
 
-            stationShareOverStationName = stationArrival.getOverStatSchName();
+            //   stationShareOverStationName = stationArrival.getOverStatSchName();
+            if (globalAutoCompleteText != null) {
+                for (OvergroundSchedule overAllScheduleName : overSchArrayList) {
+                    if (overAllScheduleName.getOverStatSchName().equals(autoCompleteText)) {
+                        stationShareOverStationName = stationArrival.getOverStatSchName();
+                        globalAutoCompleteText = stationShareOverStationName;
 
+                        Timber.v(stationArrival.getOverStatSchName(), "Station name: ");
 
+                        break;
+                    }
+
+                }
+
+            }
         }
         else
         {
@@ -396,17 +408,19 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
             //List<OvergroundStation> filteredList = new ArrayList<OvergroundStation>();
             for (OvergroundStation overstation : overStatArrayList) {
                 if (overstation.getStationName().equals(autoCompleteText)) {
-                    globalAutoCompleteText = autoCompleteText;
+                   globalAutoCompleteText = autoCompleteText;
                     break;
                 }
             }
                     OvergroundSchAllAsyncTask myOverSchAllTask = new OvergroundSchAllAsyncTask(this);
             myOverSchAllTask.execute();
-            for (OvergroundSchedule overAllScheduleName : overSchArrayList) {
-                if (overAllScheduleName.getOverStatSchName().equals(autoCompleteText)) {
-                }
-
-            }
+//            for (OvergroundSchedule overAllScheduleName : overSchArrayList) {
+//                if (overAllScheduleName.getOverStatSchName().equals(autoCompleteText)) {
+//                    globalAutoCompleteText = autoCompleteText;
+//                    break;
+//                }
+//
+//            }
         }
         else
             {
