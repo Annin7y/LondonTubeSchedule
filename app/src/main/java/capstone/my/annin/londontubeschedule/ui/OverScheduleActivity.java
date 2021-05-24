@@ -375,11 +375,13 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
             stationArrival = overSchArrayList.get(0);
 
             //   stationShareOverStationName = stationArrival.getOverStatSchName();
-            if (globalAutoCompleteText != null) {
-                for (OvergroundSchedule overAllScheduleName : overSchArrayList) {
-                    if (overAllScheduleName.getOverStatSchName().equals(autoCompleteText)) {
+
+                for (OvergroundSchedule overAllScheduleName : overSchArrayList)
+                {
+                    if (autoCompleteText.equals(overAllScheduleName.getOverStatSchName()))
+                    {
                         stationShareOverStationName = stationArrival.getOverStatSchName();
-                        globalAutoCompleteText = stationShareOverStationName;
+                        autoCompleteText = stationShareOverStationName;
 
                         Timber.v(stationArrival.getOverStatSchName(), "Station name: ");
 
@@ -389,7 +391,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
                 }
 
             }
-        }
+
         else
         {
             Timber.e("Problem parsing all overground schedule JSON results" );
@@ -408,19 +410,18 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
             //List<OvergroundStation> filteredList = new ArrayList<OvergroundStation>();
             for (OvergroundStation overstation : overStatArrayList) {
                 if (overstation.getStationName().equals(autoCompleteText)) {
-                   globalAutoCompleteText = autoCompleteText;
+                  // globalAutoCompleteText = autoCompleteText;
+                    Timber.i("Station name: ");
                     break;
                 }
             }
-                    OvergroundSchAllAsyncTask myOverSchAllTask = new OvergroundSchAllAsyncTask(this);
-            myOverSchAllTask.execute();
-//            for (OvergroundSchedule overAllScheduleName : overSchArrayList) {
-//                if (overAllScheduleName.getOverStatSchName().equals(autoCompleteText)) {
-//                    globalAutoCompleteText = autoCompleteText;
-//                    break;
-//                }
-//
-//            }
+            if(autoCompleteText != null) {
+                OvergroundSchAllAsyncTask myOverSchAllTask = new OvergroundSchAllAsyncTask(this);
+                myOverSchAllTask.execute();
+            }
+            else {
+                Timber.e("Station name null");
+            }
         }
         else
             {
