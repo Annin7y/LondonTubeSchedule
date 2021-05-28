@@ -366,36 +366,41 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
     @Override
     public void returnOverScheduleAllData(ArrayList<OvergroundSchedule> simpleJsonOverSchAllData)
     {
-        if (null != simpleJsonOverSchAllData) {
+        if (null != simpleJsonOverSchAllData)
+        {
             overSchAdapter = new OvergroundScheduleAdapter(simpleJsonOverSchAllData, OverScheduleActivity.this);
             overSchArrayList = simpleJsonOverSchAllData;
             mScheduleRecyclerView.setAdapter(overSchAdapter);
             overSchAdapter.setOverSchList(overSchArrayList);
 
-            stationArrival = overSchArrayList.get(0);
+           // stationArrival = overSchArrayList.get(0);
 
             //   stationShareOverStationName = stationArrival.getOverStatSchName();
 
+           ArrayList<OvergroundSchedule> filteredList = new ArrayList<OvergroundSchedule>();
                 for (OvergroundSchedule overAllScheduleName : overSchArrayList)
                 {
                     if (autoCompleteText.equals(overAllScheduleName.getOverStatSchName()))
                     {
                         stationShareOverStationName = stationArrival.getOverStatSchName();
                         autoCompleteText = stationShareOverStationName;
-
+                       filteredList.add(overAllScheduleName);
                         Timber.v(stationArrival.getOverStatSchName(), "Station name: ");
-
                         break;
+                    }
+                    else {
+                        Timber.e("Stations names null");
+
                     }
 
                 }
-
+            overSchAdapter.setOverSchList(filteredList);
+                overSchAdapter.notifyDataSetChanged();
             }
-
         else
         {
             Timber.e("Problem parsing all overground schedule JSON results" );
-            // emptyStations.setVisibility(View.VISIBLE);
+            emptySchedule.setVisibility(View.VISIBLE);
         }
     }
 
@@ -411,19 +416,19 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
             for (OvergroundStation overstation : overStatArrayList) {
                 if (overstation.getStationName().equals(autoCompleteText)) {
                   // globalAutoCompleteText = autoCompleteText;
-                    OvergroundSchAllAsyncTask myOverSchAllTask = new OvergroundSchAllAsyncTask(this);
-                    myOverSchAllTask.execute();
+//                    OvergroundSchAllAsyncTask myOverSchAllTask = new OvergroundSchAllAsyncTask(this);
+//                  myOverSchAllTask.execute();
                     Timber.i("Station name: ");
                     break;
                 }
             }
-//            if(autoCompleteText != null) {
-//                OvergroundSchAllAsyncTask myOverSchAllTask = new OvergroundSchAllAsyncTask(this);
-//                myOverSchAllTask.execute();
-//            }
-//            else {
-//                Timber.e("Station name null");
-//            }
+            if(autoCompleteText != null) {
+                OvergroundSchAllAsyncTask myOverSchAllTask = new OvergroundSchAllAsyncTask(this);
+                myOverSchAllTask.execute();
+            }
+            else {
+                Timber.e("Station name null");
+            }
         }
         else
             {
