@@ -385,8 +385,6 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
                    // stationShareOverStationName = stationArrival.getOverStatSchName();
                  //   autoCompleteText = stationShareOverStationName;
                     filteredList.add(overAllScheduleName);
-                    mScheduleRecyclerView.setAdapter(overSchAdapter);
-                    overSchAdapter.setOverSchList(filteredList);
                     Timber.v(stationArrival.getOverStatSchName(), "Station name: ");
                     break;
                 } else {
@@ -394,6 +392,8 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
 
                 }
             }
+            mScheduleRecyclerView.setAdapter(overSchAdapter);
+            overSchAdapter.setOverSchList(filteredList);
             overSchAdapter.notifyDataSetChanged();
         }
 

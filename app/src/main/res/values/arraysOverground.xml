@@ -18,7 +18,7 @@
 <resources>
     <string-array name="stations_alph_over_list">
         <item>Acton Central Rail Station - Overground</item>
-        <item>Anerley Rail Station - Overground</item>
+        <item>Anerley Rail Station </item>
         <item>Barking Rail Station - Overground</item>
         <item>Bethnal Green Rail Station - Overground</item>
         <item>Blackhorse Road Rail Station - Overground</item>
@@ -78,7 +78,7 @@
         <item>Leytonstone High Road Rail Station - Overground</item>
         <item>London Euston Rail Station - Overground</item>
         <item>London Fields Rail Station - Overground</item>
-        <item>London Liverpool Street Rail Station - Overground</item>
+        <item>London Liverpool Street Rail Station </item>
         <item>New Cross ELL Rail Station - Overground</item>
         <item>New Cross Gate Rail Station - Overground</item>
         <item>North Wembley Rail Station - Overground</item>
