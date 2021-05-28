@@ -85,6 +85,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
 
     private OvergroundScheduleAdapter overSchAdapter;
     private ArrayList<OvergroundSchedule> overSchArrayList = new ArrayList<>();
+    ArrayList<OvergroundSchedule> filteredList = new ArrayList<OvergroundSchedule>();
     private static final String KEY_OVER_SCHEDULE_LIST = "schedule_list";
     OvergroundStation overgroundStation;
     private ArrayList<OvergroundStation> overStatArrayList = new ArrayList<>();
@@ -373,30 +374,29 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
             mScheduleRecyclerView.setAdapter(overSchAdapter);
             overSchAdapter.setOverSchList(overSchArrayList);
 
-           // stationArrival = overSchArrayList.get(0);
+            stationArrival = overSchArrayList.get(0);
 
             //   stationShareOverStationName = stationArrival.getOverStatSchName();
 
-           ArrayList<OvergroundSchedule> filteredList = new ArrayList<OvergroundSchedule>();
-                for (OvergroundSchedule overAllScheduleName : overSchArrayList)
+            for (OvergroundSchedule overAllScheduleName : overSchArrayList)
+            {
+                if (autoCompleteText.equals(overAllScheduleName.getOverStatSchName()))
                 {
-                    if (autoCompleteText.equals(overAllScheduleName.getOverStatSchName()))
-                    {
-                        stationShareOverStationName = stationArrival.getOverStatSchName();
-                        autoCompleteText = stationShareOverStationName;
-                       filteredList.add(overAllScheduleName);
-                        Timber.v(stationArrival.getOverStatSchName(), "Station name: ");
-                        break;
-                    }
-                    else {
-                        Timber.e("Stations names null");
-
-                    }
+                   // stationShareOverStationName = stationArrival.getOverStatSchName();
+                 //   autoCompleteText = stationShareOverStationName;
+                    filteredList.add(overAllScheduleName);
+                    mScheduleRecyclerView.setAdapter(overSchAdapter);
+                    overSchAdapter.setOverSchList(filteredList);
+                    Timber.v(stationArrival.getOverStatSchName(), "Station name: ");
+                    break;
+                } else {
+                    Timber.e("Stations names null");
 
                 }
-            overSchAdapter.setOverSchList(filteredList);
-                overSchAdapter.notifyDataSetChanged();
             }
+            overSchAdapter.notifyDataSetChanged();
+        }
+
         else
         {
             Timber.e("Problem parsing all overground schedule JSON results" );
