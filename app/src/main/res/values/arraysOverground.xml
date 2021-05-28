@@ -17,117 +17,117 @@
 -->
 <resources>
     <string-array name="stations_alph_over_list">
-        <item>Acton Central Rail Station - Overground</item>
+        <item>Acton Central Rail Station </item>
         <item>Anerley Rail Station </item>
-        <item>Barking Rail Station - Overground</item>
-        <item>Bethnal Green Rail Station - Overground</item>
-        <item>Blackhorse Road Rail Station - Overground</item>
-        <item>Brockley Rail Station - Overground</item>
-        <item>Brondesbury Park Rail Station - Overground</item>
-        <item>Brondesbury Rail Station - Overground</item>
-        <item>Bruce Grove Rail Station - Overground</item>
-        <item>Bush Hill Park Rail Station - Overground</item>
-        <item>Bushey Rail Station - Overground</item>
-        <item>Caledonian Road and Barnsbury Rail Station - Overground</item>
-        <item>Cambridge Heath (London) Rail Station - Overground</item>
-        <item>Camden Road Rail Station - Overground</item>
-        <item>Canada Water Rail Station - Overground</item>
-        <item>Canonbury Rail Station - Overground</item>
-        <item>Carpenders Park Rail Station - Overground</item>
-        <item>Cheshunt Rail Station - Overground</item>
-        <item>Chingford Rail Station - Overground</item>
-        <item>Clapham High Street Rail Station - Overground</item>
-        <item>Clapham Junction Rail Station - Overground</item>
-        <item>Clapton Rail Station - Overground</item>
-        <item>Crouch Hill Rail Station - Overground</item>
-        <item>Crystal Palace Rail Station - Overground</item>
-        <item>Dalston Junction Rail Station - Overground</item>
-        <item>Dalston Kingsland Rail Station - Overground</item>
-        <item>Denmark Hill Rail Station - Overground</item>
-        <item>Edmonton Green Rail Station - Overground</item>
-        <item>Emerson Park Rail Station - Overground</item>
-        <item>Enfield Town Rail Station - Overground</item>
-        <item>Finchley Road and Frognal Rail Station - Overground</item>
-        <item>Forest Hill Rail Station - Overground</item>
-        <item>Gospel Oak Rail Station - Overground</item>
-        <item>Gunnersbury Rail Station - Overground</item>
-        <item>Hackney Central Rail Station - Overground</item>
-        <item>Hackney Downs Rail Station - Overground</item>
-        <item>Hackney Wick Rail Station - Overground</item>
-        <item>Haggerston Rail Station - Overground</item>
-        <item>Hampstead Heath Rail Station - Overground</item>
-        <item>Harlesden Rail Station - Overground</item>
-        <item>Harringay Green Lanes Rail Station - Overground</item>
-        <item>Harrow and Wealdstone Rail Station - Overground</item>
-        <item>Hatch End Rail Station - Overground</item>
-        <item>Headstone Lane Rail Station - Overground</item>
-        <item>Highams Park Rail Station - Overground</item>
-        <item>Highbury and Islington Rail Station - Overground</item>
-        <item>Homerton Rail Station - Overground</item>
-        <item>Honor Oak Park Rail Station - Overground</item>
-        <item>Hoxton Rail Station - Overground</item>
-        <item>Imperial Wharf Rail Station - Overground</item>
-        <item>Kensal Green Rail Station - Overground</item>
-        <item>Kensal Rise Rail Station - Overground</item>
-        <item>Kensington (Olympia) Rail Station - Overground</item>
-        <item>Kentish Town West Rail Station - Overground</item>
-        <item>Kenton Rail Station - Overground</item>
-        <item>Kew Gardens Rail Station - Overground</item>
-        <item>Kilburn High Road Rail Station - Overground</item>
-        <item>Leyton Midland Road Rail Station - Overground</item>
-        <item>Leytonstone High Road Rail Station - Overground</item>
-        <item>London Euston Rail Station - Overground</item>
-        <item>London Fields Rail Station - Overground</item>
+        <item>Barking Rail Station </item>
+        <item>Bethnal Green Rail Station </item>
+        <item>Blackhorse Road Rail Station </item>
+        <item>Brockley Rail Station </item>
+        <item>Brondesbury Park Rail Station </item>
+        <item>Brondesbury Rail Station </item>
+        <item>Bruce Grove Rail Station </item>
+        <item>Bush Hill Park Rail Station </item>
+        <item>Bushey Rail Station </item>
+        <item>Caledonian Road and Barnsbury Rail Station </item>
+        <item>Cambridge Heath (London) Rail Station </item>
+        <item>Camden Road Rail Station </item>
+        <item>Canada Water Rail Station </item>
+        <item>Canonbury Rail Station </item>
+        <item>Carpenders Park Rail Station </item>
+        <item>Cheshunt Rail Station </item>
+        <item>Chingford Rail Station </item>
+        <item>Clapham High Street Rail Station </item>
+        <item>Clapham Junction Rail Station </item>
+        <item>Clapton Rail Station </item>
+        <item>Crouch Hill Rail Station </item>
+        <item>Crystal Palace Rail Station </item>
+        <item>Dalston Junction Rail Station </item>
+        <item>Dalston Kingsland Rail Station </item>
+        <item>Denmark Hill Rail Station </item>
+        <item>Edmonton Green Rail Station </item>
+        <item>Emerson Park Rail Station </item>
+        <item>Enfield Town Rail Station </item>
+        <item>Finchley Road and Frognal Rail Station </item>
+        <item>Forest Hill Rail Station </item>
+        <item>Gospel Oak Rail Station </item>
+        <item>Gunnersbury Rail Station </item>
+        <item>Hackney Central Rail Station </item>
+        <item>Hackney Downs Rail Station </item>
+        <item>Hackney Wick Rail Station </item>
+        <item>Haggerston Rail Station </item>
+        <item>Hampstead Heath Rail Station </item>
+        <item>Harlesden Rail Station </item>
+        <item>Harringay Green Lanes Rail Station </item>
+        <item>Harrow and Wealdstone Rail Station </item>
+        <item>Hatch End Rail Station </item>
+        <item>Headstone Lane Rail Station </item>
+        <item>Highams Park Rail Station </item>
+        <item>Highbury and Islington Rail Station </item>
+        <item>Homerton Rail Station </item>
+        <item>Honor Oak Park Rail Station </item>
+        <item>Hoxton Rail Station </item>
+        <item>Imperial Wharf Rail Station </item>
+        <item>Kensal Green Rail Station </item>
+        <item>Kensal Rise Rail Station </item>
+        <item>Kensington (Olympia) Rail Station </item>
+        <item>Kentish Town West Rail Station </item>
+        <item>Kenton Rail Station </item>
+        <item>Kew Gardens Rail Station </item>
+        <item>Kilburn High Road Rail Station </item>
+        <item>Leyton Midland Road Rail Station </item>
+        <item>Leytonstone High Road Rail Station </item>
+        <item>London Euston Rail Station </item>
+        <item>London Fields Rail Station </item>
         <item>London Liverpool Street Rail Station </item>
-        <item>New Cross ELL Rail Station - Overground</item>
-        <item>New Cross Gate Rail Station - Overground</item>
-        <item>North Wembley Rail Station - Overground</item>
-        <item>Norwood Junction Rail Station - Overground</item>
-        <item>Peckham Rye Rail Station - Overground</item>
-        <item>Penge West Rail Station - Overground</item>
-        <item>Queens Park (London) Rail Station - Overground</item>
-        <item>Queens Road Peckham Rail Station - Overground</item>
-        <item>Rectory Road Rail Station - Overground</item>
-        <item>Richmond (London) Rail Station - Overground</item>
-        <item>Romford Rail Station - Overground</item>
-        <item>Rotherhithe Rail Station - Overground</item>
-        <item>Seven Sisters Rail Station - Overground</item>
-        <item>Shadwell Rail Station - Overground</item>
-        <item>Shepherds Bush Rail Station - Overground</item>
-        <item>Shoreditch High Street Rail Station - Overground</item>
-        <item>Silver Street Rail Station - Overground</item>
-        <item>South Acton Rail Station - Overground</item>
-        <item>South Hampstead Rail Station - Overground</item>
-        <item>South Kenton Rail Station - Overground</item>
-        <item>South Tottenham Rail Station - Overground</item>
-        <item>Southbury Rail Station - Overground</item>
-        <item>St James Street (London) Rail Station - Overground</item>
-        <item>Stamford Hill Rail Station - Overground</item>
-        <item>Stoke Newington Rail Station - Overground</item>
-        <item>Stonebridge Park Rail Station - Overground</item>
-        <item>Stratford (London) Rail Station - Overground</item>
-        <item>Surrey Quays Rail Station - Overground</item>
-        <item>Sydenham Rail Station - Overground</item>
-        <item>Theobalds Grove Rail Station - Overground</item>
-        <item>Turkey Street Rail Station - Overground</item>
-        <item>Upminster Rail Station - Overground</item>
-        <item>Upper Holloway Rail Station - Overground</item>
-        <item>Walthamstow Central Rail Station - Overground</item>
-        <item>Walthamstow Queens Rail Station - Overground</item>
-        <item>Wandsworth Road Rail Station - Overground</item>
-        <item>Wanstead Park Rail Station - Overground</item>
-        <item>Wapping Rail Station - Overground</item>
-        <item>Watford High Street Rail Station - Overground</item>
-        <item>Watford Junction Rail Station - Overground</item>
-        <item>Wembley Central Rail Station - Overground</item>
-        <item>West Brompton Rail Station - Overground</item>
-        <item>West Croydon Rail Station - Overground</item>
-        <item>West Hampstead Rail Station - Overground</item>
-        <item>White Hart Lane Rail Station - Overground</item>
-        <item>Whitechapel Rail Station - Overground</item>
-        <item>Willesden Junction Rail Station - Overground</item>
-        <item>Wood Street Rail Station - Overground</item>
-        <item>Woodgrange Park Rail Station - Overground</item>
+        <item>New Cross ELL Rail Station </item>
+        <item>New Cross Gate Rail Station </item>
+        <item>North Wembley Rail Station </item>
+        <item>Norwood Junction Rail Station </item>
+        <item>Peckham Rye Rail Station </item>
+        <item>Penge West Rail Station </item>
+        <item>Queens Park (London) Rail Station </item>
+        <item>Queens Road Peckham Rail Station </item>
+        <item>Rectory Road Rail Station </item>
+        <item>Richmond (London) Rail Station </item>
+        <item>Romford Rail Station </item>
+        <item>Rotherhithe Rail Station </item>
+        <item>Seven Sisters Rail Station </item>
+        <item>Shadwell Rail Station </item>
+        <item>Shepherds Bush Rail Station </item>
+        <item>Shoreditch High Street Rail Station </item>
+        <item>Silver Street Rail Station </item>
+        <item>South Acton Rail Station </item>
+        <item>South Hampstead Rail Station </item>
+        <item>South Kenton Rail Station </item>
+        <item>South Tottenham Rail Station </item>
+        <item>Southbury Rail Station </item>
+        <item>St James Street (London) Rail Station </item>
+        <item>Stamford Hill Rail Station </item>
+        <item>Stoke Newington Rail Station </item>
+        <item>Stonebridge Park Rail Station </item>
+        <item>Stratford (London) Rail Station </item>
+        <item>Surrey Quays Rail Station -</item>
+        <item>Sydenham Rail Station </item>
+        <item>Theobalds Grove Rail Station </item>
+        <item>Turkey Street Rail Station </item>
+        <item>Upminster Rail Station </item>
+        <item>Upper Holloway Rail Station </item>
+        <item>Walthamstow Central Rail Station </item>
+        <item>Walthamstow Queens Rail Station </item>
+        <item>Wandsworth Road Rail Station </item>
+        <item>Wanstead Park Rail Station </item>
+        <item>Wapping Rail Station </item>
+        <item>Watford High Street Rail Station </item>
+        <item>Watford Junction Rail Station </item>
+        <item>Wembley Central Rail Station </item>
+        <item>West Brompton Rail Station </item>
+        <item>West Croydon Rail Station </item>
+        <item>West Hampstead Rail Station </item>
+        <item>White Hart Lane Rail Station </item>
+        <item>Whitechapel Rail Station </item>
+        <item>Willesden Junction Rail Station </item>
+        <item>Wood Street Rail Station </item>
+        <item>Woodgrange Park Rail Station </item>
 
     </string-array>
 </resources>
