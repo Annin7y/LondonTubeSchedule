@@ -57,6 +57,9 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
      */
     public class ScheduleAdapterViewHolder extends RecyclerView.ViewHolder
     {
+        @BindView(R.id.line_name)
+        public TextView lineName;
+
         @BindView(R.id.schedule_station_name)
         public TextView stationScheduleName;
 
@@ -103,6 +106,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         //Binding data
         final Schedule stationView = scheduleList.get(position);
 
+        holder.lineName.setText(stationView.getLineName());
         holder.stationScheduleName.setText(stationView.getStationScheduleName());
         holder.destinationName.setText(stationView.getDestinationName());
         holder.currentLocation.setText(stationView.getCurrentLocation());

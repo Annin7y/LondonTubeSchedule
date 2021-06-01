@@ -18,7 +18,9 @@
 <resources>
     <string name="app_name">London Tube and Overground Schedule</string>
     <string name="tube_list_instructions">Click on a line to view a list of stations.</string>
+    <string name="tube_autocomplete_instr">Enter Station Name to View Schedule</string>
     <string name="station_list_instructions">Click on a station to view train schedules.</string>
+    <string name="line_name_label">Line name:</string>
     <string name="line_name">Bakerloo</string>
     <string name="station_name">Canary Wharf</string>
     <string name="favorites_added">Line added to favorites</string>
@@ -95,6 +97,6 @@
     <string name="over_status_text">Reduced Service</string>
     <string name="over_reason_text">LONDON OVERGROUND: Until</string>
     <string name="over_stat_alph_order">Stations listed in alphabetical order.</string>
-
+    <string name="tube_list_instr_or">Or</string>
 
 </resources>

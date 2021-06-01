@@ -56,6 +56,8 @@ public class NetworkUtils
 
      private static final String BASE_URL_OVERGROUND_STATION_LIST = "https://api.tfl.gov.uk/Line/london-overground/StopPoints";
 
+    private static final String BASE_URL_SCHEDULE_TUBE_ALL = "https://api.tfl.gov.uk/Mode/tube/Arrivals/";
+
     public NetworkUtils()
     {
     }
@@ -260,7 +262,23 @@ public class NetworkUtils
 
 
 
+    public static URL buildTubeAllSchUrl()
+    {
+        URL urlTubeAllSchList = null;
+        try
+        {
+            Uri tubeSchAllQueryUri = Uri.parse(BASE_URL_SCHEDULE_TUBE_ALL).buildUpon()
+                    .build();
+            urlTubeAllSchList = new URL(tubeSchAllQueryUri.toString());
+        }
+        catch (MalformedURLException e)
+        {
+            e.printStackTrace();
+        }
 
+        Timber.v( "Built URITubeSchAll " + urlTubeAllSchList);
+        return urlTubeAllSchList;
+    }
     /**
      * Make an HTTP request to the given URL and return a String as the response.
      */
@@ -724,6 +742,62 @@ public class NetworkUtils
         return jsonOverStatAllResponse;
     }
 
+    /**
+     * Make an HTTP request to the given URL and return a String as the response.
+     */
+    public static String makeHttpTubeSchAllRequest(URL url) throws IOException
+    {
+        String jsonTubeSchAllResponse = "";
+        // Log.i("URL: ", url.toString());
+        Timber.i(url.toString());
+
+        // If the URL is null, then return early.
+        if (url == null)
+        {
+            return jsonTubeSchAllResponse;
+        }
+
+        HttpURLConnection urlConnection = null;
+        InputStream inputStream = null;
+        try
+        {
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setReadTimeout(10000 /* milliseconds */);
+            urlConnection.setConnectTimeout(15000 /* milliseconds */);
+            urlConnection.setRequestMethod("GET");
+            urlConnection.connect();
+
+            // If the request was successful (response code 200),
+            // then read the input stream and parse the response.
+            if (urlConnection.getResponseCode() == 200)
+            {
+                inputStream = urlConnection.getInputStream();
+                jsonTubeSchAllResponse = readFromStream(inputStream);
+            } else
+            {
+                Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
+            }
+        }
+        catch (IOException e)
+        {
+            Timber.e(e,"Problem retrieving all tube schedule JSON results." );
+        }
+        finally
+        {
+            if (urlConnection != null)
+            {
+                urlConnection.disconnect();
+            }
+            if (inputStream != null)
+            {
+                // Closing the input stream could throw an IOException, which is why
+                // the makeHttpRequest(URL url) method signature specifies than an IOException
+                // could be thrown.
+                inputStream.close();
+            }
+        }
+        return jsonTubeSchAllResponse;
+    }
 
 
     /**

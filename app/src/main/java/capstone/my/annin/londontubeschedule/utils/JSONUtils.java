@@ -43,6 +43,7 @@ public class JSONUtils {
 
     private static final String KEY_LINE_ID = "id";
     private static final String KEY_LINE_NAME = "name";
+    private static final String KEY_LINE_NAME_SCH = "lineName";
     private static final String KEY_LINE_STATUS_DESC = "statusSeverityDescription";
     private static final String KEY_LINE_STATUS_REASON = "reason";
     private static final String KEY_STATION_ID = "id";
@@ -114,9 +115,11 @@ public class JSONUtils {
 //        return lines;
 //    }
 
-    public static ArrayList<Line> extractFeatureFromLineStatusJson(String lineStatusJSON) {
+    public static ArrayList<Line> extractFeatureFromLineStatusJson(String lineStatusJSON)
+    {
         // If the JSON string is empty or null, then return early.
-        if (TextUtils.isEmpty(lineStatusJSON)) {
+        if (TextUtils.isEmpty(lineStatusJSON))
+        {
             return null;
         }
 
@@ -126,7 +129,8 @@ public class JSONUtils {
             JSONArray lineArray = new JSONArray(lineStatusJSON);
 
             // For each line in the recipeArray, create an {@link Lines} object
-            for (int i = 0; i < lineArray.length(); i++) {
+            for (int i = 0; i < lineArray.length(); i++)
+            {
                 // Get a single line description at position i within the list of lines
                 JSONObject currentLine = lineArray.getJSONObject(i);
 
@@ -254,73 +258,93 @@ public class JSONUtils {
 //        }
 //    }
 
-    public static ArrayList<Schedule> extractFeatureFromScheduleJson(String scheduleJSON) {
+    public static ArrayList<Schedule> extractFeatureFromScheduleJson(String scheduleJSON)
+    {
         // If the JSON string is empty or null, then return early.
-        if (TextUtils.isEmpty(scheduleJSON)) {
+        if (TextUtils.isEmpty(scheduleJSON))
+        {
             return null;
         }
 
         ArrayList<Schedule> schedules = new ArrayList<>();
 
-        try {
+        try
+        {
             // Create a JSONObject from the JSON response string
             JSONArray scheduleArray = new JSONArray(scheduleJSON);
 
             // For each schedule item in the scheduleArray, create an {@link Schedule} object
-            for (int i = 0; i < scheduleArray.length(); i++) {
+            for (int i = 0; i < scheduleArray.length(); i++)
+            {
                 // Get a single schedule description at position i within the schedule list
                 JSONObject currentSchedule = scheduleArray.getJSONObject(i);
 
                 //Extract values for the following keys
+                String lineName = "";
+                if (currentSchedule.has("lineName"))
+                {
+                    lineName = currentSchedule.optString(KEY_LINE_NAME_SCH);
+                }
+
                 String naptanIdStation = "";
-                if (currentSchedule.has("naptanId")) {
+                if (currentSchedule.has("naptanId"))
+                {
                     naptanIdStation = currentSchedule.optString(KEY_STATION_NAPTAN_ID);
                 }
 
                 String scheduleNameStation = "";
-                if (currentSchedule.has("stationName")) {
+                if (currentSchedule.has("stationName"))
+                {
                     scheduleNameStation = currentSchedule.optString(KEY_STATION_SCHEDULE_NAME);
                 }
 
                 String nameDestination = "";
-                if (currentSchedule.has("destinationName")) {
+                if (currentSchedule.has("destinationName"))
+                {
                     nameDestination = currentSchedule.optString(KEY_DESTINATION_NAME);
                 }
 
                 String locationCurrent = "";
-                if (currentSchedule.has("currentLocation")) {
+                if (currentSchedule.has("currentLocation"))
+                {
                     locationCurrent = currentSchedule.optString(KEY_CURRENT_LOCATION);
                 }
 
                 String towardsDirection = "";
-                if (currentSchedule.has("towards")) {
+                if (currentSchedule.has("towards"))
+                {
                     towardsDirection = currentSchedule.optString(KEY_DIRECTION_TOWARDS);
                 }
 
                 String arrivalExpected = "";
-                if (currentSchedule.has("expectedArrival")) {
+                if (currentSchedule.has("expectedArrival"))
+                {
                     arrivalExpected = currentSchedule.optString(KEY_EXPECTED_ARRIVAL);
                 }
 
                 String platformName = "";
-                if (currentSchedule.has("platformName")) {
+                if (currentSchedule.has("platformName"))
+                {
                     platformName = currentSchedule.optString(KEY_PLATFORM_NAME);
                 }
 
-                Schedule schedule = new Schedule(naptanIdStation, scheduleNameStation, nameDestination, locationCurrent, towardsDirection, arrivalExpected, platformName);
+                Schedule schedule = new Schedule(lineName, naptanIdStation, scheduleNameStation, nameDestination, locationCurrent, towardsDirection, arrivalExpected, platformName);
                 schedules.add(schedule);
             }
             //Code based on the 1st answer in the following stackoverflow post:
             //https://stackoverflow.com/questions/17697568/how-to-sort-jsonarray-in-android/17698236
-            Collections.sort(schedules, new Comparator<Schedule>() {
+            Collections.sort(schedules, new Comparator<Schedule>()
+            {
                 @Override
-                public int compare(Schedule o1, Schedule o2) {
+                public int compare(Schedule o1, Schedule o2)
+                {
                     String time1 = o1.getExpectedArrival();
                     String time2 = o2.getExpectedArrival();
                     return time1.compareTo(time2);
                 }
             });
-        } catch (JSONException e) {
+        } catch (JSONException e)
+        {
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
             // with the message from the exception.

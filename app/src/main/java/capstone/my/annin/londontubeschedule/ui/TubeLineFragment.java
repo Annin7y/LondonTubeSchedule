@@ -167,11 +167,8 @@ public class TubeLineFragment extends BaseFragment implements LineAdapter.LineAd
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 {
                     Intent intent = new Intent(getActivity(), StationScheduleActivity.class);
-
-                   // Bundle bundle = new Bundle();
-                    intent.putExtra("station", stationName);
-                  //  intent.putExtra("Station", station);
-                   // intent.putExtras(bundle);
+                    String selection = (String)parent.getItemAtPosition(position);
+                    intent.putExtra("station", selection);
                     startActivity(intent);
                 }
             }

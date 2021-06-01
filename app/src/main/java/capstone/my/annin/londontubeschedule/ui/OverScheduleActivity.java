@@ -386,7 +386,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
                  //   autoCompleteText = stationShareOverStationName;
                     filteredList.add(overAllScheduleName);
                     Timber.v(stationArrival.getOverStatSchName(), "Station name: ");
-                    break;
+                   // break;
                 } else {
                     Timber.e("Stations names null");
 
@@ -535,8 +535,8 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
 //        finish();
 //        overridePendingTransition(0, 0);
 //        startActivity(intent);
-        OvergroundScheduleAsyncTask myScheduleTask = new OvergroundScheduleAsyncTask(this);
-        myScheduleTask.execute(overLineId, stationOverId);
+     OvergroundScheduleAsyncTask myScheduleTask = new OvergroundScheduleAsyncTask(this);
+       myScheduleTask.execute(overLineId, stationOverId);
 
     }
 

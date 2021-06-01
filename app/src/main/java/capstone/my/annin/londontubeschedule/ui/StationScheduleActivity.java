@@ -53,11 +53,15 @@ import java.util.TimeZone;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import capstone.my.annin.londontubeschedule.R;
+import capstone.my.annin.londontubeschedule.asynctask.OvergroundStatAllAsyncTask;
+import capstone.my.annin.londontubeschedule.asynctask.TubeSchAllAsyncTask;
+import capstone.my.annin.londontubeschedule.asynctask.TubeSchAllAsyncTaskInterface;
 import capstone.my.annin.londontubeschedule.asynctask.TubeScheduleAsyncTask;
 import capstone.my.annin.londontubeschedule.asynctask.TubeScheduleAsyncTaskInterface;
 import capstone.my.annin.londontubeschedule.maps.MapsConnectionCheck;
 import capstone.my.annin.londontubeschedule.maps.StationMapActivity;
 import capstone.my.annin.londontubeschedule.pojo.Line;
+import capstone.my.annin.londontubeschedule.pojo.OvergroundSchedule;
 import capstone.my.annin.londontubeschedule.pojo.Schedule;
 import capstone.my.annin.londontubeschedule.pojo.Station;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.ScheduleAdapter;
@@ -65,7 +69,7 @@ import capstone.my.annin.londontubeschedule.scrollbehavior.DisableSwipeBehavior;
 import capstone.my.annin.londontubeschedule.widget.ScheduleWidgetProvider;
 import timber.log.Timber;
 
-public class StationScheduleActivity extends AppCompatActivity implements TubeScheduleAsyncTaskInterface
+public class StationScheduleActivity extends AppCompatActivity implements TubeScheduleAsyncTaskInterface, TubeSchAllAsyncTaskInterface
 {
     private static final String TAG = StationScheduleActivity.class.getSimpleName();
 
@@ -74,6 +78,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
 
     private ScheduleAdapter scheduleAdapter;
     private ArrayList<Schedule> scheduleArrayList = new ArrayList<>();
+    ArrayList<Schedule> filteredList = new ArrayList<Schedule>();
     private static final String KEY_SCHEDULE_LIST = "schedule_list";
     Station station;
     private ArrayList<Station> stationArrayList = new ArrayList<>();
@@ -131,6 +136,12 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
         {
 
             autoCompleteText = getIntent().getExtras().getString("station");
+
+            if(autoCompleteText != null)
+            {
+                TubeSchAllAsyncTask myTubeSchAllTask = new TubeSchAllAsyncTask(this);
+                myTubeSchAllTask.execute();
+            }
 
             line = getIntent().getExtras().getParcelable("Line");
             station = getIntent().getExtras().getParcelable("Station");
@@ -322,6 +333,47 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
         }
     }
 
+    @Override
+    public void returnTubeScheduleAllData(ArrayList<Schedule> simpleJsonTubeSchAllData)
+    {
+        if (null != simpleJsonTubeSchAllData)
+
+        {
+            scheduleAdapter = new ScheduleAdapter(simpleJsonTubeSchAllData, StationScheduleActivity.this);
+            scheduleArrayList = simpleJsonTubeSchAllData;
+            mScheduleRecyclerView.setAdapter(scheduleAdapter);
+            scheduleAdapter.setScheduleList(scheduleArrayList);
+
+            stationArrival = scheduleArrayList.get(0);
+
+            for (Schedule tubeAllScheduleName : scheduleArrayList)
+            {
+                if (autoCompleteText.equals(tubeAllScheduleName.getStationScheduleName()))
+                {
+                    filteredList.add(tubeAllScheduleName);
+                    Timber.v(stationArrival.getStationScheduleName(), "Tube Station name: ");
+                } else {
+                    Timber.e("Tube schedule all null");
+
+                }
+            }
+            mScheduleRecyclerView.setAdapter(scheduleAdapter);
+            scheduleAdapter.setScheduleList(filteredList);
+            scheduleAdapter.notifyDataSetChanged();
+
+        }
+
+        else
+        {
+            Timber.e("Problem parsing all tube schedule JSON results" );
+            emptySchedule.setVisibility(View.VISIBLE);
+        }
+        }
+
+
+
+
+
     public class MyClickListener implements View.OnClickListener
     {
         @Override
@@ -436,6 +488,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
 //        finish();
 //        overridePendingTransition(0, 0);
 //        startActivity(intent);
+
         TubeScheduleAsyncTask myScheduleTask = new TubeScheduleAsyncTask(this);
         myScheduleTask.execute(lineId, stationId);
 

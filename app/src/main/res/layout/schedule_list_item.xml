@@ -25,12 +25,32 @@
     android:id="@+id/schedule_list">
 
     <TextView
-        android:id="@+id/schedule_name_label"
+        android:id="@+id/line_name_label"
         style="@style/ScheduleLabelStyle"
         android:layout_marginStart="@dimen/line_station_margin_start"
         android:layout_marginEnd="@dimen/line_station_margin_end"
         android:textSize="@dimen/sched_label_text_size"
         android:layout_marginTop="@dimen/sched_station_name_top"
+        android:text="@string/line_name_label"
+        />
+
+    <TextView
+        android:id="@+id/line_name"
+        style="@style/ScheduleNameStyle"
+        android:layout_marginStart="@dimen/line_station_margin_start"
+        android:layout_marginEnd="@dimen/line_station_margin_end"
+        android:padding="@dimen/sch_text_padding"
+        android:textSize="@dimen/sched_name_text_size"
+        tools:text="@string/line_name"
+        />
+
+    <TextView
+        android:id="@+id/schedule_name_label"
+        style="@style/ScheduleLabelStyle"
+        android:layout_marginStart="@dimen/line_station_margin_start"
+        android:layout_marginEnd="@dimen/line_station_margin_end"
+        android:textSize="@dimen/sched_label_text_size"
+        android:layout_marginTop="@dimen/sch_label_top_padding"
         android:text="@string/name_label"
         />
 

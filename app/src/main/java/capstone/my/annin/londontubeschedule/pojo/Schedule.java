@@ -20,6 +20,13 @@ import android.os.Parcelable;
 
 public class Schedule implements Parcelable
 {
+
+    /**
+     * Line name
+     */
+    private String lineName;
+
+
     /**
      * Station naptan id
      */
@@ -55,8 +62,9 @@ public class Schedule implements Parcelable
      */
     private String platformName;
 
-    public Schedule(String stationNaptanId, String stationScheduleName, String destinationName, String currentLocation, String directionTowards, String expectedArrival, String platformName)
+    public Schedule(String lineName,String stationNaptanId, String stationScheduleName, String destinationName, String currentLocation, String directionTowards, String expectedArrival, String platformName)
     {
+        this.lineName = lineName;
         this.stationNaptanId = stationNaptanId;
         this.stationScheduleName = stationScheduleName;
         this.destinationName = destinationName;
@@ -65,6 +73,17 @@ public class Schedule implements Parcelable
         this.expectedArrival = expectedArrival;
         this.platformName = platformName;
     }
+
+    public void setLineName(String lineName)
+    {
+        this.lineName = lineName;
+    }
+
+    public String getLineName()
+    {
+        return lineName;
+    }
+
 
     public void setStationNaptanId(String stationNaptanId)
     {
@@ -137,6 +156,7 @@ public class Schedule implements Parcelable
 
     protected Schedule(Parcel in)
     {
+        lineName = in.readString();
         stationNaptanId = in.readString();
         stationScheduleName = in.readString();
         destinationName = in.readString();
@@ -155,6 +175,7 @@ public class Schedule implements Parcelable
     @Override
     public void writeToParcel(Parcel dest, int flags)
     {
+        dest.writeString(lineName);
         dest.writeString(stationNaptanId);
         dest.writeString(stationScheduleName);
         dest.writeString(destinationName);
