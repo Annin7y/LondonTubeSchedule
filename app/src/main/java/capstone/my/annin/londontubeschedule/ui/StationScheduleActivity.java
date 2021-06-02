@@ -91,6 +91,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     private Context context;
     private ShareActionProvider mShareActionProvider;
     Schedule stationArrival;
+    Schedule tubeAllScheduleName;
     private String stationShareStationName;
     public String stationShareArrivalTime;
     private String stationShareDirection;
@@ -336,22 +337,18 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     @Override
     public void returnTubeScheduleAllData(ArrayList<Schedule> simpleJsonTubeSchAllData)
     {
-        if (null != simpleJsonTubeSchAllData)
-
-        {
+        if (null != simpleJsonTubeSchAllData) {
             scheduleAdapter = new ScheduleAdapter(simpleJsonTubeSchAllData, StationScheduleActivity.this);
             scheduleArrayList = simpleJsonTubeSchAllData;
             mScheduleRecyclerView.setAdapter(scheduleAdapter);
             scheduleAdapter.setScheduleList(scheduleArrayList);
 
-            stationArrival = scheduleArrayList.get(0);
+            // stationArrival = scheduleArrayList.get(0);
 
-            for (Schedule tubeAllScheduleName : scheduleArrayList)
-            {
-                if (autoCompleteText.equals(tubeAllScheduleName.getStationScheduleName()))
-                {
+            for (Schedule tubeAllScheduleName : scheduleArrayList) {
+                if (autoCompleteText.equals(tubeAllScheduleName.getStationScheduleName())) {
                     filteredList.add(tubeAllScheduleName);
-                    Timber.v(stationArrival.getStationScheduleName(), "Tube Station name: ");
+                    Timber.v(tubeAllScheduleName.getStationScheduleName(), "Tube Station name: ");
                 } else {
                     Timber.e("Tube schedule all null");
 
@@ -360,13 +357,77 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
             mScheduleRecyclerView.setAdapter(scheduleAdapter);
             scheduleAdapter.setScheduleList(filteredList);
             scheduleAdapter.notifyDataSetChanged();
+            stationArrival = filteredList.get(0);
 
-        }
+            if (stationArrival != null) {
+                stationShareStationName = stationArrival.getStationScheduleName();
+                stationShareArrivalTime = stationArrival.getExpectedArrival();
+                stationShareDirection = stationArrival.getDirectionTowards();
 
-        else
-        {
-            Timber.e("Problem parsing all tube schedule JSON results" );
-            emptySchedule.setVisibility(View.VISIBLE);
+                scheduleArrayList = filteredList;
+
+                swipeRefreshLayout.setRefreshing(false);
+                //Store Schedule Info in SharedPreferences
+                SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
+
+                Gson gson = new Gson();
+                String json = gson.toJson(scheduleArrayList);
+                prefsEditor.putString("ScheduleList_Widget", json);
+
+                String jsonLineList = gson.toJson(lineArrayList);
+                prefsEditor.putString("LineList_Widget", jsonLineList);
+
+                String jsonStationList = gson.toJson(stationArrayList);
+                prefsEditor.putString("StationList_Widget", jsonStationList);
+
+                //Save the Line as a JSON string using Preferences.
+                String jsonLine = gson.toJson(line);
+                prefsEditor.putString("Lines", jsonLine);
+
+                //Save the Stations as a JSON string using Preferences.
+                String jsonStation = gson.toJson(station);
+                prefsEditor.putString("Stations", jsonStation);
+
+                prefsEditor.apply();
+
+
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+                //convert time zone to London UK time(GMT)
+                //Code based on the first answer in the following stackoverflow post:
+                // https://stackoverflow.com/questions/22814263/how-to-set-the-timezone-for-string-parsing-in-android
+                simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+                Date date = null;
+                try {
+                    //Relative date code based on this example:
+                    //https://stackoverflow.com/questions/49441035/dateutils-getrelativetimespanstring-returning-a-formatted-date-string-instead-of
+
+                    date = simpleDateFormat.parse(stationShareArrivalTime);
+                    SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
+                    newDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+                    stationShareArrivalTime = newDateFormat.format(date);
+                } catch (ParseException e) {
+
+                    e.printStackTrace();
+                }
+
+                //Send to Widget Provider code based on the answer with 9 upvotes in this post:
+                //https://stackoverflow.com/questions/3455123/programmatically-update-widget-from-activity-service-receiver
+                Context context = getApplicationContext();
+                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+                ComponentName thisWidget = new ComponentName(context, ScheduleWidgetProvider.class);
+                int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
+                appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.appwidget_list);
+
+            } else {
+                Timber.e("Problem parsing all tube schedule JSON results");
+                emptySchedule.setVisibility(View.VISIBLE);
+            }
+            if (mShareActionProvider != null)
+            {
+                mShareActionProvider.setShareIntent(createShareIntent());
+            }
+
         }
         }
 

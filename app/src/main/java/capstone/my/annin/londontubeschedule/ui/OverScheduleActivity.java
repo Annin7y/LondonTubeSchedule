@@ -267,6 +267,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
 
             stationShareOverStationName = stationArrival.getOverStatSchName();
             stationShareOverArrivalTime = stationArrival.getOverExpArrival();
+            stationShareDirection = stationArrival.getOverDestName();
 
             swipeRefreshLayout.setRefreshing(false);
             //Store Schedule Info in SharedPreferences
@@ -365,28 +366,24 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
     }
 
     @Override
-    public void returnOverScheduleAllData(ArrayList<OvergroundSchedule> simpleJsonOverSchAllData)
-    {
-        if (null != simpleJsonOverSchAllData)
-        {
+    public void returnOverScheduleAllData(ArrayList<OvergroundSchedule> simpleJsonOverSchAllData) {
+        if (null != simpleJsonOverSchAllData) {
             overSchAdapter = new OvergroundScheduleAdapter(simpleJsonOverSchAllData, OverScheduleActivity.this);
             overSchArrayList = simpleJsonOverSchAllData;
             mScheduleRecyclerView.setAdapter(overSchAdapter);
             overSchAdapter.setOverSchList(overSchArrayList);
 
-            stationArrival = overSchArrayList.get(0);
+            // stationArrival = overSchArrayList.get(0);
 
             //   stationShareOverStationName = stationArrival.getOverStatSchName();
 
-            for (OvergroundSchedule overAllScheduleName : overSchArrayList)
-            {
-                if (autoCompleteText.equals(overAllScheduleName.getOverStatSchName()))
-                {
-                   // stationShareOverStationName = stationArrival.getOverStatSchName();
-                 //   autoCompleteText = stationShareOverStationName;
+            for (OvergroundSchedule overAllScheduleName : overSchArrayList) {
+                if (autoCompleteText.equals(overAllScheduleName.getOverStatSchName())) {
+                    // stationShareOverStationName = stationArrival.getOverStatSchName();
+                    //   autoCompleteText = stationShareOverStationName;
                     filteredList.add(overAllScheduleName);
-                    Timber.v(stationArrival.getOverStatSchName(), "Station name: ");
-                   // break;
+                    Timber.v(overAllScheduleName.getOverStatSchName(), "Station name: ");
+                    // break;
                 } else {
                     Timber.e("Stations names null");
 
@@ -395,15 +392,78 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
             mScheduleRecyclerView.setAdapter(overSchAdapter);
             overSchAdapter.setOverSchList(filteredList);
             overSchAdapter.notifyDataSetChanged();
-        }
 
-        else
-        {
-            Timber.e("Problem parsing all overground schedule JSON results" );
-            emptySchedule.setVisibility(View.VISIBLE);
+            stationArrival = filteredList.get(0);
+
+
+            if (stationArrival != null) {
+                stationShareOverStationName = stationArrival.getOverStatSchName();
+                stationShareOverArrivalTime = stationArrival.getOverExpArrival();
+                stationShareDirection = stationArrival.getOverDestName();
+
+                overSchArrayList = filteredList;
+
+                swipeRefreshLayout.setRefreshing(false);
+                //Store Schedule Info in SharedPreferences
+                SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
+
+                Gson gson = new Gson();
+                String jsonOver = gson.toJson(overSchArrayList);
+                prefsEditor.putString("OverScheduleList_Widget", jsonOver);
+
+                String jsonOverStatusList = gson.toJson(overgroundStatusArrayList);
+                prefsEditor.putString("OverStatusList_Widget", jsonOverStatusList);
+
+                String jsonStationOverList = gson.toJson(overStatArrayList);
+                prefsEditor.putString("OverStationList_Widget", jsonStationOverList);
+
+                //Save the overgroundStatus as a JSON string using Preferences.
+                String jsonStatus = gson.toJson(overground);
+                prefsEditor.putString("OverStatus", jsonStatus);
+
+                //Save the Overground Stations as a JSON string using Preferences.
+                String jsonOverStation = gson.toJson(overgroundStation);
+                prefsEditor.putString("OverStations", jsonOverStation);
+
+                prefsEditor.apply();
+
+
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+                //convert time zone to London UK time(GMT)
+                //Code based on the first answer in the following stackoverflow post:
+                // https://stackoverflow.com/questions/22814263/how-to-set-the-timezone-for-string-parsing-in-android
+                simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+                Date date = null;
+                try {
+                    //Relative date code based on this example:
+                    //https://stackoverflow.com/questions/49441035/dateutils-getrelativetimespanstring-returning-a-formatted-date-string-instead-of
+
+                    date = simpleDateFormat.parse(stationShareOverArrivalTime);
+                    SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
+                    newDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+                    stationShareOverArrivalTime = newDateFormat.format(date);
+                } catch (ParseException e) {
+
+                    e.printStackTrace();
+                }
+                //Send to Widget Provider code based on the answer with 9 upvotes in this post:
+                //https://stackoverflow.com/questions/3455123/programmatically-update-widget-from-activity-service-receiver
+                Context context = getApplicationContext();
+                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+                ComponentName thisWidget = new ComponentName(context, ScheduleWidgetProvider.class);
+                int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
+                appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.appwidget_list);
+
+            } else {
+                Timber.e("Problem parsing all overground schedule JSON results");
+                emptySchedule.setVisibility(View.VISIBLE);
+            }
+            if (mShareActionProvider != null) {
+                mShareActionProvider.setShareIntent(createShareIntent());
+            }
         }
     }
-
 
     @Override
     public void returnOverStationAllData(ArrayList<OvergroundStation> simpleJsonOverStatData) {
@@ -503,7 +563,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
 
     public Intent createShareIntent()
     {
-        if(stationShareOverStationName != null && stationShareOverArrivalTime!= null && stationShareDirection != null)
+        if(stationShareOverStationName != null && stationShareOverArrivalTime != null && stationShareDirection != null)
         {
 
             String shareTitle = "Next train at ";
