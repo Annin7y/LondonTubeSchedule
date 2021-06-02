@@ -466,16 +466,16 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
             shareIntent.setType("text/plain");
             shareIntent.putExtra(Intent.EXTRA_TEXT, data);
             startActivity(Intent.createChooser(shareIntent, "Choose an app"));
-            //return shareIntent;
-
-
+            return shareIntent;
         }
-        String shareTitle2 = "Data Currently Unavailable ";
-        Intent shareIntent2 = new Intent(Intent.ACTION_SEND);
-        shareIntent2.setType("text/plain");
-        shareIntent2.putExtra(Intent.EXTRA_TEXT, shareTitle2);
-        startActivity(Intent.createChooser(shareIntent2, "Choose an app"));
-      return shareIntent2;
+        else {
+            String shareTitle2 = "Data Currently Unavailable ";
+            Intent shareIntent2 = new Intent(Intent.ACTION_SEND);
+            shareIntent2.setType("text/plain");
+            shareIntent2.putExtra(Intent.EXTRA_TEXT, shareTitle2);
+            startActivity(Intent.createChooser(shareIntent2, "Choose an app"));
+            return shareIntent2;
+        }
     }
 
     public void refresh()
