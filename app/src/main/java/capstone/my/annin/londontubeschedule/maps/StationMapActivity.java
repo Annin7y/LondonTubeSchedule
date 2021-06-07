@@ -72,7 +72,9 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
     public GeoJsonLayer layer;
     private final int FILL_GREEN = 0x66aad2a5;
     private final int STROKE_GREEN = 0x387e40;
-
+    public double latLocationAll;
+    public double lonLocationAll;
+    String autoCompleteText;
 
     /**
      * An ArrayList of Station objects.
@@ -145,6 +147,11 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
                     //  myAllTask.execute();
                 }
                 overground = getIntent().getExtras().getParcelable("OvergroundStatus");
+
+                latLocationAll = getIntent().getExtras().getDouble("latLocation");
+                lonLocationAll =  getIntent().getExtras().getDouble("lonLocation");
+                autoCompleteText = getIntent().getExtras().getString("overStation");
+
                 if(overground != null)
                 {
                     overLineId = overground.getModeId();
@@ -291,6 +298,24 @@ public class StationMapActivity extends AppCompatActivity implements OnMapReadyC
             googleMap.addMarker(markerOptions);
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(stationCoordinates, ZOOM));
         }
+        if (autoCompleteText != null)
+        {
+            //String statOverName = overgroundStation.getStationName();
+            // Create a LatLng with the coordinates of each station
+            LatLng stationCoordinates = new  LatLng(latLocationAll, lonLocationAll);
+            MarkerOptions markerOptions = new MarkerOptions()
+
+                    // .icon(BitmapDescriptorFactory.fromResource(R.drawable.baseline_place_black_18dp))
+                    .icon(BitmapDescriptorFactory
+                            .defaultMarker(BitmapDescriptorFactory.HUE_CYAN))
+                    .title(autoCompleteText)
+                    .position(stationCoordinates);
+            googleMap.addMarker(markerOptions);
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(stationCoordinates, ZOOM));
+        }
+
+
+
 
         //AsyncTask code from onCreate; AsyncTask now run after initializing the map
         TubeGeoJsonAllLinesAsyncTask myAllTask = new TubeGeoJsonAllLinesAsyncTask(this, getApplicationContext());

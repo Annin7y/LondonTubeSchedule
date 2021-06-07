@@ -116,8 +116,8 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
-    public double latLocation;
-    public double lonLocation;
+    public double latLocationAll;
+    public double lonLocationAll;
     public double latLocation2;
 
 
@@ -478,7 +478,8 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
             //List<OvergroundStation> filteredList = new ArrayList<OvergroundStation>();
             for (OvergroundStation overstation : overStatArrayList) {
                 if (overstation.getStationName().equals(autoCompleteText)) {
-                    latLocation = overstation.getLatLocation();
+                    latLocationAll = overstation.getLatLocation();
+                    lonLocationAll = overstation.getLonLocation();
                     OvergroundSchAllAsyncTask myOverSchAllTask = new OvergroundSchAllAsyncTask(this);
                 myOverSchAllTask.execute();
                    // Timber.i("Station name: ");
@@ -619,6 +620,10 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
                 intent.putExtra("OvergroundStation", overgroundStation);
                 intent.putParcelableArrayListExtra("overgroundStatusList", overgroundStatusArrayList);
                 intent.putParcelableArrayListExtra("overgroundStationList", overStatArrayList);
+                intent.putExtra("latLocation", latLocationAll);
+                intent.putExtra("lonLocation", lonLocationAll);
+                intent.putExtra("overStation", autoCompleteText);
+
                 startActivity(intent);
 
             }
