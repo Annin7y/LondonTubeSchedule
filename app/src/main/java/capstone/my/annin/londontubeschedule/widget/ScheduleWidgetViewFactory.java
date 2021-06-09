@@ -64,7 +64,8 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
     private OvergroundStation overgroundStation;
     OvergroundSchedule overgroundSchedule;
     String packageName = "package capstone.my.annin.londontubeschedule.ui";
-    private Object StationScheduleActivity;
+    String autoCompleteText;
+
 
     public ScheduleWidgetViewFactory(Context context) {
         mContext = context;

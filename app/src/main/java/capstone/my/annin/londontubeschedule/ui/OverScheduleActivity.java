@@ -118,8 +118,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
     SwipeRefreshLayout swipeRefreshLayout;
     public double latLocationAll;
     public double lonLocationAll;
-    public double latLocation2;
-
+    private boolean isAutoCompleteText = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -384,6 +383,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
                 if (autoCompleteText.equals(overAllScheduleName.getOverStatSchName())) {
                     // stationShareOverStationName = stationArrival.getOverStatSchName();
                     //   autoCompleteText = stationShareOverStationName;
+                    isAutoCompleteText = true;
                     filteredList.add(overAllScheduleName);
                     Timber.v(overAllScheduleName.getOverStatSchName(), "Station name: ");
                     // break;
@@ -429,8 +429,10 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
                 String jsonOverStation = gson.toJson(overgroundStation);
                 prefsEditor.putString("OverStations", jsonOverStation);
 
-                prefsEditor.apply();
+                String jsonAutoCompleteText = gson.toJson(autoCompleteText);
+                prefsEditor.putString("autoCompleteText", jsonAutoCompleteText);
 
+                prefsEditor.apply();
 
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
                 //convert time zone to London UK time(GMT)
@@ -592,8 +594,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
         }
     }
 
-    public void refresh()
-    {
+    public void refresh() {
         //Code based on the following stackoverflow post:
         //https://stackoverflow.com/questions/36270993/reload-activity-from-same-activity
 //        Intent intent = getIntent();
@@ -602,11 +603,22 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
 //        finish();
 //        overridePendingTransition(0, 0);
 //        startActivity(intent);
-     OvergroundScheduleAsyncTask myScheduleTask = new OvergroundScheduleAsyncTask(this);
-       myScheduleTask.execute(overLineId, stationOverId);
+
+
+        if (isAutoCompleteText)
+        {
+            OvergroundSchAllAsyncTask myOverSchAllTask = new OvergroundSchAllAsyncTask(this);
+            myOverSchAllTask.execute();
+
+        }
+        else
+        {
+            OvergroundScheduleAsyncTask myScheduleTask = new OvergroundScheduleAsyncTask(this);
+            myScheduleTask.execute(overLineId, stationOverId);
+
+        }
 
     }
-
 
     private void init()
     {

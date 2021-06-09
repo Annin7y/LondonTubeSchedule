@@ -108,6 +108,10 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
+    public double latLocationAll;
+    public double lonLocationAll;
+    private boolean isAutoCompleteText = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -347,6 +351,7 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
 
             for (Schedule tubeAllScheduleName : scheduleArrayList) {
                 if (autoCompleteText.equals(tubeAllScheduleName.getStationScheduleName())) {
+                    isAutoCompleteText = true;
                     filteredList.add(tubeAllScheduleName);
                     Timber.v(tubeAllScheduleName.getStationScheduleName(), "Tube Station name: ");
                 } else {
@@ -430,9 +435,6 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
 
         }
         }
-
-
-
 
 
     public class MyClickListener implements View.OnClickListener
@@ -549,10 +551,15 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
 //        finish();
 //        overridePendingTransition(0, 0);
 //        startActivity(intent);
-
-        TubeScheduleAsyncTask myScheduleTask = new TubeScheduleAsyncTask(this);
-        myScheduleTask.execute(lineId, stationId);
-
+        if (isAutoCompleteText)
+        {
+            TubeSchAllAsyncTask myTubeSchAllTask = new TubeSchAllAsyncTask(this);
+            myTubeSchAllTask.execute();
+        }
+        else {
+            TubeScheduleAsyncTask myScheduleTask = new TubeScheduleAsyncTask(this);
+            myScheduleTask.execute(lineId, stationId);
+        }
     }
 
 
