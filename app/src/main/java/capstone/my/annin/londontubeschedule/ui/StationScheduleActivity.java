@@ -108,8 +108,6 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
-    public double latLocationAll;
-    public double lonLocationAll;
     private boolean isAutoCompleteText = false;
 
 

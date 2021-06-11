@@ -464,7 +464,8 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
                 Timber.e("Problem parsing all overground schedule JSON results");
                 emptySchedule.setVisibility(View.VISIBLE);
             }
-            if (mShareActionProvider != null) {
+            if (mShareActionProvider != null)
+            {
                 mShareActionProvider.setShareIntent(createShareIntent());
             }
         }
@@ -544,6 +545,9 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
         MenuItem shareItem = menu.findItem(R.id.menu_item_share);
 
         mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
+        if (shareItem != null) {
+            shareItem.setVisible(true);
+        }
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -581,16 +585,17 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
             startActivity(Intent.createChooser(shareIntent, "Choose an app"));
             return shareIntent;
 
-
         }
+
         else
             {
-            String shareTitle2 = "Data Currently Unavailable ";
-            Intent shareIntent2 = new Intent(Intent.ACTION_SEND);
-            shareIntent2.setType("text/plain");
-            shareIntent2.putExtra(Intent.EXTRA_TEXT, shareTitle2);
-            startActivity(Intent.createChooser(shareIntent2, "Choose an app"));
-            return shareIntent2;
+//            String shareTitle2 = "Data Currently Unavailable ";
+//            Intent shareIntent2 = new Intent(Intent.ACTION_SEND);
+//            shareIntent2.setType("text/plain");
+//            shareIntent2.putExtra(Intent.EXTRA_TEXT, shareTitle2);
+//            startActivity(Intent.createChooser(shareIntent2, "Choose an app"));
+//            return shareIntent2;
+                return null;
         }
     }
 
