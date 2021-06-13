@@ -109,6 +109,8 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
     private boolean isAutoCompleteText = false;
+    private boolean isShareIntent = false;
+
 
 
     @Override
@@ -492,6 +494,11 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
         MenuItem shareItem = menu.findItem(R.id.menu_item_share);
 
         mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
+        if (isShareIntent)
+        {
+            shareItem.setVisible(true);
+        }
+
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -522,20 +529,21 @@ public class StationScheduleActivity extends AppCompatActivity implements TubeSc
 
             String shareTitle = "Next train at ";
             String data = shareTitle + "\n" + stationShareStationName + "\n" + stationShareArrivalTime + "\n" + stationShareDirection;
-
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
             shareIntent.putExtra(Intent.EXTRA_TEXT, data);
             startActivity(Intent.createChooser(shareIntent, "Choose an app"));
+            isShareIntent= true;
             return shareIntent;
         }
-        else {
-            String shareTitle2 = "Data Currently Unavailable ";
-            Intent shareIntent2 = new Intent(Intent.ACTION_SEND);
-            shareIntent2.setType("text/plain");
-            shareIntent2.putExtra(Intent.EXTRA_TEXT, shareTitle2);
-            startActivity(Intent.createChooser(shareIntent2, "Choose an app"));
-            return shareIntent2;
+       else {
+//            String shareTitle2 = "Data Currently Unavailable ";
+//            Intent shareIntent2 = new Intent(Intent.ACTION_SEND);
+//            shareIntent2.setType("text/plain");
+//            shareIntent2.putExtra(Intent.EXTRA_TEXT, shareTitle2);
+//            startActivity(Intent.createChooser(shareIntent2, "Choose an app"));
+//            return shareIntent2;
+        return null;
         }
     }
 

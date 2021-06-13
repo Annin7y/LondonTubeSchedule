@@ -119,6 +119,8 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
     public double latLocationAll;
     public double lonLocationAll;
     private boolean isAutoCompleteText = false;
+    private boolean isShareIntent = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -141,6 +143,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
      if (getIntent() != null && getIntent().getExtras() != null)
     {
         autoCompleteText = getIntent().getExtras().getString("overStation");
+
 
         if(autoCompleteText != null)
         {
@@ -545,7 +548,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
         MenuItem shareItem = menu.findItem(R.id.menu_item_share);
 
         mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
-        if (shareItem != null) {
+        if (isShareIntent) {
             shareItem.setVisible(true);
         }
 
@@ -578,11 +581,11 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
 
             String shareTitle = "Next train at ";
             String data = shareTitle + "\n" + stationShareOverStationName + "\n" + stationShareOverArrivalTime + "\n" + stationShareDirection;
-
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
             shareIntent.putExtra(Intent.EXTRA_TEXT, data);
             startActivity(Intent.createChooser(shareIntent, "Choose an app"));
+            isShareIntent = true;
             return shareIntent;
 
         }
