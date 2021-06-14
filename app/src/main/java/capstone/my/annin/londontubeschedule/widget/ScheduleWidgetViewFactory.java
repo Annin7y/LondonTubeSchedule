@@ -116,11 +116,16 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
         String gsonOverSchString = sharedPreferences.getString("OverScheduleList_Widget", "");
         mOverScheduleList = gson.fromJson(gsonOverSchString, typeOverSch);
 
-        Type typeOverStatus = new TypeToken<List<Line>>()
+        Type typeOverStatus = new TypeToken<List<OvergroundStatus>>()
         {
         }.getType();
         String gsonOverStatString = sharedPreferences.getString("OverStatusList_Widget", "");
         mOverStatusList = gson.fromJson(gsonOverStatString, typeOverStatus);
+
+        //Extract the JSON lines from preferences and assign it to an OverStatus object.
+        String jsonOverStatus = sharedPreferences.getString("OverStatus", "");
+        overgroundStatus = gson.fromJson(jsonOverStatus, OvergroundStatus.class);
+
 
         Type typeOverStation = new TypeToken<List<OvergroundStation>>()
         {
@@ -128,13 +133,11 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
         String gsonOverStringStation = sharedPreferences.getString("OverStationList_Widget", "");
         mOverStationList = gson.fromJson(gsonOverStringStation, typeOverStation);
 
-        //Extract the JSON lines from preferences and assign it to an OverStatus object.
-        String jsonOverStatus = sharedPreferences.getString("OverStatus", "");
-        overgroundStatus = gson.fromJson(jsonOverStatus, OvergroundStatus.class);
 
         //Extract the JSON stations from preferences and assign it to an Overground Stations object.
         String jsonOverStations = sharedPreferences.getString("OverStations", "");
         overgroundStation = gson.fromJson(jsonOverStations, OvergroundStation.class);
+
 
     }
 

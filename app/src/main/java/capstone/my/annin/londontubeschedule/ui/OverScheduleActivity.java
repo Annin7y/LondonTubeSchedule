@@ -64,6 +64,7 @@ import capstone.my.annin.londontubeschedule.asynctask.OvergroundStatAllAsyncTask
 import capstone.my.annin.londontubeschedule.asynctask.OvergroundStationAsyncTask;
 import capstone.my.annin.londontubeschedule.asynctask.OvergroundStationAsyncTaskInterface;
 import capstone.my.annin.londontubeschedule.asynctask.OvergroundStatusAsyncTask;
+import capstone.my.annin.londontubeschedule.asynctask.OvergroundStatusAsyncTaskInterface;
 import capstone.my.annin.londontubeschedule.maps.MapsConnectionCheck;
 import capstone.my.annin.londontubeschedule.maps.StationMapActivity;
 import capstone.my.annin.londontubeschedule.pojo.OvergroundSchedule;
@@ -71,12 +72,14 @@ import capstone.my.annin.londontubeschedule.pojo.OvergroundStation;
 import capstone.my.annin.londontubeschedule.pojo.OvergroundStatus;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.OvergroundScheduleAdapter;
 import capstone.my.annin.londontubeschedule.recyclerviewadapters.OvergroundStationAdapter;
+import capstone.my.annin.londontubeschedule.recyclerviewadapters.OvergroundStatusAdapter;
 import capstone.my.annin.londontubeschedule.scrollbehavior.DisableSwipeBehavior;
 import capstone.my.annin.londontubeschedule.utils.NetworkUtils;
 import capstone.my.annin.londontubeschedule.widget.ScheduleWidgetProvider;
 import timber.log.Timber;
 
-public class OverScheduleActivity extends AppCompatActivity implements OvergroundScheduleAsyncTaskInterface,OvergroundStationAdapter.OvergroundStationAdapterOnClickHandler, OvergroundStatAllAsyncTaskInterface, OvergroundSchAllAsyncTaskInterface
+public class OverScheduleActivity extends AppCompatActivity implements OvergroundScheduleAsyncTaskInterface,OvergroundStationAdapter.OvergroundStationAdapterOnClickHandler, OvergroundStatAllAsyncTaskInterface, OvergroundSchAllAsyncTaskInterface,
+        OvergroundStatusAdapter.OvergroundStatusAdapterOnClickHandler, OvergroundStatusAsyncTaskInterface
 {
     private static final String TAG = OverScheduleActivity.class.getSimpleName();
 
@@ -142,18 +145,20 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
 
      if (getIntent() != null && getIntent().getExtras() != null)
     {
-        autoCompleteText = getIntent().getExtras().getString("overStation");
-
-
-        if(autoCompleteText != null)
-        {
-            OvergroundStatAllAsyncTask myOverStatTask = new OvergroundStatAllAsyncTask(this);
-            myOverStatTask.execute();
-
-        }
 
         overground = getIntent().getExtras().getParcelable("OvergroundStatus");
         overgroundStation = getIntent().getExtras().getParcelable("OvergroundStation");
+
+        autoCompleteText = getIntent().getExtras().getString("overStation");
+
+        if(autoCompleteText != null)
+        {
+//            OvergroundStatAllAsyncTask myOverStatTask = new OvergroundStatAllAsyncTask(this);
+//            myOverStatTask.execute();
+            OvergroundStatusAsyncTask myOvergroundTask = new OvergroundStatusAsyncTask(this);
+            myOvergroundTask.execute(NetworkUtils.buildOvergroundStatusUrl());
+
+        }
         if (overground != null)
         {
             overLineId= overground.getModeId();
@@ -297,6 +302,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
             String jsonOverStation = gson.toJson(overgroundStation);
             prefsEditor.putString("OverStations", jsonOverStation);
 
+
             prefsEditor.apply();
 
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
@@ -432,8 +438,8 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
                 String jsonOverStation = gson.toJson(overgroundStation);
                 prefsEditor.putString("OverStations", jsonOverStation);
 
-                String jsonAutoCompleteText = gson.toJson(autoCompleteText);
-                prefsEditor.putString("autoCompleteText", jsonAutoCompleteText);
+                String jsonOverLineId = gson.toJson(overLineId);
+                prefsEditor.putString("OverLineId", jsonOverLineId);
 
                 prefsEditor.apply();
 
@@ -511,6 +517,37 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
     public void onClick(OvergroundStation overgroundStation)
     {
 
+
+    }
+
+    @Override
+    public void returnOvergroundData(ArrayList<OvergroundStatus> simpleJsonOvergroundData)
+    {
+        //mLoadingIndicator.setVisibility(View.INVISIBLE);
+        if (null != simpleJsonOvergroundData)
+        {
+            // overgroundStatusAdapter = new OvergroundStatusAdapter(this, simpleJsonOvergroundData, getContext());
+            overgroundStatusArrayList = simpleJsonOvergroundData;
+            //  mOvergroundStatusRecyclerView.setAdapter(overgroundStatusAdapter);
+            //  overgroundStatusAdapter.setOvergroundList(overgroundStatusArrayList);
+            for (OvergroundStatus overstatus : overgroundStatusArrayList)
+            {
+
+                overLineId = overstatus.getModeId();
+
+                OvergroundStatAllAsyncTask myOverStatTask = new OvergroundStatAllAsyncTask(this);
+                myOverStatTask.execute();
+
+            }
+                //   showErrorMessage();
+                Timber.e("Problem parsing lines JSON results");
+
+        }
+    }
+
+    @Override
+    public void onClick(OvergroundStatus overground)
+    {
 
     }
 
