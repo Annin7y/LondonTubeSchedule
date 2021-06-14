@@ -488,8 +488,10 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
            // overStatAdapter.setStationList(overStatArrayList);
             overStatArrayList = simpleJsonOverStatData;
             //List<OvergroundStation> filteredList = new ArrayList<OvergroundStation>();
-            for (OvergroundStation overstation : overStatArrayList) {
-                if (overstation.getStationName().equals(autoCompleteText)) {
+            for (OvergroundStation overstation : overStatArrayList)
+            {
+                if (overstation.getStationName().equals(autoCompleteText))
+                {
                     latLocationAll = overstation.getLatLocation();
                     lonLocationAll = overstation.getLonLocation();
                     OvergroundSchAllAsyncTask myOverSchAllTask = new OvergroundSchAllAsyncTask(this);
