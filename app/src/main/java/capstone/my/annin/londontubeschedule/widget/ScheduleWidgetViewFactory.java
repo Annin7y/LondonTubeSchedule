@@ -65,6 +65,7 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
     OvergroundSchedule overgroundSchedule;
     String packageName = "package capstone.my.annin.londontubeschedule.ui";
     String autoCompleteText;
+    private String overLineId;
 
 
     public ScheduleWidgetViewFactory(Context context) {
@@ -125,6 +126,10 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
         //Extract the JSON lines from preferences and assign it to an OverStatus object.
         String jsonOverStatus = sharedPreferences.getString("OverStatus", "");
         overgroundStatus = gson.fromJson(jsonOverStatus, OvergroundStatus.class);
+
+//        String jsonOverLineId = sharedPreferences.getString("OverLineId", "");
+//        overLineId = gson.fromJson(jsonOverLineId, typeOverStatus);
+
 
 
         Type typeOverStation = new TypeToken<List<OvergroundStation>>()
