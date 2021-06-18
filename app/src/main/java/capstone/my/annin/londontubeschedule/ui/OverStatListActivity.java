@@ -84,7 +84,7 @@ public class OverStatListActivity extends AppCompatActivity implements Overgroun
         if (getIntent() != null && getIntent().getExtras() != null)
         {
            // overground = getIntent().getExtras().getParcelable("OvergroundStatus");
-            overLineId = getIntent().getExtras().getString("OverModeId");
+            overLineId = getIntent().getExtras().getString("OverLineId");
             overModeName = getIntent().getExtras().getString("OverModeName");
             overModeStatusDesc= getIntent().getExtras().getString("OverModeDesc");
             overModeStatusReason = getIntent().getExtras().getString("OverModeReason");
@@ -139,7 +139,7 @@ public class OverStatListActivity extends AppCompatActivity implements Overgroun
         Intent intent = new Intent(OverStatListActivity.this, OverScheduleActivity.class);
         //intent.putExtra("OvergroundStatus", overground);
         intent.putExtra("OvergroundStation", overgroundStation);
-        intent.putExtra("OverModeId", overLineId);
+        intent.putExtra("OverLineId", overLineId);
         intent.putExtra("OverModeName", overModeName);
         intent.putExtra("OverModeDesc", overModeStatusDesc);
         intent.putExtra("OverModeReason", overModeStatusReason);

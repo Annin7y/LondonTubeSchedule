@@ -150,7 +150,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
     {
 
        // overground = getIntent().getExtras().getParcelable("OvergroundStatus");
-        overLineId = getIntent().getExtras().getString("OverModeId");
+        overLineId = getIntent().getExtras().getString("OverLineId");
         overModeName = getIntent().getExtras().getString("OverModeName");
         overModeStatusDesc= getIntent().getExtras().getString("OverModeDesc");
         overModeStatusReason = getIntent().getExtras().getString("OverModeReason");
@@ -307,8 +307,19 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
            prefsEditor.putString("OverStationList_Widget", jsonStationOverList);
 
            //Save the overgroundStatus as a JSON string using Preferences.
-            String jsonStatus = gson.toJson(overground);
-            prefsEditor.putString("OverStatus", jsonStatus);
+//            String jsonStatus = gson.toJson(overground);
+//            prefsEditor.putString("OverStatus", jsonStatus);
+            String jsonModeId = gson.toJson(overLineId);
+            prefsEditor.putString("OverLineId", jsonModeId);
+
+            String jsonModeName = gson.toJson(overModeName);
+            prefsEditor.putString("OverModeName", jsonModeName);
+
+            String jsonModeDesc = gson.toJson(overModeStatusDesc);
+            prefsEditor.putString("OverModeDesc", jsonModeDesc);
+
+            String jsonModeReason = gson.toJson(overModeStatusReason);
+            prefsEditor.putString("OverModeReason", jsonModeReason);
 
            //Save the Overground Stations as a JSON string using Preferences.
             String jsonOverStation = gson.toJson(overgroundStation);

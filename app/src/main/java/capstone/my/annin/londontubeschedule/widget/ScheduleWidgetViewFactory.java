@@ -64,9 +64,10 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
     private OvergroundStation overgroundStation;
     OvergroundSchedule overgroundSchedule;
     String packageName = "package capstone.my.annin.londontubeschedule.ui";
-    private String autoCompleteText;
     private String overLineId;
-    private String stationOverId;
+    private String overModeName;
+    private String overModeStatusDesc;
+    private String overModeStatusReason;
 
 
     public ScheduleWidgetViewFactory(Context context) {
@@ -125,15 +126,20 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
         mOverStatusList = gson.fromJson(gsonOverStatString, typeOverStatus);
 
         //Extract the JSON lines from preferences and assign it to an OverStatus object.
-        String jsonOverStatus = sharedPreferences.getString("OverStatus", "");
-        overgroundStatus = gson.fromJson(jsonOverStatus, OvergroundStatus.class);
+//        String jsonOverStatus = sharedPreferences.getString("OverStatus", "");
+//        overgroundStatus = gson.fromJson(jsonOverStatus, OvergroundStatus.class);
 
        String jsonOverLineId = sharedPreferences.getString("OverLineId", "");
        overLineId = gson.fromJson(jsonOverLineId, String.class);
 
-        String jsonOverStationId = sharedPreferences.getString("OverStationId", "");
-        stationOverId = gson.fromJson(jsonOverStationId, String.class);
+        String jsonOverModeName = sharedPreferences.getString("OverModeName", "");
+        overModeName = gson.fromJson(jsonOverModeName, String.class);
 
+        String jsonOverModeDesc = sharedPreferences.getString("OverModeDesc", "");
+        overModeStatusDesc = gson.fromJson(jsonOverModeDesc, String.class);
+
+        String jsonOverModeReason = sharedPreferences.getString("OverModeReason", "");
+        overModeStatusReason = gson.fromJson(jsonOverModeReason, String.class);
 
         Type typeOverStation = new TypeToken<List<OvergroundStation>>()
         {
@@ -259,7 +265,11 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
 
             Intent intent = new Intent();
             intent.putExtra(ScheduleWidgetProvider.EXTRA_ITEM, overgroundSchedule);
-            intent.putExtra("OvergroundStatus", overgroundStatus);
+            //intent.putExtra("OvergroundStatus", overgroundStatus);
+            intent.putExtra("OverLineId", overLineId);
+            intent.putExtra("OverModeName", overModeName);
+            intent.putExtra("OverModeDesc", overModeStatusDesc);
+            intent.putExtra("OverModeReason", overModeStatusReason);
             intent.putExtra("OvergroundStation", overgroundStation);
             intent.putParcelableArrayListExtra("overStatusList", mOverStatusList);
             intent.putParcelableArrayListExtra("overStationList", mOverStationList);

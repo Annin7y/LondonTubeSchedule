@@ -79,6 +79,11 @@ public class MainActivity extends AppCompatActivity
         private ArrayList<Schedule> scheduleArrayList = new ArrayList<>();
         private ArrayList<OvergroundStation> overStatArrayList = new ArrayList<>();
         private ArrayList<OvergroundStatus> overgroundStatusArrayList = new ArrayList<>();
+        private String overModeName;
+        private String overModeStatusDesc;
+        private String overModeStatusReason;
+
+
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -148,7 +153,11 @@ public class MainActivity extends AppCompatActivity
             {
                 line = getIntent().getExtras().getParcelable("Line");
                 station = getIntent().getExtras().getParcelable("Station");
-                overground = getIntent().getExtras().getParcelable("OvergroundStatus");
+               // overground = getIntent().getExtras().getParcelable("OvergroundStatus");
+                overLineId = getIntent().getExtras().getString("OverLineId");
+                overModeName = getIntent().getExtras().getString("OverModeName");
+                overModeStatusDesc= getIntent().getExtras().getString("OverModeDesc");
+                overModeStatusReason = getIntent().getExtras().getString("OverModeReason");
                 overgroundStation = getIntent().getExtras().getParcelable("OvergroundStation");
                 //stationOverId = getIntent().getExtras().getString("OverStationId");
                // autoCompleteText = getIntent().getExtras().getString("AutoCompleteText");
@@ -168,10 +177,10 @@ public class MainActivity extends AppCompatActivity
                     intent.putParcelableArrayListExtra("lineList", lineArrayList);
                     intent.putParcelableArrayListExtra("stationList", stationArrayList);
                     startActivity(intent);
-                } else if (overground != null)
-
+                } //else if (overground != null)
+               else if(overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null)
                 {
-                    overLineId = overground.getModeId();
+                   // overLineId = overground.getModeId();
                     if (overgroundStation != null)
                     {
                         stationOverId = overgroundStation.getStationId();
@@ -179,7 +188,11 @@ public class MainActivity extends AppCompatActivity
                     overgroundStatusArrayList = getIntent().getParcelableArrayListExtra("overStatusList");
                     overStatArrayList = getIntent().getParcelableArrayListExtra("overStationList");
                     Intent intent2 = new Intent(this, OverScheduleActivity.class);
-                    intent2.putExtra("OvergroundStatus", overground);
+                   // intent2.putExtra("OvergroundStatus", overground);
+                    intent2.putExtra("OverLineId", overLineId);
+                    intent2.putExtra("OverModeName", overModeName);
+                    intent2.putExtra("OverModeDesc", overModeStatusDesc);
+                    intent2.putExtra("OverModeReason", overModeStatusReason);
                     intent2.putExtra("OvergroundStation", overgroundStation);
                     intent2.putParcelableArrayListExtra("overStatusList", overgroundStatusArrayList);
                     intent2.putParcelableArrayListExtra("overStationList", overStatArrayList);
