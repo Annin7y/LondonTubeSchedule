@@ -57,7 +57,11 @@ public class OverStatListActivity extends AppCompatActivity implements Overgroun
     @BindView(R.id.empty_view_over_stat)
     TextView emptyStations;
     OvergroundStatus overground;
+   // public String overLineId;
     public String overLineId;
+    private String overModeName;
+    private String overModeStatusDesc;
+    private String overModeStatusReason;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -79,17 +83,22 @@ public class OverStatListActivity extends AppCompatActivity implements Overgroun
 
         if (getIntent() != null && getIntent().getExtras() != null)
         {
-            overground = getIntent().getExtras().getParcelable("OvergroundStatus");
-            if(overground != null)
-            {
-                overLineId = Objects.requireNonNull(overground).getModeId();
-                overLineId= overground.getModeId();
+           // overground = getIntent().getExtras().getParcelable("OvergroundStatus");
+            overLineId = getIntent().getExtras().getString("OverModeId");
+            overModeName = getIntent().getExtras().getString("OverModeName");
+            overModeStatusDesc= getIntent().getExtras().getString("OverModeDesc");
+            overModeStatusReason = getIntent().getExtras().getString("OverModeReason");
+
+//            if(overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null)
+//            {
+               // overLineId = Objects.requireNonNull(overground).getModeId();
+               // overLineId= overground.getModeId();
             /*
              *  Starting the asyncTask so that stations load when the activity opens.
              *
                */
-                Timber.i(overground.getModeId(), "lineId: ");
-            }
+//                Timber.i(overground.getModeId(), "lineId: ");
+//            }
             overgroundStatusArrayList = getIntent().getParcelableArrayListExtra("overgroundStatusList");
 
 
@@ -128,8 +137,12 @@ public class OverStatListActivity extends AppCompatActivity implements Overgroun
     public void onClick(OvergroundStation overgroundStation)
     {
         Intent intent = new Intent(OverStatListActivity.this, OverScheduleActivity.class);
-        intent.putExtra("OvergroundStatus", overground);
+        //intent.putExtra("OvergroundStatus", overground);
         intent.putExtra("OvergroundStation", overgroundStation);
+        intent.putExtra("OverModeId", overLineId);
+        intent.putExtra("OverModeName", overModeName);
+        intent.putExtra("OverModeDesc", overModeStatusDesc);
+        intent.putExtra("OverModeReason", overModeStatusReason);
         intent.putParcelableArrayListExtra("overgroundStatusList", overgroundStatusArrayList);
         intent.putParcelableArrayListExtra("overgroundStationList", overStatArrayList);
         startActivity(intent);

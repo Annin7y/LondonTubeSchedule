@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity
         OvergroundStation overgroundStation;
         public String overLineId;
         public String stationOverId;
+        public String autoCompleteText;
         private ArrayList<Station> stationArrayList = new ArrayList<>();
         private ArrayList<Line> lineArrayList = new ArrayList<>();
         private ArrayList<Schedule> scheduleArrayList = new ArrayList<>();
@@ -149,6 +150,8 @@ public class MainActivity extends AppCompatActivity
                 station = getIntent().getExtras().getParcelable("Station");
                 overground = getIntent().getExtras().getParcelable("OvergroundStatus");
                 overgroundStation = getIntent().getExtras().getParcelable("OvergroundStation");
+                //stationOverId = getIntent().getExtras().getString("OverStationId");
+               // autoCompleteText = getIntent().getExtras().getString("AutoCompleteText");
                 if (line != null)
                 {
                     lineId = line.getLineId();
@@ -180,10 +183,27 @@ public class MainActivity extends AppCompatActivity
                     intent2.putExtra("OvergroundStation", overgroundStation);
                     intent2.putParcelableArrayListExtra("overStatusList", overgroundStatusArrayList);
                     intent2.putParcelableArrayListExtra("overStationList", overStatArrayList);
+                 //   intent2.putExtra("OverStationId", stationOverId);
+                 //  intent2.putExtra("AutoCompleteText", autoCompleteText);
                     startActivity(intent2);
 
                 }
-            }
+//                else if(autoCompleteText != null && stationOverId != null)
+//                {
+//                    overgroundStatusArrayList = getIntent().getParcelableArrayListExtra("overStatusList");
+//                    overStatArrayList = getIntent().getParcelableArrayListExtra("overStationList");
+//
+//                    Intent intent3 = new Intent(this, OverScheduleActivity.class);
+//                    intent3.putExtra("OverStationId", stationOverId);
+//                    intent3.putExtra("AutoCompleteText", autoCompleteText);
+//                    intent3.putParcelableArrayListExtra("overStatusList", overgroundStatusArrayList);
+//                    intent3.putParcelableArrayListExtra("overStationList", overStatArrayList);
+//                    startActivity(intent3);
+//
+//                    }
+
+                }
+
 
         }
 

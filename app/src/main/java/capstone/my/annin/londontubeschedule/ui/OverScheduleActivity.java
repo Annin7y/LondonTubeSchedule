@@ -97,7 +97,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
     private static final String KEY_STATUS_LIST = "status_list";
     public String stationOverId;
     OvergroundStatus overground;
-    public String overLineId;
+    OvergroundStatus overgroundObject;
     private Context context;
     private ShareActionProvider mShareActionProvider;
     OvergroundSchedule stationArrival;
@@ -109,7 +109,6 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
     TextView emptySchedule;
     String stationNameToString;
     String autoCompleteText;
-    public String globalAutoCompleteText;
     private static final String KEY_EMPTY_VALUE = "empty_value";
     @BindView(R.id.extended_fab)
     ExtendedFloatingActionButton extendedFAB;
@@ -122,7 +121,11 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
     public double latLocationAll;
     public double lonLocationAll;
     private boolean isAutoCompleteText = false;
-    private boolean isShareIntent = false;
+    private Menu menu;
+    public String overLineId;
+    private String overModeName;
+    private String overModeStatusDesc;
+    private String overModeStatusReason;
 
 
     @Override
@@ -146,7 +149,12 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
      if (getIntent() != null && getIntent().getExtras() != null)
     {
 
-        overground = getIntent().getExtras().getParcelable("OvergroundStatus");
+       // overground = getIntent().getExtras().getParcelable("OvergroundStatus");
+        overLineId = getIntent().getExtras().getString("OverModeId");
+        overModeName = getIntent().getExtras().getString("OverModeName");
+        overModeStatusDesc= getIntent().getExtras().getString("OverModeDesc");
+        overModeStatusReason = getIntent().getExtras().getString("OverModeReason");
+
         overgroundStation = getIntent().getExtras().getParcelable("OvergroundStation");
 
         autoCompleteText = getIntent().getExtras().getString("overStation");
@@ -155,16 +163,17 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
         {
 //            OvergroundStatAllAsyncTask myOverStatTask = new OvergroundStatAllAsyncTask(this);
 //            myOverStatTask.execute();
+
             OvergroundStatusAsyncTask myOvergroundTask = new OvergroundStatusAsyncTask(this);
             myOvergroundTask.execute(NetworkUtils.buildOvergroundStatusUrl());
 
         }
-        if (overground != null)
+      //  if (overground != null)
+        if(overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null)
         {
-            overLineId= overground.getModeId();
-            // Log.i("lineId: ", line.getLineId());
-            Timber.v(overground.getModeId(), "overLineId: ");
-
+//            overLineId= overground.getModeId();
+//            // Log.i("lineId: ", line.getLineId());
+//            Timber.v(overground.getModeId(), "overLineId: ");
 
             if (overgroundStation != null)
             {
@@ -279,6 +288,9 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
             stationShareOverArrivalTime = stationArrival.getOverExpArrival();
             stationShareDirection = stationArrival.getOverDestName();
 
+           menu.findItem(R.id.menu_item_share).setVisible(stationShareOverStationName != null && stationShareOverArrivalTime != null && stationShareDirection != null);
+
+
             swipeRefreshLayout.setRefreshing(false);
             //Store Schedule Info in SharedPreferences
            SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -378,7 +390,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
 
     @Override
     public void returnOverScheduleAllData(ArrayList<OvergroundSchedule> simpleJsonOverSchAllData) {
-        if (null != simpleJsonOverSchAllData) {
+        if (simpleJsonOverSchAllData.size() > 0) {
             overSchAdapter = new OvergroundScheduleAdapter(simpleJsonOverSchAllData, OverScheduleActivity.this);
             overSchArrayList = simpleJsonOverSchAllData;
             mScheduleRecyclerView.setAdapter(overSchAdapter);
@@ -408,12 +420,23 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
             stationArrival = filteredList.get(0);
 
 
-            if (stationArrival != null) {
+            if (stationArrival != null)
+            {
                 stationShareOverStationName = stationArrival.getOverStatSchName();
                 stationShareOverArrivalTime = stationArrival.getOverExpArrival();
                 stationShareDirection = stationArrival.getOverDestName();
 
                 overSchArrayList = filteredList;
+
+                if(stationShareOverStationName != null && stationShareOverArrivalTime != null && stationShareDirection != null)
+                {
+                    menu.findItem(R.id.menu_item_share).setVisible(true);
+                }
+                else
+                {
+                    menu.findItem(R.id.menu_item_share).setVisible(false);
+                }
+
 
                 swipeRefreshLayout.setRefreshing(false);
                 //Store Schedule Info in SharedPreferences
@@ -431,10 +454,10 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
                 prefsEditor.putString("OverStationList_Widget", jsonStationOverList);
 
                 //Save the overgroundStatus as a JSON string using Preferences.
-                String jsonStatus = gson.toJson(overground);
+                String jsonStatus = gson.toJson(overgroundObject);
                 prefsEditor.putString("OverStatus", jsonStatus);
 
-                //Save the Overground Stations as a JSON string using Preferences.
+               // Save the Overground Stations as a JSON string using Preferences.
                 String jsonOverStation = gson.toJson(overgroundStation);
                 prefsEditor.putString("OverStations", jsonOverStation);
 
@@ -469,20 +492,21 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
                 int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
                 appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.appwidget_list);
 
-            } else {
-                Timber.e("Problem parsing all overground schedule JSON results");
-                emptySchedule.setVisibility(View.VISIBLE);
             }
-            if (mShareActionProvider != null)
-            {
-                mShareActionProvider.setShareIntent(createShareIntent());
-            }
+        }
+        else {
+            Timber.e("Problem parsing all overground schedule JSON results");
+            emptySchedule.setVisibility(View.VISIBLE);
+        }
+        if (mShareActionProvider != null)
+        {
+            mShareActionProvider.setShareIntent(createShareIntent());
         }
     }
 
     @Override
     public void returnOverStationAllData(ArrayList<OvergroundStation> simpleJsonOverStatData) {
-        if (null != simpleJsonOverStatData) {
+        if ( simpleJsonOverStatData.size() > 0) {
            //  overStatAdapter = new OvergroundStationAdapter(this, simpleJsonOverStatData, OverScheduleActivity.this);
           //  mStationRecyclerView.setAdapter(overStatAdapter);
            // overStatAdapter.setStationList(overStatArrayList);
@@ -494,6 +518,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
                 {
                     latLocationAll = overstation.getLatLocation();
                     lonLocationAll = overstation.getLonLocation();
+                    stationOverId = overstation.getStationId();
                     OvergroundSchAllAsyncTask myOverSchAllTask = new OvergroundSchAllAsyncTask(this);
                 myOverSchAllTask.execute();
                    // Timber.i("Station name: ");
@@ -519,22 +544,21 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
     public void onClick(OvergroundStation overgroundStation)
     {
 
-
     }
 
     @Override
     public void returnOvergroundData(ArrayList<OvergroundStatus> simpleJsonOvergroundData)
     {
         //mLoadingIndicator.setVisibility(View.INVISIBLE);
-        if (null != simpleJsonOvergroundData)
+        if ( simpleJsonOvergroundData.size() > 0)
         {
             // overgroundStatusAdapter = new OvergroundStatusAdapter(this, simpleJsonOvergroundData, getContext());
             overgroundStatusArrayList = simpleJsonOvergroundData;
+
             //  mOvergroundStatusRecyclerView.setAdapter(overgroundStatusAdapter);
             //  overgroundStatusAdapter.setOvergroundList(overgroundStatusArrayList);
             for (OvergroundStatus overstatus : overgroundStatusArrayList)
             {
-
                 overLineId = overstatus.getModeId();
 
                 OvergroundStatAllAsyncTask myOverStatTask = new OvergroundStatAllAsyncTask(this);
@@ -550,7 +574,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
     @Override
     public void onClick(OvergroundStatus overground)
     {
-
+        
     }
 
 
@@ -586,10 +610,10 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
         /* Return true so that the menu is displayed in the Toolbar */
         MenuItem shareItem = menu.findItem(R.id.menu_item_share);
 
+        this.menu = menu;
+
         mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
-        if (isShareIntent) {
-            shareItem.setVisible(true);
-        }
+
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -624,7 +648,15 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
             shareIntent.setType("text/plain");
             shareIntent.putExtra(Intent.EXTRA_TEXT, data);
             startActivity(Intent.createChooser(shareIntent, "Choose an app"));
-            isShareIntent = true;
+            if(stationShareOverStationName != null && stationShareOverArrivalTime != null && stationShareDirection != null)
+            {
+                menu.findItem(R.id.menu_item_share).setVisible(true);
+            }
+            else
+            {
+                menu.findItem(R.id.menu_item_share).setVisible(false);
+            }
+            //isShareIntent = true;
             return shareIntent;
 
         }

@@ -79,6 +79,12 @@ public class OvergroundLineFragment extends BaseFragment implements OvergroundSt
 
         private static final String SNACKBAR_STATE = "snackbar_state";
         private boolean isSnackbarShowing = false;
+        OvergroundStatus overground;
+        public String overLineId;
+        private String overModeName;
+        private String overModeStatusDesc;
+        private String overModeStatusReason;
+
 
 
 //    /**
@@ -150,6 +156,12 @@ public class OvergroundLineFragment extends BaseFragment implements OvergroundSt
                        // Bundle bundle = new Bundle();
                       //  overStationName.setText(selection);
                         intent.putExtra("overStation", selection);
+                        intent.putExtra("OverModeId", overLineId);
+                        intent.putExtra("OverModeName", overModeName);
+                        intent.putExtra("OverModeDesc", overModeStatusDesc);
+                        intent.putExtra("OverModeReason", overModeStatusReason);
+                        intent.putParcelableArrayListExtra("overLineList", overgroundStatusArrayList);
+
                       //  intent.putExtras(bundle);
                         startActivity(intent);
                     }
@@ -252,6 +264,17 @@ public class OvergroundLineFragment extends BaseFragment implements OvergroundSt
                 overgroundStatusArrayList = simpleJsonOvergroundData;
                 mOvergroundStatusRecyclerView.setAdapter(overgroundStatusAdapter);
                 overgroundStatusAdapter.setOvergroundList(overgroundStatusArrayList);
+                overground = overgroundStatusArrayList.get(0);
+
+                if(overground !=null)
+                {
+                    overLineId = overground.getModeId();
+                    overModeName = overground.getModeName();
+                    overModeStatusDesc = overground.getModeStatusDesc();
+                    overModeStatusReason = overground.getModeStatusReason();
+
+                }
+
             } else
             {
              //   showErrorMessage();
@@ -263,14 +286,21 @@ public class OvergroundLineFragment extends BaseFragment implements OvergroundSt
         public void onClick(OvergroundStatus overground)
         {
             Intent intent = new Intent(getActivity(), OverStatListActivity.class);
-            intent.putExtra("OvergroundStatus", overground);
+          //  intent.putExtra("OvergroundStatus", overground);
             intent.putParcelableArrayListExtra("overLineList", overgroundStatusArrayList);
-            startActivity(intent);
+            intent.putExtra("OverModeId", overLineId);
+            intent.putExtra("OverModeName", overModeName);
+            intent.putExtra("OverModeDesc", overModeStatusDesc);
+            intent.putExtra("OverModeReason", overModeStatusReason);
 
             startActivity(intent);
+
             //log event when the user selects a line
             Bundle params = new Bundle();
             params.putParcelable("overground_select", overground);
+            Bundle params2 = new Bundle();
+
+
             mFirebaseAnalytics.logEvent("overground_select",params);
 
         }
