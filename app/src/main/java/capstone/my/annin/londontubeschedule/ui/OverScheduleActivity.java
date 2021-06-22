@@ -96,6 +96,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
     private static final String KEY_STATION_LIST = "station_list";
     private static final String KEY_STATUS_LIST = "status_list";
     public String stationOverId;
+    public String stationOverIdAll;
     OvergroundStatus overground;
     OvergroundStatus overgroundObject;
     private Context context;
@@ -120,6 +121,8 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
     SwipeRefreshLayout swipeRefreshLayout;
     public double latLocationAll;
     public double lonLocationAll;
+    private String latString;
+    private String lonString;
     private boolean isAutoCompleteText = false;
     private Menu menu;
     public String overLineId;
@@ -156,6 +159,11 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
         overModeStatusReason = getIntent().getExtras().getString("OverModeReason");
 
         overgroundStation = getIntent().getExtras().getParcelable("OvergroundStation");
+
+        stationNameToString = getIntent().getExtras().getString("OverStationName");
+        stationOverIdAll = getIntent().getExtras().getString("OverStationIdAll");
+        latString = getIntent().getExtras().getString("OverLat");
+        lonString = getIntent().getExtras().getString("OverLon");
 
         autoCompleteText = getIntent().getExtras().getString("overStation");
 
@@ -469,8 +477,20 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
                 prefsEditor.putString("OverStatus", jsonStatus);
 
                // Save the Overground Stations as a JSON string using Preferences.
-                String jsonOverStation = gson.toJson(overgroundStation);
-                prefsEditor.putString("OverStations", jsonOverStation);
+//                String jsonOverStation = gson.toJson(overgroundStation);
+//                prefsEditor.putString("OverStations", jsonOverStation);
+
+                String jsonOverLat = gson.toJson(latString);
+                prefsEditor.putString("OverLat", jsonOverLat);
+
+                String jsonOverLon = gson.toJson(lonString);
+                prefsEditor.putString("OverLon", jsonOverLon);
+
+                String jsonOverStationName = gson.toJson(stationNameToString);
+                prefsEditor.putString("OverStationName", jsonOverStationName);
+
+                String jsonOverStatId = gson.toJson(stationOverIdAll);
+                prefsEditor.putString("OverStationIdAll", jsonOverStatId);
 
                 String jsonOverLineId = gson.toJson(overLineId);
                 prefsEditor.putString("OverLineId", jsonOverLineId);
@@ -529,7 +549,10 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
                 {
                     latLocationAll = overstation.getLatLocation();
                     lonLocationAll = overstation.getLonLocation();
-                    stationOverId = overstation.getStationId();
+                    stationOverIdAll = overstation.getStationId();
+                    stationNameToString = overstation.getStationName();
+                    latString = String.valueOf(latLocationAll);
+                    lonString = String.valueOf(lonLocationAll);
                     OvergroundSchAllAsyncTask myOverSchAllTask = new OvergroundSchAllAsyncTask(this);
                 myOverSchAllTask.execute();
                    // Timber.i("Station name: ");

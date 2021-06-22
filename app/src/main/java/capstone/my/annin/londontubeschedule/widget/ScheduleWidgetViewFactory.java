@@ -69,6 +69,10 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
     private String overModeStatusDesc;
     private String overModeStatusReason;
     private String stationOverId;
+    private String stationOverIdAll;
+    private  String stationNameToString;
+    private String latString;
+    private String lonString;
 
 
     public ScheduleWidgetViewFactory(Context context) {
@@ -152,11 +156,17 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
         String jsonOverStations = sharedPreferences.getString("OverStations", "");
         overgroundStation = gson.fromJson(jsonOverStations, OvergroundStation.class);
 
-        String jsonOverStationId = sharedPreferences.getString("OverStationId", "");
-        stationOverId = gson.fromJson(jsonOverStationId, String.class);
+        String jsonOverStationId = sharedPreferences.getString("OverStationIdAll", "");
+        stationOverIdAll = gson.fromJson(jsonOverStationId, String.class);
 
+        String jsonOverStationName = sharedPreferences.getString("OverStationName", "");
+        stationNameToString = gson.fromJson(jsonOverStationName, String.class);
 
+        String jsonOverLat= sharedPreferences.getString("OverLat", "");
+        latString = gson.fromJson(jsonOverLat, String.class);
 
+        String jsonOverLon = sharedPreferences.getString("OverLon", "");
+        lonString = gson.fromJson(jsonOverLon, String.class);
     }
 
     @Override
@@ -275,6 +285,11 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
             intent.putExtra("OverModeDesc", overModeStatusDesc);
             intent.putExtra("OverModeReason", overModeStatusReason);
             intent.putExtra("OvergroundStation", overgroundStation);
+            intent.putExtra("OverStationName", stationNameToString);
+            intent.putExtra("OverStationIdAll", stationOverIdAll);
+            intent.putExtra("OverLat", latString);
+            intent.putExtra("OverLon", lonString);
+
             intent.putParcelableArrayListExtra("overStatusList", mOverStatusList);
             intent.putParcelableArrayListExtra("overStationList", mOverStationList);
             itemView.setOnClickFillInIntent(R.id.schedule_widget_list, intent);

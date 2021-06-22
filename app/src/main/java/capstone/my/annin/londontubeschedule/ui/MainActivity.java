@@ -73,6 +73,10 @@ public class MainActivity extends AppCompatActivity
         OvergroundStation overgroundStation;
         public String overLineId;
         public String stationOverId;
+        public String stationOverIdAll;
+        public String latString;
+        public String lonString;
+        public String stationNameToString;
         public String autoCompleteText;
         private ArrayList<Station> stationArrayList = new ArrayList<>();
         private ArrayList<Line> lineArrayList = new ArrayList<>();
@@ -118,16 +122,13 @@ public class MainActivity extends AppCompatActivity
             //      by calling onPageTitle()
             tabLayout.setupWithViewPager(viewPager);
 
-            if (savedInstanceState == null)
-            {
-                if (isNetworkStatusAvailable(getApplicationContext()))
-                {
+            if (savedInstanceState == null) {
+                if (isNetworkStatusAvailable(getApplicationContext())) {
                     fragmentTubeLine = (TubeLineFragment)
                             getSupportFragmentManager().findFragmentByTag(TUBE_LINE_FRAGMENT);
                     fragmentOverground = (OvergroundLineFragment)
                             getSupportFragmentManager().findFragmentByTag(TUBE_OVERGROUND_FRAGMENT);
-                } else
-                    {
+                } else {
                     Snackbar
                             .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
                             .setAction(R.string.snackbar_retry, new MainActivity.MyClickListener())
@@ -137,36 +138,36 @@ public class MainActivity extends AppCompatActivity
                     showErrorMessage();
                 }
 
-            }
-                else
-                    {
-                    isSnackbarShowing = savedInstanceState.getBoolean(SNACKBAR_STATE);
-                    if (isSnackbarShowing)
-                    {
-                        Snackbar
-                                .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
-                                .setAction(R.string.snackbar_retry, new MainActivity.MyClickListener())
-                                .setBehavior(new DisableSwipeBehavior())
-                                .show();
-                    }
+            } else {
+                isSnackbarShowing = savedInstanceState.getBoolean(SNACKBAR_STATE);
+                if (isSnackbarShowing) {
+                    Snackbar
+                            .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.snackbar_retry, new MainActivity.MyClickListener())
+                            .setBehavior(new DisableSwipeBehavior())
+                            .show();
                 }
-            if (getIntent() != null && getIntent().getExtras() != null)
-            {
+            }
+            if (getIntent() != null && getIntent().getExtras() != null) {
                 line = getIntent().getExtras().getParcelable("Line");
                 station = getIntent().getExtras().getParcelable("Station");
-               // overground = getIntent().getExtras().getParcelable("OvergroundStatus");
+                // overground = getIntent().getExtras().getParcelable("OvergroundStatus");
                 overLineId = getIntent().getExtras().getString("OverLineId");
                 overModeName = getIntent().getExtras().getString("OverModeName");
-                overModeStatusDesc= getIntent().getExtras().getString("OverModeDesc");
+                overModeStatusDesc = getIntent().getExtras().getString("OverModeDesc");
                 overModeStatusReason = getIntent().getExtras().getString("OverModeReason");
                 overgroundStation = getIntent().getExtras().getParcelable("OvergroundStation");
+                stationNameToString = getIntent().getExtras().getString("OverStationName");
+                stationOverIdAll = getIntent().getExtras().getString("OverStationIdAll");
+                latString = getIntent().getExtras().getString("OverLat");
+                lonString = getIntent().getExtras().getString("OverLon");
+
                 //stationOverId = getIntent().getExtras().getString("OverStationId");
-               // autoCompleteText = getIntent().getExtras().getString("AutoCompleteText");
+                // autoCompleteText = getIntent().getExtras().getString("AutoCompleteText");
                 if (line != null)
                 {
                     lineId = line.getLineId();
-                    if (station != null)
-                    {
+                    if (station != null) {
                         stationId = station.getStationId();
                     }
 
@@ -179,47 +180,54 @@ public class MainActivity extends AppCompatActivity
                     intent.putParcelableArrayListExtra("stationList", stationArrayList);
                     startActivity(intent);
                 } //else if (overground != null)
-               else if(overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null)
-                {
-                   // overLineId = overground.getModeId();
-                    if (overgroundStation != null)
-                    {
+//                else  if (stationNameToString != null && stationOverIdAll != null && latString != null && lonString != null
+//                && overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null)
+//                {
+//                    overgroundStatusArrayList = getIntent().getParcelableArrayListExtra("overStatusList");
+//                    overStatArrayList = getIntent().getParcelableArrayListExtra("overStationList");
+//                    Intent intent3 = new Intent(this, OverScheduleActivity.class);
+//                    intent3.putExtra("OverLineId", overLineId);
+//                    intent3.putExtra("OverModeName", overModeName);
+//                    intent3.putExtra("OverModeDesc", overModeStatusDesc);
+//                    intent3.putExtra("OverModeReason", overModeStatusReason);
+//                    intent3.putExtra("OverStationIdAll", stationOverIdAll);
+//                    intent3.putExtra("OverStationName", stationNameToString);
+//                    intent3.putExtra("OverLat", latString);
+//                    intent3.putExtra("OverLon", lonString);
+//                    intent3.putParcelableArrayListExtra("overStatusList", overgroundStatusArrayList);
+//                    intent3.putParcelableArrayListExtra("overStationList", overStatArrayList);
+//                    startActivity(intent3);
+//                }
+
+                else if (overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null) {
+                    // overLineId = overground.getModeId();
+                    if (overgroundStation != null) {
                         stationOverId = overgroundStation.getStationId();
                     }
+
                     overgroundStatusArrayList = getIntent().getParcelableArrayListExtra("overStatusList");
                     overStatArrayList = getIntent().getParcelableArrayListExtra("overStationList");
                     Intent intent2 = new Intent(this, OverScheduleActivity.class);
-                   // intent2.putExtra("OvergroundStatus", overground);
+                    // intent2.putExtra("OvergroundStatus", overground);
                     intent2.putExtra("OverLineId", overLineId);
                     intent2.putExtra("OverModeName", overModeName);
                     intent2.putExtra("OverModeDesc", overModeStatusDesc);
                     intent2.putExtra("OverModeReason", overModeStatusReason);
                     intent2.putExtra("OvergroundStation", overgroundStation);
+//                    intent2.putExtra("OverStationIdAll", stationOverIdAll);
+//                    intent2.putExtra("OverStationName", stationNameToString);
+//                    intent2.putExtra("OverLat", latString);
+//                    intent2.putExtra("OverLon", lonString);
+
                     intent2.putParcelableArrayListExtra("overStatusList", overgroundStatusArrayList);
                     intent2.putParcelableArrayListExtra("overStationList", overStatArrayList);
-                 //   intent2.putExtra("OverStationId", stationOverId);
-                 //  intent2.putExtra("AutoCompleteText", autoCompleteText);
+                    //   intent2.putExtra("OverStationId", stationOverId);
+                    //  intent2.putExtra("AutoCompleteText", autoCompleteText);
                     startActivity(intent2);
-
-                }
-//                else if(autoCompleteText != null && stationOverId != null)
-//                {
-//                    overgroundStatusArrayList = getIntent().getParcelableArrayListExtra("overStatusList");
-//                    overStatArrayList = getIntent().getParcelableArrayListExtra("overStationList");
-//
-//                    Intent intent3 = new Intent(this, OverScheduleActivity.class);
-//                    intent3.putExtra("OverStationId", stationOverId);
-//                    intent3.putExtra("AutoCompleteText", autoCompleteText);
-//                    intent3.putParcelableArrayListExtra("overStatusList", overgroundStatusArrayList);
-//                    intent3.putParcelableArrayListExtra("overStationList", overStatArrayList);
-//                    startActivity(intent3);
-//
-//                    }
-
                 }
 
-
-        }
+                }
+            }
 
 
     public class MyClickListener implements View.OnClickListener
