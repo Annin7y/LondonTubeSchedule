@@ -159,7 +159,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
 
         autoCompleteText = getIntent().getExtras().getString("overStation");
 
-        if(autoCompleteText != null)
+        if(autoCompleteText != null && overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null)
         {
 //            OvergroundStatAllAsyncTask myOverStatTask = new OvergroundStatAllAsyncTask(this);
 //            myOverStatTask.execute();
@@ -169,7 +169,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
 
         }
       //  if (overground != null)
-        if(overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null)
+         else if(overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null)
         {
 //            overLineId= overground.getModeId();
 //            // Log.i("lineId: ", line.getLineId());

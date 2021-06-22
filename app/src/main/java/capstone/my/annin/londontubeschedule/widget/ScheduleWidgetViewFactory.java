@@ -68,6 +68,7 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
     private String overModeName;
     private String overModeStatusDesc;
     private String overModeStatusReason;
+    private String stationOverId;
 
 
     public ScheduleWidgetViewFactory(Context context) {
@@ -147,10 +148,13 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
         String gsonOverStringStation = sharedPreferences.getString("OverStationList_Widget", "");
         mOverStationList = gson.fromJson(gsonOverStringStation, typeOverStation);
 
-
         //Extract the JSON stations from preferences and assign it to an Overground Stations object.
         String jsonOverStations = sharedPreferences.getString("OverStations", "");
         overgroundStation = gson.fromJson(jsonOverStations, OvergroundStation.class);
+
+        String jsonOverStationId = sharedPreferences.getString("OverStationId", "");
+        stationOverId = gson.fromJson(jsonOverStationId, String.class);
+
 
 
     }

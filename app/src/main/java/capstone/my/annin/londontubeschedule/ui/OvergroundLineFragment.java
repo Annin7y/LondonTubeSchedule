@@ -160,7 +160,7 @@ public class OvergroundLineFragment extends BaseFragment implements OvergroundSt
                         intent.putExtra("OverModeName", overModeName);
                         intent.putExtra("OverModeDesc", overModeStatusDesc);
                         intent.putExtra("OverModeReason", overModeStatusReason);
-                        intent.putParcelableArrayListExtra("overLineList", overgroundStatusArrayList);
+                        intent.putParcelableArrayListExtra("overgroundStatusList", overgroundStatusArrayList);
 
                       //  intent.putExtras(bundle);
                         startActivity(intent);
@@ -287,7 +287,7 @@ public class OvergroundLineFragment extends BaseFragment implements OvergroundSt
         {
             Intent intent = new Intent(getActivity(), OverStatListActivity.class);
           //  intent.putExtra("OvergroundStatus", overground);
-            intent.putParcelableArrayListExtra("overLineList", overgroundStatusArrayList);
+            intent.putParcelableArrayListExtra("overgroundStatusList", overgroundStatusArrayList);
             intent.putExtra("OverLineId", overLineId);
             intent.putExtra("OverModeName", overModeName);
             intent.putExtra("OverModeDesc", overModeStatusDesc);
