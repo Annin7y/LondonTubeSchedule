@@ -78,6 +78,8 @@ import capstone.my.annin.londontubeschedule.utils.NetworkUtils;
 import capstone.my.annin.londontubeschedule.widget.ScheduleWidgetProvider;
 import timber.log.Timber;
 
+//import static capstone.my.annin.londontubeschedule.ui.MyClickListener.isNetworkStatusAvailable;
+
 public class OverScheduleActivity extends AppCompatActivity implements OvergroundScheduleAsyncTaskInterface,OvergroundStationAdapter.OvergroundStationAdapterOnClickHandler, OvergroundStatAllAsyncTaskInterface, OvergroundSchAllAsyncTaskInterface,
         OvergroundStatusAdapter.OvergroundStatusAdapterOnClickHandler, OvergroundStatusAsyncTaskInterface
 {
@@ -109,6 +111,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
     @BindView(R.id.empty_view_schedule)
     TextView emptySchedule;
     String stationNameToString;
+    String stationNameToStringAuto;
     String autoCompleteText;
     private static final String KEY_EMPTY_VALUE = "empty_value";
     @BindView(R.id.extended_fab)
@@ -160,7 +163,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
 
         overgroundStation = getIntent().getExtras().getParcelable("OvergroundStation");
 
-        stationNameToString = getIntent().getExtras().getString("OverStationName");
+        stationNameToStringAuto = getIntent().getExtras().getString("OverStationName");
         stationOverIdAll = getIntent().getExtras().getString("OverStationIdAll");
         latString = getIntent().getExtras().getString("OverLat");
         lonString = getIntent().getExtras().getString("OverLon");
@@ -177,76 +180,156 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
 
         }
       //  if (overground != null)
-         else if(overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null)
+//         else if(overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null)
+//        {
+////            overLineId= overground.getModeId();
+////            // Log.i("lineId: ", line.getLineId());
+////            Timber.v(overground.getModeId(), "overLineId: ");
+//
+//            if (overgroundStation != null)
+//            {
+//                stationOverId = overgroundStation.getStationId();
+//                // Log.i("stationId: ", stations.getStationId());
+//                Timber.v(overgroundStation.getStationId(), "stationId: ");
+//
+//                // stationNameStation.setText(station.getStationName());
+//                stationNameToString = overgroundStation.getStationName();
+//
+//                ActionBar actionBar = getSupportActionBar();
+//                actionBar.setTitle(stationNameToString);
+//
+//            }
+//            overgroundStatusArrayList = getIntent().getParcelableArrayListExtra("overgroundStatusList");
+//            overStatArrayList = getIntent().getParcelableArrayListExtra("overgroundStationList");
+//
+//
+//            if (savedInstanceState == null)
+//            {
+//                if (isNetworkStatusAvailable(this))
+//                {
+//                    /*
+//                     *  Starting the asyncTask so that schedule loads when the activity opens.
+//                     */
+//                    OvergroundScheduleAsyncTask myScheduleTask = new OvergroundScheduleAsyncTask(this);
+//                    myScheduleTask.execute(overLineId, stationOverId);
+//
+//
+//                } else
+//                {
+//                    Snackbar
+//                            .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+//                            .setAction(R.string.snackbar_retry, new OverScheduleActivity.MyClickListener())
+//                            .setBehavior(new DisableSwipeBehavior())
+//                            .show();
+//                    isSnackbarShowing = true;
+//                    showErrorMessage();
+//                }}
+//
+//            else
+//            {
+//                isSnackbarShowing = savedInstanceState.getBoolean(SNACKBAR_STATE);
+//                if (isSnackbarShowing)
+//                {
+//                    Snackbar
+//                            .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+//                            .setAction(R.string.snackbar_retry, new OverScheduleActivity.MyClickListener())
+//                            .setBehavior(new DisableSwipeBehavior())
+//                            .show();
+//                }
+//                //emptySchedule visibility code based on the answer in this stackoverflow thread:
+//                //https://stackoverflow.com/questions/51903851/keeping-textview-visibility-view-invisible-and-button-state-setenabledfalse
+//                if (savedInstanceState.getBoolean("visible"))
+//                {
+//
+//                    emptySchedule.setVisibility(View.VISIBLE);
+//                }
+//                {
+//                    overSchArrayList = savedInstanceState.getParcelableArrayList(KEY_OVER_SCHEDULE_LIST);
+//                    overSchAdapter.setOverSchList(overSchArrayList);
+//                }
+//            }
+//        }
+
+//        if(stationNameToStringAuto != null && stationOverIdAll != null  && latString != null && lonString != null && overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null)
+//        {
+////            OvergroundStatAllAsyncTask myOverStatTask = new OvergroundStatAllAsyncTask(this);
+////            myOverStatTask.execute();
+//
+//            OvergroundSchAllAsyncTask myOverSchAllTask = new OvergroundSchAllAsyncTask(this);
+//            myOverSchAllTask.execute();
+//
+//            stationNameToString = stationNameToStringAuto;
+//
+//            ActionBar actionBar = getSupportActionBar();
+//            actionBar.setTitle(stationNameToString);
+//        }
+        else if(overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null)
         {
-//            overLineId= overground.getModeId();
-//            // Log.i("lineId: ", line.getLineId());
-//            Timber.v(overground.getModeId(), "overLineId: ");
 
-            if (overgroundStation != null)
-            {
-                stationOverId = overgroundStation.getStationId();
-                // Log.i("stationId: ", stations.getStationId());
-                Timber.v(overgroundStation.getStationId(), "stationId: ");
+            if(autoCompleteText != null && stationNameToStringAuto != null && stationOverIdAll != null  && latString != null && lonString != null && overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null) {
+//            OvergroundStatAllAsyncTask myOverStatTask = new OvergroundStatAllAsyncTask(this);
+//            myOverStatTask.execute();
 
-                // stationNameStation.setText(station.getStationName());
-                stationNameToString = overgroundStation.getStationName();
-
+                stationNameToString = stationNameToStringAuto;
                 ActionBar actionBar = getSupportActionBar();
-                actionBar.setTitle(stationNameToString);
-
-
+            actionBar.setTitle(stationNameToString);
             }
-            overgroundStatusArrayList = getIntent().getParcelableArrayListExtra("overgroundStatusList");
-            overStatArrayList = getIntent().getParcelableArrayListExtra("overgroundStationList");
+                overgroundStatusArrayList = getIntent().getParcelableArrayListExtra("overgroundStatusList");
+               overStatArrayList = getIntent().getParcelableArrayListExtra("overgroundStationList");
 
-
-            if (savedInstanceState == null)
-            {
-                if (isNetworkStatusAvailable(this))
+                if (savedInstanceState == null)
                 {
-                    /*
-                     *  Starting the asyncTask so that schedule loads when the activity opens.
-                     */
-                    OvergroundScheduleAsyncTask myScheduleTask = new OvergroundScheduleAsyncTask(this);
-                    myScheduleTask.execute(overLineId, stationOverId);
+                    if (isNetworkStatusAvailable(this))
+                    {
+                        /*
+                         *  Starting the asyncTask so that schedule loads when the activity opens.
+                         */
+                       // OvergroundScheduleAsyncTask myScheduleTask = new OvergroundScheduleAsyncTask(this);
+                       // myScheduleTask.execute(overLineId, stationOverId);
+//                        OvergroundSchAllAsyncTask myOverSchAllTask = new OvergroundSchAllAsyncTask(this);
+//           myOverSchAllTask.execute();
 
+                        OvergroundSchAllAsyncTask myOverSchAllTask = new OvergroundSchAllAsyncTask(this);
+          myOverSchAllTask.execute();
 
-                } else
-                {
-                    Snackbar
-                            .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
-                            .setAction(R.string.snackbar_retry, new OverScheduleActivity.MyClickListener())
-                            .setBehavior(new DisableSwipeBehavior())
-                            .show();
-                    isSnackbarShowing = true;
-                    showErrorMessage();
-                }}
+                    } else
+                    {
+                        Snackbar
+                                .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+                                .setAction(R.string.snackbar_retry, new OverScheduleActivity.MyClickListener())
+                                .setBehavior(new DisableSwipeBehavior())
+                                .show();
+                        isSnackbarShowing = true;
+                        showErrorMessage();
+                    }}
 
-            else
-            {
-                isSnackbarShowing = savedInstanceState.getBoolean(SNACKBAR_STATE);
-                if (isSnackbarShowing)
+                else
                 {
-                    Snackbar
-                            .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
-                            .setAction(R.string.snackbar_retry, new OverScheduleActivity.MyClickListener())
-                            .setBehavior(new DisableSwipeBehavior())
-                            .show();
-                }
-                //emptySchedule visibility code based on the answer in this stackoverflow thread:
-                //https://stackoverflow.com/questions/51903851/keeping-textview-visibility-view-invisible-and-button-state-setenabledfalse
-                if (savedInstanceState.getBoolean("visible"))
-                {
+                    isSnackbarShowing = savedInstanceState.getBoolean(SNACKBAR_STATE);
+                    if (isSnackbarShowing)
+                    {
+                        Snackbar
+                                .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+                                .setAction(R.string.snackbar_retry, new OverScheduleActivity.MyClickListener())
+                                .setBehavior(new DisableSwipeBehavior())
+                                .show();
+                    }
+                    //emptySchedule visibility code based on the answer in this stackoverflow thread:
+                    //https://stackoverflow.com/questions/51903851/keeping-textview-visibility-view-invisible-and-button-state-setenabledfalse
+                    if (savedInstanceState.getBoolean("visible"))
+                    {
 
-                    emptySchedule.setVisibility(View.VISIBLE);
-                }
-                {
-                    overSchArrayList = savedInstanceState.getParcelableArrayList(KEY_OVER_SCHEDULE_LIST);
-                    overSchAdapter.setOverSchList(overSchArrayList);
+                        emptySchedule.setVisibility(View.VISIBLE);
+                    }
+                    {
+                        overSchArrayList = savedInstanceState.getParcelableArrayList(KEY_OVER_SCHEDULE_LIST);
+                        overSchAdapter.setOverSchList(overSchArrayList);
+                    }
                 }
             }
+
         }
+
         if (MapsConnectionCheck.checkPlayServices(this))
         {
             init();
@@ -278,7 +361,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
 
     }
 
-}
+
 
     @Override
     public void returnOverScheduleData(ArrayList<OvergroundSchedule> simpleJsonOverSchData)
@@ -486,7 +569,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
                 String jsonOverLon = gson.toJson(lonString);
                 prefsEditor.putString("OverLon", jsonOverLon);
 
-                String jsonOverStationName = gson.toJson(stationNameToString);
+                String jsonOverStationName = gson.toJson(stationNameToStringAuto);
                 prefsEditor.putString("OverStationName", jsonOverStationName);
 
                 String jsonOverStatId = gson.toJson(stationOverIdAll);
@@ -494,6 +577,10 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
 
                 String jsonOverLineId = gson.toJson(overLineId);
                 prefsEditor.putString("OverLineId", jsonOverLineId);
+
+//                String jsonOverAutoText = gson.toJson(autoCompleteText);
+//                prefsEditor.putString("OverStation", jsonOverAutoText);
+
 
                 prefsEditor.apply();
 
@@ -550,7 +637,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
                     latLocationAll = overstation.getLatLocation();
                     lonLocationAll = overstation.getLonLocation();
                     stationOverIdAll = overstation.getStationId();
-                    stationNameToString = overstation.getStationName();
+                    stationNameToStringAuto = overstation.getStationName();
                     latString = String.valueOf(latLocationAll);
                     lonString = String.valueOf(lonLocationAll);
                     OvergroundSchAllAsyncTask myOverSchAllTask = new OvergroundSchAllAsyncTask(this);
