@@ -179,7 +179,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
             myOvergroundTask.execute(NetworkUtils.buildOvergroundStatusUrl());
 
         }
-      //  if (overground != null)
+       // if (overground != null)
 //         else if(overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null)
 //        {
 ////            overLineId= overground.getModeId();
@@ -250,19 +250,6 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
 //            }
 //        }
 
-//        if(stationNameToStringAuto != null && stationOverIdAll != null  && latString != null && lonString != null && overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null)
-//        {
-////            OvergroundStatAllAsyncTask myOverStatTask = new OvergroundStatAllAsyncTask(this);
-////            myOverStatTask.execute();
-//
-//            OvergroundSchAllAsyncTask myOverSchAllTask = new OvergroundSchAllAsyncTask(this);
-//            myOverSchAllTask.execute();
-//
-//            stationNameToString = stationNameToStringAuto;
-//
-//            ActionBar actionBar = getSupportActionBar();
-//            actionBar.setTitle(stationNameToString);
-//        }
         else if(overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null)
         {
 
@@ -578,8 +565,8 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
                 String jsonOverLineId = gson.toJson(overLineId);
                 prefsEditor.putString("OverLineId", jsonOverLineId);
 
-//                String jsonOverAutoText = gson.toJson(autoCompleteText);
-//                prefsEditor.putString("OverStation", jsonOverAutoText);
+                String jsonOverAutoText = gson.toJson(autoCompleteText);
+                prefsEditor.putString("overStation", jsonOverAutoText);
 
 
                 prefsEditor.apply();

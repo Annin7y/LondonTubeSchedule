@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity
                 stationOverIdAll = getIntent().getExtras().getString("OverStationIdAll");
                 latString = getIntent().getExtras().getString("OverLat");
                 lonString = getIntent().getExtras().getString("OverLon");
-                autoCompleteText = getIntent().getExtras().getString("OverStation");
+                autoCompleteText = getIntent().getExtras().getString("overStation");
 
                 //stationOverId = getIntent().getExtras().getString("OverStationId");
                 // autoCompleteText = getIntent().getExtras().getString("AutoCompleteText");
@@ -194,7 +194,7 @@ public class MainActivity extends AppCompatActivity
                     intent3.putExtra("OverModeReason", overModeStatusReason);
                     intent3.putExtra("OverStationIdAll", stationOverIdAll);
                     intent3.putExtra("OverStationName", stationNameToStringAuto);
-                    intent3.putExtra("OverStation", autoCompleteText);
+                    intent3.putExtra("overStation", autoCompleteText);
                     intent3.putExtra("OverLat", latString);
                     intent3.putExtra("OverLon", lonString);
                     intent3.putParcelableArrayListExtra("overStatusList", overgroundStatusArrayList);
@@ -202,11 +202,11 @@ public class MainActivity extends AppCompatActivity
                     startActivity(intent3);
                 }
 
-//                else if (overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null) {
+//                else if (overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null && overgroundStation != null) {
 //                    // overLineId = overground.getModeId();
-//                    if (overgroundStation != null) {
+//                   // if (overgroundStation != null) {
 //                        stationOverId = overgroundStation.getStationId();
-//                    }
+//                  //  }
 //
 //                    overgroundStatusArrayList = getIntent().getParcelableArrayListExtra("overStatusList");
 //                    overStatArrayList = getIntent().getParcelableArrayListExtra("overStationList");
@@ -221,16 +221,16 @@ public class MainActivity extends AppCompatActivity
 //                    intent2.putExtra("OverStationName", stationNameToString);
 //                    intent2.putExtra("OverLat", latString);
 //                    intent2.putExtra("OverLon", lonString);
-
-                  //  intent2.putParcelableArrayListExtra("overStatusList", overgroundStatusArrayList);
-                 //   intent2.putParcelableArrayListExtra("overStationList", overStatArrayList);
-                    //   intent2.putExtra("OverStationId", stationOverId);
-                    //  intent2.putExtra("AutoCompleteText", autoCompleteText);
-                 //   startActivity(intent2);
-             //   }
+//
+//                    intent2.putParcelableArrayListExtra("overStatusList", overgroundStatusArrayList);
+//                    intent2.putParcelableArrayListExtra("overStationList", overStatArrayList);
+//                       intent2.putExtra("OverStationId", stationOverId);
+//                      intent2.putExtra("AutoCompleteText", autoCompleteText);
+//                    startActivity(intent2);
+                }
 
                 }
-            }
+
 
 
     public class MyClickListener implements View.OnClickListener

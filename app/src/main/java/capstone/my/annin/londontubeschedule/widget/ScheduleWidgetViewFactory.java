@@ -163,7 +163,7 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
         String jsonOverStationName = sharedPreferences.getString("OverStationName", "");
         stationNameToStringAuto = gson.fromJson(jsonOverStationName, String.class);
 
-        String jsonOverAutoText = sharedPreferences.getString("OverStation", "");
+        String jsonOverAutoText = sharedPreferences.getString("overStation", "");
         autoCompleteText = gson.fromJson(jsonOverAutoText, String.class);
 
         String jsonOverLat= sharedPreferences.getString("OverLat", "");
@@ -290,7 +290,7 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
             intent.putExtra("OverModeReason", overModeStatusReason);
             intent.putExtra("OvergroundStation", overgroundStation);
             intent.putExtra("OverStationName", stationNameToStringAuto);
-            intent.putExtra("OverStation", autoCompleteText);
+            intent.putExtra("overStation", autoCompleteText);
             intent.putExtra("OverStationIdAll", stationOverIdAll);
             intent.putExtra("OverLat", latString);
             intent.putExtra("OverLon", lonString);
