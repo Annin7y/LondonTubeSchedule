@@ -179,76 +179,76 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
             myOvergroundTask.execute(NetworkUtils.buildOvergroundStatusUrl());
 
         }
-       // if (overground != null)
-//         else if(overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null)
-//        {
-////            overLineId= overground.getModeId();
-////            // Log.i("lineId: ", line.getLineId());
-////            Timber.v(overground.getModeId(), "overLineId: ");
-//
-//            if (overgroundStation != null)
-//            {
-//                stationOverId = overgroundStation.getStationId();
-//                // Log.i("stationId: ", stations.getStationId());
-//                Timber.v(overgroundStation.getStationId(), "stationId: ");
-//
-//                // stationNameStation.setText(station.getStationName());
-//                stationNameToString = overgroundStation.getStationName();
-//
-//                ActionBar actionBar = getSupportActionBar();
-//                actionBar.setTitle(stationNameToString);
-//
-//            }
-//            overgroundStatusArrayList = getIntent().getParcelableArrayListExtra("overgroundStatusList");
-//            overStatArrayList = getIntent().getParcelableArrayListExtra("overgroundStationList");
-//
-//
-//            if (savedInstanceState == null)
-//            {
-//                if (isNetworkStatusAvailable(this))
-//                {
-//                    /*
-//                     *  Starting the asyncTask so that schedule loads when the activity opens.
-//                     */
-//                    OvergroundScheduleAsyncTask myScheduleTask = new OvergroundScheduleAsyncTask(this);
-//                    myScheduleTask.execute(overLineId, stationOverId);
-//
-//
-//                } else
-//                {
-//                    Snackbar
-//                            .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
-//                            .setAction(R.string.snackbar_retry, new OverScheduleActivity.MyClickListener())
-//                            .setBehavior(new DisableSwipeBehavior())
-//                            .show();
-//                    isSnackbarShowing = true;
-//                    showErrorMessage();
-//                }}
-//
-//            else
-//            {
-//                isSnackbarShowing = savedInstanceState.getBoolean(SNACKBAR_STATE);
-//                if (isSnackbarShowing)
-//                {
-//                    Snackbar
-//                            .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
-//                            .setAction(R.string.snackbar_retry, new OverScheduleActivity.MyClickListener())
-//                            .setBehavior(new DisableSwipeBehavior())
-//                            .show();
-//                }
-//                //emptySchedule visibility code based on the answer in this stackoverflow thread:
-//                //https://stackoverflow.com/questions/51903851/keeping-textview-visibility-view-invisible-and-button-state-setenabledfalse
-//                if (savedInstanceState.getBoolean("visible"))
-//                {
-//
-//                    emptySchedule.setVisibility(View.VISIBLE);
-//                }
-//                {
-//                    overSchArrayList = savedInstanceState.getParcelableArrayList(KEY_OVER_SCHEDULE_LIST);
-//                    overSchAdapter.setOverSchList(overSchArrayList);
-//                }
-//            }
-//        }
+        //if (overground != null)
+         else if(overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null)
+        {
+//            overLineId= overground.getModeId();
+//            // Log.i("lineId: ", line.getLineId());
+//            Timber.v(overground.getModeId(), "overLineId: ");
+
+            if (overgroundStation != null)
+            {
+                stationOverId = overgroundStation.getStationId();
+                // Log.i("stationId: ", stations.getStationId());
+                Timber.v(overgroundStation.getStationId(), "stationId: ");
+
+                // stationNameStation.setText(station.getStationName());
+                stationNameToString = overgroundStation.getStationName();
+
+                ActionBar actionBar = getSupportActionBar();
+                actionBar.setTitle(stationNameToString);
+
+            }
+            overgroundStatusArrayList = getIntent().getParcelableArrayListExtra("overgroundStatusList");
+            overStatArrayList = getIntent().getParcelableArrayListExtra("overgroundStationList");
+
+
+            if (savedInstanceState == null)
+            {
+                if (isNetworkStatusAvailable(this))
+                {
+                    /*
+                     *  Starting the asyncTask so that schedule loads when the activity opens.
+                     */
+                    OvergroundScheduleAsyncTask myScheduleTask = new OvergroundScheduleAsyncTask(this);
+                    myScheduleTask.execute(overLineId, stationOverId);
+
+
+                } else
+                {
+                    Snackbar
+                            .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.snackbar_retry, new OverScheduleActivity.MyClickListener())
+                            .setBehavior(new DisableSwipeBehavior())
+                            .show();
+                    isSnackbarShowing = true;
+                    showErrorMessage();
+                }}
+
+            else
+            {
+                isSnackbarShowing = savedInstanceState.getBoolean(SNACKBAR_STATE);
+                if (isSnackbarShowing)
+                {
+                    Snackbar
+                            .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.snackbar_retry, new OverScheduleActivity.MyClickListener())
+                            .setBehavior(new DisableSwipeBehavior())
+                            .show();
+                }
+                //emptySchedule visibility code based on the answer in this stackoverflow thread:
+                //https://stackoverflow.com/questions/51903851/keeping-textview-visibility-view-invisible-and-button-state-setenabledfalse
+                if (savedInstanceState.getBoolean("visible"))
+                {
+
+                    emptySchedule.setVisibility(View.VISIBLE);
+                }
+                {
+                    overSchArrayList = savedInstanceState.getParcelableArrayList(KEY_OVER_SCHEDULE_LIST);
+                    overSchAdapter.setOverSchList(overSchArrayList);
+                }
+            }
+        }
 
         else if(overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null)
         {
