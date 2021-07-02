@@ -156,10 +156,11 @@ public class OvergroundLineFragment extends BaseFragment implements OvergroundSt
                        // Bundle bundle = new Bundle();
                       //  overStationName.setText(selection);
                         intent.putExtra("overStation", selection);
-                        intent.putExtra("OverLineId", overLineId);
-                        intent.putExtra("OverModeName", overModeName);
-                        intent.putExtra("OverModeDesc", overModeStatusDesc);
-                        intent.putExtra("OverModeReason", overModeStatusReason);
+//                        intent.putExtra("OverLineId", overLineId);
+//                        intent.putExtra("OverModeName", overModeName);
+//                        intent.putExtra("OverModeDesc", overModeStatusDesc);
+//                        intent.putExtra("OverModeReason", overModeStatusReason);
+                        intent.putExtra("OvergroundStatus", overgroundStatusArrayList.get(0));
                         intent.putParcelableArrayListExtra("overgroundStatusList", overgroundStatusArrayList);
 
                       //  intent.putExtras(bundle);
@@ -286,12 +287,12 @@ public class OvergroundLineFragment extends BaseFragment implements OvergroundSt
         public void onClick(OvergroundStatus overground)
         {
             Intent intent = new Intent(getActivity(), OverStatListActivity.class);
-          //  intent.putExtra("OvergroundStatus", overground);
+           intent.putExtra("OvergroundStatus", overground);
             intent.putParcelableArrayListExtra("overgroundStatusList", overgroundStatusArrayList);
-            intent.putExtra("OverLineId", overLineId);
-            intent.putExtra("OverModeName", overModeName);
-            intent.putExtra("OverModeDesc", overModeStatusDesc);
-            intent.putExtra("OverModeReason", overModeStatusReason);
+//            intent.putExtra("OverLineId", overLineId);
+//            intent.putExtra("OverModeName", overModeName);
+//            intent.putExtra("OverModeDesc", overModeStatusDesc);
+//            intent.putExtra("OverModeReason", overModeStatusReason);
 
             startActivity(intent);
 

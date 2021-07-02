@@ -132,20 +132,20 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
         mOverStatusList = gson.fromJson(gsonOverStatString, typeOverStatus);
 
         //Extract the JSON lines from preferences and assign it to an OverStatus object.
-//        String jsonOverStatus = sharedPreferences.getString("OverStatus", "");
-//        overgroundStatus = gson.fromJson(jsonOverStatus, OvergroundStatus.class);
+        String jsonOverStatus = sharedPreferences.getString("OverStatus", "");
+        overgroundStatus = gson.fromJson(jsonOverStatus, OvergroundStatus.class);
 
-       String jsonOverLineId = sharedPreferences.getString("OverLineId", "");
-       overLineId = gson.fromJson(jsonOverLineId, String.class);
-
-        String jsonOverModeName = sharedPreferences.getString("OverModeName", "");
-        overModeName = gson.fromJson(jsonOverModeName, String.class);
-
-        String jsonOverModeDesc = sharedPreferences.getString("OverModeDesc", "");
-        overModeStatusDesc = gson.fromJson(jsonOverModeDesc, String.class);
-
-        String jsonOverModeReason = sharedPreferences.getString("OverModeReason", "");
-        overModeStatusReason = gson.fromJson(jsonOverModeReason, String.class);
+//       String jsonOverLineId = sharedPreferences.getString("OverLineId", "");
+//       overLineId = gson.fromJson(jsonOverLineId, String.class);
+//
+//        String jsonOverModeName = sharedPreferences.getString("OverModeName", "");
+//        overModeName = gson.fromJson(jsonOverModeName, String.class);
+//
+//        String jsonOverModeDesc = sharedPreferences.getString("OverModeDesc", "");
+//        overModeStatusDesc = gson.fromJson(jsonOverModeDesc, String.class);
+//
+//        String jsonOverModeReason = sharedPreferences.getString("OverModeReason", "");
+//        overModeStatusReason = gson.fromJson(jsonOverModeReason, String.class);
 
         Type typeOverStation = new TypeToken<List<OvergroundStation>>()
         {
@@ -157,26 +157,33 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
         String jsonOverStations = sharedPreferences.getString("OverStations", "");
         overgroundStation = gson.fromJson(jsonOverStations, OvergroundStation.class);
 
-        String jsonOverStationId = sharedPreferences.getString("OverStationIdAll", "");
-        stationOverIdAll = gson.fromJson(jsonOverStationId, String.class);
-
-        String jsonOverStationName = sharedPreferences.getString("OverStationName", "");
-        stationNameToStringAuto = gson.fromJson(jsonOverStationName, String.class);
+//        String jsonOverStationId = sharedPreferences.getString("OverStationIdAll", "");
+//        stationOverIdAll = gson.fromJson(jsonOverStationId, String.class);
+//
+//        String jsonOverStationName = sharedPreferences.getString("OverStationName", "");
+//        stationNameToStringAuto = gson.fromJson(jsonOverStationName, String.class);
 
         String jsonOverAutoText = sharedPreferences.getString("overStation", "");
         autoCompleteText = gson.fromJson(jsonOverAutoText, String.class);
 
-        String jsonOverLat= sharedPreferences.getString("OverLat", "");
-        latString = gson.fromJson(jsonOverLat, String.class);
-
-        String jsonOverLon = sharedPreferences.getString("OverLon", "");
-        lonString = gson.fromJson(jsonOverLon, String.class);
+//        String jsonOverLat= sharedPreferences.getString("OverLat", "");
+//        latString = gson.fromJson(jsonOverLat, String.class);
+//
+//        String jsonOverLon = sharedPreferences.getString("OverLon", "");
+//        lonString = gson.fromJson(jsonOverLon, String.class);
     }
 
     @Override
     public int getCount()
     {
-        return mScheduleList.size() + mOverScheduleList.size();
+//        if(mScheduleList == null && mOverScheduleList == null)
+//        {
+//            return 0;
+//        }
+//        else{
+            return mScheduleList.size() + mOverScheduleList.size();
+    //    }
+
     }
 
     @Override
@@ -283,17 +290,17 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
 
             Intent intent = new Intent();
             intent.putExtra(ScheduleWidgetProvider.EXTRA_ITEM, overgroundSchedule);
-            //intent.putExtra("OvergroundStatus", overgroundStatus);
-            intent.putExtra("OverLineId", overLineId);
-            intent.putExtra("OverModeName", overModeName);
-            intent.putExtra("OverModeDesc", overModeStatusDesc);
-            intent.putExtra("OverModeReason", overModeStatusReason);
+           intent.putExtra("OvergroundStatus", overgroundStatus);
+//            intent.putExtra("OverLineId", overLineId);
+//            intent.putExtra("OverModeName", overModeName);
+//            intent.putExtra("OverModeDesc", overModeStatusDesc);
+//            intent.putExtra("OverModeReason", overModeStatusReason);
             intent.putExtra("OvergroundStation", overgroundStation);
-            intent.putExtra("OverStationName", stationNameToStringAuto);
+           // intent.putExtra("OverStationName", stationNameToStringAuto);
             intent.putExtra("overStation", autoCompleteText);
-            intent.putExtra("OverStationIdAll", stationOverIdAll);
-            intent.putExtra("OverLat", latString);
-            intent.putExtra("OverLon", lonString);
+//            intent.putExtra("OverStationIdAll", stationOverIdAll);
+//            intent.putExtra("OverLat", latString);
+//            intent.putExtra("OverLon", lonString);
 
             intent.putParcelableArrayListExtra("overStatusList", mOverStatusList);
             intent.putParcelableArrayListExtra("overStationList", mOverStationList);

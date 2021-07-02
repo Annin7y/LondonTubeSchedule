@@ -155,22 +155,22 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
      if (getIntent() != null && getIntent().getExtras() != null)
     {
 
-       // overground = getIntent().getExtras().getParcelable("OvergroundStatus");
-        overLineId = getIntent().getExtras().getString("OverLineId");
-        overModeName = getIntent().getExtras().getString("OverModeName");
-        overModeStatusDesc= getIntent().getExtras().getString("OverModeDesc");
-        overModeStatusReason = getIntent().getExtras().getString("OverModeReason");
+       overground = getIntent().getExtras().getParcelable("OvergroundStatus");
+//        overLineId = getIntent().getExtras().getString("OverLineId");
+//        overModeName = getIntent().getExtras().getString("OverModeName");
+//        overModeStatusDesc= getIntent().getExtras().getString("OverModeDesc");
+//        overModeStatusReason = getIntent().getExtras().getString("OverModeReason");
 
         overgroundStation = getIntent().getExtras().getParcelable("OvergroundStation");
 
-        stationNameToStringAuto = getIntent().getExtras().getString("OverStationName");
-        stationOverIdAll = getIntent().getExtras().getString("OverStationIdAll");
-        latString = getIntent().getExtras().getString("OverLat");
-        lonString = getIntent().getExtras().getString("OverLon");
+//        stationNameToStringAuto = getIntent().getExtras().getString("OverStationName");
+//        stationOverIdAll = getIntent().getExtras().getString("OverStationIdAll");
+//        latString = getIntent().getExtras().getString("OverLat");
+//        lonString = getIntent().getExtras().getString("OverLon");
 
         autoCompleteText = getIntent().getExtras().getString("overStation");
 
-        if(autoCompleteText != null && overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null)
+        if(autoCompleteText != null && overground != null)
         {
 //            OvergroundStatAllAsyncTask myOverStatTask = new OvergroundStatAllAsyncTask(this);
 //            myOverStatTask.execute();
@@ -179,12 +179,12 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
             myOvergroundTask.execute(NetworkUtils.buildOvergroundStatusUrl());
 
         }
-        //if (overground != null)
-         else if(overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null)
+        else if (overground != null)
+        // else if(overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null)
         {
-//            overLineId= overground.getModeId();
+            overLineId= overground.getModeId();
 //            // Log.i("lineId: ", line.getLineId());
-//            Timber.v(overground.getModeId(), "overLineId: ");
+            Timber.v(overground.getModeId(), "overLineId: ");
 
             if (overgroundStation != null)
             {
@@ -250,70 +250,70 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
             }
         }
 
-        else if(overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null)
-        {
-
-            if(autoCompleteText != null && stationNameToStringAuto != null && stationOverIdAll != null  && latString != null && lonString != null && overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null) {
-//            OvergroundStatAllAsyncTask myOverStatTask = new OvergroundStatAllAsyncTask(this);
-//            myOverStatTask.execute();
-
-                stationNameToString = stationNameToStringAuto;
-                ActionBar actionBar = getSupportActionBar();
-            actionBar.setTitle(stationNameToString);
-            }
-                overgroundStatusArrayList = getIntent().getParcelableArrayListExtra("overgroundStatusList");
-               overStatArrayList = getIntent().getParcelableArrayListExtra("overgroundStationList");
-
-                if (savedInstanceState == null)
-                {
-                    if (isNetworkStatusAvailable(this))
-                    {
-                        /*
-                         *  Starting the asyncTask so that schedule loads when the activity opens.
-                         */
-                       // OvergroundScheduleAsyncTask myScheduleTask = new OvergroundScheduleAsyncTask(this);
-                       // myScheduleTask.execute(overLineId, stationOverId);
+//        else if(overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null)
+//        {
+//
+//            if(autoCompleteText != null && stationNameToStringAuto != null && stationOverIdAll != null  && latString != null && lonString != null && overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null) {
+////            OvergroundStatAllAsyncTask myOverStatTask = new OvergroundStatAllAsyncTask(this);
+////            myOverStatTask.execute();
+//
+//                stationNameToString = stationNameToStringAuto;
+//                ActionBar actionBar = getSupportActionBar();
+//            actionBar.setTitle(stationNameToString);
+//            }
+//                overgroundStatusArrayList = getIntent().getParcelableArrayListExtra("overgroundStatusList");
+//               overStatArrayList = getIntent().getParcelableArrayListExtra("overgroundStationList");
+//
+//                if (savedInstanceState == null)
+//                {
+//                    if (isNetworkStatusAvailable(this))
+//                    {
+//                        /*
+//                         *  Starting the asyncTask so that schedule loads when the activity opens.
+//                         */
+//                       // OvergroundScheduleAsyncTask myScheduleTask = new OvergroundScheduleAsyncTask(this);
+//                       // myScheduleTask.execute(overLineId, stationOverId);
+////                        OvergroundSchAllAsyncTask myOverSchAllTask = new OvergroundSchAllAsyncTask(this);
+////           myOverSchAllTask.execute();
+//
 //                        OvergroundSchAllAsyncTask myOverSchAllTask = new OvergroundSchAllAsyncTask(this);
-//           myOverSchAllTask.execute();
-
-                        OvergroundSchAllAsyncTask myOverSchAllTask = new OvergroundSchAllAsyncTask(this);
-          myOverSchAllTask.execute();
-
-                    } else
-                    {
-                        Snackbar
-                                .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
-                                .setAction(R.string.snackbar_retry, new OverScheduleActivity.MyClickListener())
-                                .setBehavior(new DisableSwipeBehavior())
-                                .show();
-                        isSnackbarShowing = true;
-                        showErrorMessage();
-                    }}
-
-                else
-                {
-                    isSnackbarShowing = savedInstanceState.getBoolean(SNACKBAR_STATE);
-                    if (isSnackbarShowing)
-                    {
-                        Snackbar
-                                .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
-                                .setAction(R.string.snackbar_retry, new OverScheduleActivity.MyClickListener())
-                                .setBehavior(new DisableSwipeBehavior())
-                                .show();
-                    }
-                    //emptySchedule visibility code based on the answer in this stackoverflow thread:
-                    //https://stackoverflow.com/questions/51903851/keeping-textview-visibility-view-invisible-and-button-state-setenabledfalse
-                    if (savedInstanceState.getBoolean("visible"))
-                    {
-
-                        emptySchedule.setVisibility(View.VISIBLE);
-                    }
-                    {
-                        overSchArrayList = savedInstanceState.getParcelableArrayList(KEY_OVER_SCHEDULE_LIST);
-                        overSchAdapter.setOverSchList(overSchArrayList);
-                    }
-                }
-            }
+//          myOverSchAllTask.execute();
+//
+//                    } else
+//                    {
+//                        Snackbar
+//                                .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+//                                .setAction(R.string.snackbar_retry, new OverScheduleActivity.MyClickListener())
+//                                .setBehavior(new DisableSwipeBehavior())
+//                                .show();
+//                        isSnackbarShowing = true;
+//                        showErrorMessage();
+//                    }}
+//
+//                else
+//                {
+//                    isSnackbarShowing = savedInstanceState.getBoolean(SNACKBAR_STATE);
+//                    if (isSnackbarShowing)
+//                    {
+//                        Snackbar
+//                                .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
+//                                .setAction(R.string.snackbar_retry, new OverScheduleActivity.MyClickListener())
+//                                .setBehavior(new DisableSwipeBehavior())
+//                                .show();
+//                    }
+//                    //emptySchedule visibility code based on the answer in this stackoverflow thread:
+//                    //https://stackoverflow.com/questions/51903851/keeping-textview-visibility-view-invisible-and-button-state-setenabledfalse
+//                    if (savedInstanceState.getBoolean("visible"))
+//                    {
+//
+//                        emptySchedule.setVisibility(View.VISIBLE);
+//                    }
+//                    {
+//                        overSchArrayList = savedInstanceState.getParcelableArrayList(KEY_OVER_SCHEDULE_LIST);
+//                        overSchAdapter.setOverSchList(overSchArrayList);
+//                    }
+//                }
+//            }
 
         }
 
@@ -385,19 +385,20 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
            prefsEditor.putString("OverStationList_Widget", jsonStationOverList);
 
            //Save the overgroundStatus as a JSON string using Preferences.
-//            String jsonStatus = gson.toJson(overground);
-//            prefsEditor.putString("OverStatus", jsonStatus);
-            String jsonModeId = gson.toJson(overLineId);
-            prefsEditor.putString("OverLineId", jsonModeId);
+            String jsonStatus = gson.toJson(overground);
+            prefsEditor.putString("OverStatus", jsonStatus);
 
-            String jsonModeName = gson.toJson(overModeName);
-            prefsEditor.putString("OverModeName", jsonModeName);
-
-            String jsonModeDesc = gson.toJson(overModeStatusDesc);
-            prefsEditor.putString("OverModeDesc", jsonModeDesc);
-
-            String jsonModeReason = gson.toJson(overModeStatusReason);
-            prefsEditor.putString("OverModeReason", jsonModeReason);
+//            String jsonModeId = gson.toJson(overLineId);
+//            prefsEditor.putString("OverLineId", jsonModeId);
+//
+//            String jsonModeName = gson.toJson(overModeName);
+//            prefsEditor.putString("OverModeName", jsonModeName);
+//
+//            String jsonModeDesc = gson.toJson(overModeStatusDesc);
+//            prefsEditor.putString("OverModeDesc", jsonModeDesc);
+//
+//            String jsonModeReason = gson.toJson(overModeStatusReason);
+//            prefsEditor.putString("OverModeReason", jsonModeReason);
 
            //Save the Overground Stations as a JSON string using Preferences.
             String jsonOverStation = gson.toJson(overgroundStation);
@@ -478,8 +479,10 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
     }
 
     @Override
-    public void returnOverScheduleAllData(ArrayList<OvergroundSchedule> simpleJsonOverSchAllData) {
-        if (simpleJsonOverSchAllData.size() > 0) {
+    public void returnOverScheduleAllData(ArrayList<OvergroundSchedule> simpleJsonOverSchAllData)
+    {
+        if (simpleJsonOverSchAllData.size() > 0)
+        {
             overSchAdapter = new OvergroundScheduleAdapter(simpleJsonOverSchAllData, OverScheduleActivity.this);
             overSchArrayList = simpleJsonOverSchAllData;
             mScheduleRecyclerView.setAdapter(overSchAdapter);
@@ -489,12 +492,15 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
 
             //   stationShareOverStationName = stationArrival.getOverStatSchName();
 
-            for (OvergroundSchedule overAllScheduleName : overSchArrayList) {
-                if (autoCompleteText.equals(overAllScheduleName.getOverStatSchName())) {
+            for (OvergroundSchedule overAllScheduleName : overSchArrayList)
+            {
+                if (autoCompleteText.equals(overAllScheduleName.getOverStatSchName()))
+                {
                     // stationShareOverStationName = stationArrival.getOverStatSchName();
                     //   autoCompleteText = stationShareOverStationName;
                     isAutoCompleteText = true;
                     filteredList.add(overAllScheduleName);
+                    stationArrival = filteredList.get(0);
                     Timber.v(overAllScheduleName.getOverStatSchName(), "Station name: ");
                     // break;
                 } else {
@@ -506,98 +512,95 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
             overSchAdapter.setOverSchList(filteredList);
             overSchAdapter.notifyDataSetChanged();
 
-            stationArrival = filteredList.get(0);
+              //  stationArrival = filteredList.get(0);
 
 
-            if (stationArrival != null)
-            {
-                stationShareOverStationName = stationArrival.getOverStatSchName();
-                stationShareOverArrivalTime = stationArrival.getOverExpArrival();
-                stationShareDirection = stationArrival.getOverDestName();
+                if (stationArrival != null) {
+                    stationShareOverStationName = stationArrival.getOverStatSchName();
+                    stationShareOverArrivalTime = stationArrival.getOverExpArrival();
+                    stationShareDirection = stationArrival.getOverDestName();
 
-                overSchArrayList = filteredList;
+                    overSchArrayList = filteredList;
 
-                if(stationShareOverStationName != null && stationShareOverArrivalTime != null && stationShareDirection != null)
-                {
-                    menu.findItem(R.id.menu_item_share).setVisible(true);
-                }
-                else
-                {
-                    menu.findItem(R.id.menu_item_share).setVisible(false);
-                }
+                    if (stationShareOverStationName != null && stationShareOverArrivalTime != null && stationShareDirection != null) {
+                        menu.findItem(R.id.menu_item_share).setVisible(true);
+                    } else {
+                        menu.findItem(R.id.menu_item_share).setVisible(false);
+                    }
 
 
-                swipeRefreshLayout.setRefreshing(false);
-                //Store Schedule Info in SharedPreferences
-                SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
+                    swipeRefreshLayout.setRefreshing(false);
+                    //Store Schedule Info in SharedPreferences
+                    SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
 
-                Gson gson = new Gson();
-                String jsonOver = gson.toJson(overSchArrayList);
-                prefsEditor.putString("OverScheduleList_Widget", jsonOver);
+                    Gson gson = new Gson();
+                    String jsonOver = gson.toJson(overSchArrayList);
+                    prefsEditor.putString("OverScheduleList_Widget", jsonOver);
 
-                String jsonOverStatusList = gson.toJson(overgroundStatusArrayList);
-                prefsEditor.putString("OverStatusList_Widget", jsonOverStatusList);
+                    String jsonOverStatusList = gson.toJson(overgroundStatusArrayList);
+                    prefsEditor.putString("OverStatusList_Widget", jsonOverStatusList);
 
-                String jsonStationOverList = gson.toJson(overStatArrayList);
-                prefsEditor.putString("OverStationList_Widget", jsonStationOverList);
+                    String jsonStationOverList = gson.toJson(overStatArrayList);
+                    prefsEditor.putString("OverStationList_Widget", jsonStationOverList);
 
-                //Save the overgroundStatus as a JSON string using Preferences.
-                String jsonStatus = gson.toJson(overgroundObject);
-                prefsEditor.putString("OverStatus", jsonStatus);
+                    //Save the overgroundStatus as a JSON string using Preferences.
+                    String jsonStatus = gson.toJson(overground);
+                    prefsEditor.putString("OverStatus", jsonStatus);
 
-               // Save the Overground Stations as a JSON string using Preferences.
+                    // Save the Overground Stations as a JSON string using Preferences.
 //                String jsonOverStation = gson.toJson(overgroundStation);
 //                prefsEditor.putString("OverStations", jsonOverStation);
 
-                String jsonOverLat = gson.toJson(latString);
-                prefsEditor.putString("OverLat", jsonOverLat);
+//                String jsonOverLat = gson.toJson(latString);
+//                prefsEditor.putString("OverLat", jsonOverLat);
+//
+//                String jsonOverLon = gson.toJson(lonString);
+//                prefsEditor.putString("OverLon", jsonOverLon);
+//
+//                String jsonOverStationName = gson.toJson(stationNameToStringAuto);
+//                prefsEditor.putString("OverStationName", jsonOverStationName);
+//
+//                String jsonOverStatId = gson.toJson(stationOverIdAll);
+//                prefsEditor.putString("OverStationIdAll", jsonOverStatId);
+//
+//                String jsonOverLineId = gson.toJson(overLineId);
+//                prefsEditor.putString("OverLineId", jsonOverLineId);
 
-                String jsonOverLon = gson.toJson(lonString);
-                prefsEditor.putString("OverLon", jsonOverLon);
-
-                String jsonOverStationName = gson.toJson(stationNameToStringAuto);
-                prefsEditor.putString("OverStationName", jsonOverStationName);
-
-                String jsonOverStatId = gson.toJson(stationOverIdAll);
-                prefsEditor.putString("OverStationIdAll", jsonOverStatId);
-
-                String jsonOverLineId = gson.toJson(overLineId);
-                prefsEditor.putString("OverLineId", jsonOverLineId);
-
-                String jsonOverAutoText = gson.toJson(autoCompleteText);
-                prefsEditor.putString("overStation", jsonOverAutoText);
+                    String jsonOverAutoText = gson.toJson(autoCompleteText);
+                    prefsEditor.putString("overStation", jsonOverAutoText);
 
 
-                prefsEditor.apply();
+                    prefsEditor.apply();
 
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-                //convert time zone to London UK time(GMT)
-                //Code based on the first answer in the following stackoverflow post:
-                // https://stackoverflow.com/questions/22814263/how-to-set-the-timezone-for-string-parsing-in-android
-                simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-                Date date = null;
-                try {
-                    //Relative date code based on this example:
-                    //https://stackoverflow.com/questions/49441035/dateutils-getrelativetimespanstring-returning-a-formatted-date-string-instead-of
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+                    //convert time zone to London UK time(GMT)
+                    //Code based on the first answer in the following stackoverflow post:
+                    // https://stackoverflow.com/questions/22814263/how-to-set-the-timezone-for-string-parsing-in-android
+                    simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+                    Date date = null;
+                    try {
+                        //Relative date code based on this example:
+                        //https://stackoverflow.com/questions/49441035/dateutils-getrelativetimespanstring-returning-a-formatted-date-string-instead-of
 
-                    date = simpleDateFormat.parse(stationShareOverArrivalTime);
-                    SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
-                    newDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-                    stationShareOverArrivalTime = newDateFormat.format(date);
-                } catch (ParseException e) {
+                        date = simpleDateFormat.parse(stationShareOverArrivalTime);
+                        SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss");
+                        newDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+                        stationShareOverArrivalTime = newDateFormat.format(date);
+                    } catch (ParseException e) {
 
-                    e.printStackTrace();
+                        e.printStackTrace();
+                    }
+                    //Send to Widget Provider code based on the answer with 9 upvotes in this post:
+                    //https://stackoverflow.com/questions/3455123/programmatically-update-widget-from-activity-service-receiver
+                    Context context = getApplicationContext();
+                    AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+                    ComponentName thisWidget = new ComponentName(context, ScheduleWidgetProvider.class);
+                    int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
+                    appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.appwidget_list);
+
                 }
-                //Send to Widget Provider code based on the answer with 9 upvotes in this post:
-                //https://stackoverflow.com/questions/3455123/programmatically-update-widget-from-activity-service-receiver
-                Context context = getApplicationContext();
-                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-                ComponentName thisWidget = new ComponentName(context, ScheduleWidgetProvider.class);
-                int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
-                appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.appwidget_list);
 
-            }
         }
         else {
             Timber.e("Problem parsing all overground schedule JSON results");

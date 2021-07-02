@@ -149,26 +149,24 @@ public class MainActivity extends AppCompatActivity
                             .show();
                 }
             }
-            if (getIntent() != null && getIntent().getExtras() != null)
-            {
+            if (getIntent() != null && getIntent().getExtras() != null) {
                 line = getIntent().getExtras().getParcelable("Line");
                 station = getIntent().getExtras().getParcelable("Station");
-                // overground = getIntent().getExtras().getParcelable("OvergroundStatus");
-                overLineId = getIntent().getExtras().getString("OverLineId");
-                overModeName = getIntent().getExtras().getString("OverModeName");
-                overModeStatusDesc = getIntent().getExtras().getString("OverModeDesc");
-                overModeStatusReason = getIntent().getExtras().getString("OverModeReason");
+                overground = getIntent().getExtras().getParcelable("OvergroundStatus");
+//                overLineId = getIntent().getExtras().getString("OverLineId");
+//                overModeName = getIntent().getExtras().getString("OverModeName");
+//                overModeStatusDesc = getIntent().getExtras().getString("OverModeDesc");
+//                overModeStatusReason = getIntent().getExtras().getString("OverModeReason");
                 overgroundStation = getIntent().getExtras().getParcelable("OvergroundStation");
                 stationNameToStringAuto = getIntent().getExtras().getString("OverStationName");
                 stationOverIdAll = getIntent().getExtras().getString("OverStationIdAll");
-                latString = getIntent().getExtras().getString("OverLat");
-                lonString = getIntent().getExtras().getString("OverLon");
+               latString = getIntent().getExtras().getString("OverLat");
+               lonString = getIntent().getExtras().getString("OverLon");
                 autoCompleteText = getIntent().getExtras().getString("overStation");
 
                 //stationOverId = getIntent().getExtras().getString("OverStationId");
                 // autoCompleteText = getIntent().getExtras().getString("AutoCompleteText");
-                if (line != null)
-                {
+                if (line != null) {
                     lineId = line.getLineId();
                     if (station != null) {
                         stationId = station.getStationId();
@@ -183,52 +181,56 @@ public class MainActivity extends AppCompatActivity
                     intent.putParcelableArrayListExtra("stationList", stationArrayList);
                     startActivity(intent);
                 } //else if (overground != null)
-                else  if (overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null)
-                {
-                    overgroundStatusArrayList = getIntent().getParcelableArrayListExtra("overStatusList");
-                    overStatArrayList = getIntent().getParcelableArrayListExtra("overStationList");
-                    Intent intent3 = new Intent(this, OverScheduleActivity.class);
-                    intent3.putExtra("OverLineId", overLineId);
-                    intent3.putExtra("OverModeName", overModeName);
-                    intent3.putExtra("OverModeDesc", overModeStatusDesc);
-                    intent3.putExtra("OverModeReason", overModeStatusReason);
-                    intent3.putExtra("OverStationIdAll", stationOverIdAll);
-                    intent3.putExtra("OverStationName", stationNameToStringAuto);
-                    intent3.putExtra("overStation", autoCompleteText);
-                    intent3.putExtra("OverLat", latString);
-                    intent3.putExtra("OverLon", lonString);
-                    intent3.putParcelableArrayListExtra("overStatusList", overgroundStatusArrayList);
-                    intent3.putParcelableArrayListExtra("overStationList", overStatArrayList);
-                    startActivity(intent3);
-                }
-
-//                else if (overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null && overgroundStation != null) {
-//                    // overLineId = overground.getModeId();
-//                   // if (overgroundStation != null) {
-//                        stationOverId = overgroundStation.getStationId();
-//                  //  }
-//
+//                else  if (overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null)
+//                {
 //                    overgroundStatusArrayList = getIntent().getParcelableArrayListExtra("overStatusList");
 //                    overStatArrayList = getIntent().getParcelableArrayListExtra("overStationList");
-//                    Intent intent2 = new Intent(this, OverScheduleActivity.class);
-//                    // intent2.putExtra("OvergroundStatus", overground);
+//                    Intent intent3 = new Intent(this, OverScheduleActivity.class);
+//                    intent3.putExtra("OverLineId", overLineId);
+//                    intent3.putExtra("OverModeName", overModeName);
+//                    intent3.putExtra("OverModeDesc", overModeStatusDesc);
+//                    intent3.putExtra("OverModeReason", overModeStatusReason);
+//                    intent3.putExtra("OverStationIdAll", stationOverIdAll);
+//                    intent3.putExtra("OverStationName", stationNameToStringAuto);
+//                    intent3.putExtra("overStation", autoCompleteText);
+//                    intent3.putExtra("OverLat", latString);
+//                    intent3.putExtra("OverLon", lonString);
+//                    intent3.putParcelableArrayListExtra("overStatusList", overgroundStatusArrayList);
+//                    intent3.putParcelableArrayListExtra("overStationList", overStatArrayList);
+//                    startActivity(intent3);
+//                }
+
+
+                else if (overground != null)
+                {
+//                else if (overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null && overgroundStation != null) {
+                    overLineId = overground.getModeId();
+                    if (overgroundStation != null)
+                    {
+                        stationOverId = overgroundStation.getStationId();
+                    }
+
+                    overgroundStatusArrayList = getIntent().getParcelableArrayListExtra("overStatusList");
+                    overStatArrayList = getIntent().getParcelableArrayListExtra("overStationList");
+                    Intent intent2 = new Intent(this, OverScheduleActivity.class);
+                    intent2.putExtra("OvergroundStatus", overground);
 //                    intent2.putExtra("OverLineId", overLineId);
 //                    intent2.putExtra("OverModeName", overModeName);
 //                    intent2.putExtra("OverModeDesc", overModeStatusDesc);
 //                    intent2.putExtra("OverModeReason", overModeStatusReason);
-//                    intent2.putExtra("OvergroundStation", overgroundStation);
+                    intent2.putExtra("OvergroundStation", overgroundStation);
 //                    intent2.putExtra("OverStationIdAll", stationOverIdAll);
 //                    intent2.putExtra("OverStationName", stationNameToString);
 //                    intent2.putExtra("OverLat", latString);
 //                    intent2.putExtra("OverLon", lonString);
 //
-//                    intent2.putParcelableArrayListExtra("overStatusList", overgroundStatusArrayList);
-//                    intent2.putParcelableArrayListExtra("overStationList", overStatArrayList);
+                    intent2.putParcelableArrayListExtra("overStatusList", overgroundStatusArrayList);
+                    intent2.putParcelableArrayListExtra("overStationList", overStatArrayList);
 //                       intent2.putExtra("OverStationId", stationOverId);
-//                      intent2.putExtra("AutoCompleteText", autoCompleteText);
-//                    startActivity(intent2);
+                      intent2.putExtra("AutoCompleteText", autoCompleteText);
+                   startActivity(intent2);
                 }
-
+            }
                 }
 
 
