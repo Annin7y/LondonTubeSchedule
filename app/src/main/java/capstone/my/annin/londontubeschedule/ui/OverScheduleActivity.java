@@ -564,8 +564,8 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
                 String jsonOverStatId = gson.toJson(stationOverIdAll);
                 prefsEditor.putString("OverStationIdAll", jsonOverStatId);
 
-                String jsonOverLineId = gson.toJson(overLineId);
-                prefsEditor.putString("OverLineId", jsonOverLineId);
+                //String jsonOverLineId = gson.toJson(overLineId);
+               // prefsEditor.putString("OverLineId", jsonOverLineId);
 
                     String jsonOverAutoText = gson.toJson(autoCompleteText);
                     prefsEditor.putString("overStation", jsonOverAutoText);

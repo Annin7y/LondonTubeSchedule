@@ -160,8 +160,8 @@ public class MainActivity extends AppCompatActivity
                 overgroundStation = getIntent().getExtras().getParcelable("OvergroundStation");
                 stationNameToStringAuto = getIntent().getExtras().getString("OverStationName");
                stationOverIdAll = getIntent().getExtras().getString("OverStationIdAll");
-//               latString = getIntent().getExtras().getString("OverLat");
-//               lonString = getIntent().getExtras().getString("OverLon");
+               latString = getIntent().getExtras().getString("OverLat");
+              lonString = getIntent().getExtras().getString("OverLon");
                 autoCompleteText = getIntent().getExtras().getString("overStation");
 
                 //stationOverId = getIntent().getExtras().getString("OverStationId");
@@ -219,14 +219,14 @@ public class MainActivity extends AppCompatActivity
 //                    intent2.putExtra("OverModeReason", overModeStatusReason);
                     intent2.putExtra("OvergroundStation", overgroundStation);
                     intent2.putExtra("OverStationIdAll", stationOverIdAll);
-                    intent2.putExtra("OverStationName", stationNameToString);
+                    intent2.putExtra("OverStationName", stationNameToStringAuto);
                     intent2.putExtra("OverLat", latString);
                     intent2.putExtra("OverLon", lonString);
 //
                     intent2.putParcelableArrayListExtra("overStatusList", overgroundStatusArrayList);
                     intent2.putParcelableArrayListExtra("overStationList", overStatArrayList);
 //                       intent2.putExtra("OverStationId", stationOverId);
-                      intent2.putExtra("AutoCompleteText", autoCompleteText);
+                      intent2.putExtra("overStation", autoCompleteText);
                    startActivity(intent2);
                 }
 
