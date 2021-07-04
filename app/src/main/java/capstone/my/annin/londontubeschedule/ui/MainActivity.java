@@ -159,9 +159,9 @@ public class MainActivity extends AppCompatActivity
 //                overModeStatusReason = getIntent().getExtras().getString("OverModeReason");
                 overgroundStation = getIntent().getExtras().getParcelable("OvergroundStation");
                 stationNameToStringAuto = getIntent().getExtras().getString("OverStationName");
-                stationOverIdAll = getIntent().getExtras().getString("OverStationIdAll");
-               latString = getIntent().getExtras().getString("OverLat");
-               lonString = getIntent().getExtras().getString("OverLon");
+               stationOverIdAll = getIntent().getExtras().getString("OverStationIdAll");
+//               latString = getIntent().getExtras().getString("OverLat");
+//               lonString = getIntent().getExtras().getString("OverLon");
                 autoCompleteText = getIntent().getExtras().getString("overStation");
 
                 //stationOverId = getIntent().getExtras().getString("OverStationId");
@@ -200,7 +200,6 @@ public class MainActivity extends AppCompatActivity
 //                    startActivity(intent3);
 //                }
 
-
                 else if (overground != null)
                 {
 //                else if (overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null && overgroundStation != null) {
@@ -219,10 +218,10 @@ public class MainActivity extends AppCompatActivity
 //                    intent2.putExtra("OverModeDesc", overModeStatusDesc);
 //                    intent2.putExtra("OverModeReason", overModeStatusReason);
                     intent2.putExtra("OvergroundStation", overgroundStation);
-//                    intent2.putExtra("OverStationIdAll", stationOverIdAll);
-//                    intent2.putExtra("OverStationName", stationNameToString);
-//                    intent2.putExtra("OverLat", latString);
-//                    intent2.putExtra("OverLon", lonString);
+                    intent2.putExtra("OverStationIdAll", stationOverIdAll);
+                    intent2.putExtra("OverStationName", stationNameToString);
+                    intent2.putExtra("OverLat", latString);
+                    intent2.putExtra("OverLon", lonString);
 //
                     intent2.putParcelableArrayListExtra("overStatusList", overgroundStatusArrayList);
                     intent2.putParcelableArrayListExtra("overStationList", overStatArrayList);
@@ -230,6 +229,7 @@ public class MainActivity extends AppCompatActivity
                       intent2.putExtra("AutoCompleteText", autoCompleteText);
                    startActivity(intent2);
                 }
+
             }
                 }
 

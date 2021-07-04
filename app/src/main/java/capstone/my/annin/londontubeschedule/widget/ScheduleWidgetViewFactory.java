@@ -157,20 +157,20 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
         String jsonOverStations = sharedPreferences.getString("OverStations", "");
         overgroundStation = gson.fromJson(jsonOverStations, OvergroundStation.class);
 
-//        String jsonOverStationId = sharedPreferences.getString("OverStationIdAll", "");
-//        stationOverIdAll = gson.fromJson(jsonOverStationId, String.class);
-//
-//        String jsonOverStationName = sharedPreferences.getString("OverStationName", "");
-//        stationNameToStringAuto = gson.fromJson(jsonOverStationName, String.class);
+        String jsonOverStationId = sharedPreferences.getString("OverStationIdAll", "");
+        stationOverIdAll = gson.fromJson(jsonOverStationId, String.class);
+
+        String jsonOverStationName = sharedPreferences.getString("OverStationName", "");
+        stationNameToStringAuto = gson.fromJson(jsonOverStationName, String.class);
 
         String jsonOverAutoText = sharedPreferences.getString("overStation", "");
         autoCompleteText = gson.fromJson(jsonOverAutoText, String.class);
 
-//        String jsonOverLat= sharedPreferences.getString("OverLat", "");
-//        latString = gson.fromJson(jsonOverLat, String.class);
-//
-//        String jsonOverLon = sharedPreferences.getString("OverLon", "");
-//        lonString = gson.fromJson(jsonOverLon, String.class);
+        String jsonOverLat= sharedPreferences.getString("OverLat", "");
+        latString = gson.fromJson(jsonOverLat, String.class);
+
+        String jsonOverLon = sharedPreferences.getString("OverLon", "");
+        lonString = gson.fromJson(jsonOverLon, String.class);
     }
 
     @Override
@@ -296,11 +296,11 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
 //            intent.putExtra("OverModeDesc", overModeStatusDesc);
 //            intent.putExtra("OverModeReason", overModeStatusReason);
             intent.putExtra("OvergroundStation", overgroundStation);
-           // intent.putExtra("OverStationName", stationNameToStringAuto);
+           intent.putExtra("OverStationName", stationNameToStringAuto);
             intent.putExtra("overStation", autoCompleteText);
-//            intent.putExtra("OverStationIdAll", stationOverIdAll);
-//            intent.putExtra("OverLat", latString);
-//            intent.putExtra("OverLon", lonString);
+            intent.putExtra("OverStationIdAll", stationOverIdAll);
+            intent.putExtra("OverLat", latString);
+            intent.putExtra("OverLon", lonString);
 
             intent.putParcelableArrayListExtra("overStatusList", mOverStatusList);
             intent.putParcelableArrayListExtra("overStationList", mOverStationList);
