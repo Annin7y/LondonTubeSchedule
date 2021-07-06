@@ -139,9 +139,11 @@ public class MainActivity extends AppCompatActivity
                     showErrorMessage();
                 }
 
-            } else {
+            } else
+                {
                 isSnackbarShowing = savedInstanceState.getBoolean(SNACKBAR_STATE);
-                if (isSnackbarShowing) {
+                if (isSnackbarShowing)
+                {
                     Snackbar
                             .make(mCoordinatorLayout, R.string.snackbar_internet, Snackbar.LENGTH_INDEFINITE)
                             .setAction(R.string.snackbar_retry, new MainActivity.MyClickListener())
@@ -157,12 +159,12 @@ public class MainActivity extends AppCompatActivity
 //                overModeName = getIntent().getExtras().getString("OverModeName");
 //                overModeStatusDesc = getIntent().getExtras().getString("OverModeDesc");
 //                overModeStatusReason = getIntent().getExtras().getString("OverModeReason");
-                overgroundStation = getIntent().getExtras().getParcelable("OvergroundStation");
-                stationNameToStringAuto = getIntent().getExtras().getString("OverStationName");
-               stationOverIdAll = getIntent().getExtras().getString("OverStationIdAll");
-               latString = getIntent().getExtras().getString("OverLat");
-              lonString = getIntent().getExtras().getString("OverLon");
-                autoCompleteText = getIntent().getExtras().getString("overStation");
+                 overgroundStation = getIntent().getExtras().getParcelable("OvergroundStation");
+                 stationNameToStringAuto = getIntent().getExtras().getString("OverStationName");
+                 stationOverIdAll = getIntent().getExtras().getString("OverStationIdAll");
+                 latString = getIntent().getExtras().getString("OverLat");
+                 lonString = getIntent().getExtras().getString("OverLon");
+                 autoCompleteText = getIntent().getExtras().getString("overStation");
 
                 //stationOverId = getIntent().getExtras().getString("OverStationId");
                 // autoCompleteText = getIntent().getExtras().getString("AutoCompleteText");
