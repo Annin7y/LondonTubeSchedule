@@ -163,7 +163,6 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
 
         overgroundStation = getIntent().getExtras().getParcelable("OvergroundStation");
 
-        stationNameToStringAuto = getIntent().getExtras().getString("OverStationName");
         stationOverIdAll = getIntent().getExtras().getString("OverStationIdAll");
         latString = getIntent().getExtras().getString("OverLat");
         lonString = getIntent().getExtras().getString("OverLon");
@@ -175,6 +174,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
 //            OvergroundStatAllAsyncTask myOverStatTask = new OvergroundStatAllAsyncTask(this);
 //            myOverStatTask.execute();
 
+            stationNameToStringAuto = getIntent().getExtras().getString("OverStationName");
             OvergroundStatusAsyncTask myOvergroundTask = new OvergroundStatusAsyncTask(this);
             myOvergroundTask.execute(NetworkUtils.buildOvergroundStatusUrl());
 
@@ -402,7 +402,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
 
            //Save the Overground Stations as a JSON string using Preferences.
             String jsonOverStation = gson.toJson(overgroundStation);
-            prefsEditor.putString("OverStations", jsonOverStation);
+            prefsEditor.putString("OvergroundStation", jsonOverStation);
 
 
             prefsEditor.apply();

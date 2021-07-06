@@ -180,26 +180,7 @@ public class MainActivity extends AppCompatActivity
                     intent.putParcelableArrayListExtra("lineList", lineArrayList);
                     intent.putParcelableArrayListExtra("stationList", stationArrayList);
                     startActivity(intent);
-                } //else if (overground != null)
-//                else  if (overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null)
-//                {
-//                    overgroundStatusArrayList = getIntent().getParcelableArrayListExtra("overStatusList");
-//                    overStatArrayList = getIntent().getParcelableArrayListExtra("overStationList");
-//                    Intent intent3 = new Intent(this, OverScheduleActivity.class);
-//                    intent3.putExtra("OverLineId", overLineId);
-//                    intent3.putExtra("OverModeName", overModeName);
-//                    intent3.putExtra("OverModeDesc", overModeStatusDesc);
-//                    intent3.putExtra("OverModeReason", overModeStatusReason);
-//                    intent3.putExtra("OverStationIdAll", stationOverIdAll);
-//                    intent3.putExtra("OverStationName", stationNameToStringAuto);
-//                    intent3.putExtra("overStation", autoCompleteText);
-//                    intent3.putExtra("OverLat", latString);
-//                    intent3.putExtra("OverLon", lonString);
-//                    intent3.putParcelableArrayListExtra("overStatusList", overgroundStatusArrayList);
-//                    intent3.putParcelableArrayListExtra("overStationList", overStatArrayList);
-//                    startActivity(intent3);
-//                }
-
+                }
                 else if (overground != null)
                 {
 //                else if (overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null && overgroundStation != null) {

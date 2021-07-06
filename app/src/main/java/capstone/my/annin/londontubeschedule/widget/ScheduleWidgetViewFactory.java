@@ -154,7 +154,7 @@ public class ScheduleWidgetViewFactory implements RemoteViewsService.RemoteViews
         mOverStationList = gson.fromJson(gsonOverStringStation, typeOverStation);
 
         //Extract the JSON stations from preferences and assign it to an Overground Stations object.
-        String jsonOverStations = sharedPreferences.getString("OverStations", "");
+        String jsonOverStations = sharedPreferences.getString("OvergroundStation", "");
         overgroundStation = gson.fromJson(jsonOverStations, OvergroundStation.class);
 
         String jsonOverStationId = sharedPreferences.getString("OverStationIdAll", "");
