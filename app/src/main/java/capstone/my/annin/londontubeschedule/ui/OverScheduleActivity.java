@@ -404,7 +404,6 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
             String jsonOverStation = gson.toJson(overgroundStation);
             prefsEditor.putString("OvergroundStation", jsonOverStation);
 
-
             prefsEditor.apply();
 
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
