@@ -162,7 +162,8 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
 //        overModeStatusReason = getIntent().getExtras().getString("OverModeReason");
 
         overgroundStation = getIntent().getExtras().getParcelable("OvergroundStation");
-
+      //  stationOverId = getIntent().getExtras().getParcelable("OverStationId");
+        stationNameToStringAuto = getIntent().getExtras().getString("OverStationName");
         stationOverIdAll = getIntent().getExtras().getString("OverStationIdAll");
         latString = getIntent().getExtras().getString("OverLat");
         lonString = getIntent().getExtras().getString("OverLon");
@@ -174,20 +175,20 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
 //            OvergroundStatAllAsyncTask myOverStatTask = new OvergroundStatAllAsyncTask(this);
 //            myOverStatTask.execute();
 
-            stationNameToStringAuto = getIntent().getExtras().getString("OverStationName");
+            ActionBar actionBar = getSupportActionBar();
+            actionBar.setTitle(autoCompleteText);
             OvergroundStatusAsyncTask myOvergroundTask = new OvergroundStatusAsyncTask(this);
             myOvergroundTask.execute(NetworkUtils.buildOvergroundStatusUrl());
 
         }
-        else if (overground != null)
-        // else if(overLineId != null && overModeName != null && overModeStatusDesc != null && overModeStatusReason != null)
+        else if (overgroundStation != null && overground != null)
         {
             overLineId= overground.getModeId();
 //            // Log.i("lineId: ", line.getLineId());
             Timber.v(overground.getModeId(), "overLineId: ");
 
-            if (overgroundStation != null)
-            {
+//            if (overgroundStation != null)
+//            {
                 stationOverId = overgroundStation.getStationId();
                 // Log.i("stationId: ", stations.getStationId());
                 Timber.v(overgroundStation.getStationId(), "stationId: ");
@@ -198,7 +199,7 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
                 ActionBar actionBar = getSupportActionBar();
                 actionBar.setTitle(stationNameToString);
 
-            }
+       //     }
             overgroundStatusArrayList = getIntent().getParcelableArrayListExtra("overgroundStatusList");
             overStatArrayList = getIntent().getParcelableArrayListExtra("overgroundStationList");
 
@@ -387,18 +388,6 @@ public class OverScheduleActivity extends AppCompatActivity implements Overgroun
            //Save the overgroundStatus as a JSON string using Preferences.
             String jsonStatus = gson.toJson(overground);
             prefsEditor.putString("OverStatus", jsonStatus);
-
-//            String jsonModeId = gson.toJson(overLineId);
-//            prefsEditor.putString("OverLineId", jsonModeId);
-//
-//            String jsonModeName = gson.toJson(overModeName);
-//            prefsEditor.putString("OverModeName", jsonModeName);
-//
-//            String jsonModeDesc = gson.toJson(overModeStatusDesc);
-//            prefsEditor.putString("OverModeDesc", jsonModeDesc);
-//
-//            String jsonModeReason = gson.toJson(overModeStatusReason);
-//            prefsEditor.putString("OverModeReason", jsonModeReason);
 
            //Save the Overground Stations as a JSON string using Preferences.
             String jsonOverStation = gson.toJson(overgroundStation);
